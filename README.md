@@ -81,4 +81,4 @@ A server is required (the page `fetch()`es `data/`); opening `index.html` via `f
 - Per-trade return % = P&L ÷ notional entry value (entry price × shares) — no leverage/margin.
 - Sharpe uses an annual risk-free rate set in `js/config.js` (`RISK_FREE_ANNUAL`); the daily
   return series is sampled on benchmark trading dates.
-- Stooq is the primary source (ASX `.au` suffix); yfinance (`.AX`) is a fallback.
+- yfinance (`.AX` suffix) is the primary source for all market data.

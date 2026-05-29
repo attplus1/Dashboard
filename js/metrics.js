@@ -166,10 +166,15 @@
     return { bins, normal, mean:m, std:s, n:vals.length };
   }
 
-  function topTrades(trades, n){
-    const byPnl = trades.slice().sort((a,b)=>b.pnl-a.pnl);
-    return { winners: byPnl.slice(0,n).filter(t=>t.pnl>0),
-             losers:  byPnl.slice(-n).reverse().filter(t=>t.pnl<0) };
+  // Top winners/losers ranked by the active display metric so the table lines
+  // up with the (%-based) returns histogram: 'percent' ranks by return %,
+  // otherwise by dollar P&L. Sign of ret and pnl always agree, so the win/loss
+  // split is the same either way.
+  function topTrades(trades, n, mode){
+    const key = mode==='percent' ? (t=>t.ret) : (t=>t.pnl);
+    const sorted = trades.slice().sort((a,b)=>key(b)-key(a));
+    return { winners: sorted.slice(0,n).filter(t=>key(t)>0),
+             losers:  sorted.slice(-n).reverse().filter(t=>key(t)<0) };
   }
 
   window.Metrics = { compute, sumInRange, byTicker, returnsHistogram, topTrades,

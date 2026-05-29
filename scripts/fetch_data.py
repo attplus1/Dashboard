@@ -40,8 +40,7 @@ BATCH = 100                                           # tickers per Yahoo reques
 SKIP_DAYS = 21
 LOOKBACK_DAYS = 126
 MIN_HISTORY = SKIP_DAYS + LOOKBACK_DAYS + 5
-CANDLES_OUT = 260
-KEEP_HISTORY = CANDLES_OUT + 210                      # bars used for outputs/MA
+CANDLES_OUT = 750                                     # ~3 yrs shown on charts
 TOP_N = 50
 
 TODAY = datetime.utcnow().strftime("%Y-%m-%d")
@@ -115,7 +114,7 @@ def _candles_from_df(sub):
 def _flatten_df(df, sym=None):
     """Flatten a MultiIndex yfinance DataFrame to plain OHLCV columns.
 
-    yfinance >=0.2.x may return (Ticker, OHLCV) or (OHLCV, Ticker) multi-level
+    yfinance ≥0.2.x may return (Ticker, OHLCV) or (OHLCV, Ticker) multi-level
     columns depending on the version and whether one or many symbols were
     requested. We detect which level holds the OHLCV names and collapse to that.
     """
@@ -229,7 +228,7 @@ def update_histories(tickers):
             if t not in got:
                 continue                               # batch was throttled
             old = candles_of(load_hist(t))
-            merged = merge(old, got[t])[-(KEEP_HISTORY if not is_backfill else 100000):]
+            merged = merge(old, got[t])      # keep the entire history in the repo store
             save_hist(t, TODAY, merged)
             updated += 1
     remaining = len(stale) - updated
@@ -260,11 +259,14 @@ def build_outputs(tickers, names):
         if not candles:
             continue
         prices[t] = {"last": candles[-1]["close"], "date": candles[-1]["date"]}
-        score = momentum_score(candles[-KEEP_HISTORY:])
+        # Full history feeds both the score and build_candles: MA50/MA200 are
+        # computed over the entire series, then the last CANDLES_OUT bars are
+        # emitted, so every displayed bar has fully-warmed moving averages.
+        score = momentum_score(candles)
         if score is not None:
             ranked.append({
                 "ticker": t, "name": names.get(t, t), "score": round(score, 4),
-                "last": candles[-1]["close"], "candles": build_candles(candles[-KEEP_HISTORY:]),
+                "last": candles[-1]["close"], "candles": build_candles(candles),
             })
     ranked.sort(key=lambda x: x["score"], reverse=True)
     return prices, ranked
