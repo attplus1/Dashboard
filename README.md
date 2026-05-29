@@ -35,7 +35,10 @@ is fetched by a scheduled GitHub Action (Python + Stooq) and committed as JSON t
 | `data/benchmark.json` | `scripts/fetch_data.py` | ASX 200 equity overlay |
 | `data/prices.json`    | `scripts/fetch_data.py` | open-position valuation |
 | `data/momentum.json`  | `scripts/fetch_data.py` | screener ranking + candles |
-| `data/universe.json`  | `scripts/build_universe.py` | tickers to scan |
+| `data/universe.json`  | `scripts/build_universe.py` | full ASX listing to scan (auto-refreshed) |
+
+The universe is rebuilt from the **ASX company directory** at the start of every data run,
+so the screener always scans the current full market without manual maintenance.
 
 The committed JSON ships as **placeholder data** (`"placeholder": true`) so the site renders
 before the first run; the dashboard flags it. Run the workflow to replace it with live data.

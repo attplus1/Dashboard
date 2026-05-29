@@ -1,5 +1,5 @@
 {
- "description": "ASX universe seed (extend via build_universe.py for full market)",
+ "description": "ASX universe \u2014 seed list; build_universe.py replaces this with the full ASX directory",
  "constituents": [
   {
    "ticker": "29M",
@@ -709,5 +709,7 @@
    "ticker": "YAL",
    "name": "Yancoal Australia"
   }
- ]
+ ],
+ "count": 177,
+ "source": "seed (full ASX list auto-built on first workflow run)"
 }
