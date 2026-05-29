@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=16" />
+  <link rel="stylesheet" href="css/styles.css?v=17" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -21,8 +21,8 @@
       </div>
     </div>
     <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="performance" role="tab">Performance Review</button>
-      <button class="tab" data-tab="screener" role="tab">Momentum Screener</button>
+      <button class="tab active" data-tab="performance" role="tab">Overview</button>
+      <button class="tab" data-tab="screener" role="tab">Screener</button>
     </nav>
     <div class="header-actions">
       <label class="upload-btn">
@@ -31,6 +31,15 @@
       </label>
     </div>
   </header>
+
+  <!-- Drag-and-drop import overlay (shown while a file is dragged over the page) -->
+  <div id="drop-overlay" class="drop-overlay">
+    <div class="drop-card">
+      <img class="drop-mark" src="assets/logo.svg" alt="" />
+      <h3>Drop your broker statement to import</h3>
+      <p><code>.csv</code>, <code>.xlsx</code> or <code>.xls</code> — processed entirely in your browser.</p>
+    </div>
+  </div>
 
   <!-- ============ PERFORMANCE TAB ============ -->
   <main id="tab-performance" class="tab-panel active">
@@ -264,12 +273,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=16"></script>
-  <script src="js/parser.js?v=16"></script>
-  <script src="js/metrics.js?v=16"></script>
-  <script src="js/charts.js?v=16"></script>
-  <script src="js/performance.js?v=16"></script>
-  <script src="js/screener.js?v=16"></script>
-  <script src="js/app.js?v=16"></script>
+  <script src="js/config.js?v=17"></script>
+  <script src="js/parser.js?v=17"></script>
+  <script src="js/metrics.js?v=17"></script>
+  <script src="js/charts.js?v=17"></script>
+  <script src="js/performance.js?v=17"></script>
+  <script src="js/screener.js?v=17"></script>
+  <script src="js/app.js?v=17"></script>
 </body>
 </html>
