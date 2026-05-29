@@ -42,15 +42,18 @@ so the screener always scans the current full market without manual maintenance.
 
 ### How market data is fetched
 
-`fetch_data.py` downloads Stooq's **bulk daily archive** — a single download that covers the
-whole market — and reads the Australian (`.au`) symbols from it. This avoids Stooq's per-symbol
-daily rate limit, which makes scanning the full ~2,000-name ASX universe feasible. If the bulk
-archive can't be retrieved it **falls back** to per-symbol requests over the seed universe
-(small enough to stay within Stooq's quota); yfinance is the final fallback for the benchmark.
+`fetch_data.py` keeps a **per-ticker price history under `data/history/`** (from 2020). A new
+ticker is **backfilled** once; after that each run fetches only the **last month** and appends
+new bars — so daily pulls from yfinance are tiny and unlikely to be rate-limited. Data comes
+from **yfinance** (Yahoo) using **batch requests** (many tickers per call), so the whole ASX
+universe is a handful of requests, not one-per-symbol. (Stooq is no longer used for the scan —
+it disabled automated bulk downloads and per-symbol rate-limits well below a full-universe run.)
 
-The workflow runs **daily at ~00:30 UTC (≈ ASX open)**. At the Australian open the latest
-settled data is the **previous trading day's closes**, which is exactly what the end-of-day
-screener uses — so viewers throughout the day see yesterday's closes, refreshed each morning.
+Each ticker is fetched at most once per UTC day. The workflow runs **every 3 hours**, so if a
+run is throttled and only updates some tickers, **later runs catch up the stragglers** until all
+are current (`momentum.json` carries a `complete` flag and a running `universe_count`). Every run
+recomputes the slim JSON the dashboard reads, so the site always shows best-available data. The
+bulky `data/history/` store is excluded from the Pages deploy.
 
 The committed JSON ships as **placeholder data** (`"placeholder": true`) so the site renders
 before the first run; the dashboard flags it. Run the workflow to replace it with live data.

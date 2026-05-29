@@ -37,8 +37,10 @@
 
     const note = $('#screener-source-note');
     if (DATA.placeholder){ note.className='source-note placeholder';
-      note.textContent='Placeholder data — run the data workflow for a live Stooq scan.'; }
-    else { note.className='source-note live'; note.textContent='Live Stooq scan · '+(DATA.asof||''); }
+      note.textContent='Placeholder data — run the data workflow for a live scan.'; }
+    else if (DATA.complete===false){ note.className='source-note placeholder';
+      note.textContent=`Scan updating… ${(DATA.universe_count||0).toLocaleString()} tickers so far · ${DATA.asof||''}`; }
+    else { note.className='source-note live'; note.textContent='Live scan · '+(DATA.asof||''); }
 
     const topN = parseInt($('#scr-topn').value,10);
     const rows = DATA.ranked.slice(0, topN);

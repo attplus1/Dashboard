@@ -1,15 +1,16 @@
 name: Update market data
 
-# Refreshes ASX 200 benchmark, prices and the momentum screen from Stooq,
-# then commits the JSON the static dashboard reads.
+# Incrementally maintains a per-ticker price history (from 2020) under
+# data/history/ and recomputes the JSON the dashboard reads. Runs several times
+# a day: each run updates the tickers not yet refreshed today, so if yfinance
+# throttles a run, later runs catch up the stragglers.
 
 on:
   schedule:
-    # ~00:30 UTC daily ≈ Australian market open (10:30 AEST / 11:30 AEDT).
-    # At AU open the latest settled data is the PREVIOUS trading day's closes,
-    # which is exactly what the EOD screener needs. No-data days are no-ops.
-    - cron: '30 0 * * *'
-  workflow_dispatch:          # allow manual runs from the Actions tab
+    # Every 3 hours. AU open is ~00:00 UTC; spreading runs across the day lets
+    # the catch-up fallback finish any tickers a throttled run missed.
+    - cron: '30 */3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -35,17 +36,23 @@ jobs:
       - name: Refresh ASX universe (full listing)
         run: python scripts/build_universe.py
 
-      - name: Fetch data
+      - name: Fetch / append data
         run: python scripts/fetch_data.py
 
       - name: Commit updated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/universe.json data/benchmark.json data/prices.json data/momentum.json
+          git add data/universe.json data/benchmark.json data/prices.json \
+                  data/momentum.json data/history
           if git diff --staged --quiet; then
             echo "No data changes."
           else
-            git commit -m "chore: refresh ASX universe + market data ($(date -u +%Y-%m-%d))"
-            git push
+            git commit -m "chore: update market data ($(date -u +'%Y-%m-%d %H:%M'))"
+            # rebase onto any commit a concurrent run pushed, then push
+            for i in 1 2 3 4; do
+              git push && break
+              git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
+              sleep $((2**i))
+            done
           fi

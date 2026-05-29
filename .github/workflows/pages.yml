@@ -28,8 +28,16 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true          # self-enable Pages if not already on
+      - name: Assemble site (exclude bulky history store)
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude '.git' --exclude '_site' \
+            --exclude 'scripts' --exclude '.github' \
+            --exclude 'data/history' \
+            ./ _site/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
       - id: deployment
         uses: actions/deploy-pages@v4

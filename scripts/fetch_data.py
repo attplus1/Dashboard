@@ -1,51 +1,50 @@
 #!/usr/bin/env python3
-"""Daily ASX market-data pipeline for the trading dashboard.
+"""Incremental ASX market-data pipeline for the trading dashboard.
 
-Runs in GitHub Actions (full network), scheduled around the Australian market
-open so the freshest fully-settled data — the PREVIOUS trading day's closes —
-is published for viewers throughout the day. Writes three JSON files the static
-dashboard reads:
+Design
+------
+* A per-ticker price history is stored in the repo under data/history/ starting
+  from 2020. The first time a ticker is seen it is BACKFILLED from 2020; after
+  that each run only fetches the LAST MONTH and appends new bars. Small daily
+  pulls => far less likely to be rate-limited.
+* Each ticker is fetched at most once per UTC day (tracked via "last_fetch").
+  The workflow runs SEVERAL times a day, so if a run is throttled and only
+  updates some tickers, later runs pick up the stragglers — "download throughout
+  the day until all stocks have updated data". MAX_FETCH_PER_RUN bounds each run.
+* Every run recomputes the slim outputs the dashboard reads from whatever
+  history is stored, so the site is always current with best-available data:
+      data/benchmark.json   ASX 200 (^AXJO)
+      data/prices.json      latest close per ticker
+      data/momentum.json    Jegadeesh-Titman 6-1 ranking + candle cards
 
-    data/benchmark.json   ASX 200 (^AXJO) daily closes  -> equity-curve overlay
-    data/prices.json      latest close per ticker        -> open-position valuation
-    data/momentum.json    Jegadeesh-Titman 6-1 ranking   -> screener cards
-
-PRIMARY source: yfinance (Yahoo). Yahoo's API accepts MANY tickers per request,
-so the whole ASX universe is fetched in a handful of BATCH requests rather than
-one-per-symbol — this avoids the per-symbol rate limits that make Stooq
-unworkable for the full universe (Stooq also disabled automated bulk downloads).
-Stooq per-symbol is kept only as a last-resort benchmark fallback.
-
-ASX tickers map to Yahoo with the ".AX" suffix (e.g. NWH -> NWH.AX).
+Source: yfinance (Yahoo). Batch requests (many tickers per call) keep request
+counts tiny. ASX tickers map to Yahoo with the ".AX" suffix.
 """
 
-import csv
-import io
 import json
 import os
 import sys
 import time
 from datetime import datetime
 
-import requests
-
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
+HISTORY_DIR = os.path.join(DATA, "history")
 UNIVERSE = os.path.join(DATA, "universe.json")
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (dashboard data pipeline)"}
-STOOQ_URL = "https://stooq.com/q/d/l/?s={sym}&i=d"
+HISTORY_START = os.environ.get("HISTORY_START", "2020-01-01")
+INCR_PERIOD = "1mo"                                   # incremental fetch depth
+MAX_FETCH_PER_RUN = int(os.environ.get("MAX_FETCH_PER_RUN", "800"))
+BATCH = 100                                           # tickers per Yahoo request
 
-# Jegadeesh-Titman 6-1 (approx. trading days): skip the most recent month (~21),
-# measure the return over the prior 6 months (~126 days).
 SKIP_DAYS = 21
 LOOKBACK_DAYS = 126
-MIN_HISTORY = SKIP_DAYS + LOOKBACK_DAYS + 5   # need this many bars to rank
-CANDLES_OUT = 260                             # bars kept per card (MA200 + headroom)
-KEEP_HISTORY = CANDLES_OUT + 210              # trim parsed history to this many bars
+MIN_HISTORY = SKIP_DAYS + LOOKBACK_DAYS + 5
+CANDLES_OUT = 260
+KEEP_HISTORY = CANDLES_OUT + 210                      # bars used for outputs/MA
 TOP_N = 50
-BATCH = 100                                   # tickers per Yahoo batch request
-PERIOD = "3y"                                 # history depth to request
+
+TODAY = datetime.utcnow().strftime("%Y-%m-%d")
 
 
 def log(*a):
@@ -53,7 +52,53 @@ def log(*a):
 
 
 # --------------------------------------------------------------------------- #
-# yfinance batch (primary)
+# Per-ticker history store (candles stored as [date,o,h,l,c], one per line)
+# --------------------------------------------------------------------------- #
+def hist_path(ticker):
+    safe = ticker.replace("^", "_").replace("/", "_")
+    return os.path.join(HISTORY_DIR, f"{safe}.json")
+
+
+def load_hist(ticker):
+    try:
+        with open(hist_path(ticker)) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def save_hist(ticker, last_fetch, candles):
+    os.makedirs(HISTORY_DIR, exist_ok=True)
+    lines = ",\n".join(json.dumps([c["date"], c["open"], c["high"], c["low"], c["close"]])
+                       for c in candles)
+    with open(hist_path(ticker), "w") as f:
+        f.write('{"ticker":%s,"last_fetch":%s,"candles":[\n%s\n]}\n'
+                % (json.dumps(ticker), json.dumps(last_fetch), lines))
+
+
+def candles_of(obj):
+    """Stored arrays -> list of {date,open,high,low,close} ascending."""
+    if not obj:
+        return []
+    out = []
+    for a in obj.get("candles", []):
+        try:
+            out.append({"date": a[0], "open": float(a[1]), "high": float(a[2]),
+                        "low": float(a[3]), "close": float(a[4])})
+        except (IndexError, ValueError, TypeError):
+            continue
+    return out
+
+
+def merge(old, new):
+    by_date = {c["date"]: c for c in old}
+    for c in new:
+        by_date[c["date"]] = c
+    return [by_date[d] for d in sorted(by_date)]
+
+
+# --------------------------------------------------------------------------- #
+# yfinance
 # --------------------------------------------------------------------------- #
 def _candles_from_df(sub):
     import pandas as pd
@@ -62,92 +107,56 @@ def _candles_from_df(sub):
         o, h, l, c = row.get("Open"), row.get("High"), row.get("Low"), row.get("Close")
         if any(pd.isna(x) for x in (o, h, l, c)):
             continue
-        out.append({"date": idx.strftime("%Y-%m-%d"),
-                    "open": float(o), "high": float(h),
-                    "low": float(l), "close": float(c)})
+        out.append({"date": idx.strftime("%Y-%m-%d"), "open": float(o),
+                    "high": float(h), "low": float(l), "close": float(c)})
     return out
 
 
-def fetch_yf_batch(tickers):
-    """Batch-download many ASX tickers. Returns {TICKER: [candles...]}."""
-    try:
-        import yfinance as yf
-    except Exception as e:
-        log(f"yfinance unavailable: {e}")
-        return {}
+def yf_download(symbols, **kw):
+    """Return DataFrame or None, with a few retries."""
+    import yfinance as yf
+    for attempt in range(3):
+        try:
+            df = yf.download(symbols, interval="1d", group_by="ticker",
+                             auto_adjust=False, threads=True, progress=False, **kw)
+            if df is not None and not df.empty:
+                return df
+        except Exception as e:
+            log(f"    download attempt {attempt+1} failed: {e}")
+        time.sleep(2 * (attempt + 1))
+    return None
 
-    result = {}
+
+def fetch_group(tickers, backfill):
+    """Fetch a set of ASX tickers (backfill from 2020, else last month).
+
+    Returns {ticker: [candles]} for tickers whose batch call SUCCEEDED (so we
+    don't mark throttled tickers as fetched). Missing members of a successful
+    batch map to [] (no new data) so they are still marked fetched.
+    """
     syms = [f"{t}.AX" for t in tickers]
+    got = {}
+    kw = {"start": HISTORY_START} if backfill else {"period": INCR_PERIOD}
     for i in range(0, len(syms), BATCH):
         chunk = syms[i:i + BATCH]
-        df = None
-        for attempt in range(3):
-            try:
-                df = yf.download(chunk, period=PERIOD, interval="1d",
-                                 group_by="ticker", auto_adjust=False,
-                                 threads=True, progress=False)
-                if df is not None and not df.empty:
-                    break
-            except Exception as e:
-                log(f"  batch {i//BATCH} attempt {attempt+1} failed: {e}")
-                time.sleep(2 * (attempt + 1))
-        if df is None or df.empty:
-            continue
+        df = yf_download(chunk, **kw)
+        if df is None:
+            continue                                   # throttled: leave for later run
         for sym in chunk:
-            ticker = sym[:-3]                       # strip ".AX"
+            t = sym[:-3]
             try:
                 sub = df[sym] if len(chunk) > 1 else df
-                sub = sub.dropna(how="all")
-                candles = _candles_from_df(sub)
+                got[t] = _candles_from_df(sub.dropna(how="all"))
             except Exception:
-                continue
-            if len(candles) >= MIN_HISTORY:
-                result[ticker] = candles[-KEEP_HISTORY:]
-        log(f"  batch {i//BATCH+1}/{(len(syms)+BATCH-1)//BATCH}: "
-            f"{len(result)} tickers so far")
-    return result
-
-
-def fetch_yf_one(yahoo_symbol):
-    """Single-symbol yfinance (used for the benchmark)."""
-    try:
-        import yfinance as yf
-        df = yf.download(yahoo_symbol, period=PERIOD, interval="1d",
-                         progress=False, auto_adjust=False)
-        if df is None or df.empty:
-            return []
-        if hasattr(df.columns, "nlevels") and df.columns.nlevels > 1:
-            df.columns = df.columns.get_level_values(0)
-        return _candles_from_df(df)
-    except Exception as e:
-        log(f"  yfinance one failed {yahoo_symbol}: {e}")
-        return []
-
-
-def fetch_stooq(symbol):
-    """Single-symbol Stooq (benchmark fallback only)."""
-    try:
-        r = requests.get(STOOQ_URL.format(sym=symbol.lower()), headers=HEADERS, timeout=25)
-        if r.status_code != 200 or "Date" not in r.text[:20]:
-            return []
-        out = []
-        for row in csv.DictReader(io.StringIO(r.text)):
-            try:
-                out.append({"date": row["Date"], "open": float(row["Open"]),
-                            "high": float(row["High"]), "low": float(row["Low"]),
-                            "close": float(row["Close"])})
-            except (KeyError, ValueError):
-                continue
-        return out
-    except requests.RequestException:
-        return []
+                got[t] = []
+        log(f"    batch {i//BATCH+1}/{(len(syms)+BATCH-1)//BATCH} ok")
+    return got
 
 
 # --------------------------------------------------------------------------- #
 # Analytics
 # --------------------------------------------------------------------------- #
 def build_candles(candles):
-    """Last CANDLES_OUT bars, each carrying MA50/MA200 computed over full history."""
     closes = [c["close"] for c in candles]
 
     def sma(i, n):
@@ -171,47 +180,95 @@ def momentum_score(candles):
 
 
 # --------------------------------------------------------------------------- #
+def update_histories(tickers):
+    """Update stale tickers (≤ MAX_FETCH_PER_RUN), backfilling new ones."""
+    stale = []
+    for t in tickers:
+        obj = load_hist(t)
+        if obj is None or obj.get("last_fetch") != TODAY:
+            stale.append((t, obj))
+    log(f"Stale tickers: {len(stale)} (cap {MAX_FETCH_PER_RUN}/run)")
+    batch = stale[:MAX_FETCH_PER_RUN]
+
+    backfill = [t for t, o in batch if not (o and o.get("candles"))]
+    incr     = [t for t, o in batch if (o and o.get("candles"))]
+    log(f"  backfill={len(backfill)} incremental={len(incr)}")
+
+    updated = 0
+    for group, is_backfill in ((backfill, True), (incr, False)):
+        if not group:
+            continue
+        got = fetch_group(group, is_backfill)
+        for t in group:
+            if t not in got:
+                continue                               # batch was throttled
+            old = candles_of(load_hist(t))
+            merged = merge(old, got[t])[-(KEEP_HISTORY if not is_backfill else 100000):]
+            save_hist(t, TODAY, merged)
+            updated += 1
+    remaining = len(stale) - updated
+    log(f"  updated {updated} tickers; {remaining} still stale (later runs will catch up)")
+    return remaining
+
+
+def update_benchmark():
+    obj = load_hist("^AXJO")
+    if obj is None or obj.get("last_fetch") != TODAY:
+        df = yf_download(["^AXJO"], **({"start": HISTORY_START}
+                         if not (obj and obj.get("candles")) else {"period": INCR_PERIOD}))
+        if df is not None:
+            if hasattr(df.columns, "nlevels") and df.columns.nlevels > 1:
+                df.columns = df.columns.get_level_values(0)
+            new = _candles_from_df(df)
+            merged = merge(candles_of(obj), new)
+            save_hist("^AXJO", TODAY, merged)
+            obj = load_hist("^AXJO")
+    return candles_of(obj)
+
+
+def build_outputs(tickers, names):
+    prices, ranked = {}, []
+    for t in tickers:
+        candles = candles_of(load_hist(t))
+        if not candles:
+            continue
+        prices[t] = {"last": candles[-1]["close"], "date": candles[-1]["date"]}
+        score = momentum_score(candles[-KEEP_HISTORY:])
+        if score is not None:
+            ranked.append({
+                "ticker": t, "name": names.get(t, t), "score": round(score, 4),
+                "last": candles[-1]["close"], "candles": build_candles(candles[-KEEP_HISTORY:]),
+            })
+    ranked.sort(key=lambda x: x["score"], reverse=True)
+    return prices, ranked
+
+
 def main():
     with open(UNIVERSE) as f:
         constituents = json.load(f)["constituents"]
     names = {c["ticker"]: c.get("name", c["ticker"]) for c in constituents}
     tickers = list(names.keys())
-    log(f"Universe: {len(tickers)} tickers")
+    log(f"Universe: {len(tickers)} tickers; history start {HISTORY_START}")
 
-    history = fetch_yf_batch(tickers)
-    source = "yfinance batch"
-    log(f"History for {len(history)} tickers via {source}")
+    remaining = update_histories(tickers)
+    bench = update_benchmark()
+    prices, ranked = build_outputs(tickers, names)
 
-    prices, ranked = {}, []
-    for ticker, candles in history.items():
-        prices[ticker] = {"last": candles[-1]["close"], "date": candles[-1]["date"]}
-        score = momentum_score(candles)
-        if score is not None:
-            ranked.append({
-                "ticker": ticker, "name": names.get(ticker, ticker),
-                "score": round(score, 4), "last": candles[-1]["close"],
-                "candles": build_candles(candles),
-            })
-
-    ranked.sort(key=lambda x: x["score"], reverse=True)
-    asof = datetime.utcnow().strftime("%Y-%m-%d")
-
-    bench = fetch_yf_one("^AXJO") or fetch_stooq("^axjo")
-    benchmark = {"placeholder": False, "asof": asof, "label": "ASX 200",
+    benchmark = {"placeholder": False, "asof": TODAY, "label": "ASX 200",
                  "data": [{"date": c["date"], "close": round(c["close"], 2)} for c in bench]}
-
     with open(os.path.join(DATA, "benchmark.json"), "w") as f:
         json.dump(benchmark, f, separators=(",", ":"))
     with open(os.path.join(DATA, "prices.json"), "w") as f:
-        json.dump({"placeholder": False, "asof": asof, "source": source,
+        json.dump({"placeholder": False, "asof": TODAY, "source": "yfinance",
                    "prices": prices}, f, separators=(",", ":"))
     with open(os.path.join(DATA, "momentum.json"), "w") as f:
-        json.dump({"placeholder": False, "asof": asof, "source": source,
-                   "universe_count": len(history), "window": "6-1 month",
-                   "ranked": ranked[:TOP_N]}, f, separators=(",", ":"))
+        json.dump({"placeholder": False, "asof": TODAY, "source": "yfinance",
+                   "universe_count": len(prices), "window": "6-1 month",
+                   "complete": remaining == 0, "ranked": ranked[:TOP_N]},
+                  f, separators=(",", ":"))
 
-    log(f"Done. scanned={len(history)} ranked={len(ranked)} "
-        f"benchmark={len(bench)} bars via {source}")
+    log(f"Done. priced={len(prices)} ranked={len(ranked)} benchmark={len(bench)} "
+        f"stale_remaining={remaining}")
 
 
 if __name__ == "__main__":
