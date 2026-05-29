@@ -37,7 +37,7 @@
     $('#kpi-grid').innerHTML = cards.join('');
   }
 
-  function renderTopTrades(m){
+  function renderTopTrades(m, unit){
     const row = t => `<tr>
       <td><b>${t.ticker}</b></td>
       <td><span class="pill ${t.dir}">${t.dir}</span></td>
@@ -45,7 +45,7 @@
       <td class="num ${cls(t.ret)}">${pct(t.ret)}</td>
       <td class="num">${t.holdDays.toFixed(1)}</td>
       <td>${fmtD(t.exitDt)}</td></tr>`;
-    const tt = window.Metrics.topTrades(m.trades, 5);
+    const tt = window.Metrics.topTrades(m.trades, 5, unit);
     $('#top-winners tbody').innerHTML = tt.winners.length
       ? tt.winners.map(row).join('') : `<tr class="empty-row"><td colspan="6">No winning trades.</td></tr>`;
     $('#top-losers tbody').innerHTML = tt.losers.length
@@ -135,7 +135,7 @@
     window.Charts.outcomeChart('outcome-chart', m);
     window.Charts.holdingChart('holding-chart', m);
     renderDistribution(m);
-    renderTopTrades(m);
+    renderTopTrades(m, unit);
     renderOpenPositions(recon.openPositions, prices);
     renderTradesTable(m.trades);
   }
