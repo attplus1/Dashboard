@@ -9,6 +9,14 @@ window.CONFIG = {
   // Used to value open positions and link trades to the price feed.
   NAME_TO_TICKER: {
     '4Dmedical Ltd': '4DX',
+    'Catalyst Metals Ltd': 'CYL',
+    'Downer EDI Ltd': 'DOW',
+    'European Lithium Ltd': 'EUR',
+    'IGO Ltd': 'IGO',
+    'News Corp - B (AU)': 'NWS',
+    'Perseus Mining Ltd': 'PRU',
+    'SRG Global Ltd': 'SRG',
+    'Whitehaven Coal Ltd': 'WHC',
     'ALS Ltd': 'ALQ',
     'APA Group': 'APA',
     'Adisyn Ltd': 'AI1',

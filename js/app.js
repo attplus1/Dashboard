@@ -37,6 +37,13 @@
     try { const r = await fetch(path, {cache:'no-store'}); if (!r.ok) throw 0; return await r.json(); }
     catch { return null; }
   }
+  // The committed trade history (repo default, used when nothing is saved locally).
+  async function loadRepoTrades(){
+    try {
+      const r = await fetch('data/trades.csv', {cache:'no-store'}); if (!r.ok) throw 0;
+      return window.TradeParser.parseCSVText(await r.text());
+    } catch { return null; }
+  }
   function setReconciliation(recon){
     state.recon = recon;
     state.fullFrom = recon.firstDate ? new Date(recon.firstDate) : new Date();
@@ -210,11 +217,16 @@
     state.benchmark = bench;            // { placeholder, asof, data:[{date,close}] }
     state.prices = prices ? prices.prices : null;
 
-    // Restore the last uploaded statement (continue where you left off).
+    // Trade history precedence: a statement you uploaded on this device
+    // (saved locally) wins; otherwise fall back to the committed repo history.
     const stored = loadStored();
     if (stored){
       try { setReconciliation(window.TradeParser.parseArrayBuffer(stored.bytes)); }
       catch(e){ clearStored(); }
+    }
+    if (!state.recon){
+      const repo = await loadRepoTrades();
+      if (repo) setReconciliation(repo);
     }
 
     applySourceNotes();
