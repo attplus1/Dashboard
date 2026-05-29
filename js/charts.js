@@ -1,8 +1,9 @@
-/* ECharts rendering helpers with a shared dark theme. */
+/* ECharts rendering helpers — Plus1 light theme. */
 (function () {
   const COLORS = {
-    text:'#9fb0c3', textStrong:'#e8eef6', grid:'#243245',
-    accent:'#3da9fc', accent2:'#5fd0c4', pos:'#2ecc8f', neg:'#ff5d6c', warn:'#f5b942'
+    text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
+    accent:'#F5821E', accent2:'#ffa24d', bench:'#3b6fb0',
+    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020'
   };
   const FONT = "Inter, system-ui, sans-serif";
   const instances = {};
@@ -31,21 +32,21 @@
       name:'Account', type:'line', data:acct, smooth:false, showSymbol:false,
       lineStyle:{width:2.4, color:COLORS.accent},
       areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,
-        [{offset:0,color:'rgba(61,169,252,.28)'},{offset:1,color:'rgba(61,169,252,0)'}])}
+        [{offset:0,color:'rgba(245,130,30,.24)'},{offset:1,color:'rgba(245,130,30,0)'}])}
     }];
     if (m.benchEquity){
       const bbase = m.benchEquity.find(v=>v!=null) || 1;
       series.push({
         name: window.CONFIG.BENCHMARK_LABEL, type:'line', showSymbol:false,
         data: m.benchEquity.map(v=> v==null?null:+toUnit(v,bbase).toFixed(2)),
-        connectNulls:true, lineStyle:{width:1.8, color:COLORS.warn, type:'dashed'}
+        connectNulls:true, lineStyle:{width:1.8, color:COLORS.bench, type:'dashed'}
       });
     }
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:64,right:18,top:34,bottom:34},
       legend:{data:series.map(s=>s.name), top:0, right:0, textStyle:{color:COLORS.text}},
-      tooltip:{trigger:'axis', backgroundColor:'#0c1118', borderColor:COLORS.grid,
+      tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         valueFormatter:v=> v==null?'–':(unit==='percent'?fmtPct(v):fmtMoney(v))},
       xAxis:{type:'category', data:dates, boundaryGap:false, ...axisBase},
@@ -60,7 +61,7 @@
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:80,right:24,top:14,bottom:30},
-      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:'#0c1118',
+      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:COLORS.tip,
         borderColor:COLORS.grid, textStyle:{color:COLORS.textStrong},
         valueFormatter:v=> unit==='percent'?fmtPct(v):fmtMoney(v)},
       xAxis:{type:'value', ...axisBase,
@@ -79,12 +80,12 @@
     const c = init(id); if (!c) return;
     c.setOption({
       backgroundColor:'transparent',
-      tooltip:{trigger:'item', backgroundColor:'#0c1118', borderColor:COLORS.grid,
+      tooltip:{trigger:'item', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong}},
       legend:{bottom:0, textStyle:{color:COLORS.text}},
       series:[{
         type:'pie', radius:['52%','74%'], center:['50%','45%'], avoidLabelOverlap:true,
-        itemStyle:{borderColor:'#121a24', borderWidth:2},
+        itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
           {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.pos}},
@@ -100,7 +101,7 @@
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:46,right:20,top:20,bottom:30},
-      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:'#0c1118',
+      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:COLORS.tip,
         borderColor:COLORS.grid, textStyle:{color:COLORS.textStrong},
         valueFormatter:v=>v.toFixed(1)+' days'},
       xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
@@ -125,7 +126,7 @@
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:6,right:6,top:8,bottom:6, containLabel:false},
-      tooltip:{trigger:'axis', backgroundColor:'#0c1118', borderColor:COLORS.grid,
+      tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},

@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trading Dashboard</title>
+  <title>Plus1 Group — Trading Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
   <header class="app-header">
     <div class="brand">
-      <div class="brand-mark">▰</div>
+      <img class="brand-mark" src="assets/logo.svg" alt="Plus1 Group" />
       <div>
-        <h1>Trading Dashboard</h1>
-        <p class="brand-sub">Performance analytics &amp; momentum screener &middot; ASX</p>
+        <h1>Plus1 Group</h1>
+        <p class="brand-sub">Trading performance &amp; momentum screener &middot; ASX</p>
       </div>
     </div>
     <nav class="tabs" role="tablist">
@@ -77,11 +78,8 @@
       </div>
     </section>
 
-    <!-- KPI cards -->
-    <section class="kpi-grid" id="kpi-grid"></section>
-
     <!-- Equity curve -->
-    <section class="panel">
+    <section class="panel" id="equity-panel">
       <div class="panel-head">
         <h3>Equity Curve vs ASX 200</h3>
         <p class="panel-desc">Cumulative account performance over the selected period. The ASX 200 benchmark
@@ -89,6 +87,9 @@
       </div>
       <div id="equity-chart" class="chart chart-lg"></div>
     </section>
+
+    <!-- KPI cards -->
+    <section class="kpi-grid" id="kpi-grid"></section>
 
     <!-- Open positions -->
     <section class="panel">
@@ -202,12 +203,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=3"></script>
-  <script src="js/parser.js?v=3"></script>
-  <script src="js/metrics.js?v=3"></script>
-  <script src="js/charts.js?v=3"></script>
-  <script src="js/performance.js?v=3"></script>
-  <script src="js/screener.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/config.js?v=4"></script>
+  <script src="js/parser.js?v=4"></script>
+  <script src="js/metrics.js?v=4"></script>
+  <script src="js/charts.js?v=4"></script>
+  <script src="js/performance.js?v=4"></script>
+  <script src="js/screener.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

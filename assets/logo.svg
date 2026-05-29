@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Plus1 Group">
+  <circle cx="100" cy="100" r="100" fill="#F5821E"/>
+  <!-- plus sign -->
+  <rect x="38" y="92" width="58" height="16" rx="2" fill="#fff"/>
+  <rect x="62" y="68" width="16" height="64" rx="2" fill="#fff"/>
+  <!-- numeral 1 -->
+  <path d="M150 60 v80 h-18 V86 l-16 6 v-18 l24 -14 z" fill="#fff"/>
+</svg>
