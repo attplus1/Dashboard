@@ -30,7 +30,7 @@
     const acct = m.equity.map(e=>+toUnit(e.equity, base).toFixed(2));
     const series = [{
       name:'Account', type:'line', data:acct, smooth:false, showSymbol:false,
-      lineStyle:{width:2.4, color:COLORS.accent},
+      itemStyle:{color:COLORS.accent}, lineStyle:{width:2.4, color:COLORS.accent},
       areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,
         [{offset:0,color:'rgba(245,130,30,.24)'},{offset:1,color:'rgba(245,130,30,0)'}])}
     }];
@@ -39,13 +39,16 @@
       series.push({
         name: window.CONFIG.BENCHMARK_LABEL, type:'line', showSymbol:false,
         data: m.benchEquity.map(v=> v==null?null:+toUnit(v,bbase).toFixed(2)),
-        connectNulls:true, lineStyle:{width:1.8, color:COLORS.bench, type:'dashed'}
+        connectNulls:true, itemStyle:{color:COLORS.bench},
+        lineStyle:{width:1.8, color:COLORS.bench, type:'dashed'}
       });
     }
     c.setOption({
       backgroundColor:'transparent',
+      color:[COLORS.accent, COLORS.bench],
       grid:{left:64,right:18,top:34,bottom:34},
-      legend:{data:series.map(s=>s.name), top:0, right:0, textStyle:{color:COLORS.text}},
+      legend:{data:series.map(s=>s.name), top:0, right:0, textStyle:{color:COLORS.text},
+        icon:'roundRect'},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         valueFormatter:v=> v==null?'–':(unit==='percent'?fmtPct(v):fmtMoney(v))},
@@ -118,42 +121,84 @@
     });
   }
 
-  // Small candlestick + MA50/MA200 card chart.
-  function candleCard(el, candles){
+  // Candlestick + MA50/MA200. Scrollable/zoomable (dataZoom). `big` shows axes
+  // and a zoom slider for the expanded full-screen view.
+  function candleCard(el, candles, big){
     const c = echarts.init(el, null, {renderer:'canvas'});
     const dates = candles.map(d=>d.date);
     const ohlc = candles.map(d=>[d.open,d.close,d.low,d.high]);
-    // Prefer MAs precomputed over the full history (so they span the whole
-    // window); fall back to a windowed average for older/placeholder data.
     const hasMA = candles.some(d=>d.ma50!=null||d.ma200!=null);
     const ma = (n,key)=> hasMA
       ? candles.map(d=> d[key]==null?null:+d[key])
       : candles.map((_,i)=>{ if (i<n-1) return null;
           let s=0; for (let k=i-n+1;k<=i;k++) s+=candles[k].close; return +(s/n).toFixed(3); });
+    // Default visible window: last ~120 bars on small cards (scroll for more).
+    const startPct = big ? 0 : Math.max(0, 100 - (120/candles.length*100));
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:6,right:6,top:8,bottom:6, containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:64} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
-      xAxis:{type:'category', data:dates, show:false, boundaryGap:true},
-      yAxis:{type:'value', scale:true, show:false},
+      xAxis:{type:'category', data:dates, show:big, boundaryGap:true,
+        axisLabel:{color:COLORS.text}, axisLine:{lineStyle:{color:COLORS.grid}}},
+      yAxis:{type:'value', scale:true, show:big, ...(big?axisBase:{})},
+      dataZoom:[
+        {type:'inside', start:startPct, end:100, zoomLock:false},
+        ...(big ? [{type:'slider', start:startPct, end:100, height:22, bottom:18,
+                    borderColor:COLORS.grid, textStyle:{color:COLORS.text}}] : [])
+      ],
       series:[
         {type:'candlestick', data:ohlc,
           itemStyle:{color:COLORS.pos,color0:COLORS.neg,
             borderColor:COLORS.pos,borderColor0:COLORS.neg}},
-        {type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
+        {name:'MA50', type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
           lineStyle:{width:1.3,color:COLORS.accent}},
-        {type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
+        {name:'MA200', type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
           lineStyle:{width:1.3,color:COLORS.warn}}
       ]
     });
     return c;
   }
 
+  // Trade-returns histogram (custom rects so bin width is exact) with a fitted
+  // normal-distribution overlay — both on a shared % value axis.
+  function returnsDistChart(id, h){
+    const c = init(id); if (!c) return;
+    if (!h.bins.length){ document.getElementById(id).innerHTML =
+      '<div class="chart-empty">Not enough trades to plot a distribution</div>'; return; }
+    c.setOption({
+      backgroundColor:'transparent',
+      grid:{left:46,right:18,top:24,bottom:38},
+      legend:{top:0,right:0,data:['Trades','Normal fit'],textStyle:{color:COLORS.text},icon:'roundRect'},
+      tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
+        textStyle:{color:COLORS.textStrong},
+        formatter:p=>{ const b=p.find(x=>x.seriesName==='Trades');
+          return (b? `Return ≈ ${(+b.value[3]).toFixed(1)}%<br/>${b.value[2]} trade(s)` : ''); }},
+      xAxis:{type:'value', name:'Return %', nameLocation:'middle', nameGap:24,
+        nameTextStyle:{color:COLORS.text}, ...axisBase,
+        axisLabel:{color:COLORS.text, formatter:'{value}%'}},
+      yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
+      series:[
+        {name:'Trades', type:'custom', encode:{x:[0,1], y:2},
+         data:h.bins.map(b=>[b.x0,b.x1,b.count,b.mid]),
+         renderItem:(params,api)=>{
+           const x0=api.coord([api.value(0),0]), x1=api.coord([api.value(1),0]);
+           const top=api.coord([0,api.value(2)]), base=api.coord([0,0]);
+           const w=Math.max(1,(x1[0]-x0[0])-1.5);
+           return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
+             style:{fill:'rgba(245,130,30,.55)', stroke:COLORS.accent, lineWidth:1}};
+         }},
+        {name:'Normal fit', type:'line', smooth:true, showSymbol:false, data:h.normal,
+         lineStyle:{color:COLORS.bench,width:2}}
+      ]
+    });
+  }
+
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
   window.addEventListener('resize', resizeAll);
 
-  window.Charts = { equityChart, tickerChart, outcomeChart, holdingChart, candleCard, resizeAll };
+  window.Charts = { equityChart, tickerChart, outcomeChart, holdingChart,
+                    candleCard, returnsDistChart, resizeAll };
 })();

@@ -9,6 +9,29 @@
     unit: 'dollar'
   };
 
+  // ---------- trade persistence (per-browser) ----------
+  // A static site can't write back to the repo, so the last uploaded statement
+  // is saved in the browser and auto-restored so you continue where you left off.
+  const LS_KEY = 'plus1_trades_v1';
+  function storeTrades(name, arrbuf){
+    try {
+      const bytes = new Uint8Array(arrbuf); let bin='';
+      const CH=0x8000; for (let i=0;i<bytes.length;i+=CH)
+        bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CH));
+      localStorage.setItem(LS_KEY, JSON.stringify({ name, ts:Date.now(), b64:btoa(bin) }));
+    } catch(e){ /* quota/full — non-fatal */ }
+  }
+  function loadStored(){
+    try {
+      const s = localStorage.getItem(LS_KEY); if (!s) return null;
+      const { b64, name, ts } = JSON.parse(s);
+      const bin = atob(b64); const bytes = new Uint8Array(bin.length);
+      for (let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+      return { bytes, name, ts };
+    } catch(e){ return null; }
+  }
+  function clearStored(){ try { localStorage.removeItem(LS_KEY); } catch(e){} }
+
   // ---------- data loading ----------
   async function loadJSON(path){
     try { const r = await fetch(path, {cache:'no-store'}); if (!r.ok) throw 0; return await r.json(); }
@@ -27,7 +50,7 @@
   function renderAll(){
     if (!state.recon){ renderEmpty(); return; }
     $('#tab-performance').classList.remove('no-data');
-    ['equity-chart','ticker-chart','outcome-chart','holding-chart']
+    ['equity-chart','ticker-chart','outcome-chart','holding-chart','dist-chart']
       .forEach(id => { const el=$('#'+id); if (el) el.innerHTML=''; });
     window.PerformanceTab.render({
       recon: state.recon, from: state.from, to: state.to,
@@ -49,10 +72,13 @@
         <span class="ec-btn" id="cta-import">＋ Import trades</span>
       </div>`;
     $('#cta-import').addEventListener('click', () => $('#file-input').click());
-    ['ticker-chart','outcome-chart','holding-chart'].forEach(id =>
+    ['ticker-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
       { const el=$('#'+id); if (el) el.innerHTML='<div class="chart-empty">No data yet</div>'; });
+    $('#dist-stats').innerHTML = '';
     $('#open-positions-table tbody').innerHTML = er(13,'Upload a file to see open positions.');
     $('#trades-table tbody').innerHTML = er(11,'Upload a file to see closed trades.');
+    $('#top-winners tbody').innerHTML = er(6,'—');
+    $('#top-losers tbody').innerHTML = er(6,'—');
   }
 
   function applySourceNotes(){
@@ -159,14 +185,19 @@
     // import
     $('#file-input').addEventListener('change',async e=>{
       const f=e.target.files[0]; if(!f) return;
-      try { setReconciliation(await window.TradeParser.parseFile(f)); renderAll(); }
-      catch(err){ alert('Could not parse file: '+err.message); }
+      try {
+        const buf = await f.arrayBuffer();
+        const recon = window.TradeParser.parseArrayBuffer(new Uint8Array(buf));
+        storeTrades(f.name, buf);            // persist so it continues next visit
+        setReconciliation(recon); renderAll();
+      } catch(err){ alert('Could not parse file: '+err.message); }
     });
   }
 
   // ---------- init ----------
   async function init(){
     wire();
+    window.ScreenerTab.wireModal();
     window.PerformanceTab.renderGlossary();
 
     // Market data loads for the benchmark/prices and the screener, but trade
@@ -179,8 +210,15 @@
     state.benchmark = bench;            // { placeholder, asof, data:[{date,close}] }
     state.prices = prices ? prices.prices : null;
 
+    // Restore the last uploaded statement (continue where you left off).
+    const stored = loadStored();
+    if (stored){
+      try { setReconciliation(window.TradeParser.parseArrayBuffer(stored.bytes)); }
+      catch(e){ clearStored(); }
+    }
+
     applySourceNotes();
-    renderAll();                        // shows the import prompt (no recon yet)
+    renderAll();                        // import prompt if nothing restored
 
     window.ScreenerTab.setData(momentum);
   }

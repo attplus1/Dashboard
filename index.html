@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=5" />
+  <link rel="stylesheet" href="css/styles.css?v=6" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -41,8 +41,8 @@
         <p>Round-trip trades are reconstructed from your broker history: entries (<em>Buy/Sell Trade</em>)
            are matched to exits (<em>Close Trade / Stop Loss</em>) by order reference, with stop-loss
            exits matched FIFO per ticker. Realised P&amp;L is read from the statement and is shown
-           <strong>gross</strong>; commissions are tracked separately. Use the date range to scope every
-           metric and chart below.</p>
+           <strong>gross</strong> of commission and overnight funding — those are tracked separately and
+           combined into the <em>Net P&amp;L</em> figures. Use the date range to scope every metric and chart below.</p>
       </div>
       <div id="data-source-note" class="source-note"></div>
     </section>
@@ -138,6 +138,38 @@
       </section>
     </div>
 
+    <!-- Returns distribution + top trades -->
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Distribution of Trade Returns</h3>
+        <p class="panel-desc">Histogram of per-trade % returns with a fitted normal curve. Mean (μ) and
+           standard deviation (σ) are shown; returns are gross of fees.</p>
+      </div>
+      <div id="dist-stats" class="dist-stats"></div>
+      <div id="dist-chart" class="chart chart-md"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Top Trades</h3>
+        <p class="panel-desc">The five largest winners and losers by realised P&amp;L in the selected period.</p>
+      </div>
+      <div class="top-trades">
+        <div>
+          <h4 class="tt-h tt-win">▲ Top 5 Winners</h4>
+          <div class="table-wrap"><table class="data-table" id="top-winners">
+            <thead><tr><th>Ticker</th><th>Side</th><th class="num">P&amp;L</th><th class="num">Return %</th><th class="num">Hold (d)</th><th>Closed</th></tr></thead>
+            <tbody></tbody></table></div>
+        </div>
+        <div>
+          <h4 class="tt-h tt-lose">▼ Top 5 Losers</h4>
+          <div class="table-wrap"><table class="data-table" id="top-losers">
+            <thead><tr><th>Ticker</th><th>Side</th><th class="num">P&amp;L</th><th class="num">Return %</th><th class="num">Hold (d)</th><th>Closed</th></tr></thead>
+            <tbody></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Closed trades table -->
     <section class="panel">
       <div class="panel-head">
@@ -194,6 +226,25 @@
     <section class="cards-grid" id="screener-cards"></section>
   </main>
 
+  <!-- Screener expand modal -->
+  <div id="mom-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-head">
+        <div><span class="modal-ticker" id="modal-ticker"></span>
+             <span class="modal-name" id="modal-name"></span></div>
+        <div class="modal-rank" id="modal-rank"></div>
+      </div>
+      <div class="modal-metrics" id="modal-metrics"></div>
+      <div class="modal-chart" id="modal-chart"></div>
+      <div class="modal-foot">
+        <span class="ma-key"><span class="ma50">MA50</span><span class="ma200">MA200</span></span>
+        <span>Scroll / drag the chart to zoom &amp; pan</span>
+      </div>
+    </div>
+  </div>
+
   <footer class="app-footer">
     <span>Static dashboard &middot; GitHub Pages</span>
     <span>Market data via Stooq (daily, refreshed by GitHub Actions)</span>
@@ -203,12 +254,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=5"></script>
-  <script src="js/parser.js?v=5"></script>
-  <script src="js/metrics.js?v=5"></script>
-  <script src="js/charts.js?v=5"></script>
-  <script src="js/performance.js?v=5"></script>
-  <script src="js/screener.js?v=5"></script>
-  <script src="js/app.js?v=5"></script>
+  <script src="js/config.js?v=6"></script>
+  <script src="js/parser.js?v=6"></script>
+  <script src="js/metrics.js?v=6"></script>
+  <script src="js/charts.js?v=6"></script>
+  <script src="js/performance.js?v=6"></script>
+  <script src="js/screener.js?v=6"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>

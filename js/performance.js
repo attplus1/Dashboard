@@ -14,29 +14,52 @@
       <div class="k-sub">${sub||''}</div></div>`;
   }
 
-  function renderKPIs(m, commission){
-    const net = m.totalPnl + commission;
+  function renderKPIs(m, commission, funding){
+    const net = m.totalPnl + commission + funding;
     const cards = [
-      kpiCard('Total P&L', money(m.totalPnl,0), `Net ${money(net,0)} after fees`,
+      kpiCard('Gross P&L', money(m.totalPnl,0), 'realised, before fees',
               m.totalPnl>=0?'pos':'neg'),
+      kpiCard('Net P&L', money(net,0), 'after commission & funding', net>=0?'pos':'neg'),
+      kpiCard('Total commission', money(commission,0), 'paid in period', commission<0?'neg':''),
+      kpiCard('Total funding', money(funding,0), 'overnight financing', funding<0?'neg':''),
       kpiCard('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W : ${m.nLoss}L`, ''),
       kpiCard('Total trades', String(m.nTotal), `${m.nWin} win · ${m.nLoss} loss · ${m.nFlat} flat`, ''),
       kpiCard('Profit factor', ratio(m.profitFactor),
               `GP ${money(m.grossProfit,0)} / GL ${money(m.grossLoss,0)}`, ''),
       kpiCard('Avg win / loss', money(m.avgWin,0),
               `loss ${money(m.avgLoss,0)} · avg ${money(m.avgPnl,0)}`, ''),
-      kpiCard('Total commission', money(commission,0), 'paid in period',
-              commission<0?'neg':''),
-      kpiCard('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0),
-              'neg'),
+      kpiCard('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg'),
       kpiCard('Sharpe ratio', ratio(m.sharpe), 'annualised, excess', ''),
       kpiCard('Information ratio', ratio(m.infoRatio), 'vs '+window.CONFIG.BENCHMARK_LABEL, ''),
       kpiCard('Avg hold (all)', m.avgHoldAll.toFixed(1)+'d',
-              `W ${m.avgHoldWin.toFixed(1)}d · L ${m.avgHoldLoss.toFixed(1)}d`, ''),
-      kpiCard('Avg return / trade', pct(m.avgRet), 'per closed position', m.avgRet>=0?'pos':'neg'),
-      kpiCard('Win : Loss', `${m.nWin} : ${m.nLoss}`, 'trade count ratio', '')
+              `W ${m.avgHoldWin.toFixed(1)}d · L ${m.avgHoldLoss.toFixed(1)}d`, '')
     ];
     $('#kpi-grid').innerHTML = cards.join('');
+  }
+
+  function renderTopTrades(m){
+    const row = t => `<tr>
+      <td><b>${t.ticker}</b></td>
+      <td><span class="pill ${t.dir}">${t.dir}</span></td>
+      <td class="num ${cls(t.pnl)}">${money(t.pnl,0)}</td>
+      <td class="num ${cls(t.ret)}">${pct(t.ret)}</td>
+      <td class="num">${t.holdDays.toFixed(1)}</td>
+      <td>${fmtD(t.exitDt)}</td></tr>`;
+    const tt = window.Metrics.topTrades(m.trades, 5);
+    $('#top-winners tbody').innerHTML = tt.winners.length
+      ? tt.winners.map(row).join('') : `<tr class="empty-row"><td colspan="6">No winning trades.</td></tr>`;
+    $('#top-losers tbody').innerHTML = tt.losers.length
+      ? tt.losers.map(row).join('') : `<tr class="empty-row"><td colspan="6">No losing trades.</td></tr>`;
+  }
+
+  function renderDistribution(m){
+    const h = window.Metrics.returnsHistogram(m.trades);
+    $('#dist-stats').innerHTML = h.n>=2
+      ? `<span>μ <b class="${cls(h.mean)}">${pct(h.mean,2)}</b></span>
+         <span>σ <b>${h.std.toFixed(2)}%</b></span>
+         <span>n <b>${h.n}</b></span>`
+      : '';
+    window.Charts.returnsDistChart('dist-chart', h);
   }
 
   function renderOpenPositions(openPositions, prices){
@@ -103,13 +126,16 @@
   // Full render given the current app state.
   function render(state){
     const { recon, from, to, unit, benchmark, prices } = state;
-    const m = window.Metrics.compute(recon.trades, from, to, recon.initialCapital, benchmark);
-    const commission = window.Metrics.commissionInRange(recon.commissions, from, to);
-    renderKPIs(m, commission);
+    const m = window.Metrics.compute(recon.trades, from, to, recon.balanceSeries, benchmark);
+    const commission = window.Metrics.sumInRange(recon.commissions, from, to);
+    const funding    = window.Metrics.sumInRange(recon.fundings, from, to);
+    renderKPIs(m, commission, funding);
     window.Charts.equityChart('equity-chart', m, unit);
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
     window.Charts.outcomeChart('outcome-chart', m);
     window.Charts.holdingChart('holding-chart', m);
+    renderDistribution(m);
+    renderTopTrades(m);
     renderOpenPositions(recon.openPositions, prices);
     renderTradesTable(m.trades);
   }

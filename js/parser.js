@@ -5,7 +5,7 @@
  */
 (function () {
   const COL = { DATE:0, TYPE:1, ORDER:2, TRADE:3, REL:4, PRODUCT:5, UNITS:6,
-                PRICE:7, STOP:9, VALUE:13, AMOUNT:14, BALANCE:15, FEE:17 };
+                PRICE:7, STOP:9, VALUE:13, AMOUNT:14, BALANCE:15, FEE:17, HOLDING:20 };
 
   const MONTHS = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
 
@@ -67,6 +67,27 @@
       }
     }
 
+    // 1b) Overnight funding ("Holding Cost"). Per-position rows carry the cost
+    //     in the HOLDING COST column and reference the position's order; the
+    //     account-level rows carry the same totals in AMOUNT (dated, no double
+    //     count) — used for period-scoped totals.
+    let totalFunding = 0;
+    const fundingByOrder = {};
+    const fundings = [];
+    for (const r of chron){
+      if (r[COL.TYPE] !== 'Holding Cost') continue;
+      const perPos = num(r[COL.HOLDING]);          // per-position cost (negative)
+      if (perPos){
+        fundingByOrder[r[COL.ORDER]] = (fundingByOrder[r[COL.ORDER]] || 0) + perPos;
+      }
+      const acct = num(r[COL.AMOUNT]);             // account-level dated cash hit
+      if (acct){
+        totalFunding += acct;
+        const d = parseDate(r[COL.DATE]);
+        if (d) fundings.push({ dt:d, amount:acct });
+      }
+    }
+
     // Account balance timeline (true equity, from the BALANCE column).
     const balanceSeries = [];
     for (const r of chron){
@@ -121,11 +142,14 @@
       const ret = notional ? (pnl / notional * 100) : 0;
       const holdDays = (when && entry.dt) ? (when - entry.dt) / 86400000 : 0;
       const exitComm = commissionByOrder[r[COL.REL]] || 0;
+      const funding = fundingByOrder[entry.order] || 0;
+      const netPnl = pnl + (commissionByOrder[entry.order] || 0) + exitComm + funding;
       trades.push({
         product, ticker: entry.ticker, dir: entry.dir, units: u,
         entryPx: entry.price, exitPx, entryDt: entry.dt, exitDt: when,
         pnl, ret, holdDays, exitType: t,
-        commission: (commissionByOrder[entry.order] || 0) + exitComm
+        commission: (commissionByOrder[entry.order] || 0) + exitComm,
+        funding, netPnl, netRet: notional ? (netPnl / notional * 100) : 0
       });
     }
     trades.sort((a,b) => a.exitDt - b.exitDt);
@@ -137,7 +161,8 @@
         openPositions.push({
           product: o.product, ticker: o.ticker, dir: o.dir, units: o.remaining,
           price: o.price, dt: o.dt, stop: o.stop,
-          commission: commissionByOrder[o.order] || 0
+          commission: commissionByOrder[o.order] || 0,
+          funding: fundingByOrder[o.order] || 0
         });
       }
     }
@@ -151,24 +176,21 @@
     const lastDate  = valid.length ? new Date(Math.max(...valid)) : null;
 
     return { trades, openPositions, totalCommission, commissions,
-             balanceSeries, initialCapital, firstDate, lastDate };
+             totalFunding, fundings, balanceSeries, initialCapital,
+             firstDate, lastDate };
   }
 
-  // Parse a File (csv/xlsx) into rows[][] via SheetJS, then reconstruct.
+  // Parse an ArrayBuffer / Uint8Array (csv/xlsx) via SheetJS, then reconstruct.
+  // Shared by file upload and saved-state restore.
+  function parseArrayBuffer(buf){
+    const wb = XLSX.read(buf, { type:'array', cellDates:true });
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'' });
+    return reconstruct(rows);
+  }
+
   function parseFile(file){
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const wb = XLSX.read(e.target.result, { type:'array', cellDates:true });
-          const ws = wb.Sheets[wb.SheetNames[0]];
-          const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'' });
-          resolve(reconstruct(rows));
-        } catch (err){ reject(err); }
-      };
-      reader.onerror = reject;
-      reader.readAsArrayBuffer(file);
-    });
+    return file.arrayBuffer().then(buf => parseArrayBuffer(new Uint8Array(buf)));
   }
 
   // Parse raw CSV text (used to load the bundled sample).
@@ -179,5 +201,5 @@
     return reconstruct(rows);
   }
 
-  window.TradeParser = { reconstruct, parseFile, parseCSVText };
+  window.TradeParser = { reconstruct, parseFile, parseArrayBuffer, parseCSVText };
 })();

@@ -57,6 +57,9 @@ window.CONFIG = {
     ['Information ratio', 'Annualised active return versus the ASX 200 benchmark, divided by tracking error (volatility of the active return).'],
     ['Avg holding period', 'Mean calendar days a position is held, split by winners, losers and overall.'],
     ['Total commissions', 'All commission charges paid in the period, taken directly from the statement.'],
+    ['Total funding', 'Overnight financing ("Holding Cost") on leveraged positions over the period. Per-trade P&L and returns are GROSS of this — it is shown separately and folded into Net P&L.'],
+    ['Net P&L', 'Gross realised P&L minus commission and overnight funding.'],
+    ['Equity curve', 'The actual account balance over time (straight from the statement), so the starting point is robust to re-uploads. The ASX 200 is rebased to the same starting value.'],
     ['Return %', 'Per-trade P&L as a percentage of the notional position value at entry (entry price × shares).']
   ]
 };
