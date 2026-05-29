@@ -58,12 +58,16 @@
 
   function tickerChart(id, rows, unit){
     const c = init(id); if (!c) return;
+    const nameByTicker = {}; rows.forEach(r => nameByTicker[r.ticker] = r.name || r.ticker);
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:80,right:24,top:14,bottom:30},
       tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:COLORS.tip,
         borderColor:COLORS.grid, textStyle:{color:COLORS.textStrong},
-        valueFormatter:v=> unit==='percent'?fmtPct(v):fmtMoney(v)},
+        formatter:params=>{ const p=params[0]; const v=p.value;
+          const nm=nameByTicker[p.name]||p.name;
+          return `<b>${nm}</b> <span style="color:${COLORS.text}">${p.name}</span><br/>`
+               + (unit==='percent'?fmtPct(v):fmtMoney(v)); }},
       xAxis:{type:'value', ...axisBase,
         axisLabel:{color:COLORS.text, formatter:v=> unit==='percent'? v+'%' : fmtMoney(v)}},
       yAxis:{type:'category', data:rows.map(r=>r.ticker), ...axisBase,
@@ -119,10 +123,13 @@
     const c = echarts.init(el, null, {renderer:'canvas'});
     const dates = candles.map(d=>d.date);
     const ohlc = candles.map(d=>[d.open,d.close,d.low,d.high]);
-    const ma = (n)=> candles.map((_,i)=>{
-      if (i<n-1) return null;
-      let s=0; for (let k=i-n+1;k<=i;k++) s+=candles[k].close; return +(s/n).toFixed(3);
-    });
+    // Prefer MAs precomputed over the full history (so they span the whole
+    // window); fall back to a windowed average for older/placeholder data.
+    const hasMA = candles.some(d=>d.ma50!=null||d.ma200!=null);
+    const ma = (n,key)=> hasMA
+      ? candles.map(d=> d[key]==null?null:+d[key])
+      : candles.map((_,i)=>{ if (i<n-1) return null;
+          let s=0; for (let k=i-n+1;k<=i;k++) s+=candles[k].close; return +(s/n).toFixed(3); });
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:6,right:6,top:8,bottom:6, containLabel:false},
@@ -136,8 +143,10 @@
         {type:'candlestick', data:ohlc,
           itemStyle:{color:COLORS.pos,color0:COLORS.neg,
             borderColor:COLORS.pos,borderColor0:COLORS.neg}},
-        {type:'line', data:ma(50), showSymbol:false, lineStyle:{width:1.3,color:COLORS.accent}},
-        {type:'line', data:ma(200), showSymbol:false, lineStyle:{width:1.3,color:COLORS.warn}}
+        {type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
+          lineStyle:{width:1.3,color:COLORS.accent}},
+        {type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
+          lineStyle:{width:1.3,color:COLORS.warn}}
       ]
     });
     return c;

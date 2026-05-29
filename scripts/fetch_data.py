@@ -98,6 +98,28 @@ def get_history(ticker):
     return candles
 
 
+def build_candles(candles):
+    """Return the last CANDLES_OUT bars, each carrying MA50/MA200 computed over
+    the FULL history so the moving averages span the entire displayed window."""
+    closes = [c["close"] for c in candles]
+
+    def sma(i, n):
+        if i < n - 1:
+            return None
+        return round(sum(closes[i - n + 1:i + 1]) / n, 4)
+
+    out = []
+    start = max(0, len(candles) - CANDLES_OUT)
+    for i in range(start, len(candles)):
+        c = candles[i]
+        out.append({
+            "date": c["date"], "open": round(c["open"], 4), "high": round(c["high"], 4),
+            "low": round(c["low"], 4), "close": round(c["close"], 4),
+            "ma50": sma(i, 50), "ma200": sma(i, 200),
+        })
+    return out
+
+
 def momentum_score(candles):
     """6-1 formation return: close[-SKIP] / close[-(SKIP+LOOKBACK)] - 1."""
     if len(candles) < MIN_HISTORY:
@@ -127,12 +149,7 @@ def main():
             ranked.append({
                 "ticker": ticker, "name": name, "score": round(score, 4),
                 "last": candles[-1]["close"],
-                "candles": [
-                    {"date": c["date"], "open": round(c["open"], 4),
-                     "high": round(c["high"], 4), "low": round(c["low"], 4),
-                     "close": round(c["close"], 4)}
-                    for c in candles[-CANDLES_OUT:]
-                ],
+                "candles": build_candles(candles),
             })
         if n % 50 == 0:
             log(f"  processed {n}/{len(universe)}")

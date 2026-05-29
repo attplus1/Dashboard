@@ -130,11 +130,11 @@
   function byTicker(trades, mode){
     const g={};
     for (const t of trades){
-      (g[t.ticker]=g[t.ticker]||{pnl:0,rets:[],n:0});
+      (g[t.ticker]=g[t.ticker]||{pnl:0,rets:[],n:0,name:t.product});
       g[t.ticker].pnl+=t.pnl; g[t.ticker].rets.push(t.ret); g[t.ticker].n++;
     }
     const rows=Object.entries(g).map(([ticker,v])=>({
-      ticker, pnl:v.pnl, ret:mean(v.rets), n:v.n,
+      ticker, name:v.name, pnl:v.pnl, ret:mean(v.rets), n:v.n,
       value: mode==='percent' ? mean(v.rets) : v.pnl
     }));
     rows.sort((a,b)=>a.value-b.value);
