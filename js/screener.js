@@ -35,7 +35,8 @@
       return { tier:'full', list: DATA.ranked, legacy:true, active:true };
     const ranked = DATA.ranked || {};
     const list = ranked[tier] || ranked.full || [];
-    const active = tier==='full' || (DATA.cap_count||0) >= (+tier);
+    const active = tier==='full'
+      || (DATA.caps_ready === true && (DATA.cap_count||0) >= (+tier));
     return { tier, list, legacy:false, active };
   }
 
