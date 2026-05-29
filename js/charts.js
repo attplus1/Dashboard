@@ -149,9 +149,10 @@
           // Expanded: full zoom + pan via wheel/drag.
           ? {type:'inside', start:startPct, end:100,
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
-          // Preview: pan left/right only (wheel scrolls, no zoom); y auto-scales.
+          // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
+          // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true,
-             zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:true},
+             zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
         ...(big ? [{type:'slider', start:startPct, end:100, height:22, bottom:18,
                     borderColor:COLORS.grid, textStyle:{color:COLORS.text}}] : [])
       ],
