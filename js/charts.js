@@ -189,6 +189,7 @@
       yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
       series:[
         {name:'Trades', type:'custom', encode:{x:[0,1], y:2},
+         itemStyle:{color:'rgba(245,130,30,.7)'},   // legend swatch matches bars
          data:h.bins.map(b=>[b.x0,b.x1,b.count,b.mid]),
          renderItem:(params,api)=>{
            const x0=api.coord([api.value(0),0]), x1=api.coord([api.value(1),0]);
@@ -198,7 +199,7 @@
              style:{fill:'rgba(245,130,30,.55)', stroke:COLORS.accent, lineWidth:1}};
          }},
         {name:'Normal fit', type:'line', smooth:true, showSymbol:false, data:h.normal,
-         lineStyle:{color:COLORS.bench,width:2}}
+         itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}
       ]
     });
   }
