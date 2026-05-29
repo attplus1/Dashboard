@@ -5,7 +5,10 @@ name: Update market data
 
 on:
   schedule:
-    - cron: '30 7 * * 1-5'   # ~07:30 UTC weekdays, after the ASX close
+    # ~00:30 UTC daily ≈ Australian market open (10:30 AEST / 11:30 AEDT).
+    # At AU open the latest settled data is the PREVIOUS trading day's closes,
+    # which is exactly what the EOD screener needs. No-data days are no-ops.
+    - cron: '30 0 * * *'
   workflow_dispatch:          # allow manual runs from the Actions tab
 
 permissions:

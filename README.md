@@ -40,6 +40,18 @@ is fetched by a scheduled GitHub Action (Python + Stooq) and committed as JSON t
 The universe is rebuilt from the **ASX company directory** at the start of every data run,
 so the screener always scans the current full market without manual maintenance.
 
+### How market data is fetched
+
+`fetch_data.py` downloads Stooq's **bulk daily archive** — a single download that covers the
+whole market — and reads the Australian (`.au`) symbols from it. This avoids Stooq's per-symbol
+daily rate limit, which makes scanning the full ~2,000-name ASX universe feasible. If the bulk
+archive can't be retrieved it **falls back** to per-symbol requests over the seed universe
+(small enough to stay within Stooq's quota); yfinance is the final fallback for the benchmark.
+
+The workflow runs **daily at ~00:30 UTC (≈ ASX open)**. At the Australian open the latest
+settled data is the **previous trading day's closes**, which is exactly what the end-of-day
+screener uses — so viewers throughout the day see yesterday's closes, refreshed each morning.
+
 The committed JSON ships as **placeholder data** (`"placeholder": true`) so the site renders
 before the first run; the dashboard flags it. Run the workflow to replace it with live data.
 
@@ -47,8 +59,8 @@ before the first run; the dashboard flags it. Run the workflow to replace it wit
 
 1. **Enable Pages**: Settings → Pages → Source = **GitHub Actions**. `pages.yml` deploys on
    push to `main`.
-2. **First data run**: Actions → *Update market data* → *Run workflow* (also runs ~07:30 UTC
-   on weekdays). Optionally run `scripts/build_universe.py` first to expand the universe.
+2. **First data run**: Actions → *Update market data* → *Run workflow* (also runs daily at
+   ~00:30 UTC ≈ ASX open).
 3. Open the published URL. Use **Import trades** to load your own statement (parsed entirely
    in the browser — nothing is uploaded).
 
