@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=15" />
+  <link rel="stylesheet" href="css/styles.css?v=16" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -215,16 +215,16 @@
 
     <section class="panel control-panel">
       <div class="control-row screener-controls">
-        <div class="screener-stat"><span class="lbl">Universe</span>
-          <select id="scr-universe-sel">
-            <option value="200" selected>Top 200 (by market cap)</option>
-            <option value="500">Top 500 (by market cap)</option>
-            <option value="full">Entire ASX universe</option>
-          </select>
-        </div>
         <div class="screener-stat"><span class="lbl">Universe scanned</span><span class="val" id="scr-universe">–</span></div>
         <div class="screener-stat"><span class="lbl">Formation window</span><span class="val" id="scr-window">6 − 1 month</span></div>
         <div class="screener-stat"><span class="lbl">As of</span><span class="val" id="scr-asof">–</span></div>
+        <div class="screener-stat push-right"><span class="lbl">Universe</span>
+          <select id="scr-universe-sel">
+            <option value="200" selected>Top 200</option>
+            <option value="500">Top 500</option>
+            <option value="full">Entire ASX universe</option>
+          </select>
+        </div>
         <div class="screener-stat"><span class="lbl">Showing top</span>
           <select id="scr-topn">
             <option>12</option><option selected>20</option><option>30</option><option>50</option>
@@ -264,12 +264,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=15"></script>
-  <script src="js/parser.js?v=15"></script>
-  <script src="js/metrics.js?v=15"></script>
-  <script src="js/charts.js?v=15"></script>
-  <script src="js/performance.js?v=15"></script>
-  <script src="js/screener.js?v=15"></script>
-  <script src="js/app.js?v=15"></script>
+  <script src="js/config.js?v=16"></script>
+  <script src="js/parser.js?v=16"></script>
+  <script src="js/metrics.js?v=16"></script>
+  <script src="js/charts.js?v=16"></script>
+  <script src="js/performance.js?v=16"></script>
+  <script src="js/screener.js?v=16"></script>
+  <script src="js/app.js?v=16"></script>
 </body>
 </html>

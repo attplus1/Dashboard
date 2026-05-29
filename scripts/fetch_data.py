@@ -47,7 +47,7 @@ TOP_N = 50
 # Market-cap cache (used to build the top-200 / top-500 universe tiers). Caps
 # are fetched from yfinance a slice at a time and refreshed weekly — market cap
 # moves slowly, so stale-by-days is fine and keeps each run's request count low.
-MAX_CAP_FETCH_PER_RUN = int(os.environ.get("MAX_CAP_FETCH_PER_RUN", "500"))
+MAX_CAP_FETCH_PER_RUN = int(os.environ.get("MAX_CAP_FETCH_PER_RUN", "1200"))
 CAP_STALE_DAYS = 7
 TIER_SIZES = [200, 500]                               # universe tiers (plus full)
 
@@ -290,8 +290,14 @@ def _extract_cap(fi):
 def update_marketcaps(tickers):
     """Refresh missing/stale market caps via yfinance (bounded per run).
 
-    Returns {ticker: market_cap} for everything cached so far. Each ticker is
-    re-checked at most weekly; throttled/empty lookups are retried next cycle.
+    Returns (caps, ready):
+      caps  -> {ticker: market_cap} for everything cached so far.
+      ready -> True once we've successfully attempted (almost) the whole
+               universe at least once. Tiers stay on the full universe until
+               then, so a partial (alphabetically-biased) sweep never produces
+               a wrong "top 200/500".
+    Each ticker is re-checked at most weekly; transient errors are NOT marked
+    fetched, so they retry on the next run instead of sticking for a week.
     """
     caps, fetched = load_marketcaps()
 
@@ -312,30 +318,34 @@ def update_marketcaps(tickers):
         for t in todo:
             try:
                 cap = _extract_cap(yf.Ticker(f"{t}.AX").fast_info)
-                if cap:
-                    caps[t] = cap
-                    got += 1
-                elif t in caps:
-                    caps.pop(t, None)            # no longer has a cap
             except Exception:
-                pass                             # leave unfetched -> retried next run
+                continue                         # transient -> retry next run
+            if cap:
+                caps[t] = cap
+                got += 1
+            else:
+                caps.pop(t, None)                # responded, but no cap (ETF, etc.)
             fetched[t] = TODAY
         log(f"  got {got}/{len(todo)} caps; {len(caps)} cached total")
         with open(MARKETCAP, "w") as f:
             json.dump({"updated": TODAY, "caps": caps, "fetched": fetched},
                       f, separators=(",", ":"))
-    return caps
+    covered = sum(1 for t in tickers if t in fetched)
+    ready = covered >= 0.9 * max(1, len(tickers))
+    log(f"  cap sweep coverage {covered}/{len(tickers)} -> tiers "
+        f"{'READY' if ready else 'warming up'}")
+    return caps, ready
 
 
-def build_outputs(tickers, names, caps):
+def build_outputs(tickers, names, caps, caps_ready):
     """Build price snapshot, per-tier momentum lists and a shared stock map.
 
     Momentum scores are computed for every priced ticker; tickers are ranked by
     market cap to assign tiers. We emit the top-TOP_N momentum names within each
     tier (top 200 / 500 by cap, plus the full universe) as lists of codes, and a
     single `stocks` map (candles/score/capRank) so candle data is never
-    duplicated across tiers. A tier falls back to the full list until enough
-    market caps have been gathered to populate it.
+    duplicated across tiers. A tier falls back to the full list until the
+    market-cap sweep is complete (caps_ready) and it has enough caps to fill.
     """
     prices, scored = {}, []
     for t in tickers:
@@ -357,8 +367,8 @@ def build_outputs(tickers, names, caps):
     full = [t for t, _, _ in scored][:TOP_N]
 
     def tier(maxrank):
-        # Not enough caps to form this tier yet -> show the full universe.
-        if n_caps < maxrank:
+        # Sweep incomplete or not enough caps yet -> show the full universe.
+        if not caps_ready or n_caps < maxrank:
             return full
         out = [t for t, _, _ in scored if cap_rank.get(t, 10**9) <= maxrank]
         return out[:TOP_N]
@@ -388,8 +398,8 @@ def main():
 
     remaining = update_histories(tickers)
     bench = update_benchmark()
-    caps = update_marketcaps(tickers)
-    prices, ranked, stocks, n_caps = build_outputs(tickers, names, caps)
+    caps, caps_ready = update_marketcaps(tickers)
+    prices, ranked, stocks, n_caps = build_outputs(tickers, names, caps, caps_ready)
 
     benchmark = {"placeholder": False, "asof": TODAY, "label": "ASX 200",
                  "data": [{"date": c["date"], "close": round(c["close"], 2)} for c in bench]}
@@ -402,7 +412,8 @@ def main():
         json.dump({"placeholder": False, "asof": TODAY, "source": "yfinance",
                    "universe_count": len(prices), "window": "6-1 month",
                    "complete": remaining == 0, "tiers": TIER_SIZES,
-                   "cap_count": n_caps, "ranked": ranked, "stocks": stocks},
+                   "cap_count": n_caps, "caps_ready": caps_ready,
+                   "ranked": ranked, "stocks": stocks},
                   f, separators=(",", ":"))
 
     log(f"Done. priced={len(prices)} caps={n_caps} stocks={len(stocks)} "

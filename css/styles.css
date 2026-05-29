@@ -190,6 +190,7 @@ input[type=date]{
 .mom-card{cursor:pointer}
 .screener-controls{gap:36px}
 .screener-stat{display:flex; flex-direction:column; gap:4px}
+.screener-stat.push-right{margin-left:auto}   /* pushes Universe + Showing top to the right */
 .screener-stat .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--text-faint)}
 .screener-stat .val{font-size:16px; font-weight:600; font-family:var(--mono)}
 .screener-stat select{
