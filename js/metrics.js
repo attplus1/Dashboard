@@ -142,10 +142,12 @@
     return rows;
   }
 
-  // Histogram of trade returns (%) with a fitted normal curve overlaid.
-  function returnsHistogram(trades){
-    const vals = trades.map(t=>t.ret).filter(v=>isFinite(v));
-    if (vals.length < 2) return { bins:[], normal:[], mean:0, std:0, n:vals.length };
+  // Histogram of trade outcomes with a fitted normal curve overlaid. `mode`
+  // selects the metric: 'dollar' bins per-trade $ P&L, otherwise % return.
+  function returnsHistogram(trades, mode){
+    const pick = mode==='dollar' ? (t=>t.pnl) : (t=>t.ret);
+    const vals = trades.map(pick).filter(v=>isFinite(v));
+    if (vals.length < 2) return { bins:[], normal:[], mean:0, std:0, n:vals.length, mode };
     const lo=Math.min(...vals), hi=Math.max(...vals);
     const nbins = Math.max(6, Math.min(24, Math.ceil(Math.sqrt(vals.length))+2));
     const span = (hi-lo)||1, w = span/nbins;
@@ -163,13 +165,13 @@
         normal.push([+x.toFixed(3), +(pdf*vals.length*w).toFixed(3)]);
       }
     }
-    return { bins, normal, mean:m, std:s, n:vals.length };
+    return { bins, normal, mean:m, std:s, n:vals.length, mode };
   }
 
   // Top winners/losers ranked by the active display metric so the table lines
-  // up with the (%-based) returns histogram: 'percent' ranks by return %,
-  // otherwise by dollar P&L. Sign of ret and pnl always agree, so the win/loss
-  // split is the same either way.
+  // up with the returns histogram: 'percent' ranks by return %, otherwise by
+  // dollar P&L. Sign of ret and pnl always agree, so the win/loss split is the
+  // same either way.
   function topTrades(trades, n, mode){
     const key = mode==='percent' ? (t=>t.ret) : (t=>t.pnl);
     const sorted = trades.slice().sort((a,b)=>key(b)-key(a));

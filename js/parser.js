@@ -193,11 +193,16 @@
     return file.arrayBuffer().then(buf => parseArrayBuffer(new Uint8Array(buf)));
   }
 
-  // Parse raw CSV text (used to load the bundled sample).
+  // Parse raw CSV text (the committed repo trade history).
+  // IMPORTANT: use the SAME options as parseArrayBuffer — cellDates:true with
+  // raw:true. With raw:false, SheetJS reformats detected date cells into an
+  // ambiguous "m/d/yy" string (e.g. "29 May 2026" -> "5/29/26"), which the
+  // dd/mm/yyyy matcher then misreads (day=5, month=29 -> overflows into 2028),
+  // corrupting every date on the default-history load path.
   function parseCSVText(text){
-    const wb = XLSX.read(text, { type:'string' });
+    const wb = XLSX.read(text, { type:'string', cellDates:true });
     const ws = wb.Sheets[wb.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:false, defval:'' });
+    const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'' });
     return reconstruct(rows);
   }
 
