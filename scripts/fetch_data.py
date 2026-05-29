@@ -221,8 +221,11 @@ def update_benchmark():
                 df.columns = df.columns.get_level_values(0)
             new = _candles_from_df(df)
             merged = merge(candles_of(obj), new)
-            save_hist("^AXJO", TODAY, merged)
-            obj = load_hist("^AXJO")
+            # Only persist (and mark as fetched) if we actually got data — an
+            # empty merge keeps last_fetch unset so the next run retries.
+            if merged:
+                save_hist("^AXJO", TODAY, merged)
+                obj = load_hist("^AXJO")
     return candles_of(obj)
 
 
