@@ -2,714 +2,7395 @@
  "description": "ASX universe \u2014 seed list; build_universe.py replaces this with the full ASX directory",
  "constituents": [
   {
+   "ticker": "10X",
+   "name": "EXULTANT MINING LIMITED"
+  },
+  {
+   "ticker": "14D",
+   "name": "1414 DEGREES LIMITED"
+  },
+  {
+   "ticker": "1AD",
+   "name": "ADALTA LIMITED"
+  },
+  {
+   "ticker": "1AE",
+   "name": "AURORA ENERGY METALS LIMITED"
+  },
+  {
+   "ticker": "1AI",
+   "name": "ALGORAE PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "1CG",
+   "name": "ONE CLICK GROUP LIMITED"
+  },
+  {
+   "ticker": "1MC",
+   "name": "MORELLA CORPORATION LIMITED"
+  },
+  {
+   "ticker": "1TT",
+   "name": "THRIVE TRIBE TECHNOLOGIES LIMITED"
+  },
+  {
    "ticker": "29M",
-   "name": "29Metals Ltd"
+   "name": "29METALS LIMITED"
+  },
+  {
+   "ticker": "360",
+   "name": "LIFE360 INC."
+  },
+  {
+   "ticker": "3DA",
+   "name": "AMAERO LTD"
+  },
+  {
+   "ticker": "3DP",
+   "name": "POINTERRA LIMITED"
+  },
+  {
+   "ticker": "3PL",
+   "name": "3P LEARNING LIMITED.."
+  },
+  {
+   "ticker": "49M",
+   "name": "49 METALS LIMITED"
+  },
+  {
+   "ticker": "4DS",
+   "name": "4DS MEMORY LIMITED"
   },
   {
    "ticker": "4DX",
-   "name": "4Dmedical Ltd"
+   "name": "4DMEDICAL LIMITED"
+  },
+  {
+   "ticker": "5GG",
+   "name": "PENTANET LIMITED"
+  },
+  {
+   "ticker": "5GN",
+   "name": "5G NETWORKS LIMITED."
+  },
+  {
+   "ticker": "6KA",
+   "name": "6K ADDITIVE, INC."
+  },
+  {
+   "ticker": "88E",
+   "name": "88 ENERGY LIMITED"
+  },
+  {
+   "ticker": "8CO",
+   "name": "8COMMON LIMITED"
+  },
+  {
+   "ticker": "8IH",
+   "name": "8I HOLDINGS LTD"
+  },
+  {
+   "ticker": "A11",
+   "name": "ATLANTIC LITHIUM LIMITED"
+  },
+  {
+   "ticker": "A1M",
+   "name": "AIC MINES LIMITED"
+  },
+  {
+   "ticker": "A1N",
+   "name": "ARN MEDIA LIMITED"
   },
   {
    "ticker": "A2M",
-   "name": "The a2 Milk Company"
+   "name": "THE A2 MILK COMPANY LIMITED"
+  },
+  {
+   "ticker": "A3D",
+   "name": "AURORA LABS LIMITED"
+  },
+  {
+   "ticker": "A4N",
+   "name": "ALPHA HPA LIMITED"
+  },
+  {
+   "ticker": "A8G",
+   "name": "AUSTRALASIAN METALS LIMITED"
+  },
+  {
+   "ticker": "AA2",
+   "name": "ARIANA RESOURCES PLC"
+  },
+  {
+   "ticker": "AAC",
+   "name": "AUSTRALIAN AGRICULTURAL COMPANY LIMITED."
+  },
+  {
+   "ticker": "AAI",
+   "name": "ALCOA CORPORATION"
+  },
+  {
+   "ticker": "AAJ",
+   "name": "ARUMA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AAL",
+   "name": "ALFABS AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "AAM",
+   "name": "AUMEGA METALS LTD"
+  },
+  {
+   "ticker": "AAP",
+   "name": "AUSTRALIAN AGRICULTURAL PROJECTS LIMITED"
+  },
+  {
+   "ticker": "AAR",
+   "name": "ASTRAL RESOURCES NL"
+  },
+  {
+   "ticker": "AAU",
+   "name": "ANTILLES GOLD LIMITED"
+  },
+  {
+   "ticker": "ABB",
+   "name": "AUSSIE BROADBAND LIMITED"
   },
   {
    "ticker": "ABC",
    "name": "Adbri Ltd"
   },
   {
+   "ticker": "ABE",
+   "name": "AUSTRALIAN BOND EXCHANGE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "ABG",
+   "name": "ABACUS GROUP"
+  },
+  {
+   "ticker": "ABR",
+   "name": "ALBRIGHT METALS LTD"
+  },
+  {
+   "ticker": "ABV",
+   "name": "ADVANCED BRAKING TECHNOLOGY LTD"
+  },
+  {
+   "ticker": "ABX",
+   "name": "ABX GROUP LIMITED"
+  },
+  {
+   "ticker": "ABY",
+   "name": "ADORE BEAUTY GROUP LIMITED"
+  },
+  {
+   "ticker": "ACE",
+   "name": "ACUSENSUS LIMITED."
+  },
+  {
+   "ticker": "ACF",
+   "name": "ACROW LIMITED"
+  },
+  {
+   "ticker": "ACL",
+   "name": "AUSTRALIAN CLINICAL LABS LIMITED"
+  },
+  {
+   "ticker": "ACM",
+   "name": "AUSTRALIAN CRITICAL MINERALS LIMITED"
+  },
+  {
+   "ticker": "ACP",
+   "name": "AUDALIA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ACQ",
+   "name": "ACORN CAPITAL INVESTMENT FUND LIMITED"
+  },
+  {
+   "ticker": "ACR",
+   "name": "ACRUX LIMITED"
+  },
+  {
+   "ticker": "ACS",
+   "name": "ACCENT RESOURCES NL"
+  },
+  {
+   "ticker": "ACU",
+   "name": "ACUMENTIS GROUP LIMITED"
+  },
+  {
+   "ticker": "ACW",
+   "name": "ACTINOGEN MEDICAL LIMITED"
+  },
+  {
+   "ticker": "AD1",
+   "name": "ADNEO LIMITED"
+  },
+  {
+   "ticker": "AD8",
+   "name": "AUDINATE GROUP LIMITED"
+  },
+  {
+   "ticker": "ADC",
+   "name": "ACDC METALS LTD"
+  },
+  {
+   "ticker": "ADD",
+   "name": "ADAVALE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ADH",
+   "name": "ADAIRS LIMITED"
+  },
+  {
+   "ticker": "ADN",
+   "name": "ANDROMEDA METALS LIMITED"
+  },
+  {
+   "ticker": "ADO",
+   "name": "ANTEOTECH LTD"
+  },
+  {
+   "ticker": "ADR",
+   "name": "ADHERIUM LIMITED"
+  },
+  {
+   "ticker": "ADS",
+   "name": "ADSLOT LTD."
+  },
+  {
+   "ticker": "ADX",
+   "name": "ADX ENERGY LTD"
+  },
+  {
+   "ticker": "ADY",
+   "name": "ADMIRALTY RESOURCES NL."
+  },
+  {
+   "ticker": "AEE",
+   "name": "AURA ENERGY LIMITED"
+  },
+  {
+   "ticker": "AEF",
+   "name": "AUSTRALIAN ETHICAL INVESTMENT LIMITED"
+  },
+  {
+   "ticker": "AEG",
+   "name": "ALAND EQUITY GROUP LIMITED"
+  },
+  {
+   "ticker": "AEI",
+   "name": "AERIS ENVIRONMENTAL LTD"
+  },
+  {
+   "ticker": "AEL",
+   "name": "AMPLITUDE ENERGY LIMITED"
+  },
+  {
+   "ticker": "AEM",
+   "name": "ADVANCED ENERGY MINERALS LTD"
+  },
+  {
+   "ticker": "AER",
+   "name": "AEERIS LTD"
+  },
+  {
+   "ticker": "AEU",
+   "name": "ATOMIC EAGLE LTD"
+  },
+  {
+   "ticker": "AEV",
+   "name": "AVENIRA LIMITED"
+  },
+  {
+   "ticker": "AFA",
+   "name": "ASF GROUP LIMITED"
+  },
+  {
+   "ticker": "AFG",
+   "name": "AUSTRALIAN FINANCE GROUP LTD"
+  },
+  {
+   "ticker": "AFI",
+   "name": "AUSTRALIAN FOUNDATION INVESTMENT COMPANY LIMITED"
+  },
+  {
+   "ticker": "AFL",
+   "name": "AF LEGAL GROUP LTD"
+  },
+  {
+   "ticker": "AFP",
+   "name": "AFT PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "AGC",
+   "name": "AUSTRALIAN GOLD AND COPPER LTD"
+  },
+  {
+   "ticker": "AGD",
+   "name": "AUSTRAL GOLD LIMITED"
+  },
+  {
+   "ticker": "AGE",
+   "name": "ALLIGATOR ENERGY LIMITED"
+  },
+  {
+   "ticker": "AGI",
+   "name": "AINSWORTH GAME TECHNOLOGY LIMITED"
+  },
+  {
    "ticker": "AGL",
-   "name": "AGL Energy Ltd"
+   "name": "AGL ENERGY LIMITED."
+  },
+  {
+   "ticker": "AGN",
+   "name": "ARGENICA THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "AGR",
+   "name": "AGUIA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AGY",
+   "name": "ARGOSY MINERALS LIMITED"
+  },
+  {
+   "ticker": "AHC",
+   "name": "AUSTCO HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "AHE",
+   "name": "ADHERIS HEALTH LIMITED"
+  },
+  {
+   "ticker": "AHF",
+   "name": "AUSTRALIAN DAIRY NUTRITIONALS LIMITED"
+  },
+  {
+   "ticker": "AHK",
+   "name": "ARK MINES LIMITED"
+  },
+  {
+   "ticker": "AHL",
+   "name": "ADRAD HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "AHN",
+   "name": "ATHENA RESOURCES LIMITED"
   },
   {
    "ticker": "AI1",
-   "name": "Adisyn Ltd"
+   "name": "ADISYN LTD"
   },
   {
    "ticker": "AIA",
-   "name": "Auckland Intl Airport"
+   "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED"
+  },
+  {
+   "ticker": "AIH",
+   "name": "ADVANCED INNERGY HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "AII",
+   "name": "ALMONTY INDUSTRIES INC."
+  },
+  {
+   "ticker": "AIM",
+   "name": "AI-MEDIA TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "AIQ",
+   "name": "ALTERNATIVE INVESTMENT TRUST"
+  },
+  {
+   "ticker": "AIS",
+   "name": "AERIS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AIV",
+   "name": "ACTIVEX LIMITED"
+  },
+  {
+   "ticker": "AIZ",
+   "name": "AIR NEW ZEALAND LIMITED"
+  },
+  {
+   "ticker": "AJL",
+   "name": "AJ LUCAS GROUP LIMITED"
+  },
+  {
+   "ticker": "AJX",
+   "name": "ALEXIUM INTERNATIONAL GROUP LIMITED"
+  },
+  {
+   "ticker": "AKA",
+   "name": "AUREKA LIMITED"
+  },
+  {
+   "ticker": "AKG",
+   "name": "ACADEMIES AUSTRALASIA GROUP LIMITED"
+  },
+  {
+   "ticker": "AKM",
+   "name": "ASPIRE MINING LIMITED"
+  },
+  {
+   "ticker": "AKN",
+   "name": "AUKING MINING LIMITED"
+  },
+  {
+   "ticker": "AKO",
+   "name": "AKORA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AL3",
+   "name": "AML3D LIMITED"
+  },
+  {
+   "ticker": "ALA",
+   "name": "AROVELLA THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "ALB",
+   "name": "ALBION RESOURCES LIMITED"
   },
   {
    "ticker": "ALC",
-   "name": "Alcidion Group"
+   "name": "ALCIDION GROUP LIMITED"
   },
   {
    "ticker": "ALD",
-   "name": "Ampol Ltd"
+   "name": "AMPOL LIMITED"
+  },
+  {
+   "ticker": "ALI",
+   "name": "ARGO GLOBAL LISTED INFRASTRUCTURE LIMITED"
+  },
+  {
+   "ticker": "ALK",
+   "name": "ALKANE RESOURCES LIMITED"
   },
   {
    "ticker": "ALL",
-   "name": "Aristocrat Leisure"
+   "name": "ARISTOCRAT LEISURE LIMITED"
+  },
+  {
+   "ticker": "ALM",
+   "name": "ALMA METALS LIMITED"
   },
   {
    "ticker": "ALQ",
-   "name": "ALS Ltd"
+   "name": "ALS LIMITED"
+  },
+  {
+   "ticker": "ALR",
+   "name": "ALTAIR MINERALS LIMITED"
   },
   {
    "ticker": "ALU",
    "name": "Altium Ltd"
   },
   {
+   "ticker": "ALV",
+   "name": "ALVO MINERALS LIMITED"
+  },
+  {
    "ticker": "ALX",
-   "name": "Atlas Arteria"
+   "name": "ATLAS ARTERIA"
+  },
+  {
+   "ticker": "ALY",
+   "name": "ALCHEMY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AM3",
+   "name": "AMARA MINERALS LIMITED"
+  },
+  {
+   "ticker": "AM5",
+   "name": "ANTARES METALS LIMITED"
+  },
+  {
+   "ticker": "AM7",
+   "name": "ARCADIA MINERALS LIMITED"
+  },
+  {
+   "ticker": "AMA",
+   "name": "AMA GROUP LIMITED"
   },
   {
    "ticker": "AMC",
-   "name": "Amcor PLC"
+   "name": "AMCOR PLC"
+  },
+  {
+   "ticker": "AMD",
+   "name": "ARROW MINERALS LTD"
+  },
+  {
+   "ticker": "AMH",
+   "name": "AMCIL LIMITED"
+  },
+  {
+   "ticker": "AMI",
+   "name": "AURELIA METALS LIMITED"
+  },
+  {
+   "ticker": "AMN",
+   "name": "AGRIMIN LIMITED"
+  },
+  {
+   "ticker": "AMO",
+   "name": "AMBERTECH LIMITED"
   },
   {
    "ticker": "AMP",
-   "name": "AMP Ltd"
+   "name": "AMP LIMITED"
+  },
+  {
+   "ticker": "AMS",
+   "name": "ATOMOS LIMITED"
+  },
+  {
+   "ticker": "AMU",
+   "name": "AMERICAN URANIUM LTD"
+  },
+  {
+   "ticker": "AMX",
+   "name": "AEROMETREX LIMITED"
+  },
+  {
+   "ticker": "AN1",
+   "name": "ANAGENICS LIMITED"
+  },
+  {
+   "ticker": "ANG",
+   "name": "AUSTIN ENGINEERING LIMITED"
   },
   {
    "ticker": "ANN",
-   "name": "Ansell Ltd"
+   "name": "ANSELL LIMITED"
+  },
+  {
+   "ticker": "ANO",
+   "name": "ADVANCE ZINCTEK LIMITED"
+  },
+  {
+   "ticker": "ANR",
+   "name": "ANATARA LIFESCIENCES LTD"
+  },
+  {
+   "ticker": "ANX",
+   "name": "ANAX METALS LIMITED"
   },
   {
    "ticker": "ANZ",
-   "name": "ANZ Group Holdings"
+   "name": "ANZ GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "AOA",
+   "name": "AUSMON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AOF",
+   "name": "AUSTRALIAN UNITY OFFICE FUND"
+  },
+  {
+   "ticker": "AOK",
+   "name": "AUSTRALIAN OIL COMPANY LIMITED."
+  },
+  {
+   "ticker": "AON",
+   "name": "APOLLO MINERALS LIMITED"
+  },
+  {
+   "ticker": "AOV",
+   "name": "AMOTIV LIMITED"
   },
   {
    "ticker": "APA",
-   "name": "APA Group"
+   "name": "APA GROUP"
+  },
+  {
+   "ticker": "APC",
+   "name": "APC MINERALS LIMITED"
+  },
+  {
+   "ticker": "APE",
+   "name": "EAGERS AUTOMOTIVE LIMITED"
+  },
+  {
+   "ticker": "APL",
+   "name": "ASSOCIATE GLOBAL PARTNERS LIMITED"
+  },
+  {
+   "ticker": "APW",
+   "name": "AIMS PROPERTY SECURITIES FUND"
   },
   {
    "ticker": "APX",
-   "name": "Appen Ltd"
+   "name": "APPEN LIMITED"
+  },
+  {
+   "ticker": "APZ",
+   "name": "ASPEN GROUP"
+  },
+  {
+   "ticker": "AQC",
+   "name": "AUSTRALIAN PACIFIC COAL LIMITED"
+  },
+  {
+   "ticker": "AQD",
+   "name": "AUSQUEST LIMITED"
+  },
+  {
+   "ticker": "AQI",
+   "name": "ALICANTO MINERALS LIMITED"
+  },
+  {
+   "ticker": "AQN",
+   "name": "AQUIRIAN LIMITED"
+  },
+  {
+   "ticker": "AQX",
+   "name": "ALICE QUEEN LIMITED"
+  },
+  {
+   "ticker": "AQZ",
+   "name": "ALLIANCE AVIATION SERVICES LIMITED"
+  },
+  {
+   "ticker": "AR1",
+   "name": "AUSTRAL RESOURCES AUSTRALIA LTD"
+  },
+  {
+   "ticker": "AR3",
+   "name": "AUSTRALIAN RARE EARTHS LIMITED"
+  },
+  {
+   "ticker": "AR9",
+   "name": "ARCHTIS LIMITED"
+  },
+  {
+   "ticker": "ARA",
+   "name": "ARIADNE AUSTRALIA LIMITED"
   },
   {
    "ticker": "ARB",
-   "name": "ARB Corporation"
+   "name": "ARB CORPORATION LIMITED."
+  },
+  {
+   "ticker": "ARC",
+   "name": "ARC FUNDS LIMITED"
+  },
+  {
+   "ticker": "ARD",
+   "name": "ARGENT MINERALS LIMITED"
+  },
+  {
+   "ticker": "ARF",
+   "name": "ARENA REIT."
+  },
+  {
+   "ticker": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "ARI",
+   "name": "ARIKA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ARL",
+   "name": "ARDEA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ARN",
+   "name": "ALDORO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ARR",
+   "name": "AMERICAN RARE EARTHS LIMITED"
+  },
+  {
+   "ticker": "ART",
+   "name": "AIRTASKER LIMITED"
+  },
+  {
+   "ticker": "ARU",
+   "name": "ARAFURA RARE EARTHS LTD"
+  },
+  {
+   "ticker": "ARV",
+   "name": "ARTEMIS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ARX",
+   "name": "AROA BIOSURGERY LIMITED"
+  },
+  {
+   "ticker": "AS1",
+   "name": "ASARA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AS2",
+   "name": "ASKARI METALS LIMITED"
+  },
+  {
+   "ticker": "ASB",
+   "name": "AUSTAL LIMITED"
+  },
+  {
+   "ticker": "ASG",
+   "name": "AUTOSPORTS GROUP LIMITED."
+  },
+  {
+   "ticker": "ASH",
+   "name": "ASHLEY SERVICES GROUP LIMITED"
+  },
+  {
+   "ticker": "ASK",
+   "name": "ABACUS STORAGE KING"
+  },
+  {
+   "ticker": "ASL",
+   "name": "ANDEAN SILVER LIMITED"
   },
   {
    "ticker": "ASM",
-   "name": "Australian Strategic Materials"
+   "name": "AUSTRALIAN STRATEGIC MATERIALS LIMITED"
+  },
+  {
+   "ticker": "ASN",
+   "name": "ANSON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ASP",
+   "name": "ASPERMONT LIMITED."
+  },
+  {
+   "ticker": "ASQ",
+   "name": "AUSTRALIAN SILICA QUARTZ GROUP LTD"
+  },
+  {
+   "ticker": "ASV",
+   "name": "ASSET VISION CO LTD"
   },
   {
    "ticker": "ASX",
-   "name": "ASX Ltd"
+   "name": "ASX LIMITED"
+  },
+  {
+   "ticker": "AT1",
+   "name": "ATOMO DIAGNOSTICS LIMITED"
+  },
+  {
+   "ticker": "AT4",
+   "name": "AMERICAN TUNGSTEN & ANTIMONY LTD"
+  },
+  {
+   "ticker": "ATA",
+   "name": "ATTURRA LIMITED"
+  },
+  {
+   "ticker": "ATC",
+   "name": "ALTECH BATTERIES LTD"
+  },
+  {
+   "ticker": "ATG",
+   "name": "ARTICORE GROUP LIMITED"
+  },
+  {
+   "ticker": "ATH",
+   "name": "ALTERITY THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "ATM",
+   "name": "PT ANTAM (PERSERO) TBK"
+  },
+  {
+   "ticker": "ATP",
+   "name": "ATLAS PEARLS LTD"
+  },
+  {
+   "ticker": "ATR",
+   "name": "ASTRON LIMITED"
+  },
+  {
+   "ticker": "ATS",
+   "name": "AUSTRALIS OIL & GAS LIMITED"
+  },
+  {
+   "ticker": "ATT",
+   "name": "ALTITUDE MINERALS LTD"
+  },
+  {
+   "ticker": "ATV",
+   "name": "ACTIVEPORT GROUP LTD"
+  },
+  {
+   "ticker": "ATX",
+   "name": "AMPLIA THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "AU1",
+   "name": "THE AGENCY GROUP AUSTRALIA LTD"
+  },
+  {
+   "ticker": "AUA",
+   "name": "AUDEARA LIMITED"
+  },
+  {
+   "ticker": "AUB",
+   "name": "AUB GROUP LIMITED"
+  },
+  {
+   "ticker": "AUC",
+   "name": "AUSGOLD LIMITED"
+  },
+  {
+   "ticker": "AUE",
+   "name": "AURUM RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AUG",
+   "name": "AUGUSTUS MINERALS LIMITED"
+  },
+  {
+   "ticker": "AUI",
+   "name": "AUSTRALIAN UNITED INVESTMENT COMPANY LIMITED"
+  },
+  {
+   "ticker": "AUQ",
+   "name": "ALARA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AUR",
+   "name": "AURIS MINERALS LIMITED"
+  },
+  {
+   "ticker": "AUV",
+   "name": "AURAVELLE METALS LIMITED"
+  },
+  {
+   "ticker": "AUZ",
+   "name": "AUSTRALIAN MINES LIMITED"
+  },
+  {
+   "ticker": "AV1",
+   "name": "ADVERITAS LIMITED"
+  },
+  {
+   "ticker": "AVA",
+   "name": "AVA RISK GROUP LIMITED"
+  },
+  {
+   "ticker": "AVD",
+   "name": "AVADA GROUP LIMITED"
+  },
+  {
+   "ticker": "AVE",
+   "name": "AVECHO BIOTECHNOLOGY LIMITED"
+  },
+  {
+   "ticker": "AVG",
+   "name": "AUSTRALIAN VINTAGE LTD"
+  },
+  {
+   "ticker": "AVH",
+   "name": "AVITA MEDICAL INC."
+  },
+  {
+   "ticker": "AVL",
+   "name": "AUSTRALIAN VANADIUM LIMITED"
+  },
+  {
+   "ticker": "AVM",
+   "name": "ADVANCE METALS LIMITED"
+  },
+  {
+   "ticker": "AVR",
+   "name": "ANTERIS TECHNOLOGIES GLOBAL CORP."
+  },
+  {
+   "ticker": "AVW",
+   "name": "AVIRA RESOURCES LTD"
+  },
+  {
+   "ticker": "AW1",
+   "name": "AMERICAN WEST METALS LIMITED"
+  },
+  {
+   "ticker": "AWJ",
+   "name": "AURIC MINING LIMITED"
+  },
+  {
+   "ticker": "AX1",
+   "name": "ACCENT GROUP LIMITED"
+  },
+  {
+   "ticker": "AX8",
+   "name": "ACCELERATE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AXE",
+   "name": "ARCHER MATERIALS LIMITED"
+  },
+  {
+   "ticker": "AXI",
+   "name": "AXTEC LIMITED"
+  },
+  {
+   "ticker": "AXL",
+   "name": "AXEL REE LIMITED"
+  },
+  {
+   "ticker": "AXN",
+   "name": "ALLIANCE NICKEL LIMITED"
+  },
+  {
+   "ticker": "AXP",
+   "name": "AXP ENERGY LIMITED"
   },
   {
    "ticker": "AYA",
-   "name": "Artrya Ltd"
+   "name": "ARTRYA LIMITED"
+  },
+  {
+   "ticker": "AYM",
+   "name": "AUSTRALIA UNITED MINING LIMITED"
+  },
+  {
+   "ticker": "AYT",
+   "name": "AUSTIN METALS LIMITED"
+  },
+  {
+   "ticker": "AZ9",
+   "name": "ASIAN BATTERY METALS PLC"
+  },
+  {
+   "ticker": "AZI",
+   "name": "ALTAMIN LIMITED"
   },
   {
    "ticker": "AZJ",
-   "name": "Aurizon Holdings Ltd"
+   "name": "AURIZON HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "AZY",
+   "name": "ANTIPA MINERALS LIMITED"
+  },
+  {
+   "ticker": "B4P",
+   "name": "BEFOREPAY GROUP LIMITED"
+  },
+  {
+   "ticker": "BAK",
+   "name": "BARKLY RARE EARTHS LIMITED"
   },
   {
    "ticker": "BAP",
-   "name": "Bapcor Ltd"
+   "name": "BAPCOR LIMITED"
+  },
+  {
+   "ticker": "BAS",
+   "name": "BASS OIL LIMITED"
+  },
+  {
+   "ticker": "BB1",
+   "name": "BLINKLAB LIMITED"
+  },
+  {
+   "ticker": "BBC",
+   "name": "BNK BANKING CORPORATION LIMITED"
+  },
+  {
+   "ticker": "BBL",
+   "name": "BRISBANE BRONCOS LIMITED"
+  },
+  {
+   "ticker": "BBN",
+   "name": "BABY BUNTING GROUP LIMITED"
+  },
+  {
+   "ticker": "BBT",
+   "name": "BETR ENTERTAINMENT LIMITED"
+  },
+  {
+   "ticker": "BC8",
+   "name": "BLACK CAT SYNDICATE LIMITED"
+  },
+  {
+   "ticker": "BCA",
+   "name": "BLACK CANYON LIMITED"
+  },
+  {
+   "ticker": "BCB",
+   "name": "BOWEN COKING COAL LIMITED"
+  },
+  {
+   "ticker": "BCC",
+   "name": "BEAM COMMUNICATIONS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "BCI",
+   "name": "BCI MINERALS LIMITED"
+  },
+  {
+   "ticker": "BCK",
+   "name": "BROCKMAN MINING LIMITED"
+  },
+  {
+   "ticker": "BCM",
+   "name": "BRAZILIAN CRITICAL MINERALS LIMITED"
+  },
+  {
+   "ticker": "BCN",
+   "name": "BEACON MINERALS LIMITED"
+  },
+  {
+   "ticker": "BDM",
+   "name": "BURGUNDY DIAMOND MINES LIMITED"
+  },
+  {
+   "ticker": "BDX",
+   "name": "BCAL DIAGNOSTICS LIMITED"
+  },
+  {
+   "ticker": "BEL",
+   "name": "BENTLEY CAPITAL LIMITED"
   },
   {
    "ticker": "BEN",
-   "name": "Bendigo & Adelaide Bank"
+   "name": "BENDIGO AND ADELAIDE BANK LIMITED"
+  },
+  {
+   "ticker": "BEO",
+   "name": "BEONIC LTD"
+  },
+  {
+   "ticker": "BET",
+   "name": "BETMAKERS TECHNOLOGY GROUP LTD"
+  },
+  {
+   "ticker": "BEZ",
+   "name": "BESRA GOLD INC."
+  },
+  {
+   "ticker": "BFG",
+   "name": "BELL FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "BFL",
+   "name": "BSP FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "BGA",
+   "name": "BEGA CHEESE LIMITED"
+  },
+  {
+   "ticker": "BGD",
+   "name": "BARTON GOLD HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "BGE",
+   "name": "BRIDGE SAAS LIMITED"
   },
   {
    "ticker": "BGL",
-   "name": "Bellevue Gold Ltd"
+   "name": "BELLEVUE GOLD LIMITED"
+  },
+  {
+   "ticker": "BGP",
+   "name": "BRISCOE GROUP AUSTRALASIA LIMITED"
+  },
+  {
+   "ticker": "BGT",
+   "name": "BIO-GENE TECHNOLOGY LTD"
+  },
+  {
+   "ticker": "BHD",
+   "name": "BENJAMIN HORNIGOLD LIMITED"
+  },
+  {
+   "ticker": "BHL",
+   "name": "BLACK HORSE MINING LIMITED"
+  },
+  {
+   "ticker": "BHM",
+   "name": "BROKEN HILL MINES LIMITED"
   },
   {
    "ticker": "BHP",
-   "name": "BHP Group Ltd"
+   "name": "BHP GROUP LIMITED"
+  },
+  {
+   "ticker": "BIM",
+   "name": "BINDI METALS LIMITED"
+  },
+  {
+   "ticker": "BIO",
+   "name": "BIOME AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "BIS",
+   "name": "BISALLOY STEEL GROUP LIMITED"
+  },
+  {
+   "ticker": "BIT",
+   "name": "BIOTRON LIMITED"
+  },
+  {
+   "ticker": "BKB",
+   "name": "BLACK BEAR MINERALS LIMITED"
+  },
+  {
+   "ticker": "BKI",
+   "name": "BKI INVESTMENT COMPANY LIMITED"
   },
   {
    "ticker": "BKL",
    "name": "Blackmores Ltd"
   },
   {
+   "ticker": "BKT",
+   "name": "BLACK ROCK MINING LIMITED"
+  },
+  {
+   "ticker": "BKY",
+   "name": "BERKELEY ENERGIA LIMITED"
+  },
+  {
    "ticker": "BLD",
    "name": "Boral Ltd"
   },
   {
+   "ticker": "BLG",
+   "name": "BLUGLASS LIMITED"
+  },
+  {
+   "ticker": "BLU",
+   "name": "BLUE ENERGY LIMITED."
+  },
+  {
+   "ticker": "BLX",
+   "name": "BEACON LIGHTING GROUP LIMITED"
+  },
+  {
+   "ticker": "BLZ",
+   "name": "BLAZE MINERALS LIMITED"
+  },
+  {
+   "ticker": "BM1",
+   "name": "BALLARD MINING LIMITED"
+  },
+  {
+   "ticker": "BM8",
+   "name": "BATTERY AGE MINERALS LTD"
+  },
+  {
+   "ticker": "BMC",
+   "name": "BMC MINERALS LTD."
+  },
+  {
+   "ticker": "BMH",
+   "name": "BAUMART HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "BML",
+   "name": "BOAB METALS LIMITED"
+  },
+  {
+   "ticker": "BMM",
+   "name": "BAYAN MINING AND MINERALS LIMITED"
+  },
+  {
+   "ticker": "BMN",
+   "name": "BANNERMAN ENERGY LTD"
+  },
+  {
+   "ticker": "BMR",
+   "name": "BALLYMORE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BMT",
+   "name": "BEAMTREE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "BNL",
+   "name": "BLUE STAR HELIUM LIMITED"
+  },
+  {
+   "ticker": "BNR",
+   "name": "BULLETIN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BNZ",
+   "name": "BENZ MINING CORP."
+  },
+  {
+   "ticker": "BOA",
+   "name": "BOA RESOURCES LTD"
+  },
+  {
+   "ticker": "BOC",
+   "name": "BOUGAINVILLE COPPER LIMITED"
+  },
+  {
+   "ticker": "BOE",
+   "name": "BOSS ENERGY LTD"
+  },
+  {
+   "ticker": "BOL",
+   "name": "BOOM LOGISTICS LIMITED"
+  },
+  {
    "ticker": "BOQ",
-   "name": "Bank of Queensland"
+   "name": "BANK OF QUEENSLAND LIMITED."
+  },
+  {
+   "ticker": "BOT",
+   "name": "BOTANIX PHARMACEUTICALS LTD"
+  },
+  {
+   "ticker": "BP8",
+   "name": "BPH GLOBAL LTD"
+  },
+  {
+   "ticker": "BPG",
+   "name": "BLACK PEARL GROUP LIMITED"
+  },
+  {
+   "ticker": "BPH",
+   "name": "BPH ENERGY LTD"
+  },
+  {
+   "ticker": "BPM",
+   "name": "BPM MINERALS LIMITED"
+  },
+  {
+   "ticker": "BPP",
+   "name": "BABYLON PUMP & POWER LIMITED"
   },
   {
    "ticker": "BPT",
-   "name": "Beach Energy Ltd"
+   "name": "BEACH ENERGY LIMITED"
+  },
+  {
+   "ticker": "BRE",
+   "name": "BRAZILIAN RARE EARTHS LIMITED"
   },
   {
    "ticker": "BRG",
-   "name": "Breville Group Ltd"
+   "name": "BREVILLE GROUP LIMITED"
+  },
+  {
+   "ticker": "BRI",
+   "name": "BIG RIVER INDUSTRIES LIMITED"
+  },
+  {
+   "ticker": "BRK",
+   "name": "BROOKSIDE ENERGY LIMITED"
+  },
+  {
+   "ticker": "BRL",
+   "name": "BATHURST RESOURCES LIMITED."
   },
   {
    "ticker": "BRN",
-   "name": "BrainChip Holdings"
+   "name": "BRAINCHIP HOLDINGS LTD"
+  },
+  {
+   "ticker": "BRU",
+   "name": "BURU ENERGY LIMITED"
+  },
+  {
+   "ticker": "BRX",
+   "name": "BELARAROX LIMITED"
+  },
+  {
+   "ticker": "BRY",
+   "name": "BARYS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BSA",
+   "name": "BSA LIMITED"
   },
   {
    "ticker": "BSL",
-   "name": "BlueScope Steel Ltd"
+   "name": "BLUESCOPE STEEL LIMITED"
+  },
+  {
+   "ticker": "BSN",
+   "name": "BASIN ENERGY LIMITED"
+  },
+  {
+   "ticker": "BSR",
+   "name": "BISON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BSX",
+   "name": "BLACKSTONE MINERALS LIMITED"
+  },
+  {
+   "ticker": "BTC",
+   "name": "BTC HEALTH LTD"
+  },
+  {
+   "ticker": "BTE",
+   "name": "BOTALA ENERGY LTD"
+  },
+  {
+   "ticker": "BTI",
+   "name": "BAILADOR TECHNOLOGY INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "BTL",
+   "name": "BEETALOO ENERGY AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "BTM",
+   "name": "BREAKTHROUGH MINERALS LIMITED"
+  },
+  {
+   "ticker": "BTN",
+   "name": "BUTN LIMITED"
+  },
+  {
+   "ticker": "BTR",
+   "name": "BRIGHTSTAR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BUB",
+   "name": "BUBS AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "BUR",
+   "name": "BURLEY MINERALS LTD"
+  },
+  {
+   "ticker": "BUS",
+   "name": "BUBALUS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BUX",
+   "name": "BUXTON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BUY",
+   "name": "BOUNTY OIL & GAS NL"
+  },
+  {
+   "ticker": "BVR",
+   "name": "BELLAVISTA RESOURCES LTD"
+  },
+  {
+   "ticker": "BVS",
+   "name": "BRAVURA SOLUTIONS LIMITED."
+  },
+  {
+   "ticker": "BWF",
+   "name": "BLACKWALL LIMITED"
+  },
+  {
+   "ticker": "BWN",
+   "name": "BHAGWAN MARINE LIMITED"
   },
   {
    "ticker": "BWP",
-   "name": "BWP Trust"
+   "name": "BWP GROUP"
   },
   {
    "ticker": "BXB",
-   "name": "Brambles Ltd"
+   "name": "BRAMBLES LIMITED"
+  },
+  {
+   "ticker": "BXN",
+   "name": "BIOXYNE LIMITED"
+  },
+  {
+   "ticker": "C1X",
+   "name": "COSMOS EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "C29",
+   "name": "C29 METALS LIMITED"
+  },
+  {
+   "ticker": "C79",
+   "name": "CHRYSOS CORPORATION LIMITED"
+  },
+  {
+   "ticker": "C7A",
+   "name": "CLARA RESOURCES AUSTRALIA LTD"
+  },
+  {
+   "ticker": "CAA",
+   "name": "CAPRAL LIMITED"
+  },
+  {
+   "ticker": "CAE",
+   "name": "CANNINDAH RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CAF",
+   "name": "CENTREPOINT ALLIANCE LIMITED"
+  },
+  {
+   "ticker": "CAM",
+   "name": "CLIME CAPITAL LIMITED"
+  },
+  {
+   "ticker": "CAN",
+   "name": "CANN GROUP LIMITED"
+  },
+  {
+   "ticker": "CAQ",
+   "name": "CAQ HOLDINGS LIMITED"
   },
   {
    "ticker": "CAR",
-   "name": "CAR Group Ltd"
+   "name": "CAR GROUP LIMITED"
+  },
+  {
+   "ticker": "CAT",
+   "name": "CATAPULT SPORTS LTD"
+  },
+  {
+   "ticker": "CAV",
+   "name": "CARNAVALE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CAY",
+   "name": "CANYON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CAZ",
+   "name": "CAZALY RESOURCES LIMITED"
   },
   {
    "ticker": "CBA",
-   "name": "Commonwealth Bank"
+   "name": "COMMONWEALTH BANK OF AUSTRALIA."
+  },
+  {
+   "ticker": "CBE",
+   "name": "COBRE LIMITED"
+  },
+  {
+   "ticker": "CBL",
+   "name": "CONTROL BIONICS LIMITED"
+  },
+  {
+   "ticker": "CBO",
+   "name": "COBRAM ESTATE OLIVES LIMITED"
+  },
+  {
+   "ticker": "CBY",
+   "name": "CANTERBURY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CC5",
+   "name": "CLEVER CULTURE SYSTEMS LIMITED"
+  },
+  {
+   "ticker": "CC9",
+   "name": "CHARIOT RESOURCES LTD"
+  },
+  {
+   "ticker": "CCA",
+   "name": "CHANGE FINANCIAL LIMITED"
+  },
+  {
+   "ticker": "CCE",
+   "name": "CARNEGIE CLEAN ENERGY LIMITED"
+  },
+  {
+   "ticker": "CCG",
+   "name": "COMMS GROUP LTD"
   },
   {
    "ticker": "CCL",
-   "name": "Cuscal Ltd"
+   "name": "CUSCAL LIMITED"
+  },
+  {
+   "ticker": "CCM",
+   "name": "CADOUX LIMITED"
+  },
+  {
+   "ticker": "CCO",
+   "name": "THE CALMER CO INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "CCP",
+   "name": "CREDIT CORP GROUP LIMITED"
+  },
+  {
+   "ticker": "CCR",
+   "name": "CREDIT CLEAR LIMITED"
+  },
+  {
+   "ticker": "CCV",
+   "name": "CASH CONVERTERS INTERNATIONAL"
+  },
+  {
+   "ticker": "CCX",
+   "name": "CITY CHIC COLLECTIVE LIMITED"
+  },
+  {
+   "ticker": "CD1",
+   "name": "CD PRIVATE EQUITY FUND I"
+  },
+  {
+   "ticker": "CD2",
+   "name": "CD PRIVATE EQUITY FUND II"
+  },
+  {
+   "ticker": "CD3",
+   "name": "CD PRIVATE EQUITY FUND III"
   },
   {
    "ticker": "CDA",
-   "name": "Codan Ltd"
+   "name": "CODAN LIMITED"
+  },
+  {
+   "ticker": "CDE",
+   "name": "CODEIFAI LIMITED"
+  },
+  {
+   "ticker": "CDM",
+   "name": "CADENCE CAPITAL LIMITED"
+  },
+  {
+   "ticker": "CDO",
+   "name": "CADENCE OPPORTUNITIES FUND LIMITED."
+  },
+  {
+   "ticker": "CDP",
+   "name": "CARINDALE PROPERTY TRUST"
+  },
+  {
+   "ticker": "CDR",
+   "name": "CODRUS MINERALS LIMITED"
+  },
+  {
+   "ticker": "CDT",
+   "name": "CASTLE MINERALS LIMITED"
+  },
+  {
+   "ticker": "CEH",
+   "name": "COAST ENTERTAINMENT HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "CEL",
+   "name": "CHALLENGER GOLD LIMITED"
   },
   {
    "ticker": "CEN",
-   "name": "Contact Energy Ltd"
+   "name": "CONTACT ENERGY LIMITED"
+  },
+  {
+   "ticker": "CF1",
+   "name": "COMPLII FINTECH SOLUTIONS LTD"
+  },
+  {
+   "ticker": "CG1",
+   "name": "CARBONXT GROUP LIMITED"
   },
   {
    "ticker": "CGF",
-   "name": "Challenger Ltd"
+   "name": "CHALLENGER LIMITED"
+  },
+  {
+   "ticker": "CGO",
+   "name": "CPT GLOBAL LIMITED"
+  },
+  {
+   "ticker": "CGR",
+   "name": "CGN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CGS",
+   "name": "COGSTATE LTD"
   },
   {
    "ticker": "CHC",
-   "name": "Charter Hall Group"
+   "name": "CHARTER HALL GROUP"
+  },
+  {
+   "ticker": "CHI",
+   "name": "CHANNEL INFRASTRUCTURE NZ LIMITED"
+  },
+  {
+   "ticker": "CHL",
+   "name": "CAMPLIFY HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "CHM",
+   "name": "CHIMERIC THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "CHN",
+   "name": "CHALICE MINING LIMITED"
+  },
+  {
+   "ticker": "CHR",
+   "name": "CHARGER METALS NL"
+  },
+  {
+   "ticker": "CHW",
+   "name": "CHILWA MINERALS LTD"
   },
   {
    "ticker": "CIA",
-   "name": "Champion Iron Ltd"
+   "name": "CHAMPION IRON LIMITED"
+  },
+  {
+   "ticker": "CIN",
+   "name": "CARLTON INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "CIP",
+   "name": "CENTURIA INDUSTRIAL REIT"
+  },
+  {
+   "ticker": "CIW",
+   "name": "CLIME INVESTMENT MANAGEMENT LTD"
+  },
+  {
+   "ticker": "CKA",
+   "name": "COKAL LIMITED"
+  },
+  {
+   "ticker": "CKF",
+   "name": "COLLINS FOODS LIMITED"
+  },
+  {
+   "ticker": "CL8",
+   "name": "CL8 HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "CLA",
+   "name": "CELSIUS RESOURCES LIMITED."
+  },
+  {
+   "ticker": "CLG",
+   "name": "CLOSE THE LOOP LTD."
+  },
+  {
+   "ticker": "CLU",
+   "name": "CLUEY LTD"
+  },
+  {
+   "ticker": "CLV",
+   "name": "CLOVER CORPORATION LIMITED"
+  },
+  {
+   "ticker": "CLW",
+   "name": "CHARTER HALL LONG WALE REIT"
+  },
+  {
+   "ticker": "CLX",
+   "name": "CTI LOGISTICS LIMITED"
+  },
+  {
+   "ticker": "CLZ",
+   "name": "CLASSIC MINERALS LTD"
+  },
+  {
+   "ticker": "CMA",
+   "name": "CARMA LIMITED"
+  },
+  {
+   "ticker": "CMB",
+   "name": "CAMBIUM BIO LIMITED"
+  },
+  {
+   "ticker": "CMD",
+   "name": "CASSIUS MINING LIMITED"
+  },
+  {
+   "ticker": "CMG",
+   "name": "CRITICAL MINERALS GROUP LIMITED"
+  },
+  {
+   "ticker": "CML",
+   "name": "CONNECTED MINERALS LIMITED"
   },
   {
    "ticker": "CMM",
-   "name": "Capricorn Metals"
+   "name": "CAPRICORN METALS LTD"
+  },
+  {
+   "ticker": "CMO",
+   "name": "COSMO METALS LIMITED"
+  },
+  {
+   "ticker": "CMP",
+   "name": "COMPUMEDICS LIMITED"
+  },
+  {
+   "ticker": "CMW",
+   "name": "CROMWELL PROPERTY GROUP"
+  },
+  {
+   "ticker": "CMX",
+   "name": "CHEMX MATERIALS LIMITED"
+  },
+  {
+   "ticker": "CNB",
+   "name": "CARNABY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CND",
+   "name": "CONDOR ENERGY LIMITED"
+  },
+  {
+   "ticker": "CNI",
+   "name": "CENTURIA CAPITAL GROUP"
+  },
+  {
+   "ticker": "CNJ",
+   "name": "CONICO LTD"
+  },
+  {
+   "ticker": "CNQ",
+   "name": "CLEAN TEQ WATER LIMITED"
   },
   {
    "ticker": "CNU",
-   "name": "Chorus Ltd"
+   "name": "CHORUS LIMITED"
+  },
+  {
+   "ticker": "COB",
+   "name": "COBALT BLUE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "COD",
+   "name": "CODA MINERALS LTD"
+  },
+  {
+   "ticker": "COF",
+   "name": "CENTURIA OFFICE REIT"
+  },
+  {
+   "ticker": "COG",
+   "name": "COG FINANCIAL SERVICES LIMITED"
   },
   {
    "ticker": "COH",
-   "name": "Cochlear Ltd"
+   "name": "COCHLEAR LIMITED"
+  },
+  {
+   "ticker": "COI",
+   "name": "COMET RIDGE LIMITED"
   },
   {
    "ticker": "COL",
-   "name": "Coles Group Ltd"
+   "name": "COLES GROUP LIMITED."
+  },
+  {
+   "ticker": "COS",
+   "name": "COSOL LIMITED"
+  },
+  {
+   "ticker": "COV",
+   "name": "CLEO DIAGNOSTICS LTD"
+  },
+  {
+   "ticker": "COY",
+   "name": "COPPERMOLY LIMITED"
+  },
+  {
+   "ticker": "CP8",
+   "name": "CANADIAN PHOSPHATE LIMITED"
+  },
+  {
+   "ticker": "CPM",
+   "name": "COOPER METALS LIMITED"
+  },
+  {
+   "ticker": "CPN",
+   "name": "CASPIN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CPO",
+   "name": "CULPEO MINERALS LIMITED"
+  },
+  {
+   "ticker": "CPU",
+   "name": "COMPUTERSHARE LIMITED."
+  },
+  {
+   "ticker": "CPV",
+   "name": "CLEARVUE TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "CQE",
+   "name": "CHARTER HALL SOCIAL INFRASTRUCTURE REIT"
   },
   {
    "ticker": "CQR",
-   "name": "Charter Hall Retail"
+   "name": "CHARTER HALL RETAIL REIT"
+  },
+  {
+   "ticker": "CQT",
+   "name": "CONNEQT HEALTH LIMITED"
+  },
+  {
+   "ticker": "CR1",
+   "name": "CONSTELLATION RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CR3",
+   "name": "CORE ENERGY MINERALS LTD"
+  },
+  {
+   "ticker": "CR9",
+   "name": "CORELLA RESOURCES LTD"
+  },
+  {
+   "ticker": "CRB",
+   "name": "CARBINE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CRD",
+   "name": "CONRAD ASIA ENERGY LTD."
+  },
+  {
+   "ticker": "CRI",
+   "name": "CRITICA LIMITED"
+  },
+  {
+   "ticker": "CRN",
+   "name": "CORONADO GLOBAL RESOURCES INC."
+  },
+  {
+   "ticker": "CRR",
+   "name": "CRITICAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CRS",
+   "name": "CAPRICE RESOURCES LTD"
+  },
+  {
+   "ticker": "CSC",
+   "name": "CAPSTONE COPPER CORP."
   },
   {
    "ticker": "CSL",
-   "name": "CSL Ltd"
+   "name": "CSL LIMITED"
   },
   {
    "ticker": "CSR",
    "name": "CSR Ltd"
   },
   {
+   "ticker": "CST",
+   "name": "CASTILE RESOURCES LTD"
+  },
+  {
+   "ticker": "CSX",
+   "name": "CLEANSPACE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "CT1",
+   "name": "CONSTELLATION TECHNOLOGIES LIMITED"
+  },
+  {
    "ticker": "CTD",
-   "name": "Corporate Travel Mgmt"
+   "name": "CORPORATE TRAVEL MANAGEMENT LIMITED"
+  },
+  {
+   "ticker": "CTE",
+   "name": "CRYOSITE LIMITED"
+  },
+  {
+   "ticker": "CTM",
+   "name": "CENTAURUS METALS LIMITED"
+  },
+  {
+   "ticker": "CTN",
+   "name": "CATALINA RESOURCES LTD"
+  },
+  {
+   "ticker": "CTO",
+   "name": "CITIGOLD CORPORATION LIMITED"
+  },
+  {
+   "ticker": "CTP",
+   "name": "CENTRAL PETROLEUM LIMITED"
+  },
+  {
+   "ticker": "CTQ",
+   "name": "CARETEQ LIMITED"
+  },
+  {
+   "ticker": "CTT",
+   "name": "CETTIRE LIMITED"
   },
   {
    "ticker": "CU6",
-   "name": "Clarity Pharmaceuticals"
+   "name": "CLARITY PHARMACEUTICALS LTD"
+  },
+  {
+   "ticker": "CUE",
+   "name": "CUE ENERGY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CUF",
+   "name": "CUFE LTD"
+  },
+  {
+   "ticker": "CUL",
+   "name": "CULLEN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CUP",
+   "name": "COUNT LIMITED"
+  },
+  {
+   "ticker": "CUV",
+   "name": "CLINUVEL PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "CVB",
+   "name": "CURVEBEAM AI LIMITED"
+  },
+  {
+   "ticker": "CVC",
+   "name": "CVC LIMITED"
+  },
+  {
+   "ticker": "CVL",
+   "name": "CIVMEC LIMITED"
+  },
+  {
+   "ticker": "CVN",
+   "name": "CARNARVON ENERGY LIMITED"
+  },
+  {
+   "ticker": "CVR",
+   "name": "CAVALIER RESOURCES LIMITED"
+  },
+  {
+   "ticker": "CVV",
+   "name": "CARAVEL MINERALS LIMITED"
+  },
+  {
+   "ticker": "CVW",
+   "name": "CLEARVIEW WEALTH LIMITED"
+  },
+  {
+   "ticker": "CWP",
+   "name": "CEDAR WOODS PROPERTIES LIMITED"
   },
   {
    "ticker": "CWY",
-   "name": "Cleanaway Waste Mgmt"
+   "name": "CLEANAWAY WASTE MANAGEMENT LIMITED"
+  },
+  {
+   "ticker": "CXL",
+   "name": "CALIX LIMITED"
+  },
+  {
+   "ticker": "CXO",
+   "name": "CORE LITHIUM LTD"
+  },
+  {
+   "ticker": "CXU",
+   "name": "CAULDRON ENERGY LIMITED"
+  },
+  {
+   "ticker": "CXZ",
+   "name": "CONNEXION MOBILITY LTD"
+  },
+  {
+   "ticker": "CY5",
+   "name": "CYGNUS METALS LIMITED"
+  },
+  {
+   "ticker": "CYB",
+   "name": "AUCYBER LIMITED"
+  },
+  {
+   "ticker": "CYC",
+   "name": "CYCLOPHARM LIMITED"
+  },
+  {
+   "ticker": "CYG",
+   "name": "COVENTRY GROUP LIMITED"
+  },
+  {
+   "ticker": "CYL",
+   "name": "CATALYST METALS LIMITED"
+  },
+  {
+   "ticker": "CYM",
+   "name": "CYPRIUM METALS LIMITED"
+  },
+  {
+   "ticker": "CYP",
+   "name": "CYNATA THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "CYQ",
+   "name": "CYCLIQ GROUP LTD"
+  },
+  {
+   "ticker": "CZN",
+   "name": "CORAZON MINING LIMITED"
+  },
+  {
+   "ticker": "CZR",
+   "name": "CZR RESOURCES LTD"
+  },
+  {
+   "ticker": "D3E",
+   "name": "D3 ENERGY LIMITED"
+  },
+  {
+   "ticker": "DAF",
+   "name": "DISCOVERY ALASKA LIMITED"
+  },
+  {
+   "ticker": "DAI",
+   "name": "DECIDR AI INDUSTRIES LTD"
+  },
+  {
+   "ticker": "DAL",
+   "name": "DALAROO METALS LTD"
+  },
+  {
+   "ticker": "DBF",
+   "name": "DUXTON FARMS LTD"
   },
   {
    "ticker": "DBI",
-   "name": "Dalrymple Bay Infrastructure"
+   "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED"
+  },
+  {
+   "ticker": "DBO",
+   "name": "DIABLO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "DCC",
+   "name": "DIGITALX LIMITED"
+  },
+  {
+   "ticker": "DDR",
+   "name": "DICKER DATA LIMITED"
+  },
+  {
+   "ticker": "DDT",
+   "name": "DATADOT TECHNOLOGY LIMITED"
   },
   {
    "ticker": "DEG",
    "name": "De Grey Mining Ltd"
   },
   {
+   "ticker": "DEL",
+   "name": "DELOREAN CORPORATION LIMITED"
+  },
+  {
+   "ticker": "DEM",
+   "name": "DE.MEM LIMITED"
+  },
+  {
+   "ticker": "DES",
+   "name": "DESOTO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "DEV",
+   "name": "DEVEX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "DGH",
+   "name": "DESANE GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "DGL",
+   "name": "DGL GROUP LIMITED"
+  },
+  {
+   "ticker": "DGR",
+   "name": "DGR GLOBAL LIMITED"
+  },
+  {
+   "ticker": "DGT",
+   "name": "DIGICO INFRASTRUCTURE REIT"
+  },
+  {
+   "ticker": "DJW",
+   "name": "DJERRIWARRH INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "DKM",
+   "name": "DUKETON MINING LIMITED"
+  },
+  {
+   "ticker": "DLI",
+   "name": "DELTA LITHIUM LIMITED"
+  },
+  {
+   "ticker": "DM1",
+   "name": "DESERT METALS LIMITED"
+  },
+  {
+   "ticker": "DME",
+   "name": "DOME GOLD MINES LIMITED"
+  },
+  {
+   "ticker": "DMG",
+   "name": "DRAGON MOUNTAIN GOLD LIMITED"
+  },
+  {
    "ticker": "DMP",
-   "name": "Domino's Pizza Enterprises"
+   "name": "DOMINO'S PIZZA ENTERPRISES LIMITED"
+  },
+  {
+   "ticker": "DN1",
+   "name": "DOMINION INCOME TRUST 1"
   },
   {
    "ticker": "DNL",
-   "name": "Dyno Nobel Ltd"
+   "name": "DYNO NOBEL LIMITED."
+  },
+  {
+   "ticker": "DOC",
+   "name": "DOCTOR CARE ANYWHERE GROUP PLC"
   },
   {
    "ticker": "DOW",
-   "name": "Downer EDI Ltd"
+   "name": "DOWNER EDI LIMITED"
+  },
+  {
+   "ticker": "DPM",
+   "name": "DPM METALS INC."
+  },
+  {
+   "ticker": "DRE",
+   "name": "DREADNOUGHT RESOURCES LTD"
+  },
+  {
+   "ticker": "DRO",
+   "name": "DRONESHIELD LIMITED"
+  },
+  {
+   "ticker": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED"
+  },
+  {
+   "ticker": "DRX",
+   "name": "DIATREME RESOURCES LIMITED"
+  },
+  {
+   "ticker": "DSK",
+   "name": "DUSK GROUP LIMITED"
+  },
+  {
+   "ticker": "DSM",
+   "name": "DESERT MINERALS LTD"
+  },
+  {
+   "ticker": "DTI",
+   "name": "DTI GROUP LTD"
   },
   {
    "ticker": "DTL",
-   "name": "Data#3 Ltd"
+   "name": "DATA#3 LIMITED"
+  },
+  {
+   "ticker": "DTM",
+   "name": "DART MINING NL"
+  },
+  {
+   "ticker": "DTR",
+   "name": "DATELINE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "DTZ",
+   "name": "DOTZ NANO LIMITED"
+  },
+  {
+   "ticker": "DUB",
+   "name": "DUBBER CORPORATION LIMITED"
+  },
+  {
+   "ticker": "DUG",
+   "name": "DUG TECHNOLOGY LTD"
+  },
+  {
+   "ticker": "DUN",
+   "name": "DUNDAS MINERALS LIMITED"
+  },
+  {
+   "ticker": "DUR",
+   "name": "DURATEC LIMITED"
+  },
+  {
+   "ticker": "DVL",
+   "name": "DORSAVI LTD"
+  },
+  {
+   "ticker": "DVP",
+   "name": "DEVELOP GLOBAL LIMITED"
+  },
+  {
+   "ticker": "DWG",
+   "name": "DATAWORKS GROUP LIMITED"
+  },
+  {
+   "ticker": "DXB",
+   "name": "DIMERIX LIMITED"
+  },
+  {
+   "ticker": "DXC",
+   "name": "DEXUS CONVENIENCE RETAIL REIT"
+  },
+  {
+   "ticker": "DXI",
+   "name": "DEXUS INDUSTRIA REIT."
+  },
+  {
+   "ticker": "DXN",
+   "name": "DXN LIMITED"
   },
   {
    "ticker": "DXS",
-   "name": "Dexus"
+   "name": "DEXUS"
+  },
+  {
+   "ticker": "DYL",
+   "name": "DEEP YELLOW LIMITED"
+  },
+  {
+   "ticker": "DYM",
+   "name": "DYNAMIC METALS LIMITED"
+  },
+  {
+   "ticker": "E25",
+   "name": "ELEMENT 25 LIMITED"
+  },
+  {
+   "ticker": "E79",
+   "name": "E79 GOLD MINES LIMITED"
+  },
+  {
+   "ticker": "EAX",
+   "name": "ENERGY ACTION LIMITED"
   },
   {
    "ticker": "EBO",
-   "name": "Ebos Group Ltd"
+   "name": "EBOS GROUP LIMITED"
+  },
+  {
+   "ticker": "EBR",
+   "name": "EBR SYSTEMS INC."
+  },
+  {
+   "ticker": "ECH",
+   "name": "ECHELON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ECL",
+   "name": "EXCELSIOR CAPITAL LTD"
+  },
+  {
+   "ticker": "ECP",
+   "name": "ECP EMERGING GROWTH LIMITED"
+  },
+  {
+   "ticker": "ECS",
+   "name": "ECS BOTANICS HOLDINGS LTD"
+  },
+  {
+   "ticker": "ECT",
+   "name": "ENVIRONMENTAL CLEAN TECHNOLOGIES LIMITED."
+  },
+  {
+   "ticker": "EDE",
+   "name": "EDEN INNOVATIONS LTD"
+  },
+  {
+   "ticker": "EDU",
+   "name": "EDU HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EDV",
+   "name": "ENDEAVOUR GROUP LIMITED"
+  },
+  {
+   "ticker": "EE1",
+   "name": "EARTHS ENERGY LIMITED"
+  },
+  {
+   "ticker": "EFE",
+   "name": "EASTERN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "EG1",
+   "name": "EVERGOLD MINERALS LIMITED"
+  },
+  {
+   "ticker": "EGA",
+   "name": "EASTERN GAS CORPORATION LIMITED"
+  },
+  {
+   "ticker": "EGG",
+   "name": "ENERO GROUP LIMITED"
+  },
+  {
+   "ticker": "EGH",
+   "name": "EUREKA GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EGL",
+   "name": "ENVIRONMENTAL GROUP LIMITED (THE)"
+  },
+  {
+   "ticker": "EGR",
+   "name": "ECOGRAF LIMITED"
+  },
+  {
+   "ticker": "EGY",
+   "name": "ENERGY TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "EHL",
+   "name": "EMECO HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EIQ",
+   "name": "ECHOIQ LIMITED"
+  },
+  {
+   "ticker": "EL8",
+   "name": "ELEVATE URANIUM LTD"
   },
   {
    "ticker": "ELD",
-   "name": "Elders Ltd"
+   "name": "ELDERS LIMITED"
+  },
+  {
+   "ticker": "ELS",
+   "name": "ELSIGHT LIMITED"
+  },
+  {
+   "ticker": "ELT",
+   "name": "ELEMENTOS LIMITED"
+  },
+  {
+   "ticker": "ELV",
+   "name": "ELEVRA LITHIUM LIMITED"
+  },
+  {
+   "ticker": "EM2",
+   "name": "EAGLE MOUNTAIN MINING LIMITED"
+  },
+  {
+   "ticker": "EM3",
+   "name": "EMC GOLD CORPORATION"
+  },
+  {
+   "ticker": "EMA",
+   "name": "EMINENCE MINERALS LIMITED"
+  },
+  {
+   "ticker": "EMB",
+   "name": "EMBELTON LIMITED"
+  },
+  {
+   "ticker": "EMC",
+   "name": "EVEREST METALS CORPORATION LTD"
+  },
+  {
+   "ticker": "EMD",
+   "name": "EMYRIA LIMITED"
+  },
+  {
+   "ticker": "EME",
+   "name": "ENERGY METALS LTD"
+  },
+  {
+   "ticker": "EMH",
+   "name": "EUROPEAN METALS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EML",
+   "name": "EML PAYMENTS LIMITED"
+  },
+  {
+   "ticker": "EMN",
+   "name": "EURO MANGANESE INC"
+  },
+  {
+   "ticker": "EMP",
+   "name": "EMPEROR ENERGY LIMITED"
+  },
+  {
+   "ticker": "EMR",
+   "name": "EMERALD RESOURCES NL"
+  },
+  {
+   "ticker": "EMT",
+   "name": "EMETALS LIMITED"
+  },
+  {
+   "ticker": "EMU",
+   "name": "EMU NL"
+  },
+  {
+   "ticker": "EMV",
+   "name": "EMVISION MEDICAL DEVICES LTD"
+  },
+  {
+   "ticker": "ENL",
+   "name": "ENLITIC INC."
+  },
+  {
+   "ticker": "ENN",
+   "name": "ELANOR INVESTORS GROUP"
+  },
+  {
+   "ticker": "ENP",
+   "name": "ENTROPY NEURODYNAMICS LIMITED"
+  },
+  {
+   "ticker": "ENR",
+   "name": "ENCOUNTER RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ENT",
+   "name": "ENTERPRISE METALS LIMITED"
+  },
+  {
+   "ticker": "ENV",
+   "name": "ENOVA MINING LIMITED"
+  },
+  {
+   "ticker": "EOL",
+   "name": "ENERGY ONE LIMITED"
+  },
+  {
+   "ticker": "EOS",
+   "name": "ELECTRO OPTIC SYSTEMS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EPI",
+   "name": "EPIMINDER LIMITED"
+  },
+  {
+   "ticker": "EPM",
+   "name": "ECLIPSE METALS LIMITED."
+  },
+  {
+   "ticker": "EPN",
+   "name": "EPSILON HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "EPX",
+   "name": "EPX LIMITED"
+  },
+  {
+   "ticker": "EPY",
+   "name": "EARLYPAY LTD"
+  },
+  {
+   "ticker": "EQR",
+   "name": "EQ RESOURCES LIMITED"
+  },
+  {
+   "ticker": "EQT",
+   "name": "EQT HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "EQU",
+   "name": "EQUUS ENERGY LIMITED"
+  },
+  {
+   "ticker": "EQX",
+   "name": "EQUATORIAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ERA",
+   "name": "ENERGY RESOURCES OF AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "ERD",
+   "name": "EROAD LIMITED"
+  },
+  {
+   "ticker": "ERE",
+   "name": "EUROPEAN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ERG",
+   "name": "ENECO REFRESH LTD"
+  },
+  {
+   "ticker": "ERL",
+   "name": "EMPIRE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ERM",
+   "name": "EMMERSON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ESK",
+   "name": "ETHERSTACK PLC"
+  },
+  {
+   "ticker": "ESR",
+   "name": "ESTRELLA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ETM",
+   "name": "ENERGY TRANSITION MINERALS LTD"
+  },
+  {
+   "ticker": "EUR",
+   "name": "EUROPEAN LITHIUM LIMITED"
+  },
+  {
+   "ticker": "EV1",
+   "name": "EVOLUTION ENERGY MINERALS LIMITED"
+  },
+  {
+   "ticker": "EV8",
+   "name": "EVERLAST MINERALS LTD."
+  },
+  {
+   "ticker": "EVE",
+   "name": "EVE HEALTH GROUP LIMITED."
+  },
+  {
+   "ticker": "EVG",
+   "name": "EVION GROUP NL"
   },
   {
    "ticker": "EVN",
-   "name": "Evolution Mining Ltd"
+   "name": "EVOLUTION MINING LIMITED"
+  },
+  {
+   "ticker": "EVO",
+   "name": "EMBARK EARLY EDUCATION LIMITED"
+  },
+  {
+   "ticker": "EVR",
+   "name": "EV RESOURCES LTD"
   },
   {
    "ticker": "EVT",
-   "name": "EVT Ltd"
+   "name": "EVT LIMITED"
+  },
+  {
+   "ticker": "EVZ",
+   "name": "EVZ LIMITED"
+  },
+  {
+   "ticker": "EWC",
+   "name": "ENERGY WORLD CORPORATION LTD"
+  },
+  {
+   "ticker": "EXL",
+   "name": "ELIXINOL WELLNESS LIMITED"
+  },
+  {
+   "ticker": "EXP",
+   "name": "EXPERIENCE CO LIMITED"
+  },
+  {
+   "ticker": "EXR",
+   "name": "ELIXIR ENERGY LIMITED"
+  },
+  {
+   "ticker": "EXT",
+   "name": "EXCITE TECHNOLOGY SERVICES LTD"
+  },
+  {
+   "ticker": "EYE",
+   "name": "NOVA EYE MEDICAL LIMITED"
+  },
+  {
+   "ticker": "EZL",
+   "name": "EUROZ HARTLEYS GROUP LIMITED"
+  },
+  {
+   "ticker": "EZZ",
+   "name": "EZZ LIFE SCIENCE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "FAL",
+   "name": "FALCON METALS LTD"
+  },
+  {
+   "ticker": "FAR",
+   "name": "FAR LIMITED"
+  },
+  {
+   "ticker": "FAU",
+   "name": "FIRST AU LIMITED"
+  },
+  {
+   "ticker": "FBR",
+   "name": "FBR LTD"
   },
   {
    "ticker": "FBU",
-   "name": "Fletcher Building Ltd"
+   "name": "FLETCHER BUILDING LIMITED"
+  },
+  {
+   "ticker": "FCG",
+   "name": "FREEDOM CARE GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "FCL",
+   "name": "FINEOS CORPORATION HOLDINGS PLC"
+  },
+  {
+   "ticker": "FCT",
+   "name": "FIRSTWAVE CLOUD TECHNOLOGY LIMITED"
+  },
+  {
+   "ticker": "FDR",
+   "name": "FINDER ENERGY HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "FDV",
+   "name": "FRONTIER DIGITAL VENTURES LIMITED"
+  },
+  {
+   "ticker": "FEG",
+   "name": "FAR EAST GOLD LTD"
+  },
+  {
+   "ticker": "FEL",
+   "name": "FORTE ENERGY LIMITED"
+  },
+  {
+   "ticker": "FEX",
+   "name": "FENIX RESOURCES LTD"
+  },
+  {
+   "ticker": "FFG",
+   "name": "FATFISH GROUP LIMITED"
+  },
+  {
+   "ticker": "FFI",
+   "name": "FFI HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "FFM",
+   "name": "FIREFLY METALS LTD"
+  },
+  {
+   "ticker": "FG1",
+   "name": "FLYNN GOLD LIMITED"
+  },
+  {
+   "ticker": "FGG",
+   "name": "FUTURE GENERATION GLOBAL LIMITED"
+  },
+  {
+   "ticker": "FGH",
+   "name": "FORESTA GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "FGR",
+   "name": "FIRST GRAPHENE LIMITED"
+  },
+  {
+   "ticker": "FGX",
+   "name": "FUTURE GENERATION AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "FHE",
+   "name": "FRONTIER ENERGY LIMITED"
+  },
+  {
+   "ticker": "FHS",
+   "name": "FREEHILL MINING LIMITED."
+  },
+  {
+   "ticker": "FID",
+   "name": "FIDUCIAN GROUP LIMITED"
+  },
+  {
+   "ticker": "FIN",
+   "name": "FIN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "FL1",
+   "name": "FIRST LITHIUM LIMITED"
+  },
+  {
+   "ticker": "FLC",
+   "name": "FLUENCE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "FLG",
+   "name": "FLAGSHIP MINERALS LIMITED"
+  },
+  {
+   "ticker": "FLN",
+   "name": "FREELANCER LIMITED"
   },
   {
    "ticker": "FLT",
-   "name": "Flight Centre Travel"
+   "name": "FLIGHT CENTRE TRAVEL GROUP LIMITED"
+  },
+  {
+   "ticker": "FLX",
+   "name": "FELIX GROUP HOLDINGS LTD"
+  },
+  {
+   "ticker": "FME",
+   "name": "FUTURE METALS NL"
   },
   {
    "ticker": "FMG",
-   "name": "Fortescue Ltd"
+   "name": "FORTESCUE LTD"
+  },
+  {
+   "ticker": "FML",
+   "name": "FOCUS MINERALS LTD"
+  },
+  {
+   "ticker": "FMN",
+   "name": "FAMIEN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "FMR",
+   "name": "FMR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "FND",
+   "name": "FINDI LIMITED"
+  },
+  {
+   "ticker": "FNR",
+   "name": "FAR NORTHERN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "FNX",
+   "name": "FINEXIA FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "FOS",
+   "name": "FOS CAPITAL LTD"
+  },
+  {
+   "ticker": "FPC",
+   "name": "FAT PROPHETS GLOBAL CONTRARIAN FUND LTD"
   },
   {
    "ticker": "FPH",
-   "name": "Fisher & Paykel Healthcare"
+   "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "FPR",
+   "name": "FLEETPARTNERS GROUP LIMITED"
+  },
+  {
+   "ticker": "FRB",
+   "name": "FIREBIRD METALS LIMITED"
+  },
+  {
+   "ticker": "FRE",
+   "name": "FIREBRICK PHARMA LIMITED"
+  },
+  {
+   "ticker": "FRI",
+   "name": "FINBAR GROUP LIMITED"
+  },
+  {
+   "ticker": "FRM",
+   "name": "FARM PRIDE FOODS LIMITED"
+  },
+  {
+   "ticker": "FRS",
+   "name": "FORRESTANIA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "FRW",
+   "name": "FREIGHTWAYS GROUP LIMITED"
+  },
+  {
+   "ticker": "FRX",
+   "name": "FLEXIROAM LIMITED"
+  },
+  {
+   "ticker": "FSA",
+   "name": "FSA GROUP LIMITED"
+  },
+  {
+   "ticker": "FSI",
+   "name": "FLAGSHIP INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "FTI",
+   "name": "FORTIFAI LTD"
+  },
+  {
+   "ticker": "FUL",
+   "name": "FULCRUM LITHIUM LTD"
+  },
+  {
+   "ticker": "FUN",
+   "name": "FORTUNA METALS LTD"
+  },
+  {
+   "ticker": "FWD",
+   "name": "FLEETWOOD LIMITED"
+  },
+  {
+   "ticker": "FXG",
+   "name": "FELIX GOLD LIMITED"
+  },
+  {
+   "ticker": "FZR",
+   "name": "FITZROY RIVER CORPORATION LTD"
+  },
+  {
+   "ticker": "G11",
+   "name": "G11 RESOURCES LIMITED"
+  },
+  {
+   "ticker": "G1C",
+   "name": "GROUP ONE CAPITAL LIMITED"
   },
   {
    "ticker": "G50",
-   "name": "G50 Corp Ltd"
+   "name": "G50 CORP LIMITED"
+  },
+  {
+   "ticker": "G6M",
+   "name": "GROUP 6 METALS LIMITED"
+  },
+  {
+   "ticker": "G88",
+   "name": "GOLDEN MILE RESOURCES LTD"
+  },
+  {
+   "ticker": "GA8",
+   "name": "GOLDARC RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GAL",
+   "name": "GALILEO MINING LTD"
+  },
+  {
+   "ticker": "GAP",
+   "name": "GALE PACIFIC LIMITED"
+  },
+  {
+   "ticker": "GAS",
+   "name": "STATE GAS LIMITED"
+  },
+  {
+   "ticker": "GBE",
+   "name": "GLOBE METALS & MINING LIMITED"
+  },
+  {
+   "ticker": "GBM",
+   "name": "GBM RESOURCES LIMITED."
+  },
+  {
+   "ticker": "GBR",
+   "name": "GREAT BOULDER RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GC1",
+   "name": "GLENNON SMALL COMPANIES LIMITED"
+  },
+  {
+   "ticker": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST"
+  },
+  {
+   "ticker": "GCM",
+   "name": "GCM CORPORATION LIMITED"
+  },
+  {
+   "ticker": "GCR",
+   "name": "GOLDEN CROSS RESOURCES LTD"
+  },
+  {
+   "ticker": "GDF",
+   "name": "GARDA PROPERTY GROUP"
+  },
+  {
+   "ticker": "GDG",
+   "name": "GENERATION DEVELOPMENT GROUP LIMITED"
+  },
+  {
+   "ticker": "GDI",
+   "name": "GDI PROPERTY GROUP"
+  },
+  {
+   "ticker": "GDM",
+   "name": "GREAT DIVIDE MINING LTD"
+  },
+  {
+   "ticker": "GDR",
+   "name": "GOLDEN DRAGON MINING LTD"
+  },
+  {
+   "ticker": "GED",
+   "name": "GOLDEN DEEPS LIMITED."
+  },
+  {
+   "ticker": "GEM",
+   "name": "G8 EDUCATION LIMITED"
+  },
+  {
+   "ticker": "GEN",
+   "name": "GENMIN LIMITED"
+  },
+  {
+   "ticker": "GES",
+   "name": "GENESIS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GFL",
+   "name": "GLOBAL MASTERS FUND LIMITED"
+  },
+  {
+   "ticker": "GG1",
+   "name": "GREEN & GOLD MINERALS LIMITED"
+  },
+  {
+   "ticker": "GG8",
+   "name": "GORILLA GOLD MINES LTD"
+  },
+  {
+   "ticker": "GGE",
+   "name": "GRAND GULF ENERGY LIMITED"
+  },
+  {
+   "ticker": "GGP",
+   "name": "GREATLAND RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GGR",
+   "name": "GOLDEN GLOBE RESOURCES LTD."
+  },
+  {
+   "ticker": "GHM",
+   "name": "GOLDEN HORSE MINERALS LIMITED"
+  },
+  {
+   "ticker": "GHY",
+   "name": "GOLD HYDROGEN LIMITED"
+  },
+  {
+   "ticker": "GIB",
+   "name": "GIBB RIVER DIAMONDS LIMITED"
+  },
+  {
+   "ticker": "GL1",
+   "name": "GLOBAL LITHIUM RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GLB",
+   "name": "GLOBE INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "GLE",
+   "name": "GLG CORP LTD"
+  },
+  {
+   "ticker": "GLF",
+   "name": "GEMLIFE COMMUNITIES GROUP"
+  },
+  {
+   "ticker": "GLH",
+   "name": "GLOBAL HEALTH LIMITED"
+  },
+  {
+   "ticker": "GLL",
+   "name": "GALILEE ENERGY LIMITED"
+  },
+  {
+   "ticker": "GLN",
+   "name": "GALAN LITHIUM LIMITED"
+  },
+  {
+   "ticker": "GLS",
+   "name": "L1 GLOBAL LONG SHORT FUND LIMITED"
+  },
+  {
+   "ticker": "GMD",
+   "name": "GENESIS MINERALS LIMITED"
   },
   {
    "ticker": "GMG",
-   "name": "Goodman Group"
+   "name": "GOODMAN GROUP"
+  },
+  {
+   "ticker": "GML",
+   "name": "GATEWAY MINING LIMITED"
+  },
+  {
+   "ticker": "GMN",
+   "name": "GOLD MOUNTAIN LIMITED"
   },
   {
    "ticker": "GNC",
-   "name": "GrainCorp Ltd"
+   "name": "GRAINCORP LIMITED"
+  },
+  {
+   "ticker": "GNE",
+   "name": "GENESIS ENERGY LIMITED"
+  },
+  {
+   "ticker": "GNG",
+   "name": "GR ENGINEERING SERVICES LIMITED"
+  },
+  {
+   "ticker": "GNM",
+   "name": "GREAT NORTHERN MINERALS LIMITED"
+  },
+  {
+   "ticker": "GNP",
+   "name": "GENUSPLUS GROUP LTD"
   },
   {
    "ticker": "GOR",
    "name": "Gold Road Resources"
   },
   {
+   "ticker": "GOW",
+   "name": "GOWING BROS LIMITED"
+  },
+  {
+   "ticker": "GOZ",
+   "name": "GROWTHPOINT PROPERTIES AUSTRALIA"
+  },
+  {
+   "ticker": "GPR",
+   "name": "GEOPACIFIC RESOURCES LTD"
+  },
+  {
    "ticker": "GPT",
-   "name": "GPT Group"
+   "name": "GPT GROUP"
+  },
+  {
+   "ticker": "GQG",
+   "name": "GQG PARTNERS INC."
+  },
+  {
+   "ticker": "GR8",
+   "name": "GREAT DIRT RESOURCES LTD"
+  },
+  {
+   "ticker": "GRE",
+   "name": "GREENTECH METALS LIMITED"
+  },
+  {
+   "ticker": "GRL",
+   "name": "GODOLPHIN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "GRR",
+   "name": "GRANGE RESOURCES LIMITED."
+  },
+  {
+   "ticker": "GRV",
+   "name": "GREENVALE ENERGY LTD"
+  },
+  {
+   "ticker": "GRX",
+   "name": "GREENX METALS LIMITED"
+  },
+  {
+   "ticker": "GSM",
+   "name": "GOLDEN STATE MINING LIMITED"
+  },
+  {
+   "ticker": "GSN",
+   "name": "GREAT SOUTHERN MINING LIMITED"
+  },
+  {
+   "ticker": "GSS",
+   "name": "GENETIC SIGNATURES LIMITED"
+  },
+  {
+   "ticker": "GT1",
+   "name": "GREEN TECHNOLOGY METALS LIMITED"
+  },
+  {
+   "ticker": "GT1N",
+   "name": "GREEN TECHNOLOGY METALS LIMITED"
+  },
+  {
+   "ticker": "GT3",
+   "name": "GREEN360 TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "GTE",
+   "name": "GREAT WESTERN EXPLORATION LIMITED."
+  },
+  {
+   "ticker": "GTG",
+   "name": "GENETIC TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "GTI",
+   "name": "GRATIFII LIMITED"
+  },
+  {
+   "ticker": "GTK",
+   "name": "GENTRACK GROUP LIMITED"
+  },
+  {
+   "ticker": "GTN",
+   "name": "GTN LIMITED"
+  },
+  {
+   "ticker": "GUL",
+   "name": "GULLEWA LIMITED"
+  },
+  {
+   "ticker": "GUM",
+   "name": "GUMTREE AUSTRALIA MARKETS LIMITED"
+  },
+  {
+   "ticker": "GVF",
+   "name": "STAUDE CAPITAL GLOBAL VALUE FUND LIMITED"
+  },
+  {
+   "ticker": "GW1",
+   "name": "GREENWING RESOURCES LTD"
+  },
+  {
+   "ticker": "GWA",
+   "name": "GWA GROUP LIMITED."
+  },
+  {
+   "ticker": "GWR",
+   "name": "GWR GROUP LIMITED"
+  },
+  {
+   "ticker": "GYG",
+   "name": "GUZMAN Y GOMEZ LIMITED"
+  },
+  {
+   "ticker": "H2G",
+   "name": "H2G LIMITED"
+  },
+  {
+   "ticker": "H3E",
+   "name": "H3 ENERGY LIMITED"
+  },
+  {
+   "ticker": "HAL",
+   "name": "HALO TECHNOLOGIES HOLDINGS LTD"
+  },
+  {
+   "ticker": "HAR",
+   "name": "HARANGA RESOURCES LIMITED."
+  },
+  {
+   "ticker": "HAS",
+   "name": "HASTINGS TECHNOLOGY METALS LTD"
+  },
+  {
+   "ticker": "HAV",
+   "name": "HAVILAH RESOURCES LIMITED"
+  },
+  {
+   "ticker": "HAW",
+   "name": "HAWTHORN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "HCD",
+   "name": "HYDROCARBON DYNAMICS LIMITED"
+  },
+  {
+   "ticker": "HCF",
+   "name": "H&G HIGH CONVICTION LIMITED"
+  },
+  {
+   "ticker": "HCH",
+   "name": "HOT CHILI LIMITED"
+  },
+  {
+   "ticker": "HCL",
+   "name": "HIGHCOM LIMITED"
+  },
+  {
+   "ticker": "HCT",
+   "name": "HOLISTA COLLTECH LIMITED"
+  },
+  {
+   "ticker": "HCW",
+   "name": "HEALTHCO HEALTHCARE AND WELLNESS REIT"
+  },
+  {
+   "ticker": "HDN",
+   "name": "HOMECO DAILY NEEDS REIT"
+  },
+  {
+   "ticker": "HE8",
+   "name": "HELIOS ENERGY LTD"
+  },
+  {
+   "ticker": "HFR",
+   "name": "HIGHFIELD RESOURCES LIMITED"
+  },
+  {
+   "ticker": "HFY",
+   "name": "HUBIFY LIMITED"
+  },
+  {
+   "ticker": "HGH",
+   "name": "HEARTLAND GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "HGO",
+   "name": "HILLGROVE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "HHR",
+   "name": "HARTSHEAD RESOURCES NL"
+  },
+  {
+   "ticker": "HIO",
+   "name": "HAWSONS IRON LTD"
+  },
+  {
+   "ticker": "HIQ",
+   "name": "HITIQ LIMITED"
+  },
+  {
+   "ticker": "HIT",
+   "name": "HITECH GROUP AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "HLI",
+   "name": "HELIA GROUP LIMITED"
+  },
+  {
+   "ticker": "HLO",
+   "name": "HELLOWORLD TRAVEL LIMITED"
+  },
+  {
+   "ticker": "HLS",
+   "name": "HEALIUS LIMITED"
+  },
+  {
+   "ticker": "HLX",
+   "name": "HELIX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "HM1",
+   "name": "HEARTS AND MINDS INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "HMC",
+   "name": "HMC CAPITAL LIMITED"
+  },
+  {
+   "ticker": "HMD",
+   "name": "HERAMED LIMITED"
+  },
+  {
+   "ticker": "HMG",
+   "name": "HAMELIN GOLD LIMITED"
+  },
+  {
+   "ticker": "HMI",
+   "name": "HIREMII LIMITED"
+  },
+  {
+   "ticker": "HMX",
+   "name": "HAMMER METALS LIMITED"
+  },
+  {
+   "ticker": "HMY",
+   "name": "HARMONEY CORP LIMITED"
+  },
+  {
+   "ticker": "HOR",
+   "name": "HORSESHOE METALS LIMITED"
+  },
+  {
+   "ticker": "HPC",
+   "name": "THE HYDRATION PHARMACEUTICALS COMPANY LIMITED"
+  },
+  {
+   "ticker": "HPG",
+   "name": "HIPAGES GROUP HOLDINGS LTD"
+  },
+  {
+   "ticker": "HPR",
+   "name": "HIGH PEAK ROYALTIES LIMITED"
+  },
+  {
+   "ticker": "HRE",
+   "name": "HEAVY RARE EARTHS LIMITED"
+  },
+  {
+   "ticker": "HRN",
+   "name": "HORIZON GOLD LIMITED"
+  },
+  {
+   "ticker": "HSN",
+   "name": "HANSEN TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "HT8",
+   "name": "HARRIS TECHNOLOGY GROUP LIMITED"
+  },
+  {
+   "ticker": "HTG",
+   "name": "HARVEST TECHNOLOGY GROUP LTD"
+  },
+  {
+   "ticker": "HTM",
+   "name": "HIGH-TECH METALS LTD"
+  },
+  {
+   "ticker": "HUB",
+   "name": "HUB24 LIMITED"
+  },
+  {
+   "ticker": "HUM",
+   "name": "HUMM GROUP LIMITED"
   },
   {
    "ticker": "HVN",
-   "name": "Harvey Norman Holdings"
+   "name": "HARVEY NORMAN HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "HVY",
+   "name": "HEAVY MINERALS LIMITED"
+  },
+  {
+   "ticker": "HWK",
+   "name": "HAWK RESOURCES LIMITED."
+  },
+  {
+   "ticker": "HXL",
+   "name": "HEXIMA LIMITED."
+  },
+  {
+   "ticker": "HYD",
+   "name": "HYDRIX LIMITED"
+  },
+  {
+   "ticker": "HYT",
+   "name": "HYTERRA LTD"
+  },
+  {
+   "ticker": "HZN",
+   "name": "HORIZON OIL LIMITED"
+  },
+  {
+   "ticker": "HZR",
+   "name": "HAZER GROUP LIMITED"
+  },
+  {
+   "ticker": "I88",
+   "name": "INFINI RESOURCES LIMITED"
   },
   {
    "ticker": "IAG",
-   "name": "Insurance Australia Group"
+   "name": "INSURANCE AUSTRALIA GROUP LIMITED"
+  },
+  {
+   "ticker": "IAM",
+   "name": "INCOME ASSET MANAGEMENT GROUP LIMITED."
+  },
+  {
+   "ticker": "IBC",
+   "name": "IRONBARK BALANCED INCOME LIMITED"
+  },
+  {
+   "ticker": "IBR",
+   "name": "IRON BEAR RESOURCES LTD"
+  },
+  {
+   "ticker": "IBX",
+   "name": "IMAGION BIOSYSTEMS LIMITED"
+  },
+  {
+   "ticker": "ICE",
+   "name": "ICETANA LIMITED"
+  },
+  {
+   "ticker": "ICL",
+   "name": "ICENI GOLD LIMITED"
+  },
+  {
+   "ticker": "ICR",
+   "name": "INTELICARE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "ICU",
+   "name": "INVESTOR CENTRE LIMITED"
+  },
+  {
+   "ticker": "ID8",
+   "name": "IDENTITII LIMITED"
+  },
+  {
+   "ticker": "IDA",
+   "name": "INDIANA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "IDT",
+   "name": "IDT AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "IDX",
+   "name": "INTEGRAL DIAGNOSTICS LIMITED"
+  },
+  {
+   "ticker": "IEL",
+   "name": "IDP EDUCATION LIMITED"
+  },
+  {
+   "ticker": "IEQ",
+   "name": "INTERNATIONAL EQUITIES CORPORATION LIMITED."
+  },
+  {
+   "ticker": "IFG",
+   "name": "INFOCUS GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "IFN",
+   "name": "INFRAGREEN GROUP LIMITED"
+  },
+  {
+   "ticker": "IFT",
+   "name": "INFRATIL LIMITED."
+  },
+  {
+   "ticker": "IG6",
+   "name": "INTERNATIONAL GRAPHITE LIMITED"
+  },
+  {
+   "ticker": "IGL",
+   "name": "IVE GROUP LIMITED"
+  },
+  {
+   "ticker": "IGN",
+   "name": "IGNITE LIMITED"
   },
   {
    "ticker": "IGO",
-   "name": "IGO Ltd"
+   "name": "IGO LIMITED"
+  },
+  {
+   "ticker": "IIQ",
+   "name": "INOVIQ LTD"
+  },
+  {
+   "ticker": "IKE",
+   "name": "IKEGPS GROUP LIMITED"
+  },
+  {
+   "ticker": "ILA",
+   "name": "ISLAND PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "ILT",
+   "name": "ILTANI RESOURCES LIMITED."
   },
   {
    "ticker": "ILU",
-   "name": "Iluka Resources Ltd"
+   "name": "ILUKA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "IMA",
+   "name": "IMAGE RESOURCES NL"
+  },
+  {
+   "ticker": "IMB",
+   "name": "INTELLIGENT MONITORING GROUP LIMITED"
+  },
+  {
+   "ticker": "IMC",
+   "name": "IMMURON LIMITED"
+  },
+  {
+   "ticker": "IMD",
+   "name": "IMDEX LIMITED"
+  },
+  {
+   "ticker": "IME",
+   "name": "IMEXHS LIMITED"
+  },
+  {
+   "ticker": "IMI",
+   "name": "INFINITY MINING LIMITED"
+  },
+  {
+   "ticker": "IMM",
+   "name": "IMMUTEP LIMITED"
+  },
+  {
+   "ticker": "IMR",
+   "name": "IMRICOR MEDICAL SYSTEMS INC."
   },
   {
    "ticker": "IMU",
-   "name": "Imugene Ltd"
+   "name": "IMUGENE LIMITED"
+  },
+  {
+   "ticker": "INA",
+   "name": "INGENIA COMMUNITIES GROUP"
+  },
+  {
+   "ticker": "IND",
+   "name": "INDUSTRIAL MINERALS LTD"
+  },
+  {
+   "ticker": "INF",
+   "name": "INFINITY METALS LIMITED"
+  },
+  {
+   "ticker": "ING",
+   "name": "INGHAMS GROUP LIMITED"
+  },
+  {
+   "ticker": "INR",
+   "name": "IONEER LTD"
+  },
+  {
+   "ticker": "INV",
+   "name": "INVESTSMART GROUP LIMITED"
+  },
+  {
+   "ticker": "IOD",
+   "name": "IODM LIMITED"
+  },
+  {
+   "ticker": "ION",
+   "name": "IONDRIVE LIMITED"
+  },
+  {
+   "ticker": "IOV",
+   "name": "ION VIDEO LTD"
+  },
+  {
+   "ticker": "IPC",
+   "name": "IMPERIAL PACIFIC LIMITED"
+  },
+  {
+   "ticker": "IPD",
+   "name": "IMPEDIMED LIMITED"
   },
   {
    "ticker": "IPG",
-   "name": "IPD Group Ltd"
+   "name": "IPD GROUP LTD"
+  },
+  {
+   "ticker": "IPH",
+   "name": "IPH LIMITED"
   },
   {
    "ticker": "IPL",
    "name": "Incitec Pivot Ltd"
   },
   {
+   "ticker": "IPT",
+   "name": "IMPACT MINERALS LIMITED"
+  },
+  {
+   "ticker": "IPX",
+   "name": "IPERIONX LIMITED"
+  },
+  {
+   "ticker": "IR1",
+   "name": "IRIS METALS LIMITED"
+  },
+  {
+   "ticker": "IRD",
+   "name": "IRON ROAD LIMITED"
+  },
+  {
+   "ticker": "IRE",
+   "name": "IRESS LIMITED"
+  },
+  {
+   "ticker": "IRI",
+   "name": "INTEGRATED RESEARCH LIMITED"
+  },
+  {
+   "ticker": "IS3",
+   "name": "I SYNERGY GROUP LIMITED"
+  },
+  {
+   "ticker": "ITM",
+   "name": "ITECH MINERALS LTD"
+  },
+  {
+   "ticker": "ITS",
+   "name": "INFOTRUST LTD"
+  },
+  {
+   "ticker": "IVG",
+   "name": "INVERT GRAPHITE LIMITED"
+  },
+  {
+   "ticker": "IVR",
+   "name": "INVESTIGATOR SILVER LIMITED"
+  },
+  {
+   "ticker": "IVX",
+   "name": "INVION LIMITED"
+  },
+  {
+   "ticker": "IVZ",
+   "name": "INVICTUS ENERGY LTD"
+  },
+  {
+   "ticker": "IXC",
+   "name": "INVEX THERAPEUTICS LTD"
+  },
+  {
+   "ticker": "IXR",
+   "name": "IONIC RARE EARTHS LIMITED"
+  },
+  {
+   "ticker": "JAL",
+   "name": "JAMESON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "JAN",
+   "name": "JANISON EDUCATION GROUP LIMITED"
+  },
+  {
+   "ticker": "JAT",
+   "name": "JATCORP LIMITED"
+  },
+  {
+   "ticker": "JAV",
+   "name": "JAVELIN MINERALS LIMITED"
+  },
+  {
+   "ticker": "JAY",
+   "name": "JAYRIDE GROUP LIMITED"
+  },
+  {
    "ticker": "JBH",
-   "name": "JB Hi-Fi Ltd"
+   "name": "JB HI-FI LIMITED"
+  },
+  {
+   "ticker": "JCS",
+   "name": "JCURVE SOLUTIONS LTD"
+  },
+  {
+   "ticker": "JDO",
+   "name": "JUDO CAPITAL HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "JGH",
+   "name": "JADE GAS HOLDINGS LIMITED"
   },
   {
    "ticker": "JHX",
-   "name": "James Hardie Industries"
+   "name": "JAMES HARDIE INDUSTRIES PLC"
+  },
+  {
+   "ticker": "JIN",
+   "name": "JUMBO INTERACTIVE LIMITED"
   },
   {
    "ticker": "JLG",
    "name": "Johns Lyng Group"
   },
   {
+   "ticker": "JLL",
+   "name": "JINDALEE LITHIUM LIMITED"
+  },
+  {
+   "ticker": "JMS",
+   "name": "JUPITER MINES LIMITED."
+  },
+  {
+   "ticker": "JNO",
+   "name": "JUNO MINERALS LIMITED"
+  },
+  {
+   "ticker": "JNS",
+   "name": "JANUS ELECTRIC HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "JPR",
+   "name": "JUPITER ENERGY LIMITED"
+  },
+  {
+   "ticker": "JYC",
+   "name": "JOYCE CORPORATION LTD"
+  },
+  {
+   "ticker": "KAL",
+   "name": "KALGOORLIE GOLD MINING LIMITED"
+  },
+  {
+   "ticker": "KAM",
+   "name": "K2 ASSET MANAGEMENT HOLDINGS LTD"
+  },
+  {
+   "ticker": "KAO",
+   "name": "KAOKO METALS LIMITED"
+  },
+  {
    "ticker": "KAR",
-   "name": "Karoon Energy Ltd"
+   "name": "KAROON ENERGY LTD"
+  },
+  {
+   "ticker": "KAT",
+   "name": "KATANA CAPITAL LIMITED"
+  },
+  {
+   "ticker": "KAU",
+   "name": "KAISER REEF LIMITED"
+  },
+  {
+   "ticker": "KBC",
+   "name": "KEYBRIDGE CAPITAL LIMITED"
+  },
+  {
+   "ticker": "KCC",
+   "name": "KINCORA COPPER LIMITED"
+  },
+  {
+   "ticker": "KCN",
+   "name": "KINGSGATE CONSOLIDATED LIMITED."
+  },
+  {
+   "ticker": "KEY",
+   "name": "KEY PETROLEUM LIMITED"
+  },
+  {
+   "ticker": "KFM",
+   "name": "KINGFISHER MINING LTD"
+  },
+  {
+   "ticker": "KGL",
+   "name": "KGL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KGN",
+   "name": "KOGAN.COM LTD"
+  },
+  {
+   "ticker": "KIT",
+   "name": "KAPSTREAM INVESTMENT TRUST"
+  },
+  {
+   "ticker": "KKC",
+   "name": "KKR CREDIT INCOME FUND"
+  },
+  {
+   "ticker": "KKO",
+   "name": "KINETIKO ENERGY LTD"
+  },
+  {
+   "ticker": "KLI",
+   "name": "KILLI RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KLR",
+   "name": "KAILI RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KLS",
+   "name": "KELSIAN GROUP LIMITED"
+  },
+  {
+   "ticker": "KLV",
+   "name": "KLEVO REWARDS LIMITED"
+  },
+  {
+   "ticker": "KM1",
+   "name": "KALI METALS LIMITED"
+  },
+  {
+   "ticker": "KMD",
+   "name": "KMD BRANDS LIMITED"
+  },
+  {
+   "ticker": "KME",
+   "name": "KIP MCGRATH EDUCATION CENTRES LIMITED"
+  },
+  {
+   "ticker": "KNB",
+   "name": "KOONENBERRY GOLD LIMITED"
+  },
+  {
+   "ticker": "KNG",
+   "name": "KINGSLAND MINERALS LTD"
+  },
+  {
+   "ticker": "KNI",
+   "name": "KUNIKO LIMITED"
+  },
+  {
+   "ticker": "KNO",
+   "name": "KNOSYS LIMITED"
+  },
+  {
+   "ticker": "KOA",
+   "name": "THE KOALA COMPANY LIMITED"
+  },
+  {
+   "ticker": "KOB",
+   "name": "KOBA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KOR",
+   "name": "KORAB RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KOV",
+   "name": "KORVEST LTD"
+  },
+  {
+   "ticker": "KP2",
+   "name": "KORE POTASH PLC"
+  },
+  {
+   "ticker": "KPG",
+   "name": "KELLY PARTNERS GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "KPO",
+   "name": "KALINA POWER LIMITED"
+  },
+  {
+   "ticker": "KRM",
+   "name": "KINGSROSE MINING LIMITED"
+  },
+  {
+   "ticker": "KRR",
+   "name": "KING RIVER RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KSC",
+   "name": "K & S CORPORATION LIMITED"
+  },
+  {
+   "ticker": "KSL",
+   "name": "KINA SECURITIES LIMITED"
+  },
+  {
+   "ticker": "KSN",
+   "name": "KINGSTON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KTA",
+   "name": "KRAKATOA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KTK",
+   "name": "KTEK AEROSYSTEMS LTD"
+  },
+  {
+   "ticker": "KYP",
+   "name": "KINATICO LTD"
+  },
+  {
+   "ticker": "KZR",
+   "name": "KALAMAZOO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "L1G",
+   "name": "L1 GROUP LIMITED"
+  },
+  {
+   "ticker": "L1M",
+   "name": "LIGHTNING MINERALS LTD"
+  },
+  {
+   "ticker": "LAC",
+   "name": "LAC GOLD LIMITED"
+  },
+  {
+   "ticker": "LAM",
+   "name": "LARAMIDE RESOURCES LTD"
+  },
+  {
+   "ticker": "LAT",
+   "name": "LATITUDE 66 LIMITED"
+  },
+  {
+   "ticker": "LAU",
+   "name": "LINDSAY AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "LBL",
+   "name": "LASERBOND LIMITED"
+  },
+  {
+   "ticker": "LCE",
+   "name": "LONDON CITY EQUITIES LIMITED"
+  },
+  {
+   "ticker": "LCL",
+   "name": "LCL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "LCY",
+   "name": "LEGACY IRON ORE LIMITED"
+  },
+  {
+   "ticker": "LDR",
+   "name": "LODE RESOURCES LTD"
+  },
+  {
+   "ticker": "LDX",
+   "name": "LUMOS DIAGNOSTICS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "LED",
+   "name": "LDR CAPITAL PROPERTY FUND"
+  },
+  {
+   "ticker": "LEG",
+   "name": "LEGEND MINING LIMITED"
+  },
+  {
+   "ticker": "LEL",
+   "name": "LITHIUM ENERGY LIMITED"
+  },
+  {
+   "ticker": "LEX",
+   "name": "LEFROY EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "LF1",
+   "name": "LA TROBE PRIVATE CREDIT FUND"
+  },
+  {
+   "ticker": "LFG",
+   "name": "LIBERTY FINANCIAL GROUP"
+  },
+  {
+   "ticker": "LFS",
+   "name": "LATITUDE GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "LFT",
+   "name": "LI-FT POWER LTD."
+  },
+  {
+   "ticker": "LGF",
+   "name": "L1 GOLD FUND LIMITED"
+  },
+  {
+   "ticker": "LGI",
+   "name": "LGI LIMITED"
+  },
+  {
+   "ticker": "LGM",
+   "name": "LEGACY MINERALS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "LGP",
+   "name": "LITTLE GREEN PHARMA LTD"
+  },
+  {
+   "ticker": "LIB",
+   "name": "LIBERTY METALS LTD"
+  },
+  {
+   "ticker": "LIC",
+   "name": "LIFESTYLE COMMUNITIES LIMITED"
   },
   {
    "ticker": "LIN",
-   "name": "Lindian Resources Ltd"
+   "name": "LINDIAN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "LIO",
+   "name": "LION ENERGY LIMITED"
+  },
+  {
+   "ticker": "LIS",
+   "name": "LI-S ENERGY LIMITED"
+  },
+  {
+   "ticker": "LIT",
+   "name": "LIVIUM LTD"
+  },
+  {
+   "ticker": "LKE",
+   "name": "LAKE RESOURCES N.L."
+  },
+  {
+   "ticker": "LKO",
+   "name": "LAKES BLUE ENERGY NL"
+  },
+  {
+   "ticker": "LKY",
+   "name": "LOCKSLEY RESOURCES LIMITED"
   },
   {
    "ticker": "LLC",
-   "name": "Lendlease Group"
+   "name": "LENDLEASE GROUP"
+  },
+  {
+   "ticker": "LLM",
+   "name": "LOYAL METALS LTD"
+  },
+  {
+   "ticker": "LM1",
+   "name": "LEEUWIN METALS LTD"
+  },
+  {
+   "ticker": "LM8",
+   "name": "LUNNON METALS LIMITED"
+  },
+  {
+   "ticker": "LMG",
+   "name": "LATROBE MAGNESIUM LIMITED"
+  },
+  {
+   "ticker": "LML",
+   "name": "LINCOLN MINERALS LIMITED"
+  },
+  {
+   "ticker": "LMS",
+   "name": "LITCHFIELD MINERALS LIMITED"
   },
   {
    "ticker": "LNK",
    "name": "Link Admin Holdings"
   },
   {
+   "ticker": "LNQ",
+   "name": "LINQ MINERALS LIMITED"
+  },
+  {
+   "ticker": "LNW",
+   "name": "LIGHT & WONDER INC."
+  },
+  {
+   "ticker": "LOT",
+   "name": "LOTUS RESOURCES LIMITED"
+  },
+  {
    "ticker": "LOV",
-   "name": "Lovisa Holdings Ltd"
+   "name": "LOVISA HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "LPE",
+   "name": "LOCALITY PLANNING ENERGY HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "LPM",
+   "name": "LITHIUM PLUS MINERALS LTD."
+  },
+  {
+   "ticker": "LRD",
+   "name": "LORD RESOURCES LIMITED"
+  },
+  {
+   "ticker": "LRK",
+   "name": "LARK DISTILLING CO. LTD"
+  },
+  {
+   "ticker": "LRM",
+   "name": "LION ROCK MINERALS LTD"
+  },
+  {
+   "ticker": "LRT",
+   "name": "LOWELL RESOURCES FUND"
+  },
+  {
+   "ticker": "LRV",
+   "name": "LARVOTTO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "LSA",
+   "name": "LACHLAN STAR LIMITED"
+  },
+  {
+   "ticker": "LSF",
+   "name": "L1 LONG SHORT FUND LIMITED"
+  },
+  {
+   "ticker": "LSR",
+   "name": "LODESTAR MINERALS LIMITED"
+  },
+  {
+   "ticker": "LSX",
+   "name": "LION SELECTION GROUP LIMITED."
+  },
+  {
+   "ticker": "LTP",
+   "name": "LTR PHARMA LIMITED"
   },
   {
    "ticker": "LTR",
-   "name": "Liontown Resources Ltd"
+   "name": "LIONTOWN LIMITED"
+  },
+  {
+   "ticker": "LU7",
+   "name": "LITHIUM UNIVERSE LIMITED"
+  },
+  {
+   "ticker": "LVE",
+   "name": "LOVE GROUP GLOBAL LTD"
+  },
+  {
+   "ticker": "LYC",
+   "name": "LYNAS RARE EARTHS LIMITED"
+  },
+  {
+   "ticker": "LYL",
+   "name": "LYCOPODIUM LIMITED"
+  },
+  {
+   "ticker": "M24",
+   "name": "MAMBA EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "M2M",
+   "name": "MT MALCOLM MINES NL"
+  },
+  {
+   "ticker": "M2R",
+   "name": "MIRAMAR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "M3M",
+   "name": "M3 MINING LIMITED"
+  },
+  {
+   "ticker": "M4M",
+   "name": "MACRO METALS LIMITED"
+  },
+  {
+   "ticker": "M79",
+   "name": "MAMMOTH MINERALS LIMITED"
+  },
+  {
+   "ticker": "M7T",
+   "name": "MACH7 TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "MA1",
+   "name": "MA CREDIT INCOME TRUST"
+  },
+  {
+   "ticker": "MAD",
+   "name": "MADER GROUP LIMITED"
+  },
+  {
+   "ticker": "MAF",
+   "name": "MA FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "MAG",
+   "name": "MAGMATIC RESOURCES LIMITED"
   },
   {
    "ticker": "MAH",
-   "name": "Macmahon Holdings Ltd"
+   "name": "MACMAHON HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "MAM",
+   "name": "MICROEQUITIES ASSET MANAGEMENT GROUP LIMITED"
+  },
+  {
+   "ticker": "MAN",
+   "name": "MANDRAKE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MAP",
+   "name": "MICROBA LIFE SCIENCES LIMITED"
+  },
+  {
+   "ticker": "MAQ",
+   "name": "MACQUARIE TECHNOLOGY GROUP LIMITED"
+  },
+  {
+   "ticker": "MAT",
+   "name": "MATSA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MAU",
+   "name": "MAGNETIC RESOURCES NL"
+  },
+  {
+   "ticker": "MAY",
+   "name": "MELBANA ENERGY LIMITED"
+  },
+  {
+   "ticker": "MBG",
+   "name": "MB GOLD LIMITED"
+  },
+  {
+   "ticker": "MBH",
+   "name": "MAGGIE BEER HOLDINGS LTD"
+  },
+  {
+   "ticker": "MBK",
+   "name": "METAL BANK LIMITED"
+  },
+  {
+   "ticker": "MC2",
+   "name": "MARIMACA COPPER CORP."
+  },
+  {
+   "ticker": "MCA",
+   "name": "MURRAY COD AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "MCE",
+   "name": "MATRIX COMPOSITES & ENGINEERING LIMITED"
+  },
+  {
+   "ticker": "MCM",
+   "name": "MC MINING LIMITED"
+  },
+  {
+   "ticker": "MCO",
+   "name": "MYECO GROUP LTD"
+  },
+  {
+   "ticker": "MCP",
+   "name": "MCPHERSON'S LIMITED"
+  },
+  {
+   "ticker": "MCY",
+   "name": "MERCURY NZ LIMITED"
+  },
+  {
+   "ticker": "MDI",
+   "name": "MIDDLE ISLAND RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MDX",
+   "name": "MINDAX LIMITED"
+  },
+  {
+   "ticker": "MEC",
+   "name": "MORPHIC ETHICAL EQUITIES FUND LIMITED"
+  },
+  {
+   "ticker": "MEG",
+   "name": "MEGADO MINERALS LTD"
+  },
+  {
+   "ticker": "MEI",
+   "name": "METEORIC RESOURCES NL"
+  },
+  {
+   "ticker": "MEK",
+   "name": "MEEKA METALS LIMITED"
+  },
+  {
+   "ticker": "MEL",
+   "name": "METGASCO LTD"
+  },
+  {
+   "ticker": "MEM",
+   "name": "MEMPHASYS LIMITED."
+  },
+  {
+   "ticker": "MEU",
+   "name": "MARMOTA LIMITED"
+  },
+  {
+   "ticker": "MEX",
+   "name": "MINERALS EXPLORATION LIMITED"
   },
   {
    "ticker": "MEZ",
-   "name": "Meridian Energy Ltd"
+   "name": "MERIDIAN ENERGY LIMITED"
+  },
+  {
+   "ticker": "MFD",
+   "name": "MAYFIELD CHILDCARE LIMITED"
+  },
+  {
+   "ticker": "MFF",
+   "name": "MFF CAPITAL INVESTMENTS LIMITED"
   },
   {
    "ticker": "MFG",
-   "name": "Magellan Financial Group"
+   "name": "MAGELLAN FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "MGA",
+   "name": "METALSGROVE MINING LTD"
+  },
+  {
+   "ticker": "MGH",
+   "name": "MAAS GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "MGL",
+   "name": "MAGONTEC LIMITED"
   },
   {
    "ticker": "MGR",
-   "name": "Mirvac Group"
+   "name": "MIRVAC GROUP"
+  },
+  {
+   "ticker": "MGT",
+   "name": "MAGNETITE MINES LIMITED."
+  },
+  {
+   "ticker": "MGU",
+   "name": "MAGNUM MINING AND EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "MGX",
+   "name": "MGX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MHC",
+   "name": "MANHATTAN GOLD CORPORATION LIMITED"
+  },
+  {
+   "ticker": "MHJ",
+   "name": "MICHAEL HILL INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "MHK",
+   "name": "METAL HAWK LIMITED."
+  },
+  {
+   "ticker": "MHM",
+   "name": "MOUNT HOPE MINING LIMITED"
   },
   {
    "ticker": "MI6",
-   "name": "Minerals 260 Ltd"
+   "name": "MINERALS 260 LIMITED"
   },
   {
    "ticker": "MIN",
-   "name": "Mineral Resources Ltd"
+   "name": "MINERAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MIO",
+   "name": "MACARTHUR MINERALS LIMITED"
+  },
+  {
+   "ticker": "MIR",
+   "name": "MIRRABOOKA INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "MKR",
+   "name": "MANUKA RESOURCES LTD."
+  },
+  {
+   "ticker": "ML8",
+   "name": "MOONLIGHT RESOURCES LTD"
+  },
+  {
+   "ticker": "MLG",
+   "name": "MLG OZ LIMITED"
+  },
+  {
+   "ticker": "MLS",
+   "name": "METALS AUSTRALIA LTD"
   },
   {
    "ticker": "MLX",
-   "name": "Metals X Ltd"
+   "name": "METALS X LIMITED"
+  },
+  {
+   "ticker": "MM1",
+   "name": "MIDAS MINERALS LTD"
+  },
+  {
+   "ticker": "MM8",
+   "name": "MEDALLION METALS LIMITED."
+  },
+  {
+   "ticker": "MMA",
+   "name": "MARONAN METALS LIMITED"
+  },
+  {
+   "ticker": "MME",
+   "name": "MONEYME LIMITED"
+  },
+  {
+   "ticker": "MMI",
+   "name": "METRO MINING LIMITED"
+  },
+  {
+   "ticker": "MML",
+   "name": "MCLAREN MINERALS LIMITED"
+  },
+  {
+   "ticker": "MMR",
+   "name": "MEC RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED"
+  },
+  {
+   "ticker": "MNB",
+   "name": "MINBOS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MNC",
+   "name": "MERINO & CO. LIMITED"
   },
   {
    "ticker": "MND",
-   "name": "Monadelphous Group"
+   "name": "MONADELPHOUS GROUP LIMITED"
+  },
+  {
+   "ticker": "MNE",
+   "name": "MACALLUM NEW ENERGY LIMITED"
+  },
+  {
+   "ticker": "MOH",
+   "name": "MOHO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MOM",
+   "name": "MOAB MINERALS LIMITED"
+  },
+  {
+   "ticker": "MOT",
+   "name": "METRICS INCOME OPPORTUNITIES TRUST"
+  },
+  {
+   "ticker": "MOV",
+   "name": "MOVE LOGISTICS GROUP LIMITED"
   },
   {
    "ticker": "MP1",
-   "name": "Megaport Ltd"
+   "name": "MEGAPORT LIMITED"
+  },
+  {
+   "ticker": "MPK",
+   "name": "MANY PEAKS MINERALS LTD"
   },
   {
    "ticker": "MPL",
-   "name": "Medibank Private Ltd"
+   "name": "MEDIBANK PRIVATE LIMITED"
+  },
+  {
+   "ticker": "MPP",
+   "name": "METRO PERFORMANCE GLASS LIMITED"
+  },
+  {
+   "ticker": "MPR",
+   "name": "MPR AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "MPW",
+   "name": "METAL POWDER WORKS LIMITED"
+  },
+  {
+   "ticker": "MPX",
+   "name": "MUSTERA PROPERTY GROUP LIMITED"
   },
   {
    "ticker": "MQG",
-   "name": "Macquarie Group Ltd"
+   "name": "MACQUARIE GROUP LIMITED"
+  },
+  {
+   "ticker": "MQR",
+   "name": "MARQUEE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MRC",
+   "name": "MINERAL COMMODITIES LTD"
+  },
+  {
+   "ticker": "MRD",
+   "name": "MOUNT RIDLEY MINES LIMITED"
+  },
+  {
+   "ticker": "MRE",
+   "name": "METRICS REAL ESTATE MULTI-STRATEGY FUND"
+  },
+  {
+   "ticker": "MRQ",
+   "name": "MRG METALS LIMITED"
+  },
+  {
+   "ticker": "MRR",
+   "name": "MINREX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "MRT",
+   "name": "MARITANA MINERALS LIMITED"
+  },
+  {
+   "ticker": "MRZ",
+   "name": "MONT ROYAL RESOURCES LIMITED"
   },
   {
    "ticker": "MSB",
-   "name": "Mesoblast Ltd"
+   "name": "MESOBLAST LIMITED"
+  },
+  {
+   "ticker": "MSG",
+   "name": "MCS SERVICES LIMITED"
+  },
+  {
+   "ticker": "MSI",
+   "name": "MULTISTACK INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "MSV",
+   "name": "MITCHELL SERVICES LIMITED"
+  },
+  {
+   "ticker": "MTC",
+   "name": "METALSTECH LIMITED"
+  },
+  {
+   "ticker": "MTH",
+   "name": "MITHRIL SILVER AND GOLD LIMITED"
+  },
+  {
+   "ticker": "MTL",
+   "name": "MANTLE MINERALS LIMITED"
+  },
+  {
+   "ticker": "MTM",
+   "name": "METALLIUM LIMITED"
+  },
+  {
+   "ticker": "MTO",
+   "name": "MOTORCYCLE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "MTS",
+   "name": "METCASH LIMITED"
+  },
+  {
+   "ticker": "MVF",
+   "name": "MONASH IVF GROUP LIMITED"
+  },
+  {
+   "ticker": "MVL",
+   "name": "MARVEL GOLD LIMITED"
+  },
+  {
+   "ticker": "MVP",
+   "name": "MEDICAL DEVELOPMENTS INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "MX1",
+   "name": "MICRO-X LIMITED"
+  },
+  {
+   "ticker": "MXI",
+   "name": "MAXIPARTS LIMITED"
+  },
+  {
+   "ticker": "MXO",
+   "name": "MOTIO LTD"
+  },
+  {
+   "ticker": "MXT",
+   "name": "METRICS MASTER INCOME TRUST"
+  },
+  {
+   "ticker": "MYE",
+   "name": "MASTERMYNE GROUP LIMITED"
+  },
+  {
+   "ticker": "MYG",
+   "name": "MAYFIELD GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "MYR",
+   "name": "MYER HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "MYS",
+   "name": "MYSTATE LIMITED"
+  },
+  {
+   "ticker": "MYX",
+   "name": "MAYNE PHARMA GROUP LIMITED"
+  },
+  {
+   "ticker": "N1H",
+   "name": "N1 HOLDINGS LIMITED"
   },
   {
    "ticker": "NAB",
-   "name": "National Australia Bank"
+   "name": "NATIONAL AUSTRALIA BANK LIMITED"
+  },
+  {
+   "ticker": "NAC",
+   "name": "NAOS EX-50 OPPORTUNITIES COMPANY LIMITED"
+  },
+  {
+   "ticker": "NAE",
+   "name": "NEW AGE EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "NAG",
+   "name": "NAGAMBIE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "NAN",
+   "name": "NANOSONICS LIMITED"
+  },
+  {
+   "ticker": "NC1",
+   "name": "NICO RESOURCES LIMITED"
+  },
+  {
+   "ticker": "NC6",
+   "name": "NANOLLOSE LIMITED"
+  },
+  {
+   "ticker": "NCC",
+   "name": "NAOS EMERGING OPPORTUNITIES COMPANY LIMITED"
   },
   {
    "ticker": "NCK",
-   "name": "Nick Scali Ltd"
+   "name": "NICK SCALI LIMITED"
+  },
+  {
+   "ticker": "NDO",
+   "name": "NIDO EDUCATION LIMITED"
+  },
+  {
+   "ticker": "NEC",
+   "name": "NINE ENTERTAINMENT CO. HOLDINGS LIMITED"
   },
   {
    "ticker": "NEM",
-   "name": "Newmont Corp"
+   "name": "NEWMONT CORPORATION"
+  },
+  {
+   "ticker": "NES",
+   "name": "NELSON RESOURCES LIMITED."
   },
   {
    "ticker": "NEU",
-   "name": "Neuren Pharmaceuticals"
+   "name": "NEUREN PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "NFL",
+   "name": "NORFOLK METALS LIMITED"
+  },
+  {
+   "ticker": "NFM",
+   "name": "NEW FRONTIER MINERALS LIMITED"
+  },
+  {
+   "ticker": "NGE",
+   "name": "NGE CAPITAL LIMITED"
+  },
+  {
+   "ticker": "NGI",
+   "name": "NAVIGATOR GLOBAL INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "NGS",
+   "name": "NUTRITIONAL GROWTH SOLUTIONS LTD"
+  },
+  {
+   "ticker": "NGX",
+   "name": "NGX LIMITED"
+  },
+  {
+   "ticker": "NGY",
+   "name": "NUENERGY GAS LIMITED"
+  },
+  {
+   "ticker": "NH3",
+   "name": "NH3 CLEAN ENERGY LIMITED"
   },
   {
    "ticker": "NHC",
-   "name": "New Hope Corp"
+   "name": "NEW HOPE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "NHE",
+   "name": "NOBLE HELIUM LIMITED"
   },
   {
    "ticker": "NHF",
-   "name": "nib holdings Ltd"
+   "name": "NIB HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "NIC",
+   "name": "NICKEL INDUSTRIES LIMITED"
+  },
+  {
+   "ticker": "NIM",
+   "name": "NIMY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "NME",
+   "name": "NEX METALS EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "NMG",
+   "name": "NEW MURCHISON GOLD LIMITED"
+  },
+  {
+   "ticker": "NMR",
+   "name": "NATIVE MINERAL RESOURCES HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "NMT",
+   "name": "NEOMETALS LTD"
+  },
+  {
+   "ticker": "NNL",
+   "name": "NORDIC RESOURCES LTD"
+  },
+  {
+   "ticker": "NOL",
+   "name": "NOBLEOAK LIFE LIMITED"
+  },
+  {
+   "ticker": "NOR",
+   "name": "NORWOOD SYSTEMS LIMITED"
+  },
+  {
+   "ticker": "NOU",
+   "name": "NOUMI LIMITED"
+  },
+  {
+   "ticker": "NOV",
+   "name": "NOVATTI GROUP LIMITED"
+  },
+  {
+   "ticker": "NOX",
+   "name": "NOXOPHARM LIMITED"
+  },
+  {
+   "ticker": "NPM",
+   "name": "NEWPEAK METALS LIMITED"
+  },
+  {
+   "ticker": "NRX",
+   "name": "NORONEX LIMITED"
+  },
+  {
+   "ticker": "NRZ",
+   "name": "NEURIZER LTD"
+  },
+  {
+   "ticker": "NSB",
+   "name": "NEUROSCIENTIFIC BIOPHARMACEUTICALS LTD"
+  },
+  {
+   "ticker": "NSC",
+   "name": "NAOS SMALL CAP OPPORTUNITIES COMPANY LIMITED"
+  },
+  {
+   "ticker": "NSM",
+   "name": "NORTH STAWELL MINERALS LTD"
   },
   {
    "ticker": "NST",
-   "name": "Northern Star Resources"
+   "name": "NORTHERN STAR RESOURCES LTD"
+  },
+  {
+   "ticker": "NTD",
+   "name": "NTAW HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "NTI",
+   "name": "NEUROTECH INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "NTM",
+   "name": "NT MINERALS LIMITED"
+  },
+  {
+   "ticker": "NTU",
+   "name": "NORTHERN MINERALS LIMITED"
+  },
+  {
+   "ticker": "NUC",
+   "name": "NUCHEV LIMITED"
   },
   {
    "ticker": "NUF",
-   "name": "Nufarm Ltd"
+   "name": "NUFARM LIMITED"
+  },
+  {
+   "ticker": "NUZ",
+   "name": "NEURIZON THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "NVA",
+   "name": "NOVA MINERALS LIMITED"
+  },
+  {
+   "ticker": "NVO",
+   "name": "NOVO RESOURCES CORP."
+  },
+  {
+   "ticker": "NVQ",
+   "name": "NOVIQTECH LIMITED"
+  },
+  {
+   "ticker": "NVU",
+   "name": "NANOVEU LIMITED"
+  },
+  {
+   "ticker": "NVX",
+   "name": "NOVONIX LIMITED"
   },
   {
    "ticker": "NWH",
-   "name": "NRW Holdings"
+   "name": "NRW HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "NWL",
+   "name": "NETWEALTH GROUP LIMITED"
+  },
+  {
+   "ticker": "NWM",
+   "name": "NORWEST MINERALS LIMITED"
+  },
+  {
+   "ticker": "NWS",
+   "name": "NEWS CORPORATION.."
+  },
+  {
+   "ticker": "NX1",
+   "name": "NEXALIS THERAPEUTICS LTD"
+  },
+  {
+   "ticker": "NXD",
+   "name": "NEXTED GROUP LIMITED"
+  },
+  {
+   "ticker": "NXG",
+   "name": "NEXGEN ENERGY (CANADA) LTD"
+  },
+  {
+   "ticker": "NXL",
+   "name": "NUIX LIMITED"
+  },
+  {
+   "ticker": "NXM",
+   "name": "NEXUS MINERALS LIMITED"
+  },
+  {
+   "ticker": "NXN",
+   "name": "NEXSEN LIMITED"
   },
   {
    "ticker": "NXT",
-   "name": "NextDC Ltd"
+   "name": "NEXTDC LIMITED"
+  },
+  {
+   "ticker": "NYM",
+   "name": "NARRYER METALS LIMITED"
+  },
+  {
+   "ticker": "NYR",
+   "name": "NYRADA INC."
+  },
+  {
+   "ticker": "NZK",
+   "name": "NEW ZEALAND KING SALMON INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "NZM",
+   "name": "NZME LIMITED"
+  },
+  {
+   "ticker": "OAK",
+   "name": "OAKRIDGE INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "OB1",
+   "name": "ORBMINCO LIMITED"
+  },
+  {
+   "ticker": "OBL",
+   "name": "OMNI BRIDGEWAY LIMITED"
+  },
+  {
+   "ticker": "OBM",
+   "name": "ORA BANDA MINING LTD"
+  },
+  {
+   "ticker": "OCA",
+   "name": "OCEANIA HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "OCC",
+   "name": "ORTHOCELL LIMITED"
+  },
+  {
+   "ticker": "OCL",
+   "name": "OBJECTIVE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "OCN",
+   "name": "OCEANA METALS LIMITED"
+  },
+  {
+   "ticker": "OCT",
+   "name": "OCTAVA MINERALS LIMITED"
+  },
+  {
+   "ticker": "OD6",
+   "name": "OD6 METALS LIMITED"
+  },
+  {
+   "ticker": "ODA",
+   "name": "ORCODA LIMITED"
+  },
+  {
+   "ticker": "ODE",
+   "name": "ODESSA MINERALS LIMITED"
+  },
+  {
+   "ticker": "ODY",
+   "name": "ODYSSEY GOLD LTD"
+  },
+  {
+   "ticker": "OEC",
+   "name": "ORBITAL CORPORATION LIMITED"
+  },
+  {
+   "ticker": "OEL",
+   "name": "OTTO ENERGY LIMITED"
+  },
+  {
+   "ticker": "OEQ",
+   "name": "ORION EQUITIES LIMITED"
+  },
+  {
+   "ticker": "OFX",
+   "name": "OFX GROUP LIMITED"
+  },
+  {
+   "ticker": "OIL",
+   "name": "OPTISCAN IMAGING LIMITED"
+  },
+  {
+   "ticker": "OKJ",
+   "name": "OAKAJEE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "OLH",
+   "name": "OLDFIELDS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "OLI",
+   "name": "OLIVER'S REAL FOOD LIMITED"
+  },
+  {
+   "ticker": "OLL",
+   "name": "OPENLEARNING LIMITED"
+  },
+  {
+   "ticker": "OLY",
+   "name": "OLYMPIO METALS LIMITED"
+  },
+  {
+   "ticker": "OM1",
+   "name": "OMNIA METALS GROUP LTD"
+  },
+  {
+   "ticker": "OMA",
+   "name": "OMEGA OIL & GAS LIMITED"
+  },
+  {
+   "ticker": "OMG",
+   "name": "OMG GROUP LIMITED"
+  },
+  {
+   "ticker": "OMH",
+   "name": "OM HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "OML",
+   "name": "OOH!MEDIA LIMITED"
+  },
+  {
+   "ticker": "OMX",
+   "name": "ORANGE MINERALS NL"
+  },
+  {
+   "ticker": "ONE",
+   "name": "ONEVIEW HEALTHCARE PLC"
+  },
+  {
+   "ticker": "OPH",
+   "name": "OPHIR HIGH CONVICTION FUND"
+  },
+  {
+   "ticker": "OPT",
+   "name": "OPTHEA LIMITED"
+  },
+  {
+   "ticker": "OR3",
+   "name": "ORE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ORA",
+   "name": "ORORA LIMITED"
+  },
+  {
+   "ticker": "ORD",
+   "name": "ORDELL MINERALS LIMITED"
+  },
+  {
+   "ticker": "ORE",
+   "name": "OREZONE GOLD CORPORATION"
   },
   {
    "ticker": "ORG",
-   "name": "Origin Energy Ltd"
+   "name": "ORIGIN ENERGY LIMITED"
   },
   {
    "ticker": "ORI",
-   "name": "Orica Ltd"
+   "name": "ORICA LIMITED"
+  },
+  {
+   "ticker": "ORN",
+   "name": "ORION MINERALS LTD"
+  },
+  {
+   "ticker": "ORP",
+   "name": "ORPHEUS URANIUM LIMITED"
+  },
+  {
+   "ticker": "OSL",
+   "name": "ONCOSIL MEDICAL LTD"
+  },
+  {
+   "ticker": "OSM",
+   "name": "OSMOND RESOURCES LIMITED"
+  },
+  {
+   "ticker": "OSX",
+   "name": "OSTEOPORE LIMITED"
+  },
+  {
+   "ticker": "OVT",
+   "name": "OVANTI LIMITED"
+  },
+  {
+   "ticker": "OZM",
+   "name": "OZAURUM RESOURCES LIMITED"
+  },
+  {
+   "ticker": "OZZ",
+   "name": "OZZ RESOURCES LIMITED"
+  },
+  {
+   "ticker": "P1E",
+   "name": "PURE ONE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "PAB",
+   "name": "PATRYS LIMITED"
+  },
+  {
+   "ticker": "PAC",
+   "name": "PACIFIC CURRENT GROUP LIMITED"
+  },
+  {
+   "ticker": "PAR",
+   "name": "PARADIGM BIOPHARMACEUTICALS LIMITED.."
+  },
+  {
+   "ticker": "PAT",
+   "name": "PATRIOT RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PBH",
+   "name": "POINTSBET HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "PBL",
+   "name": "PARABELLUM RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PC2",
+   "name": "PC GOLD LTD"
+  },
+  {
+   "ticker": "PCG",
+   "name": "PENGANA CAPITAL GROUP LIMITED"
+  },
+  {
+   "ticker": "PCI",
+   "name": "PERPETUAL CREDIT INCOME TRUST"
+  },
+  {
+   "ticker": "PCK",
+   "name": "PAINCHEK LTD"
+  },
+  {
+   "ticker": "PCL",
+   "name": "PANCONTINENTAL ENERGY NL"
+  },
+  {
+   "ticker": "PCX",
+   "name": "PENGANA GLOBAL PRIVATE CREDIT TRUST"
+  },
+  {
+   "ticker": "PDI",
+   "name": "PREDICTIVE DISCOVERY LIMITED"
   },
   {
    "ticker": "PDN",
-   "name": "Paladin Energy Ltd"
+   "name": "PALADIN ENERGY LTD"
+  },
+  {
+   "ticker": "PE1",
+   "name": "PENGANA PRIVATE EQUITY TRUST"
+  },
+  {
+   "ticker": "PEB",
+   "name": "PACIFIC EDGE LIMITED"
+  },
+  {
+   "ticker": "PEC",
+   "name": "PERPETUAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PEN",
+   "name": "PENINSULA ENERGY LIMITED"
+  },
+  {
+   "ticker": "PER",
+   "name": "PERCHERON THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "PET",
+   "name": "PHOSLOCK ENVIRONMENTAL TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "PEX",
+   "name": "PEEL MINING LIMITED"
+  },
+  {
+   "ticker": "PFE",
+   "name": "PANTERA MINERALS LIMITED"
+  },
+  {
+   "ticker": "PFG",
+   "name": "PRIME FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "PFM",
+   "name": "PLATFORMO LTD"
+  },
+  {
+   "ticker": "PFP",
+   "name": "PROPEL FUNERAL PARTNERS LIMITED"
+  },
+  {
+   "ticker": "PFT",
+   "name": "PURE FOODS TASMANIA LIMITED"
+  },
+  {
+   "ticker": "PGC",
+   "name": "PARAGON CARE LIMITED"
+  },
+  {
+   "ticker": "PGD",
+   "name": "PEREGRINE GOLD LTD"
+  },
+  {
+   "ticker": "PGF",
+   "name": "PM CAPITAL GLOBAL OPPORTUNITIES FUND LIMITED"
+  },
+  {
+   "ticker": "PGL",
+   "name": "PILBARA GOLD LIMITED"
+  },
+  {
+   "ticker": "PGM",
+   "name": "PLATINA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PGO",
+   "name": "PACGOLD LIMITED"
+  },
+  {
+   "ticker": "PGY",
+   "name": "PILOT ENERGY LIMITED"
+  },
+  {
+   "ticker": "PHO",
+   "name": "PHOSCO LTD"
+  },
+  {
+   "ticker": "PHX",
+   "name": "PHARMX TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "PIA",
+   "name": "PENGANA INTERNATIONAL EQUITIES LIMITED"
+  },
+  {
+   "ticker": "PIC",
+   "name": "PERPETUAL EQUITY INVESTMENT COMPANY LIMITED"
+  },
+  {
+   "ticker": "PIL",
+   "name": "PEPPERMINT INNOVATION LIMITED"
+  },
+  {
+   "ticker": "PIM",
+   "name": "PINNACLE MINERALS LIMITED"
+  },
+  {
+   "ticker": "PIQ",
+   "name": "PROTEOMICS INTERNATIONAL LABORATORIES LTD"
+  },
+  {
+   "ticker": "PKD",
+   "name": "PARKD LTD"
+  },
+  {
+   "ticker": "PKO",
+   "name": "PEAKO LIMITED"
+  },
+  {
+   "ticker": "PKP",
+   "name": "PEAK PROCESSING LIMITED"
+  },
+  {
+   "ticker": "PKY",
+   "name": "PATHKEY.AI LTD"
+  },
+  {
+   "ticker": "PL3",
+   "name": "PATAGONIA LITHIUM LTD"
+  },
+  {
+   "ticker": "PL8",
+   "name": "PLATO INCOME MAXIMISER LIMITED."
+  },
+  {
+   "ticker": "PL9",
+   "name": "PRAIRIE LITHIUM LIMITED"
+  },
+  {
+   "ticker": "PLA",
+   "name": "PACIFIC LIME AND CEMENT LIMITED"
+  },
+  {
+   "ticker": "PLC",
+   "name": "PLC RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PLG",
+   "name": "PEARL GULL IRON LIMITED"
   },
   {
    "ticker": "PLS",
-   "name": "Pilbara Minerals Ltd"
+   "name": "PLS GROUP LIMITED"
+  },
+  {
+   "ticker": "PLT",
+   "name": "PLENTI GROUP LIMITED"
+  },
+  {
+   "ticker": "PLY",
+   "name": "PLAYSIDE STUDIOS LIMITED"
   },
   {
    "ticker": "PME",
-   "name": "Pro Medicus Ltd"
+   "name": "PRO MEDICUS LIMITED"
+  },
+  {
+   "ticker": "PMM",
+   "name": "PIONEER MINERALS LIMITED"
+  },
+  {
+   "ticker": "PMT",
+   "name": "PMET RESOURCES INC."
   },
   {
    "ticker": "PMV",
-   "name": "Premier Investments"
+   "name": "PREMIER INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "PNC",
+   "name": "PIONEER CREDIT LIMITED"
+  },
+  {
+   "ticker": "PNI",
+   "name": "PINNACLE INVESTMENT MANAGEMENT GROUP LIMITED"
+  },
+  {
+   "ticker": "PNM",
+   "name": "PACIFIC NICKEL MINES LIMITED"
+  },
+  {
+   "ticker": "PNN",
+   "name": "POWER MINERALS LIMITED"
+  },
+  {
+   "ticker": "PNR",
+   "name": "PANTORO GOLD LIMITED"
+  },
+  {
+   "ticker": "PNT",
+   "name": "PANTHER METALS LTD"
   },
   {
    "ticker": "PNV",
-   "name": "PolyNovo Ltd"
+   "name": "POLYNOVO LIMITED"
+  },
+  {
+   "ticker": "POD",
+   "name": "PODIUM MINERALS LIMITED"
+  },
+  {
+   "ticker": "POL",
+   "name": "POLYMETALS RESOURCES LTD"
+  },
+  {
+   "ticker": "PPC",
+   "name": "PEET LIMITED"
+  },
+  {
+   "ticker": "PPE",
+   "name": "PEOPLEIN LIMITED"
+  },
+  {
+   "ticker": "PPG",
+   "name": "PRO-PAC PACKAGING LIMITED"
+  },
+  {
+   "ticker": "PPK",
+   "name": "PPK GROUP LIMITED"
+  },
+  {
+   "ticker": "PPL",
+   "name": "PUREPROFILE LTD"
+  },
+  {
+   "ticker": "PPM",
+   "name": "PEPPER MONEY LIMITED"
+  },
+  {
+   "ticker": "PPS",
+   "name": "PRAEMIUM LIMITED"
   },
   {
    "ticker": "PPT",
-   "name": "Perpetual Ltd"
+   "name": "PERPETUAL LIMITED"
+  },
+  {
+   "ticker": "PPY",
+   "name": "PAPYRUS AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "PR1",
+   "name": "PURE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PR2",
+   "name": "PICHE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PRG",
+   "name": "PRL GLOBAL LTD"
+  },
+  {
+   "ticker": "PRM",
+   "name": "PROMINENCE ENERGY LIMITED"
+  },
+  {
+   "ticker": "PRN",
+   "name": "PERENTI LIMITED"
+  },
+  {
+   "ticker": "PRO",
+   "name": "PROPHECY INTERNATIONAL HOLDINGS LIMITED"
   },
   {
    "ticker": "PRU",
-   "name": "Perseus Mining Ltd"
+   "name": "PERSEUS MINING LIMITED"
+  },
+  {
+   "ticker": "PRX",
+   "name": "PRODIGY GOLD NL"
+  },
+  {
+   "ticker": "PSC",
+   "name": "PROSPECT RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PSL",
+   "name": "PATERSON RESOURCES LTD"
+  },
+  {
+   "ticker": "PTL",
+   "name": "PRESTAL HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "PTN",
+   "name": "PATRONUS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PTR",
+   "name": "PTR MINERALS LTD"
+  },
+  {
+   "ticker": "PTX",
+   "name": "PRESCIENT THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "PUR",
+   "name": "PURSUIT MINERALS LTD"
+  },
+  {
+   "ticker": "PV1",
+   "name": "PROVARIS ENERGY LTD"
+  },
+  {
+   "ticker": "PVE",
+   "name": "PO VALLEY ENERGY LIMITED"
+  },
+  {
+   "ticker": "PVL",
+   "name": "POWERHOUSE VENTURES LIMITED"
+  },
+  {
+   "ticker": "PVT",
+   "name": "PIVOTAL METALS LIMITED"
+  },
+  {
+   "ticker": "PWH",
+   "name": "PWR HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "PWN",
+   "name": "PARKWAY CORPORATE LIMITED"
+  },
+  {
+   "ticker": "PWR",
+   "name": "PETER WARREN AUTOMOTIVE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "PXA",
+   "name": "PEXA GROUP LIMITED"
+  },
+  {
+   "ticker": "PXR",
+   "name": "PACIFIC RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PXX",
+   "name": "POLARX LIMITED"
+  },
+  {
+   "ticker": "PYC",
+   "name": "PYC THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "QAL",
+   "name": "QUALITAS LIMITED"
   },
   {
    "ticker": "QAN",
-   "name": "Qantas Airways Ltd"
+   "name": "QANTAS AIRWAYS LIMITED"
   },
   {
    "ticker": "QBE",
-   "name": "QBE Insurance Group"
+   "name": "QBE INSURANCE GROUP LIMITED"
+  },
+  {
+   "ticker": "QEM",
+   "name": "QEM LIMITED"
+  },
+  {
+   "ticker": "QFE",
+   "name": "QUICKFEE LIMITED"
+  },
+  {
+   "ticker": "QGL",
+   "name": "QUANTUM GRAPHITE LIMITED"
+  },
+  {
+   "ticker": "QML",
+   "name": "QMINES LIMITED"
+  },
+  {
+   "ticker": "QOR",
+   "name": "QORIA LIMITED"
+  },
+  {
+   "ticker": "QPM",
+   "name": "QPM ENERGY LIMITED"
+  },
+  {
+   "ticker": "QRI",
+   "name": "QUALITAS REAL ESTATE INCOME FUND"
+  },
+  {
+   "ticker": "QUB",
+   "name": "QUBE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "QUE",
+   "name": "QUESTE COMMUNICATIONS LIMITED"
+  },
+  {
+   "ticker": "QXR",
+   "name": "QX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "R8R",
+   "name": "REGENER8 RESOURCES NL"
+  },
+  {
+   "ticker": "RAC",
+   "name": "RACURA ONCOLOGY LTD"
+  },
+  {
+   "ticker": "RAD",
+   "name": "RADIOPHARM THERANOSTICS LIMITED"
+  },
+  {
+   "ticker": "RAG",
+   "name": "RAGNAR METALS LIMITED"
+  },
+  {
+   "ticker": "RAP",
+   "name": "RAPTOR METALS LTD"
+  },
+  {
+   "ticker": "RAS",
+   "name": "RAGUSA MINERALS LTD"
+  },
+  {
+   "ticker": "RAU",
+   "name": "RESOURO STRATEGIC METALS INC."
+  },
+  {
+   "ticker": "RB6",
+   "name": "RUBIX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RBR",
+   "name": "RBR GROUP LIMITED"
+  },
+  {
+   "ticker": "RBX",
+   "name": "RESOURCE BASE LIMITED."
+  },
+  {
+   "ticker": "RC1",
+   "name": "REDCASTLE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RCE",
+   "name": "RECCE PHARMACEUTICALS LTD"
+  },
+  {
+   "ticker": "RCL",
+   "name": "READCLOUD LIMITED"
+  },
+  {
+   "ticker": "RCM",
+   "name": "RAPID CRITICAL METALS LIMITED"
+  },
+  {
+   "ticker": "RCR",
+   "name": "RINCON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RCT",
+   "name": "REEF CASINO TRUST"
+  },
+  {
+   "ticker": "RDM",
+   "name": "RED METAL LIMITED"
+  },
+  {
+   "ticker": "RDN",
+   "name": "RAIDEN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RDS",
+   "name": "REDSTONE RESOURCES LIMITED"
   },
   {
    "ticker": "RDX",
-   "name": "Redox Ltd"
+   "name": "REDOX LIMITED"
+  },
+  {
+   "ticker": "RDY",
+   "name": "READYTECH HOLDINGS LIMITED"
   },
   {
    "ticker": "REA",
-   "name": "REA Group Ltd"
+   "name": "REA GROUP LTD"
+  },
+  {
+   "ticker": "REC",
+   "name": "RECHARGE METALS LIMITED"
+  },
+  {
+   "ticker": "REE",
+   "name": "RAREX LIMITED"
+  },
+  {
+   "ticker": "REG",
+   "name": "REGIS HEALTHCARE LIMITED"
   },
   {
    "ticker": "REH",
-   "name": "Reece Ltd"
+   "name": "REECE LIMITED"
+  },
+  {
+   "ticker": "REM",
+   "name": "REMSENSE TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "REP",
+   "name": "RAM ESSENTIAL SERVICES PROPERTY FUND"
+  },
+  {
+   "ticker": "REV",
+   "name": "REVOLUTION PRIVATE CREDIT INCOME TRUST"
+  },
+  {
+   "ticker": "REZ",
+   "name": "RESOURCES & ENERGY GROUP LIMITED"
+  },
+  {
+   "ticker": "RF1",
+   "name": "REGAL INVESTMENT FUND"
+  },
+  {
+   "ticker": "RFF",
+   "name": "RURAL FUNDS GROUP"
+  },
+  {
+   "ticker": "RFG",
+   "name": "RETAIL FOOD GROUP LIMITED"
+  },
+  {
+   "ticker": "RFT",
+   "name": "RECTIFIER TECHNOLOGIES LTD"
+  },
+  {
+   "ticker": "RG1",
+   "name": "REGAL PARTNERS GLOBAL INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "RG8",
+   "name": "REGAL ASIAN INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "RGL",
+   "name": "RIVERSGOLD LIMITED"
+  },
+  {
+   "ticker": "RGN",
+   "name": "REGION GROUP"
+  },
+  {
+   "ticker": "RGT",
+   "name": "ARGENT BIOPHARMA LIMITED"
   },
   {
    "ticker": "RHC",
-   "name": "Ramsay Health Care"
+   "name": "RAMSAY HEALTH CARE LIMITED"
+  },
+  {
+   "ticker": "RHI",
+   "name": "RED HILL MINERALS LIMITED"
+  },
+  {
+   "ticker": "RHT",
+   "name": "RESONANCE HEALTH LIMITED"
+  },
+  {
+   "ticker": "RHY",
+   "name": "RHYTHM BIOSCIENCES LIMITED"
+  },
+  {
+   "ticker": "RIC",
+   "name": "RIDLEY CORPORATION LIMITED"
+  },
+  {
+   "ticker": "RIE",
+   "name": "RIEDEL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RIL",
+   "name": "REDIVIUM LIMITED"
+  },
+  {
+   "ticker": "RIM",
+   "name": "RIMFIRE PACIFIC MINING LIMITED"
   },
   {
    "ticker": "RIO",
-   "name": "Rio Tinto Ltd"
+   "name": "RIO TINTO LIMITED"
+  },
+  {
+   "ticker": "RIV",
+   "name": "RIVCO AUSTRALIA LTD"
+  },
+  {
+   "ticker": "RKB",
+   "name": "ROKEBY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RKN",
+   "name": "RECKON LIMITED"
+  },
+  {
+   "ticker": "RKT",
+   "name": "ROCKETDNA LTD."
+  },
+  {
+   "ticker": "RLC",
+   "name": "REEDY LAGOON CORPORATION LIMITED"
+  },
+  {
+   "ticker": "RLF",
+   "name": "RLF AGTECH LTD"
+  },
+  {
+   "ticker": "RLG",
+   "name": "ROOLIFE GROUP LTD"
+  },
+  {
+   "ticker": "RMC",
+   "name": "RESIMAC GROUP LTD"
   },
   {
    "ticker": "RMD",
-   "name": "ResMed Inc"
+   "name": "RESMED INC"
+  },
+  {
+   "ticker": "RMI",
+   "name": "RESOURCE MINERALS INTERNATIONAL LTD"
+  },
+  {
+   "ticker": "RML",
+   "name": "RESOLUTION MINERALS LTD"
   },
   {
    "ticker": "RMS",
-   "name": "Ramelius Resources"
+   "name": "RAMELIUS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RMX",
+   "name": "RED MOUNTAIN MINING LIMITED"
+  },
+  {
+   "ticker": "RMY",
+   "name": "RMA GLOBAL LIMITED"
+  },
+  {
+   "ticker": "RND",
+   "name": "RAND MINING LIMITED"
+  },
+  {
+   "ticker": "RNT",
+   "name": "RENT.COM.AU LIMITED"
+  },
+  {
+   "ticker": "RNU",
+   "name": "RENASCOR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RNV",
+   "name": "RENERVE LIMITED"
+  },
+  {
+   "ticker": "RNX",
+   "name": "RENEGADE EXPLORATION LIMITED"
+  },
+  {
+   "ticker": "ROC",
+   "name": "ROCKETBOOTS LIMITED"
+  },
+  {
+   "ticker": "ROG",
+   "name": "RED SKY ENERGY LIMITED."
+  },
+  {
+   "ticker": "RON",
+   "name": "RONIN RESOURCES LTD"
+  },
+  {
+   "ticker": "RPL",
+   "name": "REGAL PARTNERS LIMITED"
+  },
+  {
+   "ticker": "RPM",
+   "name": "RPM AUTOMOTIVE GROUP LIMITED"
+  },
+  {
+   "ticker": "RR1",
+   "name": "REACH RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RRE",
+   "name": "RIGHT RESOURCES LIMITED"
   },
   {
    "ticker": "RRL",
-   "name": "Regis Resources Ltd"
+   "name": "REGIS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RRR",
+   "name": "REVOLVER RESOURCES HOLDINGS LTD"
   },
   {
    "ticker": "RSG",
-   "name": "Resolute Mining Ltd"
+   "name": "RESOLUTE MINING LIMITED"
+  },
+  {
+   "ticker": "RTG",
+   "name": "RTG MINING INC."
+  },
+  {
+   "ticker": "RTH",
+   "name": "RAS TECHNOLOGY HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "RTR",
+   "name": "RUMBLE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RVT",
+   "name": "RICHMOND VANADIUM TECHNOLOGY LIMITED"
   },
   {
    "ticker": "RWC",
-   "name": "Reliance Worldwide"
+   "name": "RELIANCE WORLDWIDE CORPORATION LIMITED"
+  },
+  {
+   "ticker": "RWD",
+   "name": "REWARD MINERALS LTD"
+  },
+  {
+   "ticker": "RWL",
+   "name": "RUBICON WATER LIMITED"
+  },
+  {
+   "ticker": "RXL",
+   "name": "ROX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "RYD",
+   "name": "RYDER CAPITAL LIMITED"
+  },
+  {
+   "ticker": "RYM",
+   "name": "RYMAN HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "RZI",
+   "name": "RAIZ INVEST LIMITED"
+  },
+  {
+   "ticker": "S2R",
+   "name": "S2 RESOURCES LTD"
   },
   {
    "ticker": "S32",
-   "name": "South32 Ltd"
+   "name": "SOUTH32 LIMITED"
+  },
+  {
+   "ticker": "S66",
+   "name": "STAR COMBO PHARMA LIMITED"
+  },
+  {
+   "ticker": "SAN",
+   "name": "SAGALIO ENERGY LIMITED"
+  },
+  {
+   "ticker": "SB2",
+   "name": "SALTER BROTHERS EMERGING COMPANIES LIMITED"
+  },
+  {
+   "ticker": "SBM",
+   "name": "ST BARBARA LIMITED"
+  },
+  {
+   "ticker": "SBR",
+   "name": "SABRE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SBZ",
+   "name": "SCHOOLBLAZER LIMITED"
   },
   {
    "ticker": "SCG",
-   "name": "Scentre Group"
+   "name": "SCENTRE GROUP"
+  },
+  {
+   "ticker": "SCN",
+   "name": "SCORPION MINERALS LIMITED"
+  },
+  {
+   "ticker": "SCP",
+   "name": "SCALARE PARTNERS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SDF",
+   "name": "STEADFAST GROUP LIMITED"
+  },
+  {
+   "ticker": "SDI",
+   "name": "SDI LIMITED"
+  },
+  {
+   "ticker": "SDR",
+   "name": "SITEMINDER LIMITED"
+  },
+  {
+   "ticker": "SDV",
+   "name": "SCIDEV LTD"
+  },
+  {
+   "ticker": "SEA",
+   "name": "SEA FOREST LIMITED"
+  },
+  {
+   "ticker": "SEC",
+   "name": "SPHERIA EMERGING COMPANIES LIMITED"
+  },
+  {
+   "ticker": "SEG",
+   "name": "SPORTS ENTERTAINMENT GROUP LIMITED"
   },
   {
    "ticker": "SEK",
-   "name": "Seek Ltd"
+   "name": "SEEK LIMITED"
+  },
+  {
+   "ticker": "SEN",
+   "name": "SENETAS CORPORATION LIMITED"
+  },
+  {
+   "ticker": "SEQ",
+   "name": "SEQUOIA FINANCIAL GROUP LTD"
+  },
+  {
+   "ticker": "SER",
+   "name": "STRATEGIC ENERGY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED"
+  },
+  {
+   "ticker": "SFC",
+   "name": "SCHAFFER CORPORATION LIMITED"
+  },
+  {
+   "ticker": "SFG",
+   "name": "SEAFARMS GROUP LIMITED"
+  },
+  {
+   "ticker": "SFM",
+   "name": "SANTA FE MINERALS LTD"
   },
   {
    "ticker": "SFR",
-   "name": "Sandfire Resources"
+   "name": "SANDFIRE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SFX",
+   "name": "SHEFFIELD RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SGA",
+   "name": "SARYTOGAN GRAPHITE LIMITED"
+  },
+  {
+   "ticker": "SGH",
+   "name": "SGH LIMITED"
+  },
+  {
+   "ticker": "SGI",
+   "name": "STEALTH GROUP HOLDINGS LTD"
   },
   {
    "ticker": "SGM",
-   "name": "Sims Ltd"
+   "name": "SIMS LIMITED"
   },
   {
    "ticker": "SGP",
-   "name": "Stockland"
+   "name": "STOCKLAND"
+  },
+  {
+   "ticker": "SGQ",
+   "name": "ST GEORGE MINING LIMITED"
   },
   {
    "ticker": "SGR",
-   "name": "The Star Entertainment"
+   "name": "THE STAR ENTERTAINMENT GROUP LIMITED"
+  },
+  {
+   "ticker": "SHA",
+   "name": "SHAPE AUSTRALIA CORPORATION LIMITED"
+  },
+  {
+   "ticker": "SHE",
+   "name": "STONEHORSE ENERGY LIMITED"
+  },
+  {
+   "ticker": "SHG",
+   "name": "SINGULAR HEALTH GROUP LTD"
+  },
+  {
+   "ticker": "SHJ",
+   "name": "SHINE JUSTICE LTD"
   },
   {
    "ticker": "SHL",
-   "name": "Sonic Healthcare Ltd"
+   "name": "SONIC HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "SHM",
+   "name": "SHRIRO HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SHN",
+   "name": "SUNSHINE METALS LIMITED"
+  },
+  {
+   "ticker": "SHO",
+   "name": "SPORTSHERO LIMITED"
+  },
+  {
+   "ticker": "SHV",
+   "name": "SELECT HARVESTS LIMITED"
+  },
+  {
+   "ticker": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED"
+  },
+  {
+   "ticker": "SIO",
+   "name": "SIMONDS GROUP LIMITED"
   },
   {
    "ticker": "SIQ",
-   "name": "Smartgroup Corporation"
+   "name": "SMARTGROUP CORPORATION LTD"
+  },
+  {
+   "ticker": "SIS",
+   "name": "SIMBLE SOLUTIONS LIMITED"
+  },
+  {
+   "ticker": "SIV",
+   "name": "SIV CAPITAL LIMITED"
+  },
+  {
+   "ticker": "SIX",
+   "name": "SPRINTEX LIMITED"
+  },
+  {
+   "ticker": "SK1",
+   "name": "SKINKANDY LIMITED"
+  },
+  {
+   "ticker": "SKC",
+   "name": "SKYCITY ENTERTAINMENT GROUP LIMITED"
+  },
+  {
+   "ticker": "SKK",
+   "name": "STAKK LIMITED"
+  },
+  {
+   "ticker": "SKM",
+   "name": "SKYLARK MINERALS LIMITED"
+  },
+  {
+   "ticker": "SKN",
+   "name": "SKIN ELEMENTS LIMITED"
+  },
+  {
+   "ticker": "SKO",
+   "name": "SERKO LIMITED"
+  },
+  {
+   "ticker": "SKS",
+   "name": "SKS TECHNOLOGIES GROUP LIMITED"
+  },
+  {
+   "ticker": "SKT",
+   "name": "SKY NETWORK TELEVISION LIMITED."
+  },
+  {
+   "ticker": "SKY",
+   "name": "SKY METALS LIMITED"
+  },
+  {
+   "ticker": "SLA",
+   "name": "SOLARA MINERALS LTD"
+  },
+  {
+   "ticker": "SLB",
+   "name": "STELAR METALS LIMITED"
   },
   {
    "ticker": "SLC",
-   "name": "Superloop Ltd"
+   "name": "SUPERLOOP LIMITED"
+  },
+  {
+   "ticker": "SLD",
+   "name": "SALUDA MEDICAL, INC."
+  },
+  {
+   "ticker": "SLM",
+   "name": "SOLIS MINERALS LIMITED"
   },
   {
    "ticker": "SLR",
    "name": "Silver Lake Resources"
   },
   {
+   "ticker": "SLS",
+   "name": "SOLSTICE MINERALS LIMITED"
+  },
+  {
+   "ticker": "SLX",
+   "name": "SILEX SYSTEMS LIMITED"
+  },
+  {
+   "ticker": "SLZ",
+   "name": "SULTAN RESOURCES LTD"
+  },
+  {
+   "ticker": "SM1",
+   "name": "SYNLAIT MILK LIMITED"
+  },
+  {
+   "ticker": "SMI",
+   "name": "SANTANA MINERALS LIMITED"
+  },
+  {
+   "ticker": "SMM",
+   "name": "SOMERSET MINERALS LIMITED"
+  },
+  {
+   "ticker": "SMN",
+   "name": "STRUCTURAL MONITORING SYSTEMS PLC"
+  },
+  {
+   "ticker": "SMR",
+   "name": "STANMORE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SMS",
+   "name": "STAR MINERALS LIMITED"
+  },
+  {
+   "ticker": "SMX",
+   "name": "STRATA MINERALS LIMITED."
+  },
+  {
+   "ticker": "SNC",
+   "name": "SANDON CAPITAL INVESTMENTS LIMITED"
+  },
+  {
+   "ticker": "SND",
+   "name": "SAUNDERS INTERNATIONAL LIMITED"
+  },
+  {
+   "ticker": "SNG",
+   "name": "SIREN GOLD LIMITED"
+  },
+  {
+   "ticker": "SNL",
+   "name": "SUPPLY NETWORK LIMITED"
+  },
+  {
+   "ticker": "SNM",
+   "name": "SENTINEL METALS LIMITED"
+  },
+  {
+   "ticker": "SNS",
+   "name": "SENSEN NETWORKS LIMITED"
+  },
+  {
+   "ticker": "SNT",
+   "name": "SYNTARA LIMITED"
+  },
+  {
+   "ticker": "SNX",
+   "name": "SIERRA NEVADA GOLD INC."
+  },
+  {
+   "ticker": "SNZ",
+   "name": "SUMMERSET GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SOC",
+   "name": "SOCO CORPORATION LTD"
+  },
+  {
+   "ticker": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED"
+  },
+  {
+   "ticker": "SOM",
+   "name": "SOMNOMED LIMITED"
+  },
+  {
+   "ticker": "SOP",
+   "name": "SYNERTEC CORPORATION LIMITED"
+  },
+  {
+   "ticker": "SOR",
+   "name": "STRATEGIC ELEMENTS LIMITED"
+  },
+  {
+   "ticker": "SP3",
+   "name": "SPECTUR LIMITED"
+  },
+  {
+   "ticker": "SP8",
+   "name": "STREAMPLAY STUDIO LIMITED"
+  },
+  {
+   "ticker": "SPA",
+   "name": "SPACETALK LTD"
+  },
+  {
+   "ticker": "SPD",
+   "name": "SOUTHERN PALLADIUM LIMITED"
+  },
+  {
+   "ticker": "SPG",
+   "name": "SPC GLOBAL HOLDINGS LTD"
+  },
+  {
+   "ticker": "SPGN",
+   "name": "SPC GLOBAL HOLDINGS LTD"
+  },
+  {
    "ticker": "SPK",
-   "name": "Spark New Zealand"
+   "name": "SPARK NEW ZEALAND LIMITED"
   },
   {
    "ticker": "SPL",
-   "name": "Starpharma Holdings Ltd"
+   "name": "STARPHARMA HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SPN",
+   "name": "SPARC TECHNOLOGIES LIMITED"
+  },
+  {
+   "ticker": "SPQ",
+   "name": "SUPERIOR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SPX",
+   "name": "SPENDA LIMITED"
+  },
+  {
+   "ticker": "SPZ",
+   "name": "SMART PARKING LIMITED"
+  },
+  {
+   "ticker": "SQX",
+   "name": "SQX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SRG",
+   "name": "SRG GLOBAL LIMITED"
+  },
+  {
+   "ticker": "SRH",
+   "name": "SAFEROADS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SRJ",
+   "name": "SRJ TECHNOLOGIES GROUP PLC"
+  },
+  {
+   "ticker": "SRK",
+   "name": "STRIKE RESOURCES LIMITED"
   },
   {
    "ticker": "SRL",
-   "name": "Sunrise Energy Metals"
+   "name": "SUNRISE ENERGY METALS LIMITED"
+  },
+  {
+   "ticker": "SRN",
+   "name": "SUREFIRE RESOURCES NL"
+  },
+  {
+   "ticker": "SRR",
+   "name": "SARAMA RESOURCES LTD"
+  },
+  {
+   "ticker": "SRT",
+   "name": "STRATA INVESTMENT HOLDINGS PLC"
+  },
+  {
+   "ticker": "SRV",
+   "name": "SERVCORP LIMITED"
+  },
+  {
+   "ticker": "SRZ",
+   "name": "STELLAR RESOURCES LIMITED"
+  },
+  {
+   "ticker": "SS1",
+   "name": "SUN SILVER LIMITED"
+  },
+  {
+   "ticker": "SSG",
+   "name": "SHAVER SHOP GROUP LIMITED"
+  },
+  {
+   "ticker": "SSH",
+   "name": "SSH GROUP LTD"
+  },
+  {
+   "ticker": "SSL",
+   "name": "SIETEL LIMITED"
+  },
+  {
+   "ticker": "SSM",
+   "name": "SERVICE STREAM LIMITED"
+  },
+  {
+   "ticker": "SST",
+   "name": "STEAMSHIPS TRADING COMPANY LIMITED"
+  },
+  {
+   "ticker": "STG",
+   "name": "STRAKER LIMITED"
+  },
+  {
+   "ticker": "STH",
+   "name": "STEPCHANGE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "STK",
+   "name": "STRICKLAND METALS LIMITED"
+  },
+  {
+   "ticker": "STM",
+   "name": "SUNSTONE METALS LTD"
+  },
+  {
+   "ticker": "STN",
+   "name": "SATURN METALS LIMITED"
   },
   {
    "ticker": "STO",
-   "name": "Santos Ltd"
+   "name": "SANTOS LIMITED"
+  },
+  {
+   "ticker": "STP",
+   "name": "STEP ONE CLOTHING LIMITED"
+  },
+  {
+   "ticker": "STV",
+   "name": "SWIFT TV LTD"
   },
   {
    "ticker": "STX",
-   "name": "Strike Energy Ltd"
+   "name": "STRIKE ENERGY LIMITED"
+  },
+  {
+   "ticker": "SUH",
+   "name": "SOUTHERN HEMISPHERE MINING LIMITED"
   },
   {
    "ticker": "SUL",
-   "name": "Super Retail Group"
+   "name": "SUPER RETAIL GROUP LIMITED"
   },
   {
    "ticker": "SUN",
-   "name": "Suncorp Group Ltd"
+   "name": "SUNCORP GROUP LIMITED"
+  },
+  {
+   "ticker": "SVG",
+   "name": "SAVANNAH GOLDFIELDS LIMITED"
+  },
+  {
+   "ticker": "SVL",
+   "name": "SILVER MINES LIMITED"
+  },
+  {
+   "ticker": "SVM",
+   "name": "SOVEREIGN METALS LIMITED"
+  },
+  {
+   "ticker": "SVR",
+   "name": "SOLVAR LIMITED"
   },
   {
    "ticker": "SVW",
    "name": "Seven Group Holdings"
   },
   {
+   "ticker": "SVY",
+   "name": "STAVELY MINERALS LIMITED"
+  },
+  {
+   "ticker": "SWP",
+   "name": "SWOOP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "SX2",
+   "name": "SOUTHERN CROSS GOLD CONSOLIDATED LTD."
+  },
+  {
    "ticker": "SXE",
-   "name": "Southern Cross Electrical"
+   "name": "SOUTHERN CROSS ELECTRICAL ENGINEERING LTD"
+  },
+  {
+   "ticker": "SXL",
+   "name": "SOUTHERN CROSS MEDIA GROUP LIMITED"
   },
   {
    "ticker": "SYD",
    "name": "Sydney Airport"
   },
   {
+   "ticker": "SYL",
+   "name": "SYMAL GROUP LIMITED"
+  },
+  {
+   "ticker": "SYR",
+   "name": "SYRAH RESOURCES LIMITED"
+  },
+  {
+   "ticker": "T3D",
+   "name": "333D LIMITED"
+  },
+  {
+   "ticker": "T88",
+   "name": "TAITON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "T92",
+   "name": "TERRA CRITICAL MINERALS LIMITED"
+  },
+  {
    "ticker": "TAH",
-   "name": "Tabcorp Holdings Ltd"
+   "name": "TABCORP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "TAL",
+   "name": "TALIUS GROUP LIMITED"
+  },
+  {
+   "ticker": "TAM",
+   "name": "TANAMI GOLD NL"
+  },
+  {
+   "ticker": "TAR",
+   "name": "TARUGA MINERALS LIMITED"
+  },
+  {
+   "ticker": "TAS",
+   "name": "TASMAN RESOURCES LTD"
+  },
+  {
+   "ticker": "TAT",
+   "name": "TARTANA MINERALS LIMITED"
+  },
+  {
+   "ticker": "TBN",
+   "name": "TAMBORAN RESOURCES CORPORATION"
+  },
+  {
+   "ticker": "TBR",
+   "name": "TRIBUNE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TCF",
+   "name": "360 CAPITAL MORTGAGE REIT"
+  },
+  {
+   "ticker": "TCG",
+   "name": "TURACO GOLD LIMITED"
   },
   {
    "ticker": "TCL",
-   "name": "Transurban Group"
+   "name": "TRANSURBAN GROUP"
+  },
+  {
+   "ticker": "TCO",
+   "name": "TRANSMETRO CORPORATION LIMITED"
+  },
+  {
+   "ticker": "TD1",
+   "name": "TALI DIGITAL LIMITED"
+  },
+  {
+   "ticker": "TDO",
+   "name": "3D ENERGI LIMITED"
+  },
+  {
+   "ticker": "TEA",
+   "name": "TASMEA LIMITED"
+  },
+  {
+   "ticker": "TEE",
+   "name": "TOP END ENERGY LIMITED"
+  },
+  {
+   "ticker": "TEG",
+   "name": "TRIANGLE ENERGY (GLOBAL) LIMITED"
+  },
+  {
+   "ticker": "TEK",
+   "name": "THORNEY TECHNOLOGIES LTD"
+  },
+  {
+   "ticker": "TEM",
+   "name": "TEMPEST MINERALS LIMITED"
+  },
+  {
+   "ticker": "TER",
+   "name": "TERRACOM LIMITED"
+  },
+  {
+   "ticker": "TFL",
+   "name": "TASFOODS LIMITED"
+  },
+  {
+   "ticker": "TG1",
+   "name": "TECHGEN METALS LTD"
+  },
+  {
+   "ticker": "TG6",
+   "name": "TG METALS LIMITED"
+  },
+  {
+   "ticker": "TGF",
+   "name": "TRIBECA GLOBAL NATURAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TGH",
+   "name": "TERRAGEN HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "TGM",
+   "name": "THETA GOLD MINES LIMITED"
+  },
+  {
+   "ticker": "TGN",
+   "name": "TUNGSTEN MINING NL"
+  },
+  {
+   "ticker": "THL",
+   "name": "TOURISM HOLDINGS RENTALS LIMITED"
+  },
+  {
+   "ticker": "THR",
+   "name": "THOR ENERGY PLC"
+  },
+  {
+   "ticker": "TIA",
+   "name": "TIAN AN AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "TIO",
+   "name": "TEMAS RESOURCES CORP."
+  },
+  {
+   "ticker": "TIP",
+   "name": "TEAMINVEST PRIVATE GROUP LIMITED"
+  },
+  {
+   "ticker": "TKM",
+   "name": "TREK METALS LIMITED"
   },
   {
    "ticker": "TLC",
-   "name": "Lottery Corp Ltd"
+   "name": "THE LOTTERY CORPORATION LIMITED"
+  },
+  {
+   "ticker": "TLG",
+   "name": "TALGA GROUP LTD"
+  },
+  {
+   "ticker": "TLM",
+   "name": "TALISMAN MINING LIMITED"
   },
   {
    "ticker": "TLS",
-   "name": "Telstra Group Ltd"
+   "name": "TELSTRA GROUP LIMITED"
   },
   {
    "ticker": "TLX",
-   "name": "Telix Pharmaceuticals"
+   "name": "TELIX PHARMACEUTICALS LIMITED"
+  },
+  {
+   "ticker": "TM1",
+   "name": "TERRA METALS LIMITED"
+  },
+  {
+   "ticker": "TMB",
+   "name": "TAMBOURAH METALS LTD"
+  },
+  {
+   "ticker": "TMK",
+   "name": "TMK ENERGY LIMITED"
+  },
+  {
+   "ticker": "TML",
+   "name": "TIMAH RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TMS",
+   "name": "TENNANT MINERALS LIMITED"
+  },
+  {
+   "ticker": "TMX",
+   "name": "TERRAIN MINERALS LIMITED"
+  },
+  {
+   "ticker": "TNC",
+   "name": "TRUE NORTH COPPER LIMITED"
   },
   {
    "ticker": "TNE",
-   "name": "TechnologyOne Ltd"
+   "name": "TECHNOLOGY ONE LIMITED"
+  },
+  {
+   "ticker": "TNY",
+   "name": "TINYBEANS GROUP LTD"
+  },
+  {
+   "ticker": "TOE",
+   "name": "TORO ENERGY LIMITED"
+  },
+  {
+   "ticker": "TOK",
+   "name": "TOLU MINERALS LIMITED."
+  },
+  {
+   "ticker": "TON",
+   "name": "TRITON MINERALS LTD"
+  },
+  {
+   "ticker": "TOP",
+   "name": "THORNEY OPPORTUNITIES LTD"
+  },
+  {
+   "ticker": "TOR",
+   "name": "TORQUE METALS LIMITED.."
+  },
+  {
+   "ticker": "TOT",
+   "name": "360 CAPITAL REIT"
+  },
+  {
+   "ticker": "TOU",
+   "name": "TLOU ENERGY LIMITED"
+  },
+  {
+   "ticker": "TPC",
+   "name": "TPC CONSOLIDATED LIMITED"
   },
   {
    "ticker": "TPG",
-   "name": "TPG Telecom Ltd"
+   "name": "TPG TELECOM LIMITED."
+  },
+  {
+   "ticker": "TPW",
+   "name": "TEMPLE & WEBSTER GROUP LTD"
+  },
+  {
+   "ticker": "TR2",
+   "name": "TALI RESOURCES LTD"
+  },
+  {
+   "ticker": "TR8",
+   "name": "TARRINA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TRA",
+   "name": "TURNERS AUTOMOTIVE GROUP LIMITED"
+  },
+  {
+   "ticker": "TRE",
+   "name": "TOUBANI RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TRI",
+   "name": "TRIVARX LTD"
+  },
+  {
+   "ticker": "TRJ",
+   "name": "TRAJAN GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "TRM",
+   "name": "TRUSCOTT MINING CORPORATION LIMITED"
+  },
+  {
+   "ticker": "TRP",
+   "name": "TISSUE REPAIR LTD"
+  },
+  {
+   "ticker": "TRU",
+   "name": "TRUSCREEN GROUP LIMITED"
+  },
+  {
+   "ticker": "TSK",
+   "name": "TUSKER MINERALS LTD"
+  },
+  {
+   "ticker": "TSL",
+   "name": "TITANIUM SANDS LIMITED"
+  },
+  {
+   "ticker": "TSO",
+   "name": "TESORO GOLD LTD"
+  },
+  {
+   "ticker": "TSR",
+   "name": "TURNSTONE RESOURCES LTD"
+  },
+  {
+   "ticker": "TTM",
+   "name": "TITAN MINERALS LIMITED"
+  },
+  {
+   "ticker": "TTT",
+   "name": "TITOMIC LIMITED"
+  },
+  {
+   "ticker": "TTX",
+   "name": "TETRATHERIX LIMITED"
+  },
+  {
+   "ticker": "TUA",
+   "name": "TUAS LIMITED"
+  },
+  {
+   "ticker": "TVL",
+   "name": "TOUCH VENTURES LIMITED"
+  },
+  {
+   "ticker": "TVN",
+   "name": "TIVAN LIMITED"
+  },
+  {
+   "ticker": "TWD",
+   "name": "TAMAWOOD LIMITED"
   },
   {
    "ticker": "TWE",
-   "name": "Treasury Wine Estates"
+   "name": "TREASURY WINE ESTATES LIMITED"
+  },
+  {
+   "ticker": "TWL",
+   "name": "TRADE WINDOW HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "TWR",
+   "name": "TOWER LIMITED"
+  },
+  {
+   "ticker": "TXR",
+   "name": "TALONX RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TYR",
+   "name": "TYRO PAYMENTS LIMITED"
+  },
+  {
+   "ticker": "TYX",
+   "name": "TYRANNA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "TZL",
+   "name": "TZ LIMITED"
+  },
+  {
+   "ticker": "TZN",
+   "name": "TERRAMIN AUSTRALIA LIMITED."
+  },
+  {
+   "ticker": "UBI",
+   "name": "UNIVERSAL BIOSENSORS INC."
+  },
+  {
+   "ticker": "UBN",
+   "name": "URBANISE.COM LIMITED"
+  },
+  {
+   "ticker": "UCM",
+   "name": "USCOM LIMITED"
+  },
+  {
+   "ticker": "UM1",
+   "name": "UNITY METALS LIMITED"
+  },
+  {
+   "ticker": "UNI",
+   "name": "UNIVERSAL STORE HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "UNT",
+   "name": "UNITH LTD"
+  },
+  {
+   "ticker": "UOS",
+   "name": "UNITED OVERSEAS AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "URF",
+   "name": "US MASTERS RESIDENTIAL PROPERTY FUND"
+  },
+  {
+   "ticker": "USC",
+   "name": "US1 CRITICAL MINERALS LIMITED"
+  },
+  {
+   "ticker": "USL",
+   "name": "UNICO SILVER LIMITED"
+  },
+  {
+   "ticker": "USM",
+   "name": "UNION STAR METALS LTD"
+  },
+  {
+   "ticker": "UWC",
+   "name": "UNDERWOOD CAPITAL LIMITED"
+  },
+  {
+   "ticker": "VAL",
+   "name": "VALIANT GOLD LIMITED"
+  },
+  {
+   "ticker": "VAR",
+   "name": "VARISCAN MINES LIMITED"
+  },
+  {
+   "ticker": "VAU",
+   "name": "VAULT MINERALS LIMITED"
+  },
+  {
+   "ticker": "VBC",
+   "name": "VERBREC LIMITED"
+  },
+  {
+   "ticker": "VBS",
+   "name": "VECTUS BIOSYSTEMS LIMITED"
+  },
+  {
+   "ticker": "VBX",
+   "name": "VBX LIMITED"
   },
   {
    "ticker": "VCX",
-   "name": "Vicinity Centres"
+   "name": "VICINITY CENTRES"
   },
   {
    "ticker": "VEA",
-   "name": "Viva Energy Group"
+   "name": "VIVA ENERGY GROUP LIMITED"
+  },
+  {
+   "ticker": "VEE",
+   "name": "VEEM LTD"
+  },
+  {
+   "ticker": "VEN",
+   "name": "VINTAGE ENERGY LTD"
+  },
+  {
+   "ticker": "VFX",
+   "name": "VISIONFLEX GROUP LIMITED"
+  },
+  {
+   "ticker": "VFY",
+   "name": "VITRAFY LIFE SCIENCES LIMITED"
+  },
+  {
+   "ticker": "VGL",
+   "name": "VISTA GROUP INTERNATIONAL LIMITED."
+  },
+  {
+   "ticker": "VGN",
+   "name": "VIRGIN AUSTRALIA HOLDINGS LIMITED."
+  },
+  {
+   "ticker": "VHL",
+   "name": "VITASORA HEALTH LIMITED"
+  },
+  {
+   "ticker": "VHM",
+   "name": "VHM LIMITED"
+  },
+  {
+   "ticker": "VIG",
+   "name": "VICTOR GROUP HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "VIT",
+   "name": "VITURA HEALTH LIMITED"
+  },
+  {
+   "ticker": "VKA",
+   "name": "VIKING MINES LIMITED"
+  },
+  {
+   "ticker": "VLS",
+   "name": "VITA LIFE SCIENCES LIMITED.."
+  },
+  {
+   "ticker": "VMC",
+   "name": "VENUS METALS CORPORATION LIMITED"
+  },
+  {
+   "ticker": "VML",
+   "name": "VITAL METALS LIMITED"
+  },
+  {
+   "ticker": "VMM",
+   "name": "VIRIDIS MINING AND MINERALS LIMITED"
+  },
+  {
+   "ticker": "VMS",
+   "name": "VENARI MINERALS NL"
+  },
+  {
+   "ticker": "VMT",
+   "name": "VMOTO LIMITED"
+  },
+  {
+   "ticker": "VNL",
+   "name": "VINYL GROUP LTD"
+  },
+  {
+   "ticker": "VNT",
+   "name": "VENTIA SERVICES GROUP LIMITED"
+  },
+  {
+   "ticker": "VPR",
+   "name": "VOLT GROUP LIMITED"
+  },
+  {
+   "ticker": "VR1",
+   "name": "VECTION TECHNOLOGIES LTD"
+  },
+  {
+   "ticker": "VR8",
+   "name": "VANADIUM RESOURCES LIMITED"
+  },
+  {
+   "ticker": "VRC",
+   "name": "VOLT RESOURCES LIMITED"
+  },
+  {
+   "ticker": "VRL",
+   "name": "VERITY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "VRS",
+   "name": "VERIS LIMITED"
+  },
+  {
+   "ticker": "VRX",
+   "name": "VRX SILICA LIMITED"
+  },
+  {
+   "ticker": "VSL",
+   "name": "VULCAN STEEL LIMITED"
+  },
+  {
+   "ticker": "VSR",
+   "name": "VOLTAIC STRATEGIC RESOURCES LTD"
+  },
+  {
+   "ticker": "VTA",
+   "name": "VITA RESOURCES NL"
+  },
+  {
+   "ticker": "VTM",
+   "name": "VICTORY METALS LIMITED"
+  },
+  {
+   "ticker": "VTX",
+   "name": "VERTEX MINERALS LIMITED"
+  },
+  {
+   "ticker": "VUL",
+   "name": "VULCAN ENERGY RESOURCES LIMITED"
+  },
+  {
+   "ticker": "VVA",
+   "name": "VIVA LEISURE LIMITED"
+  },
+  {
+   "ticker": "VYS",
+   "name": "VYSARN LIMITED"
+  },
+  {
+   "ticker": "W2V",
+   "name": "WAY 2 VAT LTD."
+  },
+  {
+   "ticker": "WA1",
+   "name": "WA1 RESOURCES LTD"
+  },
+  {
+   "ticker": "WAA",
+   "name": "WAM ACTIVE LIMITED"
   },
   {
    "ticker": "WAF",
-   "name": "West African Resources"
+   "name": "WEST AFRICAN RESOURCES LIMITED"
+  },
+  {
+   "ticker": "WAG",
+   "name": "THE AUSTRALIAN WEALTH ADVISORS GROUP LIMITED"
+  },
+  {
+   "ticker": "WAK",
+   "name": "WA KAOLIN LIMITED"
+  },
+  {
+   "ticker": "WAM",
+   "name": "WAM CAPITAL LIMITED"
+  },
+  {
+   "ticker": "WAR",
+   "name": "WAM STRATEGIC VALUE LIMITED"
+  },
+  {
+   "ticker": "WAT",
+   "name": "WATERCO LIMITED"
+  },
+  {
+   "ticker": "WAU",
+   "name": "WA GOLD LIMITED"
+  },
+  {
+   "ticker": "WAX",
+   "name": "WAM RESEARCH LIMITED"
   },
   {
    "ticker": "WBC",
-   "name": "Westpac Banking Corp"
+   "name": "WESTPAC BANKING CORPORATION"
+  },
+  {
+   "ticker": "WBT",
+   "name": "WEEBIT NANO LTD"
+  },
+  {
+   "ticker": "WC1",
+   "name": "WEST COBAR METALS LIMITED"
+  },
+  {
+   "ticker": "WC8",
+   "name": "WILDCAT RESOURCES LIMITED"
+  },
+  {
+   "ticker": "WCE",
+   "name": "WEST COAST SILVER LIMITED"
+  },
+  {
+   "ticker": "WCN",
+   "name": "WHITE CLIFF MINERALS LIMITED"
   },
   {
    "ticker": "WDS",
-   "name": "Woodside Energy Group"
+   "name": "WOODSIDE ENERGY GROUP LTD"
   },
   {
    "ticker": "WEB",
-   "name": "Webjet Group Ltd"
+   "name": "WEB TRAVEL GROUP LIMITED"
+  },
+  {
+   "ticker": "WEC",
+   "name": "WHITE ENERGY COMPANY LIMITED"
+  },
+  {
+   "ticker": "WEL",
+   "name": "WINCHESTER ENERGY LTD"
   },
   {
    "ticker": "WES",
-   "name": "Wesfarmers Ltd"
+   "name": "WESFARMERS LIMITED"
+  },
+  {
+   "ticker": "WGB",
+   "name": "WAM GLOBAL LIMITED"
+  },
+  {
+   "ticker": "WGN",
+   "name": "WAGNERS HOLDING COMPANY LIMITED"
+  },
+  {
+   "ticker": "WGR",
+   "name": "WESTERN GOLD RESOURCES LIMITED."
   },
   {
    "ticker": "WGX",
-   "name": "Westgold Resources Ltd"
+   "name": "WESTGOLD RESOURCES LIMITED."
   },
   {
    "ticker": "WHC",
-   "name": "Whitehaven Coal Ltd"
+   "name": "WHITEHAVEN COAL LIMITED"
+  },
+  {
+   "ticker": "WHF",
+   "name": "WHITEFIELD INDUSTRIALS LIMITED"
+  },
+  {
+   "ticker": "WHI",
+   "name": "WHITEFIELD INCOME LIMITED"
+  },
+  {
+   "ticker": "WHK",
+   "name": "WHITEHAWK LIMITED"
+  },
+  {
+   "ticker": "WIA",
+   "name": "WIA GOLD LIMITED"
+  },
+  {
+   "ticker": "WIN",
+   "name": "WIN METALS LTD"
+  },
+  {
+   "ticker": "WJL",
+   "name": "WEBJET GROUP LIMITED"
+  },
+  {
+   "ticker": "WLE",
+   "name": "WAM LEADERS LIMITED"
+  },
+  {
+   "ticker": "WMA",
+   "name": "WAM ALTERNATIVE ASSETS LIMITED"
+  },
+  {
+   "ticker": "WMG",
+   "name": "WESTERN MINES GROUP LTD"
+  },
+  {
+   "ticker": "WMI",
+   "name": "WAM MICROCAP LIMITED"
+  },
+  {
+   "ticker": "WMX",
+   "name": "WAM INCOME MAXIMISER LIMITED"
+  },
+  {
+   "ticker": "WNR",
+   "name": "WINGARA AG LTD"
+  },
+  {
+   "ticker": "WNX",
+   "name": "WELLNEX LIFE LIMITED"
+  },
+  {
+   "ticker": "WOA",
+   "name": "WIDE OPEN AGRICULTURE LTD"
   },
   {
    "ticker": "WOR",
-   "name": "Worley Ltd"
+   "name": "WORLEY LIMITED"
+  },
+  {
+   "ticker": "WOT",
+   "name": "WOTSO"
   },
   {
    "ticker": "WOW",
-   "name": "Woolworths Group Ltd"
+   "name": "WOOLWORTHS GROUP LIMITED"
+  },
+  {
+   "ticker": "WPR",
+   "name": "WAYPOINT REIT"
+  },
+  {
+   "ticker": "WQG",
+   "name": "WCM GLOBAL GROWTH LIMITED"
+  },
+  {
+   "ticker": "WRK",
+   "name": "WRKR LTD"
+  },
+  {
+   "ticker": "WRX",
+   "name": "WESTERN RIDGE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "WSI",
+   "name": "WESTSTAR INDUSTRIAL LIMITED"
+  },
+  {
+   "ticker": "WSR",
+   "name": "WESTAR RESOURCES LIMITED"
   },
   {
    "ticker": "WTC",
-   "name": "WiseTech Global Ltd"
+   "name": "WISETECH GLOBAL LIMITED"
+  },
+  {
+   "ticker": "WTL",
+   "name": "WT FINANCIAL GROUP LIMITED"
+  },
+  {
+   "ticker": "WTM",
+   "name": "WARATAH MINERALS LIMITED"
+  },
+  {
+   "ticker": "WTN",
+   "name": "WINTON LAND LIMITED"
+  },
+  {
+   "ticker": "WWG",
+   "name": "WISEWAY GROUP LIMITED"
+  },
+  {
+   "ticker": "WWI",
+   "name": "WEST WITS MINING LIMITED"
+  },
+  {
+   "ticker": "WYX",
+   "name": "WESTERN YILGARN NL"
+  },
+  {
+   "ticker": "WZR",
+   "name": "WISR LIMITED"
+  },
+  {
+   "ticker": "X2M",
+   "name": "X2M CONNECT LIMITED"
+  },
+  {
+   "ticker": "XEN",
+   "name": "XENITRA LIMITED"
+  },
+  {
+   "ticker": "XF1",
+   "name": "XREF LIMITED"
+  },
+  {
+   "ticker": "XGL",
+   "name": "XAMBLE GROUP LIMITED"
+  },
+  {
+   "ticker": "XPD",
+   "name": "XPEDRA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "XPN",
+   "name": "XPON TECHNOLOGIES GROUP LIMITED"
+  },
+  {
+   "ticker": "XRA",
+   "name": "XENORA MINERALS LTD"
+  },
+  {
+   "ticker": "XRF",
+   "name": "XRF SCIENTIFIC LIMITED"
+  },
+  {
+   "ticker": "XRG",
+   "name": "XREALITY GROUP LTD"
   },
   {
    "ticker": "XRO",
-   "name": "Xero Ltd"
+   "name": "XERO LIMITED"
+  },
+  {
+   "ticker": "XST",
+   "name": "XSTATE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "XYZ",
+   "name": "BLOCK, INC."
   },
   {
    "ticker": "YAL",
-   "name": "Yancoal Australia"
+   "name": "YANCOAL AUSTRALIA LIMITED"
+  },
+  {
+   "ticker": "YAR",
+   "name": "YARI MINERALS LIMITED"
+  },
+  {
+   "ticker": "YOJ",
+   "name": "YOJEE LIMITED"
+  },
+  {
+   "ticker": "YOW",
+   "name": "YOWIE GROUP LTD"
+  },
+  {
+   "ticker": "YRL",
+   "name": "YANDAL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "YUG",
+   "name": "YUGO METALS LIMITED"
+  },
+  {
+   "ticker": "ZAG",
+   "name": "ZULEIKA GOLD LIMITED"
+  },
+  {
+   "ticker": "ZEO",
+   "name": "ZEOTECH LIMITED"
+  },
+  {
+   "ticker": "ZEU",
+   "name": "ZEUS RESOURCES LIMITED"
+  },
+  {
+   "ticker": "ZGL",
+   "name": "ZICOM GROUP LIMITED"
+  },
+  {
+   "ticker": "ZIM",
+   "name": "ZIMPLATS HOLDINGS LIMITED"
+  },
+  {
+   "ticker": "ZIP",
+   "name": "ZIP CO LIMITED.."
+  },
+  {
+   "ticker": "ZLD",
+   "name": "ZELIRA THERAPEUTICS LIMITED"
+  },
+  {
+   "ticker": "ZMI",
+   "name": "ZINC OF IRELAND NL"
+  },
+  {
+   "ticker": "ZMM",
+   "name": "ZIMI LIMITED"
+  },
+  {
+   "ticker": "ZNC",
+   "name": "ZENITH MINERALS LIMITED"
+  },
+  {
+   "ticker": "ZNO",
+   "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 177,
- "source": "seed (full ASX list auto-built on first workflow run)"
+ "count": 1847,
+ "source": "asx directory",
+ "updated": "2026-05-29"
 }
