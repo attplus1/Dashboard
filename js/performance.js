@@ -5,6 +5,7 @@
   const pct = (v,d=1)=> (v>=0?'+':'')+v.toFixed(d)+'%';
   const cls = v => v>0?'val-pos':(v<0?'val-neg':'');
   const ratio = v => v==null?'—':(v===Infinity?'∞':v.toFixed(2));
+  const fmtD = d => (d instanceof Date && !isNaN(d.getTime())) ? d.toLocaleDateString('en-AU') : '—';
 
   function kpiCard(label, value, sub, tone){
     return `<div class="kpi ${tone||''}">
@@ -56,7 +57,8 @@
       let distTxt='—';
       if (p.stop && px!=null){ distTxt = (((px-p.stop)/px)*100).toFixed(1)+'%'; }
       else if (p.stop){ distTxt = (((p.price-p.stop)/p.price)*100).toFixed(1)+'%'; }
-      const days = Math.max(0,Math.round((now-p.dt)/86400000));
+      const days = (p.dt instanceof Date && !isNaN(p.dt.getTime()))
+        ? Math.max(0,Math.round((now-p.dt)/86400000)) : '—';
       return `<tr>
         <td><b>${p.ticker}</b></td>
         <td><span class="pill ${p.dir}">${p.dir}</span></td>
@@ -68,7 +70,7 @@
         <td class="num ${cls(uPct||0)}">${uPct==null?'—':pct(uPct)}</td>
         <td class="num">${stopTxt}</td>
         <td class="num">${distTxt}</td>
-        <td>${p.dt.toLocaleDateString('en-AU')}</td>
+        <td>${fmtD(p.dt)}</td>
         <td class="num">${days}</td>
         <td class="num val-neg">${money(p.commission,2)}</td>
       </tr>`;
@@ -87,8 +89,8 @@
       <td class="num ${cls(t.pnl)}">${money(t.pnl,2)}</td>
       <td class="num ${cls(t.ret)}">${pct(t.ret)}</td>
       <td class="num">${t.holdDays.toFixed(1)}</td>
-      <td>${t.entryDt.toLocaleDateString('en-AU')}</td>
-      <td>${t.exitDt.toLocaleDateString('en-AU')}</td>
+      <td>${fmtD(t.entryDt)}</td>
+      <td>${fmtD(t.exitDt)}</td>
       <td><span class="pill exit">${t.exitType}</span></td>
     </tr>`).join('');
   }

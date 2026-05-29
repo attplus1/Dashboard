@@ -16,11 +16,30 @@
     const v = parseFloat(s);
     return isNaN(v) ? 0 : v;
   }
-  function parseDate(s){
-    // "27 May 2026 11:14:09"
-    const m = String(s).trim().match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})\s+(\d{2}):(\d{2}):(\d{2})/);
-    if (!m) return null;
-    return new Date(+m[3], MONTHS[m[2]], +m[1], +m[4], +m[5], +m[6]);
+  function parseDate(v){
+    if (v == null || v === '' || v === '-') return null;
+    // Real Date object (SheetJS with cellDates:true).
+    if (v instanceof Date) return isNaN(v.getTime()) ? null : v;
+    // Excel serial date number.
+    if (typeof v === 'number' && isFinite(v)){
+      const d = new Date(Math.round((v - 25569) * 86400000));
+      return isNaN(d.getTime()) ? null : d;
+    }
+    const s = String(v).trim();
+    // "27 May 2026 11:14:09" / "27 September 2026" (time optional).
+    let m = s.match(/^(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+    if (m && MONTHS[m[2]] !== undefined)
+      return new Date(+m[3], MONTHS[m[2]], +m[1], +(m[4]||0), +(m[5]||0), +(m[6]||0));
+    // ISO yyyy-mm-dd[ hh:mm].
+    m = s.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{1,2}):(\d{2}))?/);
+    if (m) return new Date(+m[1], +m[2]-1, +m[3], +(m[4]||0), +(m[5]||0));
+    // dd/mm/yyyy (Australian broker convention), time optional.
+    m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})(?:\s+(\d{1,2}):(\d{2}))?/);
+    if (m){ let y=+m[3]; if (y<100) y+=2000;
+      return new Date(y, +m[2]-1, +m[1], +(m[4]||0), +(m[5]||0)); }
+    // Last resort.
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
   }
 
   function tickerFor(name){
@@ -100,7 +119,7 @@
 
       const notional = entry.price * u;
       const ret = notional ? (pnl / notional * 100) : 0;
-      const holdDays = (when - entry.dt) / 86400000;
+      const holdDays = (when && entry.dt) ? (when - entry.dt) / 86400000 : 0;
       const exitComm = commissionByOrder[r[COL.REL]] || 0;
       trades.push({
         product, ticker: entry.ticker, dir: entry.dir, units: u,
@@ -127,8 +146,9 @@
     const allDates = [];
     for (const t of trades){ allDates.push(t.entryDt, t.exitDt); }
     for (const o of openPositions){ allDates.push(o.dt); }
-    const firstDate = allDates.length ? new Date(Math.min(...allDates)) : null;
-    const lastDate  = allDates.length ? new Date(Math.max(...allDates)) : null;
+    const valid = allDates.filter(d => d instanceof Date && !isNaN(d.getTime())).map(d => d.getTime());
+    const firstDate = valid.length ? new Date(Math.min(...valid)) : null;
+    const lastDate  = valid.length ? new Date(Math.max(...valid)) : null;
 
     return { trades, openPositions, totalCommission, commissions,
              balanceSeries, initialCapital, firstDate, lastDate };
@@ -140,9 +160,9 @@
       const reader = new FileReader();
       reader.onload = e => {
         try {
-          const wb = XLSX.read(e.target.result, { type:'array' });
+          const wb = XLSX.read(e.target.result, { type:'array', cellDates:true });
           const ws = wb.Sheets[wb.SheetNames[0]];
-          const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:false, defval:'' });
+          const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'' });
           resolve(reconstruct(rows));
         } catch (err){ reject(err); }
       };
