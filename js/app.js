@@ -189,15 +189,44 @@
     $('#handle-to').addEventListener('touchstart',()=>dragHandle('to'),{passive:true});
     // screener topN
     $('#scr-topn').addEventListener('change',()=>window.ScreenerTab.render());
-    // import
-    $('#file-input').addEventListener('change',async e=>{
-      const f=e.target.files[0]; if(!f) return;
-      try {
-        const buf = await f.arrayBuffer();
-        const recon = window.TradeParser.parseArrayBuffer(new Uint8Array(buf));
-        storeTrades(f.name, buf);            // persist so it continues next visit
-        setReconciliation(recon); renderAll();
-      } catch(err){ alert('Could not parse file: '+err.message); }
+    // import (file picker + drag-and-drop both route here)
+    $('#file-input').addEventListener('change',e=>importFile(e.target.files[0]));
+    wireDragDrop();
+  }
+
+  // Parse + load a dropped/picked statement (shared by the picker and drag-drop).
+  async function importFile(f){
+    if (!f) return;
+    try {
+      const buf = await f.arrayBuffer();
+      const recon = window.TradeParser.parseArrayBuffer(new Uint8Array(buf));
+      storeTrades(f.name, buf);              // persist so it continues next visit
+      setReconciliation(recon); renderAll();
+    } catch(err){ alert('Could not parse "'+(f.name||'file')+'": '+err.message); }
+  }
+
+  // Drag a .csv/.xlsx anywhere onto the page to import it. A counter tracks
+  // enter/leave across child elements so the overlay doesn't flicker.
+  function wireDragDrop(){
+    const overlay = $('#drop-overlay');
+    let depth = 0;
+    const hasFiles = e => e.dataTransfer && Array.from(e.dataTransfer.types||[]).includes('Files');
+    window.addEventListener('dragenter', e=>{
+      if (!hasFiles(e)) return;
+      e.preventDefault(); depth++; if (overlay) overlay.classList.add('show');
+    });
+    window.addEventListener('dragover', e=>{
+      if (!hasFiles(e)) return;
+      e.preventDefault(); e.dataTransfer.dropEffect='copy';
+    });
+    window.addEventListener('dragleave', e=>{
+      if (!hasFiles(e)) return;
+      depth = Math.max(0, depth-1); if (!depth && overlay) overlay.classList.remove('show');
+    });
+    window.addEventListener('drop', e=>{
+      if (!hasFiles(e)) return;
+      e.preventDefault(); depth=0; if (overlay) overlay.classList.remove('show');
+      importFile(e.dataTransfer.files && e.dataTransfer.files[0]);
     });
   }
 
