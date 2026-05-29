@@ -132,10 +132,12 @@
       ? candles.map(d=> d[key]==null?null:+d[key])
       : candles.map((_,i)=>{ if (i<n-1) return null;
           let s=0; for (let k=i-n+1;k<=i;k++) s+=candles[k].close; return +(s/n).toFixed(3); });
-    // Show the full available history by default (back to ~2023). A log price
-    // axis keeps multi-year charts readable — momentum names spike from a low
-    // base, which a linear axis would squash into an invisible flat line.
-    const startPct = 0;
+    // Preview cards open on just the ~7-month momentum window (the 6-1 lookback,
+    // ~147 trading days); the expanded view shows the full available history.
+    // A log price axis keeps the long expanded charts readable — momentum names
+    // spike from a low base, which a linear axis would squash to a flat line.
+    const MOM_BARS = 147;
+    const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
       grid: big ? {left:54,right:18,top:16,bottom:64} : {left:6,right:6,top:8,bottom:6,containLabel:false},
