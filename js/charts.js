@@ -169,12 +169,17 @@
     return c;
   }
 
-  // Trade-returns histogram (custom rects so bin width is exact) with a fitted
-  // normal-distribution overlay — both on a shared % value axis.
+  // Trade-outcome histogram (custom rects so bin width is exact) with a fitted
+  // normal-distribution overlay. h.mode picks the metric/axis: 'dollar' shows
+  // per-trade $ P&L, otherwise % return.
   function returnsDistChart(id, h){
     const c = init(id); if (!c) return;
     if (!h.bins.length){ document.getElementById(id).innerHTML =
       '<div class="chart-empty">Not enough trades to plot a distribution</div>'; return; }
+    const isDollar = h.mode==='dollar';
+    const axisName = isDollar ? 'P&L ($)' : 'Return %';
+    const fmtAxis  = isDollar ? (v=>fmtMoney(v)) : (v=>v+'%');
+    const fmtMid   = isDollar ? (v=>fmtMoney(v)) : (v=>v.toFixed(1)+'%');
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:46,right:18,top:24,bottom:38},
@@ -182,10 +187,10 @@
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         formatter:p=>{ const b=p.find(x=>x.seriesName==='Trades');
-          return (b? `Return ≈ ${(+b.value[3]).toFixed(1)}%<br/>${b.value[2]} trade(s)` : ''); }},
-      xAxis:{type:'value', name:'Return %', nameLocation:'middle', nameGap:24,
+          return (b? `${isDollar?'P&L':'Return'} ≈ ${fmtMid(+b.value[3])}<br/>${b.value[2]} trade(s)` : ''); }},
+      xAxis:{type:'value', name:axisName, nameLocation:'middle', nameGap:24,
         nameTextStyle:{color:COLORS.text}, ...axisBase,
-        axisLabel:{color:COLORS.text, formatter:'{value}%'}},
+        axisLabel:{color:COLORS.text, formatter:v=>fmtAxis(v)}},
       yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
       series:[
         {name:'Trades', type:'custom', encode:{x:[0,1], y:2},

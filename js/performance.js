@@ -52,11 +52,14 @@
       ? tt.losers.map(row).join('') : `<tr class="empty-row"><td colspan="6">No losing trades.</td></tr>`;
   }
 
-  function renderDistribution(m){
-    const h = window.Metrics.returnsHistogram(m.trades);
+  function renderDistribution(m, unit){
+    const h = window.Metrics.returnsHistogram(m.trades, unit);
+    const isDollar = unit==='dollar';
+    const mu = isDollar ? money(h.mean,0) : pct(h.mean,2);
+    const sg = isDollar ? money(h.std,0)  : h.std.toFixed(2)+'%';
     $('#dist-stats').innerHTML = h.n>=2
-      ? `<span>μ <b class="${cls(h.mean)}">${pct(h.mean,2)}</b></span>
-         <span>σ <b>${h.std.toFixed(2)}%</b></span>
+      ? `<span>μ <b class="${cls(h.mean)}">${mu}</b></span>
+         <span>σ <b>${sg}</b></span>
          <span>n <b>${h.n}</b></span>`
       : '';
     window.Charts.returnsDistChart('dist-chart', h);
@@ -134,7 +137,7 @@
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
     window.Charts.outcomeChart('outcome-chart', m);
     window.Charts.holdingChart('holding-chart', m);
-    renderDistribution(m);
+    renderDistribution(m, unit);
     renderTopTrades(m, unit);
     renderOpenPositions(recon.openPositions, prices);
     renderTradesTable(m.trades);

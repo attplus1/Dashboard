@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=12" />
+  <link rel="stylesheet" href="css/styles.css?v=13" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -141,9 +141,10 @@
     <!-- Returns distribution + top trades -->
     <section class="panel">
       <div class="panel-head">
-        <h3>Distribution of Trade Returns</h3>
-        <p class="panel-desc">Histogram of per-trade % returns with a fitted normal curve. Mean (μ) and
-           standard deviation (σ) are shown; returns are gross of fees.</p>
+        <h3>Distribution of Trade Outcomes</h3>
+        <p class="panel-desc">Histogram of per-trade outcomes with a fitted normal curve — toggle the display
+           control above to switch between % return and $ P&amp;L. Mean (μ) and standard deviation (σ) are
+           shown; figures are gross of fees.</p>
       </div>
       <div id="dist-stats" class="dist-stats"></div>
       <div id="dist-chart" class="chart chart-md"></div>
@@ -153,8 +154,8 @@
       <div class="panel-head">
         <h3>Top Trades</h3>
         <p class="panel-desc">The five largest winners and losers in the selected period, ranked by the
-           active display metric (toggle above): dollar P&amp;L or % return — so this lines up with the
-           returns distribution, which is always by % return.</p>
+           active display metric (toggle above): dollar P&amp;L or % return — matching the distribution
+           histogram, which follows the same toggle.</p>
       </div>
       <div class="top-trades">
         <div>
@@ -256,12 +257,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=12"></script>
-  <script src="js/parser.js?v=12"></script>
-  <script src="js/metrics.js?v=12"></script>
-  <script src="js/charts.js?v=12"></script>
-  <script src="js/performance.js?v=12"></script>
-  <script src="js/screener.js?v=12"></script>
-  <script src="js/app.js?v=12"></script>
+  <script src="js/config.js?v=13"></script>
+  <script src="js/parser.js?v=13"></script>
+  <script src="js/metrics.js?v=13"></script>
+  <script src="js/charts.js?v=13"></script>
+  <script src="js/performance.js?v=13"></script>
+  <script src="js/screener.js?v=13"></script>
+  <script src="js/app.js?v=13"></script>
 </body>
 </html>
