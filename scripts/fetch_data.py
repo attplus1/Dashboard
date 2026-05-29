@@ -112,6 +112,32 @@ def _candles_from_df(sub):
     return out
 
 
+def _flatten_df(df, sym=None):
+    """Flatten a MultiIndex yfinance DataFrame to plain OHLCV columns.
+
+    yfinance >=0.2.x may return (Ticker, OHLCV) or (OHLCV, Ticker) multi-level
+    columns depending on the version and whether one or many symbols were
+    requested. We detect which level holds the OHLCV names and collapse to that.
+    """
+    import pandas as pd
+    if not isinstance(df.columns, pd.MultiIndex):
+        return df
+    ohlcv = {"Open", "High", "Low", "Close", "Volume", "Adj Close"}
+    # Try selecting by symbol (works when symbol is a top-level key)
+    if sym:
+        try:
+            return df[sym]
+        except (KeyError, TypeError):
+            pass
+    # Find the level whose values overlap with known OHLCV names
+    for lvl in range(df.columns.nlevels):
+        if set(str(v) for v in df.columns.get_level_values(lvl)) & ohlcv:
+            out = df.copy()
+            out.columns = df.columns.get_level_values(lvl)
+            return out
+    return df
+
+
 def yf_download(symbols, **kw):
     """Return DataFrame or None, with a few retries."""
     import yfinance as yf
@@ -145,7 +171,7 @@ def fetch_group(tickers, backfill):
         for sym in chunk:
             t = sym[:-3]
             try:
-                sub = df[sym] if len(chunk) > 1 else df
+                sub = _flatten_df(df, sym)
                 got[t] = _candles_from_df(sub.dropna(how="all"))
             except Exception:
                 got[t] = []
@@ -217,12 +243,13 @@ def update_benchmark():
         df = yf_download(["^AXJO"], **({"start": HISTORY_START}
                          if not (obj and obj.get("candles")) else {"period": INCR_PERIOD}))
         if df is not None:
-            if hasattr(df.columns, "nlevels") and df.columns.nlevels > 1:
-                df.columns = df.columns.get_level_values(0)
-            new = _candles_from_df(df)
+            new = _candles_from_df(_flatten_df(df, "^AXJO"))
             merged = merge(candles_of(obj), new)
-            save_hist("^AXJO", TODAY, merged)
-            obj = load_hist("^AXJO")
+            # Only persist (and mark as fetched) if we actually got data — an
+            # empty merge keeps last_fetch unset so the next run retries.
+            if merged:
+                save_hist("^AXJO", TODAY, merged)
+                obj = load_hist("^AXJO")
     return candles_of(obj)
 
 
