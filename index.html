@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- ============ HEADER ============ -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">▰</div>
+      <div>
+        <h1>Trading Dashboard</h1>
+        <p class="brand-sub">Performance analytics &amp; momentum screener &middot; ASX</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="performance" role="tab">Performance Review</button>
+      <button class="tab" data-tab="screener" role="tab">Momentum Screener</button>
+    </nav>
+    <div class="header-actions">
+      <label class="upload-btn">
+        <input type="file" id="file-input" accept=".csv,.xlsx,.xls" hidden />
+        <span>＋ Import trades</span>
+      </label>
+    </div>
+  </header>
+
+  <!-- ============ PERFORMANCE TAB ============ -->
+  <main id="tab-performance" class="tab-panel active">
+
+    <section class="panel intro-panel">
+      <div class="intro-text">
+        <h2>Performance Review</h2>
+        <p>Round-trip trades are reconstructed from your broker history: entries (<em>Buy/Sell Trade</em>)
+           are matched to exits (<em>Close Trade / Stop Loss</em>) by order reference, with stop-loss
+           exits matched FIFO per ticker. Realised P&amp;L is read from the statement and is shown
+           <strong>gross</strong>; commissions are tracked separately. Use the date range to scope every
+           metric and chart below.</p>
+      </div>
+      <div id="data-source-note" class="source-note"></div>
+    </section>
+
+    <!-- Date range control -->
+    <section class="panel control-panel">
+      <div class="control-row">
+        <div class="date-control">
+          <label>Date range</label>
+          <div class="range-inputs">
+            <input type="date" id="date-from" />
+            <span class="range-sep">→</span>
+            <input type="date" id="date-to" />
+            <button id="range-reset" class="ghost-btn">Reset</button>
+          </div>
+        </div>
+        <div class="range-slider-wrap">
+          <div id="range-slider" class="range-slider">
+            <div class="slider-track"></div>
+            <div class="slider-fill" id="slider-fill"></div>
+            <div class="slider-handle" id="handle-from" tabindex="0"></div>
+            <div class="slider-handle" id="handle-to" tabindex="0"></div>
+          </div>
+          <div class="range-labels"><span id="range-label-from"></span><span id="range-label-to"></span></div>
+        </div>
+        <div class="unit-toggle">
+          <label>Display</label>
+          <div class="seg">
+            <button class="seg-btn active" data-unit="dollar">$ P&amp;L</button>
+            <button class="seg-btn" data-unit="percent">% Return</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI cards -->
+    <section class="kpi-grid" id="kpi-grid"></section>
+
+    <!-- Equity curve -->
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Equity Curve vs ASX 200</h3>
+        <p class="panel-desc">Cumulative account performance over the selected period. The ASX 200 benchmark
+           is rebased to your starting equity so relative performance is directly comparable.</p>
+      </div>
+      <div id="equity-chart" class="chart chart-lg"></div>
+    </section>
+
+    <!-- Open positions -->
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Open Positions</h3>
+        <p class="panel-desc">Currently held positions reconstructed from unmatched entries. Unrealised P&amp;L
+           uses the latest market price from the data feed when available.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="open-positions-table">
+          <thead>
+            <tr>
+              <th>Ticker</th><th>Side</th><th class="num">Shares</th><th class="num">Open price</th>
+              <th class="num">Last</th><th class="num">Position value</th>
+              <th class="num">Unreal. P&amp;L</th><th class="num">Unreal. %</th>
+              <th class="num">Stop</th><th class="num">Dist. to stop</th>
+              <th>Opened</th><th class="num">Days held</th><th class="num">Commission</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- P&L per ticker -->
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Realised P&amp;L by Ticker</h3>
+        <p class="panel-desc">Net realised result per instrument across all closed trades in the period.
+           Toggle the display control above to switch between dollars and average % return.</p>
+      </div>
+      <div id="ticker-chart" class="chart chart-md"></div>
+    </section>
+
+    <!-- Two-up: distribution + holding -->
+    <div class="grid-2">
+      <section class="panel">
+        <div class="panel-head"><h3>Trade Outcomes</h3>
+          <p class="panel-desc">Distribution of winning, losing and breakeven trades.</p></div>
+        <div id="outcome-chart" class="chart chart-sm"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Average Holding Period</h3>
+          <p class="panel-desc">Mean time in market, split by outcome (calendar days).</p></div>
+        <div id="holding-chart" class="chart chart-sm"></div>
+      </section>
+    </div>
+
+    <!-- Closed trades table -->
+    <section class="panel">
+      <div class="panel-head">
+        <h3>Closed Trades</h3>
+        <p class="panel-desc">Every reconstructed round-trip in the selected period.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="trades-table">
+          <thead>
+            <tr>
+              <th>Ticker</th><th>Side</th><th class="num">Shares</th><th class="num">Entry</th>
+              <th class="num">Exit</th><th class="num">P&amp;L</th><th class="num">Return %</th>
+              <th class="num">Hold (d)</th><th>Opened</th><th>Closed</th><th>Exit</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel metrics-glossary">
+      <div class="panel-head"><h3>Metric Definitions</h3></div>
+      <div class="glossary-grid" id="glossary"></div>
+    </section>
+  </main>
+
+  <!-- ============ SCREENER TAB ============ -->
+  <main id="tab-screener" class="tab-panel">
+    <section class="panel intro-panel">
+      <div class="intro-text">
+        <h2>Momentum Screener</h2>
+        <p>Ranks the ASX universe using <strong>Jegadeesh &amp; Titman (1993)</strong> cross-sectional
+           momentum: the formation return over the prior <strong>6 months, skipping the most recent month</strong>
+           (a "6&ndash;1" lookback) to avoid short-term reversal. The strongest names form the suggested
+           buy list for the coming period. Each card shows a daily candlestick chart with 50- and
+           200-day moving averages.</p>
+      </div>
+      <div id="screener-source-note" class="source-note"></div>
+    </section>
+
+    <section class="panel control-panel">
+      <div class="control-row screener-controls">
+        <div class="screener-stat"><span class="lbl">Universe scanned</span><span class="val" id="scr-universe">–</span></div>
+        <div class="screener-stat"><span class="lbl">Formation window</span><span class="val" id="scr-window">6 − 1 month</span></div>
+        <div class="screener-stat"><span class="lbl">As of</span><span class="val" id="scr-asof">–</span></div>
+        <div class="screener-stat"><span class="lbl">Showing top</span>
+          <select id="scr-topn">
+            <option>12</option><option selected>20</option><option>30</option><option>50</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="cards-grid" id="screener-cards"></section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Static dashboard &middot; GitHub Pages</span>
+    <span>Market data via Stooq (daily, refreshed by GitHub Actions)</span>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- App -->
+  <script src="js/config.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/performance.js"></script>
+  <script src="js/screener.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

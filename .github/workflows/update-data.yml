@@ -1,0 +1,45 @@
+name: Update market data
+
+# Refreshes ASX 200 benchmark, prices and the momentum screen from Stooq,
+# then commits the JSON the static dashboard reads.
+
+on:
+  schedule:
+    - cron: '30 7 * * 1-5'   # ~07:30 UTC weekdays, after the ASX close
+  workflow_dispatch:          # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Fetch data
+        run: python scripts/fetch_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/benchmark.json data/prices.json data/momentum.json
+          if git diff --staged --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "chore: refresh market data ($(date -u +%Y-%m-%d))"
+            git push
+          fi

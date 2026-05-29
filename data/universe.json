@@ -1,0 +1,713 @@
+{
+ "description": "ASX universe seed (extend via build_universe.py for full market)",
+ "constituents": [
+  {
+   "ticker": "29M",
+   "name": "29Metals Ltd"
+  },
+  {
+   "ticker": "4DX",
+   "name": "4Dmedical Ltd"
+  },
+  {
+   "ticker": "A2M",
+   "name": "The a2 Milk Company"
+  },
+  {
+   "ticker": "ABC",
+   "name": "Adbri Ltd"
+  },
+  {
+   "ticker": "AGL",
+   "name": "AGL Energy Ltd"
+  },
+  {
+   "ticker": "AI1",
+   "name": "Adisyn Ltd"
+  },
+  {
+   "ticker": "AIA",
+   "name": "Auckland Intl Airport"
+  },
+  {
+   "ticker": "ALC",
+   "name": "Alcidion Group"
+  },
+  {
+   "ticker": "ALD",
+   "name": "Ampol Ltd"
+  },
+  {
+   "ticker": "ALL",
+   "name": "Aristocrat Leisure"
+  },
+  {
+   "ticker": "ALQ",
+   "name": "ALS Ltd"
+  },
+  {
+   "ticker": "ALU",
+   "name": "Altium Ltd"
+  },
+  {
+   "ticker": "ALX",
+   "name": "Atlas Arteria"
+  },
+  {
+   "ticker": "AMC",
+   "name": "Amcor PLC"
+  },
+  {
+   "ticker": "AMP",
+   "name": "AMP Ltd"
+  },
+  {
+   "ticker": "ANN",
+   "name": "Ansell Ltd"
+  },
+  {
+   "ticker": "ANZ",
+   "name": "ANZ Group Holdings"
+  },
+  {
+   "ticker": "APA",
+   "name": "APA Group"
+  },
+  {
+   "ticker": "APX",
+   "name": "Appen Ltd"
+  },
+  {
+   "ticker": "ARB",
+   "name": "ARB Corporation"
+  },
+  {
+   "ticker": "ASM",
+   "name": "Australian Strategic Materials"
+  },
+  {
+   "ticker": "ASX",
+   "name": "ASX Ltd"
+  },
+  {
+   "ticker": "AYA",
+   "name": "Artrya Ltd"
+  },
+  {
+   "ticker": "AZJ",
+   "name": "Aurizon Holdings Ltd"
+  },
+  {
+   "ticker": "BAP",
+   "name": "Bapcor Ltd"
+  },
+  {
+   "ticker": "BEN",
+   "name": "Bendigo & Adelaide Bank"
+  },
+  {
+   "ticker": "BGL",
+   "name": "Bellevue Gold Ltd"
+  },
+  {
+   "ticker": "BHP",
+   "name": "BHP Group Ltd"
+  },
+  {
+   "ticker": "BKL",
+   "name": "Blackmores Ltd"
+  },
+  {
+   "ticker": "BLD",
+   "name": "Boral Ltd"
+  },
+  {
+   "ticker": "BOQ",
+   "name": "Bank of Queensland"
+  },
+  {
+   "ticker": "BPT",
+   "name": "Beach Energy Ltd"
+  },
+  {
+   "ticker": "BRG",
+   "name": "Breville Group Ltd"
+  },
+  {
+   "ticker": "BRN",
+   "name": "BrainChip Holdings"
+  },
+  {
+   "ticker": "BSL",
+   "name": "BlueScope Steel Ltd"
+  },
+  {
+   "ticker": "BWP",
+   "name": "BWP Trust"
+  },
+  {
+   "ticker": "BXB",
+   "name": "Brambles Ltd"
+  },
+  {
+   "ticker": "CAR",
+   "name": "CAR Group Ltd"
+  },
+  {
+   "ticker": "CBA",
+   "name": "Commonwealth Bank"
+  },
+  {
+   "ticker": "CCL",
+   "name": "Cuscal Ltd"
+  },
+  {
+   "ticker": "CDA",
+   "name": "Codan Ltd"
+  },
+  {
+   "ticker": "CEN",
+   "name": "Contact Energy Ltd"
+  },
+  {
+   "ticker": "CGF",
+   "name": "Challenger Ltd"
+  },
+  {
+   "ticker": "CHC",
+   "name": "Charter Hall Group"
+  },
+  {
+   "ticker": "CIA",
+   "name": "Champion Iron Ltd"
+  },
+  {
+   "ticker": "CMM",
+   "name": "Capricorn Metals"
+  },
+  {
+   "ticker": "CNU",
+   "name": "Chorus Ltd"
+  },
+  {
+   "ticker": "COH",
+   "name": "Cochlear Ltd"
+  },
+  {
+   "ticker": "COL",
+   "name": "Coles Group Ltd"
+  },
+  {
+   "ticker": "CQR",
+   "name": "Charter Hall Retail"
+  },
+  {
+   "ticker": "CSL",
+   "name": "CSL Ltd"
+  },
+  {
+   "ticker": "CSR",
+   "name": "CSR Ltd"
+  },
+  {
+   "ticker": "CTD",
+   "name": "Corporate Travel Mgmt"
+  },
+  {
+   "ticker": "CU6",
+   "name": "Clarity Pharmaceuticals"
+  },
+  {
+   "ticker": "CWY",
+   "name": "Cleanaway Waste Mgmt"
+  },
+  {
+   "ticker": "DBI",
+   "name": "Dalrymple Bay Infrastructure"
+  },
+  {
+   "ticker": "DEG",
+   "name": "De Grey Mining Ltd"
+  },
+  {
+   "ticker": "DMP",
+   "name": "Domino's Pizza Enterprises"
+  },
+  {
+   "ticker": "DNL",
+   "name": "Dyno Nobel Ltd"
+  },
+  {
+   "ticker": "DOW",
+   "name": "Downer EDI Ltd"
+  },
+  {
+   "ticker": "DTL",
+   "name": "Data#3 Ltd"
+  },
+  {
+   "ticker": "DXS",
+   "name": "Dexus"
+  },
+  {
+   "ticker": "EBO",
+   "name": "Ebos Group Ltd"
+  },
+  {
+   "ticker": "ELD",
+   "name": "Elders Ltd"
+  },
+  {
+   "ticker": "EVN",
+   "name": "Evolution Mining Ltd"
+  },
+  {
+   "ticker": "EVT",
+   "name": "EVT Ltd"
+  },
+  {
+   "ticker": "FBU",
+   "name": "Fletcher Building Ltd"
+  },
+  {
+   "ticker": "FLT",
+   "name": "Flight Centre Travel"
+  },
+  {
+   "ticker": "FMG",
+   "name": "Fortescue Ltd"
+  },
+  {
+   "ticker": "FPH",
+   "name": "Fisher & Paykel Healthcare"
+  },
+  {
+   "ticker": "G50",
+   "name": "G50 Corp Ltd"
+  },
+  {
+   "ticker": "GMG",
+   "name": "Goodman Group"
+  },
+  {
+   "ticker": "GNC",
+   "name": "GrainCorp Ltd"
+  },
+  {
+   "ticker": "GOR",
+   "name": "Gold Road Resources"
+  },
+  {
+   "ticker": "GPT",
+   "name": "GPT Group"
+  },
+  {
+   "ticker": "HVN",
+   "name": "Harvey Norman Holdings"
+  },
+  {
+   "ticker": "IAG",
+   "name": "Insurance Australia Group"
+  },
+  {
+   "ticker": "IGO",
+   "name": "IGO Ltd"
+  },
+  {
+   "ticker": "ILU",
+   "name": "Iluka Resources Ltd"
+  },
+  {
+   "ticker": "IMU",
+   "name": "Imugene Ltd"
+  },
+  {
+   "ticker": "IPG",
+   "name": "IPD Group Ltd"
+  },
+  {
+   "ticker": "IPL",
+   "name": "Incitec Pivot Ltd"
+  },
+  {
+   "ticker": "JBH",
+   "name": "JB Hi-Fi Ltd"
+  },
+  {
+   "ticker": "JHX",
+   "name": "James Hardie Industries"
+  },
+  {
+   "ticker": "JLG",
+   "name": "Johns Lyng Group"
+  },
+  {
+   "ticker": "KAR",
+   "name": "Karoon Energy Ltd"
+  },
+  {
+   "ticker": "LIN",
+   "name": "Lindian Resources Ltd"
+  },
+  {
+   "ticker": "LLC",
+   "name": "Lendlease Group"
+  },
+  {
+   "ticker": "LNK",
+   "name": "Link Admin Holdings"
+  },
+  {
+   "ticker": "LOV",
+   "name": "Lovisa Holdings Ltd"
+  },
+  {
+   "ticker": "LTR",
+   "name": "Liontown Resources Ltd"
+  },
+  {
+   "ticker": "MAH",
+   "name": "Macmahon Holdings Ltd"
+  },
+  {
+   "ticker": "MEZ",
+   "name": "Meridian Energy Ltd"
+  },
+  {
+   "ticker": "MFG",
+   "name": "Magellan Financial Group"
+  },
+  {
+   "ticker": "MGR",
+   "name": "Mirvac Group"
+  },
+  {
+   "ticker": "MI6",
+   "name": "Minerals 260 Ltd"
+  },
+  {
+   "ticker": "MIN",
+   "name": "Mineral Resources Ltd"
+  },
+  {
+   "ticker": "MLX",
+   "name": "Metals X Ltd"
+  },
+  {
+   "ticker": "MND",
+   "name": "Monadelphous Group"
+  },
+  {
+   "ticker": "MP1",
+   "name": "Megaport Ltd"
+  },
+  {
+   "ticker": "MPL",
+   "name": "Medibank Private Ltd"
+  },
+  {
+   "ticker": "MQG",
+   "name": "Macquarie Group Ltd"
+  },
+  {
+   "ticker": "MSB",
+   "name": "Mesoblast Ltd"
+  },
+  {
+   "ticker": "NAB",
+   "name": "National Australia Bank"
+  },
+  {
+   "ticker": "NCK",
+   "name": "Nick Scali Ltd"
+  },
+  {
+   "ticker": "NEM",
+   "name": "Newmont Corp"
+  },
+  {
+   "ticker": "NEU",
+   "name": "Neuren Pharmaceuticals"
+  },
+  {
+   "ticker": "NHC",
+   "name": "New Hope Corp"
+  },
+  {
+   "ticker": "NHF",
+   "name": "nib holdings Ltd"
+  },
+  {
+   "ticker": "NST",
+   "name": "Northern Star Resources"
+  },
+  {
+   "ticker": "NUF",
+   "name": "Nufarm Ltd"
+  },
+  {
+   "ticker": "NWH",
+   "name": "NRW Holdings"
+  },
+  {
+   "ticker": "NXT",
+   "name": "NextDC Ltd"
+  },
+  {
+   "ticker": "ORG",
+   "name": "Origin Energy Ltd"
+  },
+  {
+   "ticker": "ORI",
+   "name": "Orica Ltd"
+  },
+  {
+   "ticker": "PDN",
+   "name": "Paladin Energy Ltd"
+  },
+  {
+   "ticker": "PLS",
+   "name": "Pilbara Minerals Ltd"
+  },
+  {
+   "ticker": "PME",
+   "name": "Pro Medicus Ltd"
+  },
+  {
+   "ticker": "PMV",
+   "name": "Premier Investments"
+  },
+  {
+   "ticker": "PNV",
+   "name": "PolyNovo Ltd"
+  },
+  {
+   "ticker": "PPT",
+   "name": "Perpetual Ltd"
+  },
+  {
+   "ticker": "PRU",
+   "name": "Perseus Mining Ltd"
+  },
+  {
+   "ticker": "QAN",
+   "name": "Qantas Airways Ltd"
+  },
+  {
+   "ticker": "QBE",
+   "name": "QBE Insurance Group"
+  },
+  {
+   "ticker": "RDX",
+   "name": "Redox Ltd"
+  },
+  {
+   "ticker": "REA",
+   "name": "REA Group Ltd"
+  },
+  {
+   "ticker": "REH",
+   "name": "Reece Ltd"
+  },
+  {
+   "ticker": "RHC",
+   "name": "Ramsay Health Care"
+  },
+  {
+   "ticker": "RIO",
+   "name": "Rio Tinto Ltd"
+  },
+  {
+   "ticker": "RMD",
+   "name": "ResMed Inc"
+  },
+  {
+   "ticker": "RMS",
+   "name": "Ramelius Resources"
+  },
+  {
+   "ticker": "RRL",
+   "name": "Regis Resources Ltd"
+  },
+  {
+   "ticker": "RSG",
+   "name": "Resolute Mining Ltd"
+  },
+  {
+   "ticker": "RWC",
+   "name": "Reliance Worldwide"
+  },
+  {
+   "ticker": "S32",
+   "name": "South32 Ltd"
+  },
+  {
+   "ticker": "SCG",
+   "name": "Scentre Group"
+  },
+  {
+   "ticker": "SEK",
+   "name": "Seek Ltd"
+  },
+  {
+   "ticker": "SFR",
+   "name": "Sandfire Resources"
+  },
+  {
+   "ticker": "SGM",
+   "name": "Sims Ltd"
+  },
+  {
+   "ticker": "SGP",
+   "name": "Stockland"
+  },
+  {
+   "ticker": "SGR",
+   "name": "The Star Entertainment"
+  },
+  {
+   "ticker": "SHL",
+   "name": "Sonic Healthcare Ltd"
+  },
+  {
+   "ticker": "SIQ",
+   "name": "Smartgroup Corporation"
+  },
+  {
+   "ticker": "SLC",
+   "name": "Superloop Ltd"
+  },
+  {
+   "ticker": "SLR",
+   "name": "Silver Lake Resources"
+  },
+  {
+   "ticker": "SPK",
+   "name": "Spark New Zealand"
+  },
+  {
+   "ticker": "SPL",
+   "name": "Starpharma Holdings Ltd"
+  },
+  {
+   "ticker": "SRL",
+   "name": "Sunrise Energy Metals"
+  },
+  {
+   "ticker": "STO",
+   "name": "Santos Ltd"
+  },
+  {
+   "ticker": "STX",
+   "name": "Strike Energy Ltd"
+  },
+  {
+   "ticker": "SUL",
+   "name": "Super Retail Group"
+  },
+  {
+   "ticker": "SUN",
+   "name": "Suncorp Group Ltd"
+  },
+  {
+   "ticker": "SVW",
+   "name": "Seven Group Holdings"
+  },
+  {
+   "ticker": "SXE",
+   "name": "Southern Cross Electrical"
+  },
+  {
+   "ticker": "SYD",
+   "name": "Sydney Airport"
+  },
+  {
+   "ticker": "TAH",
+   "name": "Tabcorp Holdings Ltd"
+  },
+  {
+   "ticker": "TCL",
+   "name": "Transurban Group"
+  },
+  {
+   "ticker": "TLC",
+   "name": "Lottery Corp Ltd"
+  },
+  {
+   "ticker": "TLS",
+   "name": "Telstra Group Ltd"
+  },
+  {
+   "ticker": "TLX",
+   "name": "Telix Pharmaceuticals"
+  },
+  {
+   "ticker": "TNE",
+   "name": "TechnologyOne Ltd"
+  },
+  {
+   "ticker": "TPG",
+   "name": "TPG Telecom Ltd"
+  },
+  {
+   "ticker": "TWE",
+   "name": "Treasury Wine Estates"
+  },
+  {
+   "ticker": "VCX",
+   "name": "Vicinity Centres"
+  },
+  {
+   "ticker": "VEA",
+   "name": "Viva Energy Group"
+  },
+  {
+   "ticker": "WAF",
+   "name": "West African Resources"
+  },
+  {
+   "ticker": "WBC",
+   "name": "Westpac Banking Corp"
+  },
+  {
+   "ticker": "WDS",
+   "name": "Woodside Energy Group"
+  },
+  {
+   "ticker": "WEB",
+   "name": "Webjet Group Ltd"
+  },
+  {
+   "ticker": "WES",
+   "name": "Wesfarmers Ltd"
+  },
+  {
+   "ticker": "WGX",
+   "name": "Westgold Resources Ltd"
+  },
+  {
+   "ticker": "WHC",
+   "name": "Whitehaven Coal Ltd"
+  },
+  {
+   "ticker": "WOR",
+   "name": "Worley Ltd"
+  },
+  {
+   "ticker": "WOW",
+   "name": "Woolworths Group Ltd"
+  },
+  {
+   "ticker": "WTC",
+   "name": "WiseTech Global Ltd"
+  },
+  {
+   "ticker": "XRO",
+   "name": "Xero Ltd"
+  },
+  {
+   "ticker": "YAL",
+   "name": "Yancoal Australia"
+  }
+ ]
+}
