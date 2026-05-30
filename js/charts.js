@@ -74,8 +74,9 @@
       backgroundColor:'transparent',
       color:[COLORS.accent, COLORS.bench],
       grid:{left:64,right:18,top:34,bottom:34},
-      legend:{data:series.map(s=>s.name), top:0, right:0, textStyle:{color:COLORS.text},
-        icon:'roundRect'},
+      legend:{data:series.map(s=>s.name), top:0, right:0,
+        icon:'roundRect', itemWidth:11, itemHeight:11, itemGap:16,
+        textStyle:{color:COLORS.text, fontSize:12.5}},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         valueFormatter:v=> v==null?'–':(unit==='percent'?fmtPct(v):fmtMoney(v))},
@@ -168,7 +169,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:34,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -282,7 +283,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:58},
+      grid:{left:56,right:34,top:16,bottom:58},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
