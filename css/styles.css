@@ -149,12 +149,13 @@ input[type=date]{
 }
 .slider-handle:active{cursor:grabbing}
 .range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); line-height:1; margin:0}
-.seg{display:inline-flex; background:var(--bg); border:1px solid var(--border-2); border-radius:9px; padding:3px}
+.seg{display:inline-flex; background:#fff; border:1px solid var(--border-2); border-radius:8px; padding:2px; gap:2px}
 .seg-btn{
-  background:transparent; border:none; color:var(--text-dim); padding:7px 14px;
-  border-radius:7px; cursor:pointer; font-size:12.5px; font-weight:500;
+  background:transparent; border:none; color:var(--text-dim); padding:6px 14px;
+  border-radius:6px; cursor:pointer; font-size:12.5px; font-weight:500; transition:.15s;
 }
-.seg-btn.active{background:var(--accent); color:#fff; font-weight:600}
+.seg-btn:hover{color:var(--text)}
+.seg-btn.active{background:#fff4ea; color:var(--accent-d); font-weight:600; box-shadow:inset 0 0 0 1px #ffd9b5}
 
 /* ---------- KPI ---------- */
 .kpi-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-bottom:22px}
@@ -306,7 +307,7 @@ input[type=date]{
 .mm{background:var(--bg-2); border:1px solid var(--border); border-radius:9px; padding:10px 12px}
 .mm-l{display:block; font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--text-faint)}
 .mm-v{display:block; font-family:var(--mono); font-size:16px; font-weight:700; margin-top:4px}
-.modal-chart{height:440px; width:100%}
+.modal-chart{height:400px; width:100%}
 .modal-foot{display:flex; justify-content:space-between; align-items:center; gap:16px;
   flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:10px}
 .modal-foot .ma-key{display:inline-flex; gap:16px; align-items:center}   /* keep Entry/Exit legend from overlapping */
