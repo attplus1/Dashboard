@@ -103,7 +103,7 @@
         axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
       series:[{
         type:'bar', data:rows.map(r=>({value:+r.value.toFixed(2),
-          itemStyle:{color:r.value>=0?gradH(COLORS.posMid,COLORS.pos):gradH(COLORS.neg,COLORS.negMid),
+          itemStyle:{color:r.value>=0?COLORS.pos:COLORS.neg,
                      borderRadius:[0,3,3,0]}})),
         barMaxWidth:18
       }]
@@ -122,9 +122,9 @@
         itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:gradV(COLORS.pos,COLORS.posMid)}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:gradV(COLORS.neg,COLORS.negMid)}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:gradV('#9aa6b2','#c2c9d2')}}
+          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.pos}},
+          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.neg}},
+          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#9aa6b2'}}
         ]
       }]
     });
@@ -141,9 +141,9 @@
       xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
       yAxis:{type:'value', ...axisBase, axisLabel:{color:COLORS.text, formatter:'{value}d'}},
       series:[{type:'bar', barMaxWidth:48, data:[
-        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:gradV(COLORS.pos,COLORS.posMid)}},
-        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:gradV(COLORS.neg,COLORS.negMid)}},
-        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accentMid)}}
+        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:COLORS.pos}},
+        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:COLORS.neg}},
+        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:COLORS.accent}}
       ], itemStyle:{borderRadius:[4,4,0,0]}}]
     });
   }
@@ -234,7 +234,7 @@
            const top=api.coord([0,api.value(2)]), base=api.coord([0,0]);
            const w=Math.max(1,(x1[0]-x0[0])-1.5);
            return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
-             style:{fill:gradV(COLORS.accent, COLORS.accentMid)}};
+             style:{fill:COLORS.accent}};
          }},
         {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
          itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}
