@@ -176,7 +176,7 @@
          <span>σ <b>${sg}</b></span>
          <span>n <b>${h.n}</b></span>
          <span class="dist-legend">
-           <span class="dl-item"><i class="dl-swatch dl-trades"></i>Trades</span>
+           <span class="dl-item"><i class="dl-swatch dl-trades"></i>Loss / Win</span>
            <span class="dl-item"><i class="dl-swatch dl-density"></i>Density</span>
          </span>`
       : '';
