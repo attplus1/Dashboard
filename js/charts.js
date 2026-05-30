@@ -2,7 +2,7 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#8a96a3',
+    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', accentDim:'#ffe3cc', bench:'#8a96a3',
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
     posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red (pie slices)
@@ -122,9 +122,9 @@
         itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.posMid}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.negMid}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#cdd5de'}}
+          {value:m.nWin, name:'Wins', itemStyle:{color:gradV(COLORS.pos,COLORS.posDim)}},
+          {value:m.nLoss, name:'Losses', itemStyle:{color:gradV(COLORS.neg,COLORS.negDim)}},
+          {value:m.nFlat, name:'Breakeven', itemStyle:{color:gradV('#9aa6b2','#e3e8ef')}}
         ]
       }]
     });
@@ -143,7 +143,7 @@
       series:[{type:'bar', barMaxWidth:48, data:[
         {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:gradV(COLORS.pos,COLORS.posDim)}},
         {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:gradV(COLORS.neg,COLORS.negDim)}},
-        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accent2)}}
+        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accentDim)}}
       ], itemStyle:{borderRadius:[4,4,0,0]}}]
     });
   }
@@ -235,7 +235,7 @@
            const top=api.coord([0,api.value(2)]), base=api.coord([0,0]);
            const w=Math.max(1,(x1[0]-x0[0])-1.5);
            return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
-             style:{fill:'rgba(245,130,30,.55)', stroke:COLORS.accent, lineWidth:1}};
+             style:{fill:gradV(COLORS.accent, COLORS.accentDim), stroke:COLORS.accent, lineWidth:1}};
          }},
         {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
          itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}
