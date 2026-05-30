@@ -38,6 +38,10 @@ body{
 .brand-mark{width:40px; height:40px; border-radius:50%; display:block; box-shadow:var(--shadow-sm)}
 .brand h1{font-size:16px; margin:0; letter-spacing:.2px; color:var(--text)}
 .brand-sub{margin:0; font-size:11.5px; color:var(--text-faint)}
+/* $ P&L / % Return toggle lives in the sticky header so it's reachable while
+   scrolling; it only affects the Overview, so it's hidden on the Screener tab. */
+.header-toggle{display:flex; align-items:center}
+body[data-tab="screener"] .header-toggle{display:none}
 .tabs{display:flex; margin-left:auto; align-items:center}   /* underline tabs, grouped on the right */
 .tab{
   background:transparent; border:none; color:var(--text-faint);

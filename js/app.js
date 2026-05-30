@@ -159,6 +159,7 @@
         document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
         document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
         btn.classList.add('active');
+        document.body.dataset.tab = btn.dataset.tab;   // header toggle hides on screener
         $('#tab-'+btn.dataset.tab).classList.add('active');
         if (btn.dataset.tab==='screener') window.ScreenerTab.render();
         setTimeout(()=>window.Charts.resizeAll(),50);
@@ -232,6 +233,7 @@
 
   // ---------- init ----------
   async function init(){
+    document.body.dataset.tab = 'performance';   // default active tab (header toggle visible)
     wire();
     window.ScreenerTab.wireModal();
     window.PerformanceTab.wireTradeModal();
