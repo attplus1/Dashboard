@@ -407,9 +407,10 @@ def write_candle_files(tickers):
         arr = ",".join(json.dumps([c["date"], round(c["open"], 4), round(c["high"], 4),
                                    round(c["low"], 4), round(c["close"], 4)])
                        for c in candles)
+        # No timestamp in the file: content changes only when the OHLC does, so
+        # git only re-commits tickers whose data actually moved (less churn).
         with open(os.path.join(CANDLES_DIR, f"{safe}.json"), "w") as f:
-            f.write('{"ticker":%s,"asof":%s,"candles":[%s]}'
-                    % (json.dumps(t), json.dumps(TODAY), arr))
+            f.write('{"ticker":%s,"candles":[%s]}' % (json.dumps(t), arr))
         written += 1
     return written
 
