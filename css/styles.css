@@ -211,6 +211,9 @@ input[type=date]{
 .kt-value{font-size:22px; font-weight:700; font-family:var(--mono); letter-spacing:-.5px; margin-top:7px; color:var(--text)}
 .kt-sub{font-size:11px; color:var(--text-dim); margin-top:4px}
 .val-pos{color:var(--pos)} .val-neg{color:var(--neg)}
+/* Win over the hardcoded colour in .kh-ratios b / .kh-foot b (higher specificity) */
+.kh-ratios b.val-pos,.kh-foot b.val-pos{color:var(--pos)}
+.kh-ratios b.val-neg,.kh-foot b.val-neg{color:var(--neg)}
 
 /* ---------- Charts ---------- */
 .chart{width:100%}
