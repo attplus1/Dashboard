@@ -48,10 +48,10 @@
     };
   }
 
-  // Two date labels that follow each slider handle: the LEFT one is left-anchored
-  // (so it reaches the very left edge), the RIGHT one right-anchored (hugs the
-  // right edge). Sits in a separated band below the chart. A faint divider marks
-  // the boundary between the chart and the slider zone.
+  // Two date labels that follow each slider handle: LEFT label left-anchored (its
+  // left edge tracks the left handle), RIGHT label right-anchored (its right edge
+  // tracks the right handle). Absolute x/y positioning only (no `bottom`, which
+  // conflicts with textAlign). Sits in the band below the chart.
   function attachZoomRange(c, dates, gridLeft, gridRight){
     const n = dates.length; if (!n) return;
     const clampI = i => Math.max(0, Math.min(n-1, Math.round(i)));
@@ -59,31 +59,27 @@
       const dz = (c.getOption().dataZoom||[])[0]||{};
       const sp = dz.start!=null ? dz.start : (dz.startValue!=null? dz.startValue/(n-1)*100 : 0);
       const ep = dz.end!=null   ? dz.end   : (dz.endValue!=null?   dz.endValue/(n-1)*100   : 100);
-      const W = c.getWidth();
+      const W = c.getWidth(), H = c.getHeight();
       const x0 = gridLeft, x1 = W - gridRight, span = Math.max(1, x1-x0);
+      const y = H - 40;                                // label baseline (above the slider)
       const hx = p => x0 + p/100*span;                 // handle x for a percent
       const a = dates[clampI(sp/100*(n-1))], b = dates[clampI(ep/100*(n-1))];
+      // Keep the two labels from overlapping in the middle.
+      const lx = Math.max(x0, Math.min(hx(sp), x1-120));
+      const rx = Math.min(x1, Math.max(hx(ep), x0+120));
       c.setOption({ graphic:[
-        // left label: left edge tracks the left handle, never past the right one
-        { id:'zoomL', style:{ text:a||'', x:Math.max(x0, Math.min(hx(sp), x1-58)) } },
-        // right label: right edge tracks the right handle, never past the left one
-        { id:'zoomR', style:{ text:b||'', x:Math.min(x1, Math.max(hx(ep), x0+58)) } }
+        { id:'zoomL', style:{ text:a||'', x:lx, y } },
+        { id:'zoomR', style:{ text:b||'', x:rx, y } }
       ] }, false);
     };
-    // Divider line marking the boundary between the chart and the slider band.
-    const divider = ()=>{ const W=c.getWidth(), H=c.getHeight();
-      return { id:'zoomDiv', type:'line', z:55, silent:true,
-        shape:{ x1:gridLeft, y1:H-52, x2:W-gridRight, y2:H-52 },
-        style:{ stroke:COLORS.grid, lineWidth:1 } }; };
     c.setOption({ graphic:[
-      divider(),
-      { id:'zoomL', type:'text', bottom:30, z:60,
-        style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'left', fontWeight:600 } },
-      { id:'zoomR', type:'text', bottom:30, z:60,
-        style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'right', fontWeight:600 } }
+      { id:'zoomL', type:'text', z:60,
+        style:{ text:'', x:0, y:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'left', fontWeight:600 } },
+      { id:'zoomR', type:'text', z:60,
+        style:{ text:'', x:0, y:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'right', fontWeight:600 } }
     ] }, false);
     c.on('dataZoom', update);
-    c.on('finished', ()=>c.setOption({graphic:[divider()]}, false));  // keep divider sized on resize
+    c.on('finished', update);                          // reposition on resize
     update();
   }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
@@ -209,7 +205,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:82} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:74} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -328,7 +324,7 @@
     const endPct = hi>=n-1 ? 100 : (hi+1)/n*100;
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:82},
+      grid:{left:56,right:18,top:16,bottom:74},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
