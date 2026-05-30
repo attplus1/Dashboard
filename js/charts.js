@@ -30,7 +30,7 @@
   // Bottom range slider for modal charts, styled to match the overview date
   // slider: a slim plain track with an orange fill and white circular handles —
   // no in-slider price line.
-  function zoomSlider(start, end){
+  function zoomSlider(start, end, dates){
     return {
       type:'slider', start, end, height:12, bottom:8,  // clear of the card's bottom edge (handles not clipped)
       filterMode:'filter',                             // recompute series in view -> y-axis rescales on zoom
@@ -43,11 +43,14 @@
         shadowBlur:4, shadowColor:'rgba(0,0,0,.18)' },
       moveHandleSize:0,
       emphasis:{ handleStyle:{ borderColor:COLORS.accentD } },
-      // Shorten the end-date labels (YYYY-MM-DD -> MM-DD) so they don't run off
-      // the chart's right edge; only the month/day is needed for orientation.
-      labelFormatter: v => { const s = String(v); return s.length>=10 ? s.slice(5) : s; },
+      // On a category axis the handle value is the bar INDEX, so map it back to
+      // the date and shorten to MM-DD so it reads clearly and stays on-chart.
+      labelFormatter: v => {
+        const d = dates && dates[Math.round(v)]; const s = String(d || '');
+        return s.length>=10 ? s.slice(5) : s;
+      },
       textStyle:{ color:COLORS.text, fontSize:10,
-        backgroundColor:'rgba(255,255,255,.92)', padding:[2,4], borderRadius:3,
+        backgroundColor:'rgba(255,255,255,.95)', padding:[3,5], borderRadius:3,
         borderColor:COLORS.grid, borderWidth:1 },
       brushSelect:false
     };
@@ -175,7 +178,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:28,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:30,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -196,7 +199,7 @@
           // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
-        ...(big ? [zoomSlider(startPct, 100)] : [])
+        ...(big ? [zoomSlider(startPct, 100, dates)] : [])
       ],
       series:[
         {type:'candlestick', data:ohlc,
@@ -288,7 +291,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:28,top:16,bottom:58},
+      grid:{left:56,right:30,top:16,bottom:58},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -299,7 +302,7 @@
       dataZoom:[
         {type:'inside', start:lo/n*100, end:hi/n*100, filterMode:'filter',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
-        zoomSlider(lo/n*100, hi/n*100)
+        zoomSlider(lo/n*100, hi/n*100, dates)
       ],
       series:[{
         type:'candlestick', data:ohlc,
