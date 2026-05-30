@@ -166,7 +166,8 @@ input[type=date]{
 /* ---------- KPI ---------- */
 /* KPI: a featured Net P&L hero card + a clean grid of minimal stat tiles
    (Robinhood / Stake inspired — lots of whitespace, on-palette only). */
-.kpi-grid{display:grid; grid-template-columns:300px 1fr; gap:16px; margin-bottom:22px; align-items:stretch}
+.kpi-grid{display:grid; grid-template-columns:280px 1fr 280px; gap:16px; margin-bottom:22px; align-items:stretch}
+@media(max-width:1240px){.kpi-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr}}
 
 .kpi-hero{
@@ -186,6 +187,16 @@ input[type=date]{
 .kh-foot span{display:flex; justify-content:space-between; font-family:var(--mono); font-size:13px; color:var(--text);
   border-top:1px solid var(--border); padding-top:7px}
 .kh-foot i{font-style:normal; font-family:'Inter',sans-serif; font-size:11.5px; color:var(--text-dim)}
+
+/* Second hero card: risk-adjusted ratios, one row each */
+.kpi-hero.ratios::before{background:var(--accent)}
+.kpi-hero.ratios .kh-label{margin-bottom:4px}
+.kh-ratios{display:flex; flex-direction:column; justify-content:center; gap:0; margin-top:6px; flex:1}
+.kh-ratios > div{display:flex; align-items:baseline; justify-content:space-between;
+  padding:13px 0; border-top:1px solid var(--border)}
+.kh-ratios > div:first-child{border-top:none}
+.kh-ratios i{font-style:normal; font-size:12.5px; color:var(--text-dim)}
+.kh-ratios b{font-family:var(--mono); font-size:23px; font-weight:700; letter-spacing:-.5px; color:var(--text)}
 
 .kpi-tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
   background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden}

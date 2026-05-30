@@ -97,7 +97,7 @@
       if (base) heroSub = `${pct(net/base*100,1)} on starting equity`;
     }
 
-    // Hero P&L card + a clean tile grid. Subs are kept to one short line max.
+    // Hero Net P&L card.
     const hero = `<div class="kpi-hero ${netPos?'pos':'neg'}">
       <div class="kh-label">Net P&amp;L</div>
       <div class="kh-value ${netPos?'val-pos':'val-neg'}">${money(net,0)}</div>
@@ -109,6 +109,17 @@
       </div>
     </div>`;
 
+    // Hero Risk-adjusted ratios card (same shape as the P&L hero).
+    const ratios = `<div class="kpi-hero ratios">
+      <div class="kh-label">Risk-Adjusted Ratios</div>
+      <div class="kh-ratios">
+        <div><i>Sharpe</i><b>${ratio(m.sharpe)}</b></div>
+        <div><i>Sortino</i><b>${ratio(m.sortino)}</b></div>
+        <div><i>Calmar</i><b>${ratio(m.calmar)}</b></div>
+        <div><i>Information ratio</i><b>${ratio(m.infoRatio)}</b></div>
+      </div>
+    </div>`;
+
     const tiles = [
       kTile('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W · ${m.nLoss}L`, ''),
       kTile('Profit factor', ratio(m.profitFactor), '', ''),
@@ -117,13 +128,9 @@
       kTile('Avg win', money(m.avgWin,0), '', m.avgWin>=0?'pos':''),
       kTile('Avg loss', money(m.avgLoss,0), '', 'neg'),
       kTile('Avg trade', money(m.avgPnl,0), '', m.avgPnl>=0?'pos':'neg'),
-      kTile('Avg hold', m.avgHoldAll.toFixed(1)+'d', '', ''),
-      kTile('Sharpe', ratio(m.sharpe), '', ''),
-      kTile('Sortino', ratio(m.sortino), '', ''),
-      kTile('Calmar', ratio(m.calmar), '', ''),
-      kTile('Info ratio', ratio(m.infoRatio), '', '')
+      kTile('Avg hold', m.avgHoldAll.toFixed(1)+'d', '', '')
     ];
-    $('#kpi-grid').innerHTML = hero + `<div class="kpi-tiles">${tiles.join('')}</div>`;
+    $('#kpi-grid').innerHTML = hero + `<div class="kpi-tiles">${tiles.join('')}</div>` + ratios;
   }
 
   function renderTopTrades(m, unit){
