@@ -193,19 +193,21 @@ input[type=date]{
 .kpi-hero.tinted.pos{background:linear-gradient(155deg, #fff, var(--pos-dim)); border-color:#bfe6d4}
 .kpi-hero.tinted.neg{background:linear-gradient(155deg, #fff, var(--neg-dim)); border-color:#f6cdd2}
 .kpi-hero.tinted .kh-tint{
-  content:''; position:absolute; inset:-80px; z-index:0; opacity:0; pointer-events:none;
+  position:absolute; inset:0; z-index:0; opacity:0; pointer-events:none;
   transition:opacity .25s ease;
+  /* fixed-size diagonal tile -> animating background-position by one tile is
+     perfectly seamless (the earlier glitch came from background-size:200%). */
+  background-size:40px 40px;
 }
-.kpi-hero.tinted.pos .kh-tint{background:repeating-linear-gradient(45deg,
-  rgba(21,163,107,.05) 0, rgba(21,163,107,.05) 26px, rgba(21,163,107,.16) 26px, rgba(21,163,107,.16) 52px)}
-.kpi-hero.tinted.neg .kh-tint{background:repeating-linear-gradient(45deg,
-  rgba(226,59,78,.05) 0, rgba(226,59,78,.05) 26px, rgba(226,59,78,.16) 26px, rgba(226,59,78,.16) 52px)}
-.kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-scroll 2.6s linear infinite}
+.kpi-hero.tinted.pos .kh-tint{background-image:linear-gradient(45deg,
+  rgba(21,163,107,.16) 25%, transparent 25%, transparent 50%,
+  rgba(21,163,107,.16) 50%, rgba(21,163,107,.16) 75%, transparent 75%)}
+.kpi-hero.tinted.neg .kh-tint{background-image:linear-gradient(45deg,
+  rgba(226,59,78,.16) 25%, transparent 25%, transparent 50%,
+  rgba(226,59,78,.16) 50%, rgba(226,59,78,.16) 75%, transparent 75%)}
+.kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-scroll 1.6s linear infinite}
 .kpi-hero.tinted > *:not(.kh-tint){position:relative; z-index:1}   /* content above the overlay */
-@keyframes tint-scroll{
-  from{transform:translate(0,0)}
-  to{transform:translate(-52px,-52px)}   /* one tile (26px stripe x2) along the diagonal */
-}
+@keyframes tint-scroll{ from{background-position:0 0} to{background-position:40px 40px} }
 @media(prefers-reduced-motion:reduce){.kpi-hero.tinted:hover .kh-tint{animation:none}}
 .kpi-hero.tinted.pos::before{background:var(--pos)} .kpi-hero.tinted.neg::before{background:var(--neg)}
 .kpi-hero.tinted.pos .kh-foot span,.kpi-hero.tinted.neg .kh-foot span{border-top-color:rgba(30,40,55,.10)}
