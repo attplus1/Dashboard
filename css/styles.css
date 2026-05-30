@@ -186,23 +186,23 @@ input[type=date]{
 }
 .kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--border-2)}
 .kpi-hero:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(30,40,55,.12)}
-/* Net P&L card: whole background tints green (profit) / red (loss). On hover a
-   soft multi-stop gradient overlay (the card's own tint colour via the .pos/.neg
-   classes) is oversized (background-size:300%) and its position is animated so
-   the coloured band sweeps smoothly around the card. Adapts to the data. */
-.kpi-hero.tinted.pos{background:linear-gradient(155deg, #fff, var(--pos-dim)); border-color:#bfe6d4}
-.kpi-hero.tinted.neg{background:linear-gradient(155deg, #fff, var(--neg-dim)); border-color:#f6cdd2}
+/* Net P&L card: whole background tints green (profit) / red (loss) — white at
+   both the top-left and the bottom-right (where the figures sit). On hover a
+   soft, very light band sweeps across. */
+.kpi-hero.tinted.pos{background:linear-gradient(150deg, #fff 0%, var(--pos-dim) 48%, #f3fbf7 100%); border-color:#bfe6d4}
+.kpi-hero.tinted.neg{background:linear-gradient(150deg, #fff 0%, var(--neg-dim) 48%, #fef5f6 100%); border-color:#f6cdd2}
 .kpi-hero.tinted .kh-tint{
-  position:absolute; inset:0; z-index:0; opacity:0; pointer-events:none;
+  position:absolute; top:0; right:0; bottom:0; left:5px; z-index:0; opacity:0; pointer-events:none;
   transition:opacity .25s ease; background-size:300% 300%;
 }
-/* Band uses the same light tint as the static gradient (--pos-dim/--neg-dim). */
+/* Light sweeping band (low-alpha tint so plenty of white shows through). */
 .kpi-hero.tinted.pos .kh-tint{background-image:linear-gradient(115deg,
-  transparent 0%, var(--pos-dim) 40%, transparent 80%)}
+  transparent 0%, rgba(21,163,107,.10) 42%, transparent 78%)}
 .kpi-hero.tinted.neg .kh-tint{background-image:linear-gradient(115deg,
-  transparent 0%, var(--neg-dim) 40%, transparent 80%)}
+  transparent 0%, rgba(226,59,78,.10) 42%, transparent 78%)}
 .kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-sweep 4s ease-in-out infinite}
 .kpi-hero.tinted > *:not(.kh-tint){position:relative; z-index:1}   /* content above the overlay */
+.kpi-hero.tinted::before{z-index:2}                                /* keep the accent bar above the sweep */
 @keyframes tint-sweep{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
