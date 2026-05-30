@@ -61,8 +61,7 @@
       .forEach(id => { const el=$('#'+id); if (el) el.innerHTML=''; });
     window.PerformanceTab.render({
       recon: state.recon, from: state.from, to: state.to,
-      unit: state.unit, benchmark: state.benchmark, prices: state.prices,
-      tradePrices: state.tradePrices
+      unit: state.unit, benchmark: state.benchmark, prices: state.prices
     });
   }
 
@@ -240,15 +239,13 @@
 
     // Market data loads for the benchmark/prices and the screener, but trade
     // data is NOT auto-loaded — the performance page stays empty until upload.
-    const [bench, prices, momentum, tradePrices] = await Promise.all([
+    const [bench, prices, momentum] = await Promise.all([
       loadJSON('data/benchmark.json'),
-      loadJSON('data/prices.json'), loadJSON('data/momentum.json'),
-      loadJSON('data/trade_prices.json')
+      loadJSON('data/prices.json'), loadJSON('data/momentum.json')
     ]);
 
     state.benchmark = bench;            // { placeholder, asof, data:[{date,close}] }
     state.prices = prices ? prices.prices : null;
-    state.tradePrices = tradePrices ? tradePrices.prices : null;
 
     // Trade history precedence: a statement you uploaded on this device
     // (saved locally) wins; otherwise fall back to the committed repo history.

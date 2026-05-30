@@ -7,8 +7,21 @@
   const ratio = v => v==null?'—':(v===Infinity?'∞':v.toFixed(2));
   const fmtD = d => (d instanceof Date && !isNaN(d.getTime())) ? d.toLocaleDateString('en-AU') : '—';
 
-  let TRADE_PRICES = null;     // { ticker: [[date,o,h,l,c],...] } for trade popups
   let _tradesShown = [];       // trades currently in the table (newest-first)
+  const _candleCache = {};     // ticker -> [[date,o,h,l,c],...] | null (lazy)
+  let _openToken = 0;          // guards against out-of-order async opens
+
+  // Lazily fetch one ticker's slim OHLC from data/candles/<TICKER>.json.
+  async function loadCandles(ticker){
+    if (ticker in _candleCache) return _candleCache[ticker];
+    let rows = null;
+    try {
+      const r = await fetch('data/candles/'+encodeURIComponent(ticker)+'.json', {cache:'no-store'});
+      if (r.ok){ const j = await r.json(); rows = j.candles || j; }
+    } catch(e){ rows = null; }
+    _candleCache[ticker] = rows;
+    return rows;
+  }
 
   function kpiCard(label, value, sub, tone){
     return `<div class="kpi ${tone||''}">
@@ -128,9 +141,9 @@
   }
 
   // ---------- trade entry/exit chart popup ----------
-  function openTradeModal(t){
+  async function openTradeModal(t){
     if (!t) return;
-    const rows = TRADE_PRICES && TRADE_PRICES[t.ticker];
+    const token = ++_openToken;
     $('#trade-modal-ticker').textContent = t.ticker;
     $('#trade-modal-name').textContent   = t.product || '';
     $('#trade-modal-side').textContent   = t.dir.toUpperCase()+' · '+t.exitType;
@@ -144,11 +157,14 @@
       mm('Return', pct(t.ret), cls(t.ret)) +
       mm('Hold', t.holdDays.toFixed(1)+' d');
     const modal = $('#trade-modal'); modal.hidden = false;
-    requestAnimationFrame(()=>{
-      if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, t);
-      else $('#trade-modal-chart').innerHTML =
-        '<div class="chart-empty">Price history isn\'t available for '+t.ticker+'.</div>';
-    });
+    const chartEl = $('#trade-modal-chart');
+    chartEl.innerHTML = '<div class="chart-empty">Loading price history…</div>';
+    const rows = await loadCandles(t.ticker);
+    if (token !== _openToken || modal.hidden) return;   // superseded or closed
+    chartEl.innerHTML = '';
+    if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, t);
+    else chartEl.innerHTML =
+      '<div class="chart-empty">Price history isn\'t available for '+t.ticker+'.</div>';
   }
   function closeTradeModal(){ const m=$('#trade-modal'); if (m) m.hidden = true; }
   function wireTradeModal(){
@@ -165,7 +181,6 @@
   // Full render given the current app state.
   function render(state){
     const { recon, from, to, unit, benchmark, prices } = state;
-    TRADE_PRICES = state.tradePrices || TRADE_PRICES;
     const m = window.Metrics.compute(recon.trades, from, to, recon.balanceSeries, benchmark);
     const commission = window.Metrics.sumInRange(recon.commissions, from, to);
     const funding    = window.Metrics.sumInRange(recon.fundings, from, to);
