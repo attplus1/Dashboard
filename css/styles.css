@@ -120,7 +120,7 @@ body[data-tab="screener"] .header-toggle{display:none}
 
 /* ---------- Controls ---------- */
 .control-panel{padding:16px 22px}
-.control-row{display:flex; gap:28px; align-items:center; flex-wrap:wrap}
+.control-row{display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap}
 .control-label{
   display:block; font-size:11px; text-transform:uppercase; letter-spacing:.6px;
   color:var(--text-faint); margin-bottom:10px;
@@ -225,7 +225,7 @@ input[type=date]{
 .dist-legend{display:inline-flex; gap:16px; margin-left:auto}   /* legend pushed to the right of the stats row */
 .dl-item{display:inline-flex; align-items:center; gap:6px}
 .dl-swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
-.dl-swatch.dl-trades{background:linear-gradient(180deg,var(--accent),#ffb877)}
+.dl-swatch.dl-trades{background:var(--accent)}
 .dl-swatch.dl-density{background:#8a96a3}
 .top-trades{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:760px){.top-trades{grid-template-columns:1fr}}
