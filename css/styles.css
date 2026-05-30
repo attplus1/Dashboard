@@ -264,11 +264,15 @@ input[type=date]{
 .empty-row td{text-align:center; color:var(--text-faint); padding:26px}
 
 /* ---------- Glossary ---------- */
-.glossary-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px 28px}
+.glossary-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
 @media(max-width:760px){.glossary-grid{grid-template-columns:1fr}}
-.gloss-item{font-size:12.5px}
-.gloss-item b{color:var(--accent-d)}
-.gloss-item p{margin:3px 0 0; color:var(--text-dim)}
+.gloss-group{background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px}
+.gloss-group-title{margin:0 0 4px; font-size:11px; font-weight:700; letter-spacing:.5px;
+  text-transform:uppercase; color:var(--accent-d)}
+.gloss-items{display:flex; flex-direction:column}
+.gloss-item{font-size:12.5px; padding:12px 0; border-top:1px solid var(--border)}
+.gloss-item b{display:block; color:var(--text); font-size:13px; margin-bottom:3px}
+.gloss-item p{margin:0; color:var(--text-dim); line-height:1.5}
 
 /* ---------- Empty state (no file uploaded) ---------- */
 .no-data .kpi-grid,
