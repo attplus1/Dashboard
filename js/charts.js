@@ -43,7 +43,13 @@
         shadowBlur:4, shadowColor:'rgba(0,0,0,.18)' },
       moveHandleSize:0,
       emphasis:{ handleStyle:{ borderColor:COLORS.accentD } },
-      textStyle:{ color:COLORS.text, fontSize:10 }, brushSelect:false
+      // Shorten the end-date labels (YYYY-MM-DD -> MM-DD) so they don't run off
+      // the chart's right edge; only the month/day is needed for orientation.
+      labelFormatter: v => { const s = String(v); return s.length>=10 ? s.slice(5) : s; },
+      textStyle:{ color:COLORS.text, fontSize:10,
+        backgroundColor:'rgba(255,255,255,.92)', padding:[2,4], borderRadius:3,
+        borderColor:COLORS.grid, borderWidth:1 },
+      brushSelect:false
     };
   }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
@@ -169,18 +175,17 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:34,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:28,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
       xAxis:{type:'category', data:dates, show:big, boundaryGap:true,
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
-      // Preview: tight linear axis fitted to the visible 7-month window so the
-      // candles fill the card vertically. Expanded: log axis for the full
-      // multi-year history (which spans too many decades for linear).
-      yAxis: big ? {type:'log', show:true, ...axisBase}
-                 : {type:'value', scale:true, show:false},
+      // Linear axis with scale:true so it always re-fits to the VISIBLE window
+      // (paired with dataZoom filterMode:'filter') — candles fill the height at
+      // any zoom. Preview hides the axis; expanded shows it.
+      yAxis:{type:'value', scale:true, show:big, ...(big?axisBase:{})},
       dataZoom:[
         big
           // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
@@ -283,7 +288,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:34,top:16,bottom:58},
+      grid:{left:56,right:28,top:16,bottom:58},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
