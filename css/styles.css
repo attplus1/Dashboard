@@ -186,24 +186,27 @@ input[type=date]{
 }
 .kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent)}
 .kpi-hero:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(30,40,55,.12)}
-/* Net P&L card: whole background tints green (profit) / red (loss). On hover a
-   REPEATING diagonal gradient (built from each card's own tint colour via the
-   .pos/.neg classes) scrolls continuously along the diagonal — it tiles
-   seamlessly so the motion loops without a jump. Adapts to whatever the data
-   produces. */
+/* Net P&L card: whole background tints green (profit) / red (loss). On hover an
+   oversized diagonal repeating-gradient overlay (the card's own tint colour via
+   the .pos/.neg classes) is translated along the diagonal — a seamless scroll
+   with no scaling artifacts. Adapts to whatever the data produces. */
 .kpi-hero.tinted.pos{background:linear-gradient(155deg, #fff, var(--pos-dim)); border-color:#bfe6d4}
 .kpi-hero.tinted.neg{background:linear-gradient(155deg, #fff, var(--neg-dim)); border-color:#f6cdd2}
-.kpi-hero.tinted.pos:hover{
-  background:repeating-linear-gradient(45deg, var(--pos-dim) 0, #c8ead9 28px, var(--pos-dim) 56px);
-  background-size:200% 200%; animation:tint-scroll 2.4s linear infinite}
-.kpi-hero.tinted.neg:hover{
-  background:repeating-linear-gradient(45deg, var(--neg-dim) 0, #f7ccd1 28px, var(--neg-dim) 56px);
-  background-size:200% 200%; animation:tint-scroll 2.4s linear infinite}
-@keyframes tint-scroll{
-  from{background-position:0 0}
-  to{background-position:56px 56px}   /* one full tile (28px stripe x2) along the diagonal */
+.kpi-hero.tinted .kh-tint{
+  content:''; position:absolute; inset:-80px; z-index:0; opacity:0; pointer-events:none;
+  transition:opacity .25s ease;
 }
-@media(prefers-reduced-motion:reduce){.kpi-hero.tinted:hover{animation:none}}
+.kpi-hero.tinted.pos .kh-tint{background:repeating-linear-gradient(45deg,
+  rgba(21,163,107,.05) 0, rgba(21,163,107,.05) 26px, rgba(21,163,107,.16) 26px, rgba(21,163,107,.16) 52px)}
+.kpi-hero.tinted.neg .kh-tint{background:repeating-linear-gradient(45deg,
+  rgba(226,59,78,.05) 0, rgba(226,59,78,.05) 26px, rgba(226,59,78,.16) 26px, rgba(226,59,78,.16) 52px)}
+.kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-scroll 2.6s linear infinite}
+.kpi-hero.tinted > *:not(.kh-tint){position:relative; z-index:1}   /* content above the overlay */
+@keyframes tint-scroll{
+  from{transform:translate(0,0)}
+  to{transform:translate(-52px,-52px)}   /* one tile (26px stripe x2) along the diagonal */
+}
+@media(prefers-reduced-motion:reduce){.kpi-hero.tinted:hover .kh-tint{animation:none}}
 .kpi-hero.tinted.pos::before{background:var(--pos)} .kpi-hero.tinted.neg::before{background:var(--neg)}
 .kpi-hero.tinted.pos .kh-foot span,.kpi-hero.tinted.neg .kh-foot span{border-top-color:rgba(30,40,55,.10)}
 .kh-label{font-size:11px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--text-faint)}

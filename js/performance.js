@@ -102,6 +102,7 @@
 
     // Hero Net P&L card — background tints green (profit) or red (loss).
     const hero = `<div class="kpi-hero tinted ${netPos?'pos':'neg'}">
+      <span class="kh-tint"></span>
       <div class="kh-label">Net P&amp;L</div>
       <div class="kh-value ${netPos?'val-pos':'val-neg'}">${money(net,0)}</div>
       <div class="kh-sub">${heroSub}</div>
