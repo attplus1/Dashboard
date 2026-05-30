@@ -97,15 +97,18 @@
       if (base) heroSub = `${pct(net/base*100,1)} on starting equity`;
     }
 
+    // Colour a ratio value by its sign (positive = good = green, negative = red).
+    const rcls = v => v==null ? '' : (v>0?'val-pos':(v<0?'val-neg':''));
+
     // Hero Net P&L card — background tints green (profit) or red (loss).
     const hero = `<div class="kpi-hero tinted ${netPos?'pos':'neg'}">
       <div class="kh-label">Net P&amp;L</div>
       <div class="kh-value ${netPos?'val-pos':'val-neg'}">${money(net,0)}</div>
       <div class="kh-sub">${heroSub}</div>
       <div class="kh-foot">
-        <span><i>Gross</i>${money(m.totalPnl,0)}</span>
-        <span><i>Commission</i>${money(commission,0)}</span>
-        <span><i>Funding</i>${money(funding,0)}</span>
+        <span><i>Gross</i><b class="${cls(m.totalPnl)}">${money(m.totalPnl,0)}</b></span>
+        <span><i>Commission</i><b class="${cls(commission)}">${money(commission,0)}</b></span>
+        <span><i>Funding</i><b class="${cls(funding)}">${money(funding,0)}</b></span>
       </div>
     </div>`;
 
@@ -115,19 +118,19 @@
       <div class="kh-ratios">
         <div><i>Total trades</i><b>${m.nTotal}</b></div>
         <div><i>Avg trade</i><b class="${cls(m.avgPnl)}">${money(m.avgPnl,0)}</b></div>
-        <div><i>Avg win</i><b class="${m.avgWin>=0?'val-pos':''}">${money(m.avgWin,0)}</b></div>
+        <div><i>Avg win</i><b class="val-pos">${money(m.avgWin,0)}</b></div>
         <div><i>Avg loss</i><b class="val-neg">${money(m.avgLoss,0)}</b></div>
       </div>
     </div>`;
 
-    // Hero Risk-adjusted ratios card.
+    // Hero Risk-adjusted ratios card (values coloured by sign).
     const ratios = `<div class="kpi-hero">
       <div class="kh-label">Risk-Adjusted Ratios</div>
       <div class="kh-ratios">
-        <div><i>Sharpe</i><b>${ratio(m.sharpe)}</b></div>
-        <div><i>Sortino</i><b>${ratio(m.sortino)}</b></div>
-        <div><i>Calmar</i><b>${ratio(m.calmar)}</b></div>
-        <div><i>Information ratio</i><b>${ratio(m.infoRatio)}</b></div>
+        <div><i>Sharpe</i><b class="${rcls(m.sharpe)}">${ratio(m.sharpe)}</b></div>
+        <div><i>Sortino</i><b class="${rcls(m.sortino)}">${ratio(m.sortino)}</b></div>
+        <div><i>Calmar</i><b class="${rcls(m.calmar)}">${ratio(m.calmar)}</b></div>
+        <div><i>Information ratio</i><b class="${rcls(m.infoRatio)}">${ratio(m.infoRatio)}</b></div>
       </div>
     </div>`;
 
