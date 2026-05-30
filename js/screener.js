@@ -74,7 +74,8 @@
         +`(${(DATA.cap_count||0).toLocaleString()} so far); showing the full universe meanwhile.`; }
     else if (DATA.complete===false){ note.className='source-note placeholder';
       note.textContent=`Scan updating… ${(DATA.universe_count||0).toLocaleString()} tickers so far · ${DATA.asof||''}`; }
-    else { note.className='source-note live'; note.textContent='Live scan · '+(DATA.asof||''); }
+    else { note.className='source-note live';
+      note.innerHTML='<span class="live-dot"></span>Live scan · '+(DATA.asof||''); }
 
     const topN = parseInt($('#scr-topn').value,10);
     currentRows = list.slice(0, topN).map(stockOf);

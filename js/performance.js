@@ -126,7 +126,7 @@
     const mu = isDollar ? money(h.mean,0) : pct(h.mean,2);
     const sg = isDollar ? money(h.std,0)  : h.std.toFixed(2)+'%';
     $('#dist-stats').innerHTML = h.n>=2
-      ? `<span>μ <b class="${cls(h.mean)}">${mu}</b></span>
+      ? `<span>μ <b>${mu}</b></span>
          <span>σ <b>${sg}</b></span>
          <span>n <b>${h.n}</b></span>`
       : '';

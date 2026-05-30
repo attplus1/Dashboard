@@ -94,16 +94,29 @@ body[data-tab="screener"] .header-toggle{display:none}
 .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
 
+/* Collapsible panels — click the header to hide/show the contents */
+.panel.collapsible > .panel-head{cursor:pointer; position:relative; padding-right:30px; user-select:none}
+.collapse-toggle{position:absolute; top:-2px; right:-2px; background:none; border:none; cursor:pointer;
+  color:var(--text-faint); font-size:15px; line-height:1; padding:4px}
+.collapse-toggle:hover{color:var(--accent)}
+.collapse-toggle .chev{display:inline-block; transition:transform .2s}
+.panel.collapsed .collapse-toggle .chev{transform:rotate(-90deg)}
+.panel.collapsed > .panel-head{margin-bottom:0}
+.panel.collapsed > .panel-head .panel-desc{display:none}
+.panel.collapsed > :not(.panel-head){display:none}
+
 .intro-panel{display:flex; justify-content:space-between; gap:24px; align-items:flex-start;
   border-left:4px solid var(--accent)}
 .intro-text h2{margin:0 0 8px; font-size:20px}
 .intro-text p{margin:0; color:var(--text-dim); font-size:13px; max-width:820px}
 .source-note{
-  flex-shrink:0; font-size:11.5px; color:var(--text-dim);
-  border:1px dashed var(--border-2); border-radius:10px; padding:8px 12px; max-width:230px;
+  flex-shrink:0; font-size:11.5px; color:var(--text-dim); display:inline-flex; align-items:center;
+  border:1px solid var(--border-2); border-radius:0; padding:7px 11px; max-width:250px; line-height:1.3;
 }
-.source-note.live{border-color:var(--pos); color:var(--pos); background:var(--pos-dim)}
-.source-note.placeholder{border-color:var(--warn); color:#9a6b00; background:#fdf3dd}
+.source-note.live{border-color:var(--pos); color:var(--pos); background:var(--pos-dim); font-weight:500}
+.source-note.placeholder{border-color:var(--warn); color:#9a6b00; background:#fdf3dd; border-style:dashed}
+.source-note .live-dot{display:inline-block; width:8px; height:8px; background:currentColor;
+  margin-right:8px; flex-shrink:0}
 
 /* ---------- Controls ---------- */
 .control-panel{padding:16px 22px}
@@ -208,7 +221,7 @@ input[type=date]{
 
 /* ---------- Distribution + top trades ---------- */
 .dist-stats{display:flex; gap:22px; margin-bottom:6px; font-size:12.5px; color:var(--text-dim)}
-.dist-stats b{font-family:var(--mono); color:var(--text)}
+.dist-stats b{font-family:var(--mono); color:var(--accent); font-weight:400}
 .top-trades{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:760px){.top-trades{grid-template-columns:1fr}}
 .tt-h{margin:0 0 8px; font-size:12.5px; font-weight:600}

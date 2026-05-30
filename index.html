@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=30" />
+  <link rel="stylesheet" href="css/styles.css?v=31" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -95,7 +95,7 @@
     <section class="kpi-grid" id="kpi-grid"></section>
 
     <!-- Open positions -->
-    <section class="panel">
+    <section class="panel collapsible">
       <div class="panel-head">
         <h3>Open Positions</h3>
         <p class="panel-desc">Currently held positions reconstructed from unmatched entries. Unrealised P&amp;L
@@ -118,7 +118,7 @@
     </section>
 
     <!-- P&L per ticker -->
-    <section class="panel">
+    <section class="panel collapsible">
       <div class="panel-head">
         <h3>Realised P&amp;L by Ticker</h3>
         <p class="panel-desc">Net realised result per instrument across all closed trades in the period.
@@ -129,12 +129,12 @@
 
     <!-- Two-up: distribution + holding -->
     <div class="grid-2">
-      <section class="panel">
+      <section class="panel collapsible">
         <div class="panel-head"><h3>Trade Outcomes</h3>
           <p class="panel-desc">Distribution of winning, losing and breakeven trades.</p></div>
         <div id="outcome-chart" class="chart chart-sm"></div>
       </section>
-      <section class="panel">
+      <section class="panel collapsible">
         <div class="panel-head"><h3>Average Holding Period</h3>
           <p class="panel-desc">Mean time in market, split by outcome (calendar days).</p></div>
         <div id="holding-chart" class="chart chart-sm"></div>
@@ -142,7 +142,7 @@
     </div>
 
     <!-- Returns distribution + top trades -->
-    <section class="panel">
+    <section class="panel collapsible">
       <div class="panel-head">
         <h3>Distribution of Trade Outcomes</h3>
         <p class="panel-desc">Histogram of per-trade outcomes with a smoothed density curve (kernel density
@@ -154,7 +154,7 @@
       <div id="dist-chart" class="chart chart-md"></div>
     </section>
 
-    <section class="panel">
+    <section class="panel collapsible">
       <div class="panel-head">
         <h3>Top Trades</h3>
         <p class="panel-desc">The five largest winners and losers in the selected period, ranked by the
@@ -178,7 +178,7 @@
     </section>
 
     <!-- Closed trades table -->
-    <section class="panel">
+    <section class="panel collapsible">
       <div class="panel-head">
         <h3>Closed Trades</h3>
         <p class="panel-desc">Every reconstructed round-trip in the selected period.</p>
@@ -197,7 +197,7 @@
       </div>
     </section>
 
-    <section class="panel metrics-glossary">
+    <section class="panel metrics-glossary collapsible">
       <div class="panel-head"><h3>Metric Definitions</h3></div>
       <div class="glossary-grid" id="glossary"></div>
     </section>
@@ -295,12 +295,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=30"></script>
-  <script src="js/parser.js?v=30"></script>
-  <script src="js/metrics.js?v=30"></script>
-  <script src="js/charts.js?v=30"></script>
-  <script src="js/performance.js?v=30"></script>
-  <script src="js/screener.js?v=30"></script>
-  <script src="js/app.js?v=30"></script>
+  <script src="js/config.js?v=31"></script>
+  <script src="js/parser.js?v=31"></script>
+  <script src="js/metrics.js?v=31"></script>
+  <script src="js/charts.js?v=31"></script>
+  <script src="js/performance.js?v=31"></script>
+  <script src="js/screener.js?v=31"></script>
+  <script src="js/app.js?v=31"></script>
 </body>
 </html>
