@@ -57,7 +57,7 @@
   function renderAll(){
     if (!state.recon){ renderEmpty(); return; }
     $('#tab-performance').classList.remove('no-data');
-    ['equity-chart','ticker-chart','outcome-chart','holding-chart','dist-chart']
+    ['equity-chart','ticker-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart']
       .forEach(id => { const el=$('#'+id); if (el) el.innerHTML=''; });
     window.PerformanceTab.render({
       recon: state.recon, from: state.from, to: state.to,
@@ -79,7 +79,7 @@
         <span class="ec-btn" id="cta-import">＋ Import trades</span>
       </div>`;
     $('#cta-import').addEventListener('click', () => $('#file-input').click());
-    ['ticker-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
+    ['ticker-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
       { const el=$('#'+id); if (el) el.innerHTML='<div class="chart-empty">No data yet</div>'; });
     $('#dist-stats').innerHTML = '';
     $('#open-positions-table tbody').innerHTML = er(13,'Upload a file to see open positions.');

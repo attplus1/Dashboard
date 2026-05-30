@@ -158,6 +158,46 @@
     return rows;
   }
 
+  // Aggregate P&L / mean return by a bucket key derived from each trade's ENTRY
+  // time. `keyOf(date)->index` and `labels` define the buckets; returns one row
+  // per bucket (including empties so the axis is stable).
+  function byEntryBucket(trades, mode, labels, keyOf){
+    const g = labels.map(()=>({pnl:0, rets:[], n:0}));
+    for (const t of trades){
+      const d = t.entryDt;
+      if (!(d instanceof Date) || isNaN(d.getTime())) continue;
+      const k = keyOf(d); if (k==null || k<0 || k>=labels.length) continue;
+      g[k].pnl += t.pnl; g[k].rets.push(t.ret); g[k].n++;
+    }
+    return labels.map((label,i)=>({
+      label, pnl:g[i].pnl, ret:g[i].rets.length?mean(g[i].rets):0, n:g[i].n,
+      value: mode==='percent' ? (g[i].rets.length?mean(g[i].rets):0) : g[i].pnl
+    }));
+  }
+
+  // P&L/return by weekday of entry (Mon–Fri; weekends folded in if present).
+  function byWeekday(trades, mode){
+    const labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    // JS getDay(): 0=Sun..6=Sat -> map to Mon-first index.
+    const rows = byEntryBucket(trades, mode, labels, d=>(d.getDay()+6)%7);
+    // Drop trailing weekend buckets if they have no trades, to keep it tidy.
+    while (rows.length>5 && rows[rows.length-1].n===0) rows.pop();
+    return rows;
+  }
+
+  // P&L/return by hour of entry (only hours that actually occur in the data).
+  function byHour(trades, mode){
+    const labels = Array.from({length:24}, (_,h)=>String(h).padStart(2,'0'));
+    const rows = byEntryBucket(trades, mode, labels, d=>d.getHours());
+    return rows.filter(r=>r.n>0);
+  }
+
+  // The bucket with the highest value (P&L or mean return) — for the KPI tiles.
+  function bestBucket(rows){
+    if (!rows || !rows.length) return null;
+    return rows.reduce((a,b)=> b.value>a.value ? b : a);
+  }
+
   // Histogram of trade outcomes with a smoothed density curve overlaid. `mode`
   // selects the metric: 'dollar' bins per-trade $ P&L, otherwise % return.
   function returnsHistogram(trades, mode){
@@ -202,6 +242,6 @@
              losers:  sorted.slice(-n).reverse().filter(t=>key(t)<0) };
   }
 
-  window.Metrics = { compute, sumInRange, byTicker, returnsHistogram, topTrades,
-                     filterTrades, mean, std };
+  window.Metrics = { compute, sumInRange, byTicker, byWeekday, byHour, bestBucket,
+                     returnsHistogram, topTrades, filterTrades, mean, std };
 })();

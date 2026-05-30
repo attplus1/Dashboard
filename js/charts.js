@@ -137,6 +137,29 @@
     });
   }
 
+  // Vertical category bars coloured by sign — used for P&L/return by weekday or
+  // by hour of entry. `rows` = [{label, value, pnl, ret, n}], `unit` = display.
+  function categoryBarChart(id, rows, unit){
+    const c = init(id); if (!c) return;
+    c.setOption({
+      backgroundColor:'transparent',
+      grid:{left:52, right:18, top:16, bottom:30},
+      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:COLORS.tip,
+        borderColor:COLORS.grid, textStyle:{color:COLORS.textStrong},
+        formatter:params=>{ const p=params[0]; const r=rows[p.dataIndex]||{};
+          return `<b>${p.name}</b><br/>${unit==='percent'?fmtPct(p.value):fmtMoney(p.value)}`
+               + `<br/><span style="color:${COLORS.text}">${r.n||0} trade(s)</span>`; }},
+      xAxis:{type:'category', data:rows.map(r=>r.label), ...axisBase, axisLabel:{...XLABEL}},
+      yAxis:{type:'value', scale:true, ...axisBase,
+        axisLabel:{color:COLORS.text, formatter:v=> unit==='percent'? v+'%' : fmtMoney(v)}},
+      series:[{
+        type:'bar', barMaxWidth:38,
+        data:rows.map(r=>({value:+r.value.toFixed(2),
+          itemStyle:{color:r.value>=0?COLORS.pos:COLORS.neg, borderRadius:[4,4,0,0]}}))
+      }]
+    });
+  }
+
   // Trade outcomes: a big win-rate headline + a 100% win/loss/breakeven split
   // bar. Rendered as HTML (not ECharts) so it inherits the site font.
   function outcomeChart(id, m){
@@ -345,6 +368,6 @@
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
   window.addEventListener('resize', resizeAll);
 
-  window.Charts = { equityChart, tickerChart, outcomeChart, holdingChart,
+  window.Charts = { equityChart, tickerChart, categoryBarChart, outcomeChart, holdingChart,
                     candleCard, returnsDistChart, tradeChart, resizeAll };
 })();
