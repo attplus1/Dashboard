@@ -102,6 +102,7 @@ body[data-tab="screener"] .header-toggle{display:none}
 .collapse-toggle .chev{display:inline-block; transition:transform .2s}
 .panel.collapsed .collapse-toggle .chev{transform:rotate(-90deg)}
 .panel.collapsed > .panel-head{margin-bottom:0}
+.panel.collapsed > .panel-head h3{margin-bottom:0}   /* symmetric top/bottom padding when collapsed */
 .panel.collapsed > .panel-head .panel-desc{display:none}
 .panel.collapsed > :not(.panel-head){display:none}
 
@@ -136,8 +137,9 @@ input[type=date]{
   border-radius:8px; padding:7px 10px; cursor:pointer; font-size:12.5px;
 }
 .ghost-btn:hover{color:var(--accent-d); border-color:var(--accent)}
-.range-slider-wrap{flex:1; min-width:260px; display:flex; flex-direction:column; justify-content:center}
-.range-slider{position:relative; height:34px; display:flex; align-items:center}
+.range-slider-wrap{flex:1; min-width:260px; align-self:stretch;
+  display:flex; flex-direction:column; justify-content:space-between}
+.range-slider{position:relative; height:18px; display:flex; align-items:center}
 .slider-track{position:absolute; left:0; right:0; height:5px; background:var(--bg); border-radius:4px; border:1px solid var(--border)}
 .slider-fill{position:absolute; height:5px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:4px}
 .slider-handle{
@@ -146,7 +148,7 @@ input[type=date]{
   box-shadow:0 2px 6px rgba(31,42,55,.22);
 }
 .slider-handle:active{cursor:grabbing}
-.range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-bottom:3px}
+.range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); line-height:1; margin:0}
 .seg{display:inline-flex; background:var(--bg); border:1px solid var(--border-2); border-radius:9px; padding:3px}
 .seg-btn{
   background:transparent; border:none; color:var(--text-dim); padding:7px 14px;
