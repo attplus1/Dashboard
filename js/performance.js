@@ -86,9 +86,12 @@
       ${sub?`<div class="kt-sub">${sub}</div>`:''}</div>`;
   }
 
-  function renderKPIs(m, commission, funding){
+  function renderKPIs(m, commission, funding, unit){
     const net = m.totalPnl + commission + funding;
     const C = window.CONFIG;
+    const fmtVal = v => unit==='percent' ? pct(v,1) : money(v,0);
+    const bestDay = window.Metrics.bestBucket(window.Metrics.byWeekday(m.trades, unit));
+    const bestHour = window.Metrics.bestBucket(window.Metrics.byHour(m.trades, unit));
     const netPos = net>=0;
     // Headline return on starting equity, if we have an equity curve.
     let heroSub = `Gross ${money(m.totalPnl,0)} · fees ${money(commission+funding,0)}`;
@@ -137,10 +140,14 @@
 
     // Smaller stat tiles for the remaining metrics (original-style grid).
     const tiles = [
-      kTile('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W · ${m.nLoss}L`, ''),
       kTile('Profit factor', ratio(m.profitFactor), '', ''),
       kTile('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg'),
-      kTile('Avg hold', m.avgHoldAll.toFixed(1)+'d', '', '')
+      kTile('Most profitable day',
+            bestDay ? bestDay.label : '—',
+            bestDay ? fmtVal(bestDay.value) : '', bestDay && bestDay.value>=0?'pos':(bestDay?'neg':'')),
+      kTile('Most profitable hour',
+            bestHour ? bestHour.label+':00' : '—',
+            bestHour ? fmtVal(bestHour.value) : '', bestHour && bestHour.value>=0?'pos':(bestHour?'neg':''))
     ];
     $('#kpi-grid').innerHTML =
       `<div class="kpi-heroes">${hero}${activity}${ratios}</div>` +
@@ -332,9 +339,11 @@
     const m = window.Metrics.compute(recon.trades, from, to, recon.balanceSeries, benchmark);
     const commission = window.Metrics.sumInRange(recon.commissions, from, to);
     const funding    = window.Metrics.sumInRange(recon.fundings, from, to);
-    renderKPIs(m, commission, funding);
+    renderKPIs(m, commission, funding, unit);
     window.Charts.equityChart('equity-chart', m, unit);
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
+    window.Charts.categoryBarChart('weekday-chart', window.Metrics.byWeekday(m.trades, unit), unit);
+    window.Charts.categoryBarChart('hour-chart', window.Metrics.byHour(m.trades, unit), unit);
     window.Charts.outcomeChart('outcome-chart', m);
     window.Charts.holdingChart('holding-chart', m);
     renderDistribution(m, unit);

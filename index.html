@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=77" />
+  <link rel="stylesheet" href="css/styles.css?v=78" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -120,6 +120,20 @@
       </div>
       <div id="ticker-chart" class="chart chart-md"></div>
     </section>
+
+    <!-- Two-up: by entry weekday + by entry hour -->
+    <div class="grid-2">
+      <section class="panel collapsible">
+        <div class="panel-head"><h3>By Entry Weekday</h3>
+          <p class="panel-desc">Performance by the day of week a trade was entered.</p></div>
+        <div id="weekday-chart" class="chart chart-sm"></div>
+      </section>
+      <section class="panel collapsible">
+        <div class="panel-head"><h3>By Entry Hour</h3>
+          <p class="panel-desc">Performance by the hour of day a trade was entered.</p></div>
+        <div id="hour-chart" class="chart chart-sm"></div>
+      </section>
+    </div>
 
     <!-- Two-up: outcomes + holding -->
     <div class="grid-2">
@@ -284,12 +298,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=77"></script>
-  <script src="js/parser.js?v=77"></script>
-  <script src="js/metrics.js?v=77"></script>
-  <script src="js/charts.js?v=77"></script>
-  <script src="js/performance.js?v=77"></script>
-  <script src="js/screener.js?v=77"></script>
-  <script src="js/app.js?v=77"></script>
+  <script src="js/config.js?v=78"></script>
+  <script src="js/parser.js?v=78"></script>
+  <script src="js/metrics.js?v=78"></script>
+  <script src="js/charts.js?v=78"></script>
+  <script src="js/performance.js?v=78"></script>
+  <script src="js/screener.js?v=78"></script>
+  <script src="js/app.js?v=78"></script>
 </body>
 </html>
