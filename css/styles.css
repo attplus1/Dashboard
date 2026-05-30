@@ -136,7 +136,7 @@ input[type=date]{
   border-radius:8px; padding:7px 10px; cursor:pointer; font-size:12.5px;
 }
 .ghost-btn:hover{color:var(--accent-d); border-color:var(--accent)}
-.range-slider-wrap{flex:1; min-width:260px}
+.range-slider-wrap{flex:1; min-width:260px; display:flex; flex-direction:column; justify-content:center}
 .range-slider{position:relative; height:34px; display:flex; align-items:center}
 .slider-track{position:absolute; left:0; right:0; height:5px; background:var(--bg); border-radius:4px; border:1px solid var(--border)}
 .slider-fill{position:absolute; height:5px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:4px}
@@ -146,7 +146,7 @@ input[type=date]{
   box-shadow:0 2px 6px rgba(31,42,55,.22);
 }
 .slider-handle:active{cursor:grabbing}
-.range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:2px}
+.range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-bottom:3px}
 .seg{display:inline-flex; background:var(--bg); border:1px solid var(--border-2); border-radius:9px; padding:3px}
 .seg-btn{
   background:transparent; border:none; color:var(--text-dim); padding:7px 14px;
@@ -220,8 +220,13 @@ input[type=date]{
   color:var(--text-faint); font-size:13px}
 
 /* ---------- Distribution + top trades ---------- */
-.dist-stats{display:flex; gap:22px; margin-bottom:6px; font-size:12.5px; color:var(--text-dim)}
+.dist-stats{display:flex; align-items:center; gap:22px; margin-bottom:6px; font-size:12.5px; color:var(--text-dim)}
 .dist-stats b{font-family:var(--mono); color:var(--accent); font-weight:400}
+.dist-legend{display:inline-flex; gap:16px; margin-left:auto}   /* legend pushed to the right of the stats row */
+.dl-item{display:inline-flex; align-items:center; gap:6px}
+.dl-swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
+.dl-swatch.dl-trades{background:linear-gradient(180deg,var(--accent),#ffb877)}
+.dl-swatch.dl-density{background:#8a96a3}
 .top-trades{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:760px){.top-trades{grid-template-columns:1fr}}
 .tt-h{margin:0 0 8px; font-size:12.5px; font-weight:600}
