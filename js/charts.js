@@ -211,18 +211,16 @@
     if (!h.bins.length){ document.getElementById(id).innerHTML =
       '<div class="chart-empty">Not enough trades to plot a distribution</div>'; return; }
     const isDollar = h.mode==='dollar';
-    const axisName = isDollar ? 'P&L ($)' : 'Return %';
     const fmtAxis  = isDollar ? (v=>fmtMoney(v)) : (v=>v+'%');
     const fmtMid   = isDollar ? (v=>fmtMoney(v)) : (v=>v.toFixed(1)+'%');
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:46,right:18,top:16,bottom:38},
+      grid:{left:46,right:18,top:16,bottom:24},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         formatter:p=>{ const b=p.find(x=>x.seriesName==='Trades');
           return (b? `${isDollar?'P&L':'Return'} ≈ ${fmtMid(+b.value[3])}<br/>${b.value[2]} trade(s)` : ''); }},
-      xAxis:{type:'value', name:axisName, nameLocation:'middle', nameGap:24,
-        nameTextStyle:{color:COLORS.text}, ...axisBase,
+      xAxis:{type:'value', ...axisBase,
         axisLabel:{...XLABEL, formatter:v=>fmtAxis(v)}},
       yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
       series:[
