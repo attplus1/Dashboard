@@ -61,11 +61,17 @@
     const toUnit = (eq, base) => unit==='percent' ? (eq/base-1)*100 : eq;
     const base = m.equity.length ? m.equity[0].equity : 1;
     const acct = m.equity.map(e=>+toUnit(e.equity, base).toFixed(2));
+    // Colour the account curve by performance over the window: green if it
+    // finished up, red if down.
+    const lastEqRaw = m.equity.length ? m.equity[m.equity.length-1].equity : base;
+    const acctUp = lastEqRaw >= base;
+    const lineCol = acctUp ? COLORS.pos : COLORS.neg;
+    const areaRGB = acctUp ? '21,163,107' : '226,59,78';
     const series = [{
       name:'Account', type:'line', data:acct, smooth:false, showSymbol:false,
-      itemStyle:{color:COLORS.accent}, lineStyle:{width:2.4, color:COLORS.accent},
+      itemStyle:{color:lineCol}, lineStyle:{width:2.4, color:lineCol},
       areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,
-        [{offset:0,color:'rgba(245,130,30,.24)'},{offset:1,color:'rgba(245,130,30,0)'}])}
+        [{offset:0,color:`rgba(${areaRGB},.22)`},{offset:1,color:`rgba(${areaRGB},0)`}])}
     }];
     if (m.benchEquity){
       const bbase = m.benchEquity.find(v=>v!=null) || 1;
@@ -90,7 +96,7 @@
     ];
     c.setOption({
       backgroundColor:'transparent',
-      color:[COLORS.accent, COLORS.bench],
+      color:[lineCol, COLORS.bench],
       grid:{left:64,right:18,top:86,bottom:34},   // room for the equity headline + a clear gap
       graphic:headline,
       legend:{data:series.map(s=>s.name), top:0, right:0,
