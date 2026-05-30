@@ -32,7 +32,7 @@
   // no in-slider price line.
   function zoomSlider(start, end){
     return {
-      type:'slider', start, end, height:10, bottom:16,
+      type:'slider', start, end, height:12, bottom:4,
       showDataShadow:false,                            // drop the mini price line
       backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
       fillerColor:'rgba(245,130,30,.22)',
@@ -167,7 +167,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:64} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:52} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -280,7 +280,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:60},
+      grid:{left:56,right:18,top:16,bottom:52},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
