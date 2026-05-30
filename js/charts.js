@@ -3,7 +3,7 @@
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
     accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', accentMid:'#ffb877', bench:'#8a96a3',
-    densityLine:'#c2c9d2',   // lighter site grey (matches --border-2 family) for the distribution density
+    densityLine:'#dfe4ea',   // very light site grey for the distribution density overlay
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
     posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
@@ -259,7 +259,7 @@
              style:{fill}};
          }},
         {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
-         itemStyle:{color:COLORS.densityLine}, lineStyle:{color:COLORS.densityLine,width:2}}
+         itemStyle:{color:COLORS.densityLine}, lineStyle:{color:COLORS.densityLine,width:2.5}}
       ]
     });
   }
