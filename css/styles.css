@@ -15,9 +15,10 @@
 html,body{margin:0;padding:0}
 body{
   background:
-    radial-gradient(1100px 520px at 88% -10%, rgba(245,130,30,.10), transparent 60%),
-    radial-gradient(800px 480px at -5% 0%, rgba(245,130,30,.05), transparent 55%),
-    var(--bg);
+    radial-gradient(1200px 560px at 90% -8%, rgba(245,130,30,.13), transparent 60%),
+    radial-gradient(900px 520px at -6% 2%, rgba(59,111,176,.07), transparent 55%),
+    linear-gradient(180deg, #f3f6fa 0%, var(--bg) 38%, #e7ebf1 100%);
+  background-attachment:fixed;
   color:var(--text);
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased;
@@ -248,9 +249,17 @@ input[type=date]{
 .screener-stat .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--text-faint)}
 .screener-stat .val{font-size:16px; font-weight:600; font-family:var(--mono)}
 .screener-stat select{
+  -webkit-appearance:none; -moz-appearance:none; appearance:none;
   background:#fff; border:1px solid var(--border-2); color:var(--text);
-  border-radius:8px; padding:6px 10px; font-size:13px;
+  border-radius:8px; padding:7px 32px 7px 12px; font-size:13px; font-weight:500;
+  cursor:pointer; transition:border-color .15s, box-shadow .15s;
+  /* custom caret */
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2.5 4.2l3.5 3.6 3.5-3.6' fill='none' stroke='%235a6776' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat; background-position:right 11px center;
 }
+.screener-stat select:hover{border-color:var(--accent-2)}
+.screener-stat select:focus{outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(245,130,30,.15)}
 .cards-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:18px}
 .mom-card{
   background:var(--panel);
