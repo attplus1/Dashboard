@@ -96,7 +96,7 @@ body[data-tab="screener"] .header-toggle{display:none}
   border:1px solid var(--border); border-radius:var(--radius);
   padding:20px 22px; margin-bottom:22px; box-shadow:var(--shadow);
 }
-.panel-head{margin-bottom:14px}
+.panel-head{margin-bottom:16px}
 .panel-head h3{margin:0 0 4px; font-size:15px}
 .panel-desc{margin:0; color:var(--text-dim); font-size:12.5px; max-width:880px}
 .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:22px}
@@ -272,7 +272,7 @@ input[type=date]{
   color:var(--text-faint); font-size:13px}
 
 /* ---------- Distribution + top trades ---------- */
-.dist-stats{display:flex; align-items:center; gap:22px; margin-bottom:6px; font-size:12.5px; color:var(--text-dim)}
+.dist-stats{display:flex; align-items:center; gap:22px; margin-bottom:16px; font-size:12.5px; color:var(--text-dim)}
 .dist-stats b{font-family:var(--mono); color:var(--accent); font-weight:400}
 .dist-legend{display:inline-flex; gap:16px; margin-left:auto}   /* legend pushed to the right of the stats row */
 .dl-item{display:inline-flex; align-items:center; gap:6px}
