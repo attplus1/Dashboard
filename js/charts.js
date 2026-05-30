@@ -2,7 +2,7 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#3b6fb0',
+    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#8a96a3',
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
@@ -211,7 +211,7 @@
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:46,right:18,top:24,bottom:38},
-      legend:{top:0,right:0,data:['Trades','Normal fit'],textStyle:{color:COLORS.text},icon:'roundRect'},
+      legend:{top:0,right:0,data:['Trades','Density'],textStyle:{color:COLORS.text},icon:'roundRect'},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         formatter:p=>{ const b=p.find(x=>x.seriesName==='Trades');
@@ -231,7 +231,7 @@
            return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
              style:{fill:'rgba(245,130,30,.55)', stroke:COLORS.accent, lineWidth:1}};
          }},
-        {name:'Normal fit', type:'line', smooth:true, showSymbol:false, data:h.normal,
+        {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
          itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}
       ]
     });
