@@ -329,8 +329,13 @@
   }
 
   function renderGlossary(){
-    $('#glossary').innerHTML = window.CONFIG.GLOSSARY.map(([t,d])=>
-      `<div class="gloss-item"><b>${t}</b><p>${d}</p></div>`).join('');
+    $('#glossary').innerHTML = window.CONFIG.GLOSSARY.map(([group, items])=>`
+      <div class="gloss-group">
+        <h4 class="gloss-group-title">${group}</h4>
+        <div class="gloss-items">
+          ${items.map(([t,d])=>`<div class="gloss-item"><b>${t}</b><p>${d}</p></div>`).join('')}
+        </div>
+      </div>`).join('');
   }
 
   // Full render given the current app state.

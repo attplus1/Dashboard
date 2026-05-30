@@ -55,19 +55,35 @@ window.CONFIG = {
     'Woolworths Group Ltd': 'WOW'
   },
 
+  // Grouped glossary. Audience: equities traders who know the basics but not
+  // risk-adjusted ratios — so those get the fullest, plain-English treatment,
+  // and obvious terms (win rate, avg win/loss, etc.) are omitted.
   GLOSSARY: [
-    ['Total P&L', 'Sum of realised profit and loss across all closed trades in the period (gross of commission).'],
-    ['Win rate', 'Winning trades divided by total closed trades.'],
-    ['Profit factor', 'Gross profit ÷ gross loss. Above 1.0 is profitable; 2.0+ is strong.'],
-    ['Avg win / loss', 'Mean P&L of winning trades and of losing trades, shown separately.'],
-    ['Max drawdown', 'Largest peak-to-trough decline of the equity curve over the period.'],
-    ['Sharpe ratio', 'Annualised excess return (over the risk-free rate) per unit of total volatility, computed from the daily equity return series.'],
-    ['Information ratio', 'Annualised active return versus the ASX 200 benchmark, divided by tracking error (volatility of the active return).'],
-    ['Avg holding period', 'Mean calendar days a position is held, split by winners, losers and overall.'],
-    ['Total commissions', 'All commission charges paid in the period, taken directly from the statement.'],
-    ['Total funding', 'Overnight financing ("Holding Cost") on leveraged positions over the period. Per-trade P&L and returns are GROSS of this — it is shown separately and folded into Net P&L.'],
-    ['Net P&L', 'Gross realised P&L minus commission and overnight funding.'],
-    ['Equity curve', 'The actual account balance over time (straight from the statement), so the starting point is robust to re-uploads. The ASX 200 is rebased to the same starting value.'],
-    ['Return %', 'Per-trade P&L as a percentage of the notional position value at entry (entry price × shares).']
+    ['Risk-adjusted ratios', [
+      ['Sharpe ratio',
+       'How much return you earned above a "safe" cash rate for each unit of overall volatility (how much the account bounces around). It answers "was the return worth the bumpiness?" Higher is better — as a rough guide, above 1 is good, above 2 is excellent. Can be negative if you underperformed cash.'],
+      ['Sortino ratio',
+       'Like Sharpe, but it only counts downside volatility — the losing days. Big upside swings are not penalised, since you don\'t mind those. It better reflects "bad" risk; higher is better.'],
+      ['Calmar ratio',
+       'Annualised return divided by the worst peak-to-trough drop (max drawdown). It answers "how much did I make relative to the most painful loss along the way?" Higher is better.'],
+      ['Information ratio',
+       'How much you beat (or trailed) the ASX 200 benchmark, divided by how consistently you did so. It measures skill at outperforming the index rather than just riding the market — higher means more reliable outperformance.'],
+      ['Max drawdown',
+       'The largest peak-to-trough fall in the account over the period, shown as a % and in dollars. A gauge of the worst losing stretch you would have had to sit through.']
+    ]],
+    ['How figures are calculated', [
+      ['Gross vs Net P&L',
+       'Gross P&L is the realised result straight from the statement, before costs. Net P&L subtracts commission and overnight funding.'],
+      ['Total funding',
+       'Overnight financing ("Holding Cost") charged on leveraged positions held overnight. Per-trade P&L and returns are shown gross of this; it is tracked separately and folded into Net P&L.'],
+      ['Return %',
+       'A trade\'s P&L as a percentage of its notional value at entry (entry price × shares) — i.e. the move on the full position size, not on margin posted.'],
+      ['Profit factor',
+       'Gross profit divided by gross loss. Above 1.0 means winners outweigh losers; 2.0+ is strong.'],
+      ['Equity curve',
+       'Your actual account balance over time, taken directly from the statement. The ASX 200 is rebased to your starting balance so the two lines are directly comparable.'],
+      ['Most profitable day / hour',
+       'The entry weekday and hour with the highest total P&L (or average return, per the display toggle), drawn from the two charts above.']
+    ]]
   ]
 };
