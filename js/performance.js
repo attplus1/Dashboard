@@ -200,7 +200,10 @@
     const token = ++_openToken;
     $('#trade-modal-ticker').textContent = cfg.ticker;
     $('#trade-modal-name').textContent   = cfg.name || '';
-    $('#trade-modal-side').textContent   = cfg.side || '';
+    const dirLabel = cfg.dir==='short' ? '▼ SHORT' : '▲ LONG';
+    $('#trade-modal-side').innerHTML =
+      `<span class="pos-badge ${cfg.dir}">${dirLabel}</span>`
+      + (cfg.sideNote ? `<span class="side-note">${cfg.sideNote}</span>` : '');
     const mm = (l,v,tone)=>`<div class="mm"><span class="mm-l">${l}</span>
       <span class="mm-v ${tone||''}">${v}</span></div>`;
     $('#trade-modal-metrics').innerHTML = cfg.metrics.map(([l,v,tone])=>mm(l,v,tone)).join('');
@@ -224,7 +227,7 @@
   function openTradeModal(t){
     if (!t) return;
     openChartModal({
-      ticker:t.ticker, name:t.product, side:t.dir.toUpperCase()+' · '+t.exitType,
+      ticker:t.ticker, name:t.product, dir:t.dir, sideNote:t.exitType,
       metrics:[
         ['Entry', t.entryPx.toFixed(3)+' · '+fmtD(t.entryDt)],
         ['Exit',  t.exitPx.toFixed(3)+' · '+fmtD(t.exitDt)],
@@ -247,7 +250,7 @@
     const days = (p.dt instanceof Date && !isNaN(p.dt.getTime()))
       ? Math.max(0,Math.round((now-p.dt)/86400000)) : '—';
     openChartModal({
-      ticker:p.ticker, name:p.product, side:p.dir.toUpperCase()+' · OPEN',
+      ticker:p.ticker, name:p.product, dir:p.dir, sideNote:'Open position',
       metrics:[
         ['Entry', p.price.toFixed(3)+' · '+fmtD(p.dt)],
         ['Last', px!=null ? px.toFixed(3) : '—'],

@@ -284,6 +284,26 @@ input[type=date]{
 .modal-chart{height:440px; width:100%}
 .modal-foot{display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-dim); margin-top:8px}
 
+/* Trade modal: chart on the left, metric cards stacked on the right */
+.trade-modal-body{display:flex; gap:16px; align-items:stretch; margin:16px 0}
+.trade-modal-body .modal-chart{flex:1; min-width:0; width:auto; margin:0}
+.trade-modal-body .modal-metrics{
+  display:flex; flex-direction:column; gap:9px;
+  width:210px; flex-shrink:0; margin:0; grid-template-columns:none;
+}
+@media(max-width:720px){
+  .trade-modal-body{flex-direction:column}
+  .trade-modal-body .modal-metrics{width:auto; flex-direction:row; flex-wrap:wrap}
+  .trade-modal-body .modal-metrics .mm{flex:1; min-width:120px}
+}
+/* Clear long/short badge in the trade modal header (replaces the orange text) */
+#trade-modal-side{display:flex; align-items:center; gap:10px}
+.pos-badge{display:inline-block; padding:4px 12px; border-radius:999px;
+  font-size:12.5px; font-weight:700; letter-spacing:.4px}
+.pos-badge.long{background:var(--pos-dim); color:var(--pos)}
+.pos-badge.short{background:var(--neg-dim); color:var(--neg)}
+.side-note{font-family:var(--mono); font-size:11.5px; color:var(--text-dim)}
+
 /* ---------- Footer ---------- */
 .app-footer{
   max-width:1320px; margin:0 auto; padding:18px 28px 40px;
