@@ -77,50 +77,53 @@
       <div class="k-sub">${sub||''}</div></div>`;
   }
 
-  // One metric cell inside a group. tone -> pos/neg accent on the value.
-  function kCell(label, value, sub, tone){
-    return `<div class="kc ${tone||''}">
-      <div class="kc-label">${label}</div>
-      <div class="kc-value ${tone==='pos'?'val-pos':tone==='neg'?'val-neg':''}">${value}</div>
-      <div class="kc-sub">${sub||''}</div></div>`;
-  }
-  // A titled group of metric cells with its own accent colour.
-  function kGroup(title, accent, cells){
-    return `<section class="kgroup" style="--kg:${accent}">
-      <div class="kg-title">${title}</div>
-      <div class="kg-cells">${cells.join('')}</div></section>`;
+  // Minimal stat tile (Robinhood/Stake style): small label, big value, optional
+  // tiny sub. tone -> pos/neg colours the value.
+  function kTile(label, value, sub, tone, span){
+    return `<div class="ktile${span?' span2':''}">
+      <div class="kt-label">${label}</div>
+      <div class="kt-value ${tone==='pos'?'val-pos':tone==='neg'?'val-neg':''}">${value}</div>
+      ${sub?`<div class="kt-sub">${sub}</div>`:''}</div>`;
   }
 
   function renderKPIs(m, commission, funding){
     const net = m.totalPnl + commission + funding;
     const C = window.CONFIG;
-    const groups = [
-      kGroup('Profit &amp; Loss', 'var(--pos)', [
-        kCell('Gross P&L', money(m.totalPnl,0), 'realised, before fees', m.totalPnl>=0?'pos':'neg'),
-        kCell('Net P&L', money(net,0), 'after commission &amp; funding', net>=0?'pos':'neg'),
-        kCell('Total commission', money(commission,0), 'paid in period', commission<0?'neg':''),
-        kCell('Total funding', money(funding,0), 'overnight financing', funding<0?'neg':'')
-      ]),
-      kGroup('Trade Stats', 'var(--accent)', [
-        kCell('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W : ${m.nLoss}L`, ''),
-        kCell('Total trades', String(m.nTotal), `${m.nWin} win · ${m.nLoss} loss · ${m.nFlat} flat`, ''),
-        kCell('Profit factor', ratio(m.profitFactor), `GP ${money(m.grossProfit,0)} / GL ${money(m.grossLoss,0)}`, ''),
-        kCell('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg')
-      ]),
-      kGroup('Averages', '#3b6fb0', [
-        kCell('Avg win', money(m.avgWin,0), 'mean winning trade', m.avgWin>=0?'pos':''),
-        kCell('Avg loss', money(m.avgLoss,0), 'mean losing trade', 'neg'),
-        kCell('Avg trade', money(m.avgPnl,0), 'mean of all trades', m.avgPnl>=0?'pos':'neg'),
-        kCell('Avg hold', m.avgHoldAll.toFixed(1)+'d', `W ${m.avgHoldWin.toFixed(1)}d · L ${m.avgHoldLoss.toFixed(1)}d`, '')
-      ]),
-      kGroup('Risk-Adjusted', '#8a5cd0', [
-        kCell('Sharpe', ratio(m.sharpe), 'excess ÷ total vol', ''),
-        kCell('Sortino', ratio(m.sortino), 'excess ÷ downside vol', ''),
-        kCell('Calmar', ratio(m.calmar), 'ann. return ÷ max DD', ''),
-        kCell('Information ratio', ratio(m.infoRatio), 'vs '+C.BENCHMARK_LABEL, '')
-      ])
+    const netPos = net>=0;
+    // Headline return on starting equity, if we have an equity curve.
+    let heroSub = `Gross ${money(m.totalPnl,0)} · fees ${money(commission+funding,0)}`;
+    if (m.equity && m.equity.length){
+      const base = m.equity[0].equity;
+      if (base) heroSub = `${pct(net/base*100,1)} on starting equity`;
+    }
+
+    // Hero P&L card + a clean tile grid. Subs are kept to one short line max.
+    const hero = `<div class="kpi-hero ${netPos?'pos':'neg'}">
+      <div class="kh-label">Net P&amp;L</div>
+      <div class="kh-value ${netPos?'val-pos':'val-neg'}">${money(net,0)}</div>
+      <div class="kh-sub">${heroSub}</div>
+      <div class="kh-foot">
+        <span><i>Gross</i>${money(m.totalPnl,0)}</span>
+        <span><i>Commission</i>${money(commission,0)}</span>
+        <span><i>Funding</i>${money(funding,0)}</span>
+      </div>
+    </div>`;
+
+    const tiles = [
+      kTile('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W · ${m.nLoss}L`, ''),
+      kTile('Profit factor', ratio(m.profitFactor), '', ''),
+      kTile('Total trades', String(m.nTotal), `${m.nFlat} flat`, ''),
+      kTile('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg'),
+      kTile('Avg win', money(m.avgWin,0), '', m.avgWin>=0?'pos':''),
+      kTile('Avg loss', money(m.avgLoss,0), '', 'neg'),
+      kTile('Avg trade', money(m.avgPnl,0), '', m.avgPnl>=0?'pos':'neg'),
+      kTile('Avg hold', m.avgHoldAll.toFixed(1)+'d', '', ''),
+      kTile('Sharpe', ratio(m.sharpe), '', ''),
+      kTile('Sortino', ratio(m.sortino), '', ''),
+      kTile('Calmar', ratio(m.calmar), '', ''),
+      kTile('Info ratio', ratio(m.infoRatio), '', '')
     ];
-    $('#kpi-grid').innerHTML = groups.join('');
+    $('#kpi-grid').innerHTML = hero + `<div class="kpi-tiles">${tiles.join('')}</div>`;
   }
 
   function renderTopTrades(m, unit){
