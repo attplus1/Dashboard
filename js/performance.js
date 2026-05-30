@@ -77,27 +77,50 @@
       <div class="k-sub">${sub||''}</div></div>`;
   }
 
+  // One metric cell inside a group. tone -> pos/neg accent on the value.
+  function kCell(label, value, sub, tone){
+    return `<div class="kc ${tone||''}">
+      <div class="kc-label">${label}</div>
+      <div class="kc-value ${tone==='pos'?'val-pos':tone==='neg'?'val-neg':''}">${value}</div>
+      <div class="kc-sub">${sub||''}</div></div>`;
+  }
+  // A titled group of metric cells with its own accent colour.
+  function kGroup(title, accent, cells){
+    return `<section class="kgroup" style="--kg:${accent}">
+      <div class="kg-title">${title}</div>
+      <div class="kg-cells">${cells.join('')}</div></section>`;
+  }
+
   function renderKPIs(m, commission, funding){
     const net = m.totalPnl + commission + funding;
-    const cards = [
-      kpiCard('Gross P&L', money(m.totalPnl,0), 'realised, before fees',
-              m.totalPnl>=0?'pos':'neg'),
-      kpiCard('Net P&L', money(net,0), 'after commission & funding', net>=0?'pos':'neg'),
-      kpiCard('Total commission', money(commission,0), 'paid in period', commission<0?'neg':''),
-      kpiCard('Total funding', money(funding,0), 'overnight financing', funding<0?'neg':''),
-      kpiCard('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W : ${m.nLoss}L`, ''),
-      kpiCard('Total trades', String(m.nTotal), `${m.nWin} win · ${m.nLoss} loss · ${m.nFlat} flat`, ''),
-      kpiCard('Profit factor', ratio(m.profitFactor),
-              `GP ${money(m.grossProfit,0)} / GL ${money(m.grossLoss,0)}`, ''),
-      kpiCard('Avg win / loss', money(m.avgWin,0),
-              `loss ${money(m.avgLoss,0)} · avg ${money(m.avgPnl,0)}`, ''),
-      kpiCard('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg'),
-      kpiCard('Sharpe ratio', ratio(m.sharpe), 'annualised, excess', ''),
-      kpiCard('Information ratio', ratio(m.infoRatio), 'vs '+window.CONFIG.BENCHMARK_LABEL, ''),
-      kpiCard('Avg hold (all)', m.avgHoldAll.toFixed(1)+'d',
-              `W ${m.avgHoldWin.toFixed(1)}d · L ${m.avgHoldLoss.toFixed(1)}d`, '')
+    const C = window.CONFIG;
+    const groups = [
+      kGroup('Profit &amp; Loss', 'var(--pos)', [
+        kCell('Gross P&L', money(m.totalPnl,0), 'realised, before fees', m.totalPnl>=0?'pos':'neg'),
+        kCell('Net P&L', money(net,0), 'after commission &amp; funding', net>=0?'pos':'neg'),
+        kCell('Total commission', money(commission,0), 'paid in period', commission<0?'neg':''),
+        kCell('Total funding', money(funding,0), 'overnight financing', funding<0?'neg':'')
+      ]),
+      kGroup('Trade Stats', 'var(--accent)', [
+        kCell('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W : ${m.nLoss}L`, ''),
+        kCell('Total trades', String(m.nTotal), `${m.nWin} win · ${m.nLoss} loss · ${m.nFlat} flat`, ''),
+        kCell('Profit factor', ratio(m.profitFactor), `GP ${money(m.grossProfit,0)} / GL ${money(m.grossLoss,0)}`, ''),
+        kCell('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg')
+      ]),
+      kGroup('Averages', '#3b6fb0', [
+        kCell('Avg win', money(m.avgWin,0), 'mean winning trade', m.avgWin>=0?'pos':''),
+        kCell('Avg loss', money(m.avgLoss,0), 'mean losing trade', 'neg'),
+        kCell('Avg trade', money(m.avgPnl,0), 'mean of all trades', m.avgPnl>=0?'pos':'neg'),
+        kCell('Avg hold', m.avgHoldAll.toFixed(1)+'d', `W ${m.avgHoldWin.toFixed(1)}d · L ${m.avgHoldLoss.toFixed(1)}d`, '')
+      ]),
+      kGroup('Risk-Adjusted', '#8a5cd0', [
+        kCell('Sharpe', ratio(m.sharpe), 'excess ÷ total vol', ''),
+        kCell('Sortino', ratio(m.sortino), 'excess ÷ downside vol', ''),
+        kCell('Calmar', ratio(m.calmar), 'ann. return ÷ max DD', ''),
+        kCell('Information ratio', ratio(m.infoRatio), 'vs '+C.BENCHMARK_LABEL, '')
+      ])
     ];
-    $('#kpi-grid').innerHTML = cards.join('');
+    $('#kpi-grid').innerHTML = groups.join('');
   }
 
   function renderTopTrades(m, unit){
