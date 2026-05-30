@@ -48,40 +48,9 @@
     };
   }
 
-  // Two date labels that follow each slider handle: LEFT label left-anchored (its
-  // left edge tracks the left handle), RIGHT label right-anchored (its right edge
-  // tracks the right handle). Absolute x/y positioning only (no `bottom`, which
-  // conflicts with textAlign). Sits in the band below the chart.
-  function attachZoomRange(c, dates, gridLeft, gridRight){
-    const n = dates.length; if (!n) return;
-    const clampI = i => Math.max(0, Math.min(n-1, Math.round(i)));
-    const update = ()=>{
-      const dz = (c.getOption().dataZoom||[])[0]||{};
-      const sp = dz.start!=null ? dz.start : (dz.startValue!=null? dz.startValue/(n-1)*100 : 0);
-      const ep = dz.end!=null   ? dz.end   : (dz.endValue!=null?   dz.endValue/(n-1)*100   : 100);
-      const W = c.getWidth(), H = c.getHeight();
-      const x0 = gridLeft, x1 = W - gridRight, span = Math.max(1, x1-x0);
-      const y = H - 40;                                // label baseline (above the slider)
-      const hx = p => x0 + p/100*span;                 // handle x for a percent
-      const a = dates[clampI(sp/100*(n-1))], b = dates[clampI(ep/100*(n-1))];
-      // Keep the two labels from overlapping in the middle.
-      const lx = Math.max(x0, Math.min(hx(sp), x1-120));
-      const rx = Math.min(x1, Math.max(hx(ep), x0+120));
-      c.setOption({ graphic:[
-        { id:'zoomL', style:{ text:a||'', x:lx, y } },
-        { id:'zoomR', style:{ text:b||'', x:rx, y } }
-      ] }, false);
-    };
-    c.setOption({ graphic:[
-      { id:'zoomL', type:'text', z:60,
-        style:{ text:'', x:0, y:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'left', fontWeight:600 } },
-      { id:'zoomR', type:'text', z:60,
-        style:{ text:'', x:0, y:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'right', fontWeight:600 } }
-    ] }, false);
-    c.on('dataZoom', update);
-    c.on('finished', update);                          // reposition on resize
-    update();
-  }
+  // (Date labels above the slider were removed by request.) Kept as a no-op so
+  // call sites and grid sizing stay unchanged — the chart position doesn't shift.
+  function attachZoomRange(){ /* intentionally empty */ }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
   const fmtPct = v => (v>=0?'+':'') + v.toFixed(2) + '%';
 
