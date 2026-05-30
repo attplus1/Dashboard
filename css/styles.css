@@ -235,9 +235,9 @@ input[type=date]{
 .mom-card-foot .ma-key{display:flex; gap:12px}
 .ma-key span::before{content:'—'; margin-right:4px; font-weight:700}
 .ma50::before{color:var(--accent)} .ma200::before{color:var(--warn)}
-.entry-key::before{color:var(--bench,#3b6fb0)} .exit-key::before{color:var(--accent)}
-#trades-table tbody tr.trade-row{cursor:pointer}
-#trades-table tbody tr.trade-row:hover{background:var(--bg)}
+.entry-key::before{color:#10b981} .exit-key::before{color:#f43f5e}
+.data-table tbody tr.row-link{cursor:pointer}
+.data-table tbody tr.row-link:hover{background:var(--bg)}
 
 .loading,.notice{
   text-align:center; padding:48px 20px; color:var(--text-dim); font-size:13px;

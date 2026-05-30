@@ -2,8 +2,9 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#F5821E', accent2:'#ffa24d', bench:'#3b6fb0',
-    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020'
+    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#3b6fb0',
+    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
+    markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
   const FONT = "Inter, system-ui, sans-serif";
   const instances = {};
@@ -19,6 +20,26 @@
   const axisBase = { axisLine:{lineStyle:{color:COLORS.grid}},
     axisLabel:{color:COLORS.text, fontFamily:FONT},
     splitLine:{lineStyle:{color:COLORS.grid, opacity:.35}} };
+
+  // Bottom range slider for modal charts, styled to match the overview date
+  // slider: light track, orange fill, white circular handles with accent border.
+  function zoomSlider(start, end){
+    return {
+      type:'slider', start, end, height:18, bottom:16,
+      backgroundColor:'transparent', borderColor:'transparent',
+      fillerColor:'rgba(245,130,30,.16)',
+      dataBackground:{ lineStyle:{color:COLORS.grid}, areaStyle:{color:'rgba(120,135,150,.05)'} },
+      selectedDataBackground:{ lineStyle:{color:COLORS.accent, opacity:.7},
+        areaStyle:{color:'rgba(245,130,30,.10)'} },
+      handleIcon:'path://M0,0 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0',
+      handleSize:'130%',
+      handleStyle:{ color:'#fff', borderColor:COLORS.accent, borderWidth:2,
+        shadowBlur:4, shadowColor:'rgba(0,0,0,.18)' },
+      moveHandleStyle:{ color:COLORS.accent2 },
+      emphasis:{ handleStyle:{ borderColor:COLORS.accentD } },
+      textStyle:{ color:COLORS.text, fontSize:10 }, brushSelect:false
+    };
+  }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
   const fmtPct = v => (v>=0?'+':'') + v.toFixed(2) + '%';
 
@@ -157,8 +178,7 @@
           // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true,
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
-        ...(big ? [{type:'slider', start:startPct, end:100, height:22, bottom:18,
-                    borderColor:COLORS.grid, textStyle:{color:COLORS.text}}] : [])
+        ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
       series:[
         {type:'candlestick', data:ohlc,
@@ -213,10 +233,12 @@
     });
   }
 
-  // Trade price chart: candlesticks for one ticker with entry/exit markers and
-  // a line connecting them (green if the trade won, red if it lost). `rows` are
-  // compact [date,open,high,low,close] arrays; `t` is the reconstructed trade.
-  function tradeChart(id, rows, t){
+  // Trade/position price chart: candlesticks for one ticker with entry (and, for
+  // closed trades, exit) marked as dots, a line connecting them (green win / red
+  // loss), and an optional dashed stop line. `rows` are compact
+  // [date,open,high,low,close] arrays; `mark` = { entryDt, entryPx, exitDt?,
+  // exitPx?, stop?, lastPx?, win? }.
+  function tradeChart(id, rows, mark){
     const c = init(id); if (!c) return;
     const dates = rows.map(r=>r[0]);
     const ohlc  = rows.map(r=>[r[1], r[4], r[3], r[2]]);   // ECharts: [open,close,low,high]
@@ -227,20 +249,31 @@
       dates.forEach((d,j)=>{ const dd=Math.abs(new Date(d).getTime()-kt); if(dd<bd){bd=dd;best=j;} });
       return best;
     };
-    const ei = nearest(key(t.entryDt)), xi = nearest(key(t.exitDt));
-    const win = t.pnl >= 0;
-    const lineCol = win ? COLORS.pos : COLORS.neg;
-    // Default view: zoom to ~20 bars either side of the trade.
     const n = rows.length;
-    const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
-    const pt = (i,price,label,col) => ({
-      coord:[dates[i], price], value:label, symbol:'pin', symbolSize:46,
-      itemStyle:{color:col},
-      label:{show:true, position:'top', formatter:label, color:COLORS.textStrong, fontSize:11}
+    const ei = nearest(key(mark.entryDt));
+    const hasExit = mark.exitPx!=null && mark.exitDt;
+    const xi = hasExit ? nearest(key(mark.exitDt)) : n-1;
+    const dot = (i,price,label,col) => ({
+      coord:[dates[i], price], value:label, symbol:'circle', symbolSize:13,
+      itemStyle:{color:col, borderColor:'#fff', borderWidth:2, shadowBlur:4, shadowColor:'rgba(0,0,0,.25)'},
+      label:{show:true, position:'top', formatter:label, color:COLORS.textStrong, fontSize:11,
+        backgroundColor:'rgba(255,255,255,.85)', padding:[2,4], borderRadius:3}
     });
+    const points = [ dot(ei, mark.entryPx, 'Entry '+(+mark.entryPx).toFixed(3), COLORS.markEntry) ];
+    if (hasExit) points.push(dot(xi, mark.exitPx, 'Exit '+(+mark.exitPx).toFixed(3), COLORS.markExit));
+    else if (mark.lastPx!=null) points.push(dot(n-1, mark.lastPx, 'Last '+(+mark.lastPx).toFixed(3), COLORS.bench));
+
+    const lineData = [];
+    if (hasExit) lineData.push([{coord:[dates[ei], mark.entryPx]}, {coord:[dates[xi], mark.exitPx]}]);
+    if (mark.stop) lineData.push({ yAxis: mark.stop,
+      lineStyle:{color:COLORS.neg, type:'dashed', width:1.2},
+      label:{show:true, formatter:'Stop '+(+mark.stop).toFixed(3), position:'insideEndTop',
+        color:COLORS.neg, fontSize:10} });
+
+    const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:64},
+      grid:{left:56,right:18,top:16,bottom:60},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -250,18 +283,14 @@
       yAxis:{type:'value', scale:true, ...axisBase},
       dataZoom:[
         {type:'inside', start:lo/n*100, end:hi/n*100, zoomOnMouseWheel:true, moveOnMouseMove:true},
-        {type:'slider', start:lo/n*100, end:hi/n*100, height:22, bottom:18,
-         borderColor:COLORS.grid, textStyle:{color:COLORS.text}}
+        zoomSlider(lo/n*100, hi/n*100)
       ],
       series:[{
         type:'candlestick', data:ohlc,
         itemStyle:{color:COLORS.pos, color0:COLORS.neg, borderColor:COLORS.pos, borderColor0:COLORS.neg},
-        markPoint:{ data:[
-          pt(ei, t.entryPx, 'Entry '+(+t.entryPx).toFixed(3), COLORS.bench),
-          pt(xi, t.exitPx,  'Exit '+(+t.exitPx).toFixed(3),  COLORS.accent)
-        ]},
-        markLine:{ symbol:'none', label:{show:false}, lineStyle:{color:lineCol, width:2, type:'solid'},
-          data:[[ {coord:[dates[ei], t.entryPx]}, {coord:[dates[xi], t.exitPx]} ]] }
+        markPoint:{ data:points },
+        markLine:{ symbol:'none', label:{show:false},
+          lineStyle:{color: mark.win ? COLORS.pos : COLORS.neg, width:2}, data:lineData }
       }]
     });
   }

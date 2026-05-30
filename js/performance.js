@@ -7,7 +7,9 @@
   const ratio = v => v==null?'—':(v===Infinity?'∞':v.toFixed(2));
   const fmtD = d => (d instanceof Date && !isNaN(d.getTime())) ? d.toLocaleDateString('en-AU') : '—';
 
-  let _tradesShown = [];       // trades currently in the table (newest-first)
+  let _tradesShown = [];       // closed trades in the table (newest-first)
+  let _topWins = [], _topLosses = [];   // current top winners / losers
+  let _openPos = [], _prices = null;    // open positions + latest prices
   const _candleCache = {};     // ticker -> [[date,o,h,l,c],...] | null (lazy)
   let _openToken = 0;          // guards against out-of-order async opens
 
@@ -54,7 +56,7 @@
   }
 
   function renderTopTrades(m, unit){
-    const row = t => `<tr>
+    const row = (t,kind,i) => `<tr class="row-link" data-kind="${kind}" data-idx="${i}" title="Click for entry/exit chart">
       <td><b>${t.ticker}</b></td>
       <td><span class="pill ${t.dir}">${t.dir}</span></td>
       <td class="num ${cls(t.pnl)}">${money(t.pnl,0)}</td>
@@ -62,10 +64,15 @@
       <td class="num">${t.holdDays.toFixed(1)}</td>
       <td>${fmtD(t.exitDt)}</td></tr>`;
     const tt = window.Metrics.topTrades(m.trades, 5, unit);
+    _topWins = tt.winners; _topLosses = tt.losers;
     $('#top-winners tbody').innerHTML = tt.winners.length
-      ? tt.winners.map(row).join('') : `<tr class="empty-row"><td colspan="6">No winning trades.</td></tr>`;
+      ? tt.winners.map((t,i)=>row(t,'win',i)).join('') : `<tr class="empty-row"><td colspan="6">No winning trades.</td></tr>`;
     $('#top-losers tbody').innerHTML = tt.losers.length
-      ? tt.losers.map(row).join('') : `<tr class="empty-row"><td colspan="6">No losing trades.</td></tr>`;
+      ? tt.losers.map((t,i)=>row(t,'lose',i)).join('') : `<tr class="empty-row"><td colspan="6">No losing trades.</td></tr>`;
+    $('#top-winners tbody').querySelectorAll('tr.row-link').forEach(tr=>
+      tr.addEventListener('click', ()=> openTradeModal(_topWins[+tr.dataset.idx])));
+    $('#top-losers tbody').querySelectorAll('tr.row-link').forEach(tr=>
+      tr.addEventListener('click', ()=> openTradeModal(_topLosses[+tr.dataset.idx])));
   }
 
   function renderDistribution(m, unit){
@@ -83,9 +90,10 @@
 
   function renderOpenPositions(openPositions, prices){
     const tb = $('#open-positions-table tbody');
+    _openPos = openPositions; _prices = prices;
     if (!openPositions.length){ tb.innerHTML = `<tr class="empty-row"><td colspan="13">No open positions.</td></tr>`; return; }
     const now = new Date();
-    tb.innerHTML = openPositions.map(p=>{
+    tb.innerHTML = openPositions.map((p,i)=>{
       const px = prices && prices[p.ticker] ? prices[p.ticker].last : null;
       const value = p.price*p.units;
       let uPnl=null, uPct=null, last='—';
@@ -101,7 +109,7 @@
       else if (p.stop){ distTxt = (((p.price-p.stop)/p.price)*100).toFixed(1)+'%'; }
       const days = (p.dt instanceof Date && !isNaN(p.dt.getTime()))
         ? Math.max(0,Math.round((now-p.dt)/86400000)) : '—';
-      return `<tr>
+      return `<tr class="row-link" data-idx="${i}" title="Click for entry chart">
         <td><b>${p.ticker}</b></td>
         <td><span class="pill ${p.dir}">${p.dir}</span></td>
         <td class="num">${p.units.toLocaleString()}</td>
@@ -117,13 +125,15 @@
         <td class="num val-neg">${money(p.commission,2)}</td>
       </tr>`;
     }).join('');
+    tb.querySelectorAll('tr.row-link').forEach(tr=>
+      tr.addEventListener('click', ()=> openPositionModal(_openPos[+tr.dataset.idx])));
   }
 
   function renderTradesTable(trades){
     const tb = $('#trades-table tbody');
     if (!trades.length){ tb.innerHTML = `<tr class="empty-row"><td colspan="11">No closed trades in this period.</td></tr>`; return; }
     _tradesShown = trades.slice().reverse();           // table is newest-first
-    tb.innerHTML = _tradesShown.map((t,i)=>`<tr class="trade-row" data-idx="${i}" title="Click for entry/exit chart">
+    tb.innerHTML = _tradesShown.map((t,i)=>`<tr class="row-link" data-idx="${i}" title="Click for entry/exit chart">
       <td><b>${t.ticker}</b></td>
       <td><span class="pill ${t.dir}">${t.dir}</span></td>
       <td class="num">${t.units.toLocaleString()}</td>
@@ -136,35 +146,68 @@
       <td>${fmtD(t.exitDt)}</td>
       <td><span class="pill exit">${t.exitType}</span></td>
     </tr>`).join('');
-    tb.querySelectorAll('.trade-row').forEach(tr=>
+    tb.querySelectorAll('tr.row-link').forEach(tr=>
       tr.addEventListener('click', ()=> openTradeModal(_tradesShown[+tr.dataset.idx])));
   }
 
-  // ---------- trade entry/exit chart popup ----------
-  async function openTradeModal(t){
-    if (!t) return;
+  // ---------- entry/exit chart popup (trades, top trades, open positions) ----------
+  async function openChartModal(cfg){
     const token = ++_openToken;
-    $('#trade-modal-ticker').textContent = t.ticker;
-    $('#trade-modal-name').textContent   = t.product || '';
-    $('#trade-modal-side').textContent   = t.dir.toUpperCase()+' · '+t.exitType;
+    $('#trade-modal-ticker').textContent = cfg.ticker;
+    $('#trade-modal-name').textContent   = cfg.name || '';
+    $('#trade-modal-side').textContent   = cfg.side || '';
     const mm = (l,v,tone)=>`<div class="mm"><span class="mm-l">${l}</span>
       <span class="mm-v ${tone||''}">${v}</span></div>`;
-    $('#trade-modal-metrics').innerHTML =
-      mm('Entry', t.entryPx.toFixed(3)+' · '+fmtD(t.entryDt)) +
-      mm('Exit',  t.exitPx.toFixed(3)+' · '+fmtD(t.exitDt)) +
-      mm('Shares', t.units.toLocaleString()) +
-      mm('P&L', money(t.pnl,2), cls(t.pnl)) +
-      mm('Return', pct(t.ret), cls(t.ret)) +
-      mm('Hold', t.holdDays.toFixed(1)+' d');
+    $('#trade-modal-metrics').innerHTML = cfg.metrics.map(([l,v,tone])=>mm(l,v,tone)).join('');
     const modal = $('#trade-modal'); modal.hidden = false;
     const chartEl = $('#trade-modal-chart');
     chartEl.innerHTML = '<div class="chart-empty">Loading price history…</div>';
-    const rows = await loadCandles(t.ticker);
+    const rows = await loadCandles(cfg.ticker);
     if (token !== _openToken || modal.hidden) return;   // superseded or closed
     chartEl.innerHTML = '';
-    if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, t);
+    if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, cfg.mark);
     else chartEl.innerHTML =
-      '<div class="chart-empty">Price history isn\'t available for '+t.ticker+'.</div>';
+      '<div class="chart-empty">Price history isn\'t available for '+cfg.ticker+'.</div>';
+  }
+
+  function openTradeModal(t){
+    if (!t) return;
+    openChartModal({
+      ticker:t.ticker, name:t.product, side:t.dir.toUpperCase()+' · '+t.exitType,
+      metrics:[
+        ['Entry', t.entryPx.toFixed(3)+' · '+fmtD(t.entryDt)],
+        ['Exit',  t.exitPx.toFixed(3)+' · '+fmtD(t.exitDt)],
+        ['Shares', t.units.toLocaleString()],
+        ['P&L', money(t.pnl,2), cls(t.pnl)],
+        ['Return', pct(t.ret), cls(t.ret)],
+        ['Hold', t.holdDays.toFixed(1)+' d']
+      ],
+      mark:{ entryDt:t.entryDt, entryPx:t.entryPx, exitDt:t.exitDt, exitPx:t.exitPx, win:t.pnl>=0 }
+    });
+  }
+
+  function openPositionModal(p){
+    if (!p) return;
+    const px = _prices && _prices[p.ticker] ? _prices[p.ticker].last : null;
+    const dir = p.dir==='long'?1:-1;
+    const uPnl = px!=null ? (px-p.price)*p.units*dir : null;
+    const uPct = px!=null ? (px/p.price-1)*100*dir : null;
+    const now = new Date();
+    const days = (p.dt instanceof Date && !isNaN(p.dt.getTime()))
+      ? Math.max(0,Math.round((now-p.dt)/86400000)) : '—';
+    openChartModal({
+      ticker:p.ticker, name:p.product, side:p.dir.toUpperCase()+' · OPEN',
+      metrics:[
+        ['Entry', p.price.toFixed(3)+' · '+fmtD(p.dt)],
+        ['Last', px!=null ? px.toFixed(3) : '—'],
+        ['Shares', p.units.toLocaleString()],
+        ['Unreal. P&L', uPnl==null?'—':money(uPnl,2), uPnl==null?'':cls(uPnl)],
+        ['Unreal. %', uPct==null?'—':pct(uPct), uPct==null?'':cls(uPct)],
+        ['Stop', p.stop ? p.stop.toFixed(3) : '—'],
+        ['Days held', String(days)]
+      ],
+      mark:{ entryDt:p.dt, entryPx:p.price, stop:p.stop||null, lastPx:px, win:true }
+    });
   }
   function closeTradeModal(){ const m=$('#trade-modal'); if (m) m.hidden = true; }
   function wireTradeModal(){
