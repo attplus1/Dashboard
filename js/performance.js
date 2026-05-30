@@ -128,7 +128,11 @@
     $('#dist-stats').innerHTML = h.n>=2
       ? `<span>μ <b>${mu}</b></span>
          <span>σ <b>${sg}</b></span>
-         <span>n <b>${h.n}</b></span>`
+         <span>n <b>${h.n}</b></span>
+         <span class="dist-legend">
+           <span class="dl-item"><i class="dl-swatch dl-trades"></i>Trades</span>
+           <span class="dl-item"><i class="dl-swatch dl-density"></i>Density</span>
+         </span>`
       : '';
     window.Charts.returnsDistChart('dist-chart', h);
   }

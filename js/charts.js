@@ -2,10 +2,10 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', accentDim:'#ffe3cc', bench:'#8a96a3',
+    accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', accentMid:'#ffb877', bench:'#8a96a3',
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
-    posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red (pie slices)
+    posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
   const FONT = "Inter, system-ui, sans-serif";
@@ -103,7 +103,7 @@
         axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
       series:[{
         type:'bar', data:rows.map(r=>({value:+r.value.toFixed(2),
-          itemStyle:{color:r.value>=0?gradH(COLORS.posDim,COLORS.pos):gradH(COLORS.neg,COLORS.negDim),
+          itemStyle:{color:r.value>=0?gradH(COLORS.posMid,COLORS.pos):gradH(COLORS.neg,COLORS.negMid),
                      borderRadius:[0,3,3,0]}})),
         barMaxWidth:18
       }]
@@ -122,9 +122,9 @@
         itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:gradV(COLORS.pos,COLORS.posDim)}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:gradV(COLORS.neg,COLORS.negDim)}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:gradV('#9aa6b2','#e3e8ef')}}
+          {value:m.nWin, name:'Wins', itemStyle:{color:gradV(COLORS.pos,COLORS.posMid)}},
+          {value:m.nLoss, name:'Losses', itemStyle:{color:gradV(COLORS.neg,COLORS.negMid)}},
+          {value:m.nFlat, name:'Breakeven', itemStyle:{color:gradV('#9aa6b2','#c2c9d2')}}
         ]
       }]
     });
@@ -141,9 +141,9 @@
       xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
       yAxis:{type:'value', ...axisBase, axisLabel:{color:COLORS.text, formatter:'{value}d'}},
       series:[{type:'bar', barMaxWidth:48, data:[
-        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:gradV(COLORS.pos,COLORS.posDim)}},
-        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:gradV(COLORS.neg,COLORS.negDim)}},
-        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accentDim)}}
+        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:gradV(COLORS.pos,COLORS.posMid)}},
+        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:gradV(COLORS.neg,COLORS.negMid)}},
+        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accentMid)}}
       ], itemStyle:{borderRadius:[4,4,0,0]}}]
     });
   }
@@ -216,8 +216,7 @@
     const fmtMid   = isDollar ? (v=>fmtMoney(v)) : (v=>v.toFixed(1)+'%');
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:46,right:18,top:24,bottom:38},
-      legend:{top:0,right:0,data:['Trades','Density'],textStyle:{color:COLORS.text},icon:'roundRect'},
+      grid:{left:46,right:18,top:16,bottom:38},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong},
         formatter:p=>{ const b=p.find(x=>x.seriesName==='Trades');
@@ -235,7 +234,7 @@
            const top=api.coord([0,api.value(2)]), base=api.coord([0,0]);
            const w=Math.max(1,(x1[0]-x0[0])-1.5);
            return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
-             style:{fill:gradV(COLORS.accent, COLORS.accentDim), stroke:COLORS.accent, lineWidth:1}};
+             style:{fill:gradV(COLORS.accent, COLORS.accentMid)}};
          }},
         {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
          itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}
