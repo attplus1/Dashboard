@@ -8,27 +8,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=23" />
+  <link rel="stylesheet" href="css/styles.css?v=24" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
   <header class="app-header">
-    <div class="brand">
-      <img class="brand-mark" src="assets/logo.svg" alt="Plus1 Group" />
-      <div>
-        <h1>Plus1 Group</h1>
-        <p class="brand-sub">Trading performance &amp; momentum screener &middot; ASX</p>
+    <div class="header-inner">
+      <div class="brand">
+        <img class="brand-mark" src="assets/logo.svg" alt="Plus1 Group" />
+        <div>
+          <h1>Plus1 Group</h1>
+          <p class="brand-sub">Trading performance &amp; momentum screener &middot; ASX</p>
+        </div>
       </div>
-    </div>
-    <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="performance" role="tab">Overview</button>
-      <button class="tab" data-tab="screener" role="tab">Screener</button>
-    </nav>
-    <div class="header-actions">
-      <label class="upload-btn">
-        <input type="file" id="file-input" accept=".csv,.xlsx,.xls" hidden />
-        <span>＋ Import trades</span>
-      </label>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="performance" role="tab">Overview</button>
+        <button class="tab" data-tab="screener" role="tab">Screener</button>
+      </nav>
+      <div class="header-actions">
+        <label class="upload-btn">
+          <input type="file" id="file-input" accept=".csv,.xlsx,.xls" hidden />
+          <span>＋ Import trades</span>
+        </label>
+      </div>
     </div>
   </header>
 
@@ -292,12 +294,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=23"></script>
-  <script src="js/parser.js?v=23"></script>
-  <script src="js/metrics.js?v=23"></script>
-  <script src="js/charts.js?v=23"></script>
-  <script src="js/performance.js?v=23"></script>
-  <script src="js/screener.js?v=23"></script>
-  <script src="js/app.js?v=23"></script>
+  <script src="js/config.js?v=24"></script>
+  <script src="js/parser.js?v=24"></script>
+  <script src="js/metrics.js?v=24"></script>
+  <script src="js/charts.js?v=24"></script>
+  <script src="js/performance.js?v=24"></script>
+  <script src="js/screener.js?v=24"></script>
+  <script src="js/app.js?v=24"></script>
 </body>
 </html>
