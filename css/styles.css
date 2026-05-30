@@ -26,24 +26,32 @@ body{
 /* ---------- Header ---------- */
 .app-header{
   position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; gap:24px;
-  padding:12px 28px;
   background:rgba(255,255,255,.88); backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
+}
+/* Inner content aligned to the same max-width container as the page body. */
+.header-inner{
+  max-width:1320px; margin:0 auto; padding:12px 28px;
+  display:flex; align-items:center; gap:24px;
 }
 .brand{display:flex; align-items:center; gap:12px}
 .brand-mark{width:40px; height:40px; border-radius:50%; display:block; box-shadow:var(--shadow-sm)}
 .brand h1{font-size:16px; margin:0; letter-spacing:.2px; color:var(--text)}
 .brand-sub{margin:0; font-size:11.5px; color:var(--text-faint)}
-.tabs{display:flex; gap:6px; margin-left:auto}   /* group tabs with the upload button on the right */
+.tabs{display:flex; margin-left:auto; align-items:center}   /* underline tabs, grouped on the right */
 .tab{
-  background:transparent; border:1px solid transparent; color:var(--text-dim);
-  padding:9px 18px; border-radius:10px; cursor:pointer; font-size:13.5px; font-weight:500;
-  transition:.15s;
+  background:transparent; border:none; color:var(--text-faint);
+  padding:7px 18px; cursor:pointer; font-size:14px; font-weight:500; line-height:1.3;
+  position:relative; transition:color .15s;
 }
-.tab:hover{color:var(--text); background:var(--bg)}
-.tab.active{color:var(--accent-d); background:#fff4ea; border-color:#ffd9b5; font-weight:600}
-.header-actions{display:flex; align-items:center}
+.tab + .tab{border-left:1px solid var(--border-2)}   /* divider between tabs */
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text); font-weight:600}
+.tab.active::after{
+  content:''; position:absolute; left:18px; right:18px; bottom:-2px; height:2.5px;
+  background:var(--accent); border-radius:2px 2px 0 0;
+}
+.header-actions{display:flex; align-items:center; margin-left:18px}
 .upload-btn{cursor:pointer}
 .upload-btn span{
   display:inline-block; padding:9px 16px; border-radius:10px; font-weight:600; font-size:13px;
@@ -283,7 +291,8 @@ input[type=date]{
   border-top:1px solid var(--border);
 }
 @media(max-width:640px){
-  .app-header{flex-wrap:wrap; gap:12px}
-  .tabs{order:3; width:100%}
+  .header-inner{flex-wrap:wrap; gap:12px}
+  .tabs{order:3; width:100%; margin-left:0; justify-content:flex-start}
+  .header-actions{margin-left:auto}
   .intro-panel{flex-direction:column}
 }
