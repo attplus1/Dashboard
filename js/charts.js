@@ -213,9 +213,62 @@
     });
   }
 
+  // Trade price chart: candlesticks for one ticker with entry/exit markers and
+  // a line connecting them (green if the trade won, red if it lost). `rows` are
+  // compact [date,open,high,low,close] arrays; `t` is the reconstructed trade.
+  function tradeChart(id, rows, t){
+    const c = init(id); if (!c) return;
+    const dates = rows.map(r=>r[0]);
+    const ohlc  = rows.map(r=>[r[1], r[4], r[3], r[2]]);   // ECharts: [open,close,low,high]
+    const key = d => (d instanceof Date ? d.toISOString().slice(0,10) : String(d).slice(0,10));
+    const nearest = k => {
+      const i = dates.indexOf(k); if (i>=0) return i;
+      const kt = new Date(k).getTime(); let best=0, bd=Infinity;
+      dates.forEach((d,j)=>{ const dd=Math.abs(new Date(d).getTime()-kt); if(dd<bd){bd=dd;best=j;} });
+      return best;
+    };
+    const ei = nearest(key(t.entryDt)), xi = nearest(key(t.exitDt));
+    const win = t.pnl >= 0;
+    const lineCol = win ? COLORS.pos : COLORS.neg;
+    // Default view: zoom to ~20 bars either side of the trade.
+    const n = rows.length;
+    const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
+    const pt = (i,price,label,col) => ({
+      coord:[dates[i], price], value:label, symbol:'pin', symbolSize:46,
+      itemStyle:{color:col},
+      label:{show:true, position:'top', formatter:label, color:COLORS.textStrong, fontSize:11}
+    });
+    c.setOption({
+      backgroundColor:'transparent',
+      grid:{left:56,right:18,top:16,bottom:64},
+      tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
+        textStyle:{color:COLORS.textStrong, fontSize:11},
+        formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
+          const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
+      xAxis:{type:'category', data:dates, boundaryGap:true,
+        axisLabel:{color:COLORS.text}, axisLine:{lineStyle:{color:COLORS.grid}}},
+      yAxis:{type:'value', scale:true, ...axisBase},
+      dataZoom:[
+        {type:'inside', start:lo/n*100, end:hi/n*100, zoomOnMouseWheel:true, moveOnMouseMove:true},
+        {type:'slider', start:lo/n*100, end:hi/n*100, height:22, bottom:18,
+         borderColor:COLORS.grid, textStyle:{color:COLORS.text}}
+      ],
+      series:[{
+        type:'candlestick', data:ohlc,
+        itemStyle:{color:COLORS.pos, color0:COLORS.neg, borderColor:COLORS.pos, borderColor0:COLORS.neg},
+        markPoint:{ data:[
+          pt(ei, t.entryPx, 'Entry '+(+t.entryPx).toFixed(3), COLORS.bench),
+          pt(xi, t.exitPx,  'Exit '+(+t.exitPx).toFixed(3),  COLORS.accent)
+        ]},
+        markLine:{ symbol:'none', label:{show:false}, lineStyle:{color:lineCol, width:2, type:'solid'},
+          data:[[ {coord:[dates[ei], t.entryPx]}, {coord:[dates[xi], t.exitPx]} ]] }
+      }]
+    });
+  }
+
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
   window.addEventListener('resize', resizeAll);
 
   window.Charts = { equityChart, tickerChart, outcomeChart, holdingChart,
-                    candleCard, returnsDistChart, resizeAll };
+                    candleCard, returnsDistChart, tradeChart, resizeAll };
 })();

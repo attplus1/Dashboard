@@ -32,6 +32,7 @@ DATA = os.path.join(ROOT, "data")
 HISTORY_DIR = os.path.join(DATA, "history")
 UNIVERSE = os.path.join(DATA, "universe.json")
 MARKETCAP = os.path.join(DATA, "marketcap.json")
+TRADE_TICKERS = os.path.join(DATA, "trade_tickers.json")
 
 HISTORY_START = os.environ.get("HISTORY_START", "2020-01-01")
 INCR_PERIOD = "1mo"                                   # incremental fetch depth
@@ -42,6 +43,7 @@ SKIP_DAYS = 21
 LOOKBACK_DAYS = 126
 MIN_HISTORY = SKIP_DAYS + LOOKBACK_DAYS + 5
 CANDLES_OUT = 750                                     # ~3 yrs shown on charts
+TRADE_CANDLES_OUT = 400                               # ~19 mo of OHLC for trade popups
 TOP_N = 50
 
 # Market-cap cache (used to build the top-200 / top-500 universe tiers). Caps
@@ -389,6 +391,25 @@ def build_outputs(tickers, names, caps, caps_ready):
     return prices, ranked, stocks, n_caps
 
 
+def build_trade_prices():
+    """Slim per-ticker OHLC for the tickers in the committed trade history, so
+    the Overview trades table can pop up a price chart with entry/exit markers.
+    Candles are compact [date,o,h,l,c] arrays over the last TRADE_CANDLES_OUT
+    bars (enough context around any trade in the statement)."""
+    try:
+        with open(TRADE_TICKERS) as f:
+            tks = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for t in tks:
+        candles = candles_of(load_hist(t))[-TRADE_CANDLES_OUT:]
+        if candles:
+            out[t] = [[c["date"], round(c["open"], 4), round(c["high"], 4),
+                       round(c["low"], 4), round(c["close"], 4)] for c in candles]
+    return out
+
+
 def main():
     with open(UNIVERSE) as f:
         constituents = json.load(f)["constituents"]
@@ -415,6 +436,9 @@ def main():
                    "cap_count": n_caps, "caps_ready": caps_ready,
                    "ranked": ranked, "stocks": stocks},
                   f, separators=(",", ":"))
+    with open(os.path.join(DATA, "trade_prices.json"), "w") as f:
+        json.dump({"asof": TODAY, "source": "yfinance",
+                   "prices": build_trade_prices()}, f, separators=(",", ":"))
 
     log(f"Done. priced={len(prices)} caps={n_caps} stocks={len(stocks)} "
         f"benchmark={len(bench)} stale_remaining={remaining}")
