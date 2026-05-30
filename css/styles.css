@@ -186,28 +186,27 @@ input[type=date]{
 }
 .kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--border-2)}
 .kpi-hero:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(30,40,55,.12)}
-/* Net P&L card: whole background tints green (profit) / red (loss). On hover an
-   oversized diagonal repeating-gradient overlay (the card's own tint colour via
-   the .pos/.neg classes) is translated along the diagonal — a seamless scroll
-   with no scaling artifacts. Adapts to whatever the data produces. */
+/* Net P&L card: whole background tints green (profit) / red (loss). On hover a
+   soft multi-stop gradient overlay (the card's own tint colour via the .pos/.neg
+   classes) is oversized (background-size:300%) and its position is animated so
+   the coloured band sweeps smoothly around the card. Adapts to the data. */
 .kpi-hero.tinted.pos{background:linear-gradient(155deg, #fff, var(--pos-dim)); border-color:#bfe6d4}
 .kpi-hero.tinted.neg{background:linear-gradient(155deg, #fff, var(--neg-dim)); border-color:#f6cdd2}
 .kpi-hero.tinted .kh-tint{
   position:absolute; inset:0; z-index:0; opacity:0; pointer-events:none;
-  transition:opacity .25s ease;
-  /* fixed-size diagonal tile -> animating background-position by one tile is
-     perfectly seamless (the earlier glitch came from background-size:200%). */
-  background-size:40px 40px;
+  transition:opacity .25s ease; background-size:300% 300%;
 }
-.kpi-hero.tinted.pos .kh-tint{background-image:linear-gradient(45deg,
-  rgba(21,163,107,.16) 25%, transparent 25%, transparent 50%,
-  rgba(21,163,107,.16) 50%, rgba(21,163,107,.16) 75%, transparent 75%)}
-.kpi-hero.tinted.neg .kh-tint{background-image:linear-gradient(45deg,
-  rgba(226,59,78,.16) 25%, transparent 25%, transparent 50%,
-  rgba(226,59,78,.16) 50%, rgba(226,59,78,.16) 75%, transparent 75%)}
-.kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-scroll 1.6s linear infinite}
+.kpi-hero.tinted.pos .kh-tint{background-image:linear-gradient(115deg,
+  transparent 0%, rgba(21,163,107,.30) 35%, rgba(21,163,107,.10) 55%, transparent 80%)}
+.kpi-hero.tinted.neg .kh-tint{background-image:linear-gradient(115deg,
+  transparent 0%, rgba(226,59,78,.30) 35%, rgba(226,59,78,.10) 55%, transparent 80%)}
+.kpi-hero.tinted:hover .kh-tint{opacity:1; animation:tint-sweep 4s ease-in-out infinite}
 .kpi-hero.tinted > *:not(.kh-tint){position:relative; z-index:1}   /* content above the overlay */
-@keyframes tint-scroll{ from{background-position:0 0} to{background-position:40px 40px} }
+@keyframes tint-sweep{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 @media(prefers-reduced-motion:reduce){.kpi-hero.tinted:hover .kh-tint{animation:none}}
 .kpi-hero.tinted.pos::before{background:var(--pos)} .kpi-hero.tinted.neg::before{background:var(--neg)}
 .kpi-hero.tinted.pos .kh-foot span,.kpi-hero.tinted.neg .kh-foot span{border-top-color:rgba(30,40,55,.10)}
