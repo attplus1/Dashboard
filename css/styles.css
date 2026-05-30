@@ -286,20 +286,25 @@ input[type=date]{
   flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:10px}
 .modal-foot .ma-key{display:inline-flex; gap:16px; align-items:center}   /* keep Entry/Exit legend from overlapping */
 
-/* Trade modal: chart on the left, metric cards stacked on the right */
-.trade-modal-body{display:flex; gap:16px; align-items:stretch; margin:16px 0}
-.trade-modal-body .modal-chart{flex:1; min-width:0; width:auto; margin:0}
-.trade-modal-body .modal-metrics{
+/* Modal split: chart on the left, metric cards stacked in a right column
+   (used by both the trade/position popup and the screener expand modal). */
+.modal-split{display:flex; gap:16px; align-items:stretch; margin:16px 0}
+.modal-split .modal-chart{flex:1; min-width:0; width:auto; margin:0}
+.modal-split .modal-metrics{
   display:flex; flex-direction:column; gap:9px;
   width:210px; flex-shrink:0; margin:0; grid-template-columns:none;
 }
 @media(max-width:720px){
-  .trade-modal-body{flex-direction:column}
-  .trade-modal-body .modal-metrics{width:auto; flex-direction:row; flex-wrap:wrap}
-  .trade-modal-body .modal-metrics .mm{flex:1; min-width:120px}
+  .modal-split{flex-direction:column}
+  .modal-split .modal-metrics{width:auto; flex-direction:row; flex-wrap:wrap}
+  .modal-split .modal-metrics .mm{flex:1; min-width:120px}
 }
-/* Trade modal header: ticker line, then the long/short badge below it, left-aligned */
-.trade-head-left{display:flex; flex-direction:column; align-items:flex-start; gap:9px}
+/* Trade modal header: ticker on the left, side badge in a right column whose
+   left edge lines up with the metric cards below it. */
+.trade-head{display:flex; gap:16px; align-items:center; padding-right:0}
+.trade-head-main{flex:1; min-width:0}
+.trade-head-side{width:210px; flex-shrink:0}
+@media(max-width:720px){ .trade-head-side{width:auto; margin-left:auto} }
 /* Clear long/short badge in the trade modal header (replaces the orange text) */
 #trade-modal-side{display:flex; align-items:center; gap:10px}
 .pos-badge{display:inline-block; padding:4px 12px; border-radius:999px;
