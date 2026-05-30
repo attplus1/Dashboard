@@ -10,20 +10,65 @@
   let _tradesShown = [];       // closed trades in the table (newest-first)
   let _topWins = [], _topLosses = [];   // current top winners / losers
   let _openPos = [], _prices = null;    // open positions + latest prices
-  const _candleCache = {};     // ticker -> [[date,o,h,l,c],...] | null (lazy)
+  const _candleCache = {};     // ticker -> [[date,o,h,l,c],...] | null (in-memory)
   let _openToken = 0;          // guards against out-of-order async opens
+  const LS_CANDLES = 'plus1_candles_v1:';   // per-ticker browser cache
+  const CANDLE_TTL = 12 * 3600 * 1000;      // re-fetch a ticker at most ~twice a day
 
-  // Lazily fetch one ticker's slim OHLC from data/candles/<TICKER>.json.
-  async function loadCandles(ticker){
+  function lsGetCandles(ticker){
+    try { return JSON.parse(localStorage.getItem(LS_CANDLES + ticker)); }
+    catch(e){ return null; }
+  }
+  function lsSetCandles(ticker, rows){
+    try { localStorage.setItem(LS_CANDLES + ticker, JSON.stringify({ ts:Date.now(), rows })); }
+    catch(e){
+      // Quota hit: drop our cached candles and try once more.
+      try {
+        Object.keys(localStorage).forEach(k=>{ if (k.startsWith(LS_CANDLES)) localStorage.removeItem(k); });
+        localStorage.setItem(LS_CANDLES + ticker, JSON.stringify({ ts:Date.now(), rows }));
+      } catch(e2){ /* give up; still works from memory this session */ }
+    }
+  }
+
+  // Synchronous peek: in-memory, or a still-fresh browser-cached copy. Returns
+  // the rows array, null (known-missing), or undefined (must fetch).
+  function peekCandles(ticker){
     if (ticker in _candleCache) return _candleCache[ticker];
+    const c = lsGetCandles(ticker);
+    if (c && c.rows && c.rows.length && (Date.now()-c.ts) < CANDLE_TTL){
+      _candleCache[ticker] = c.rows;
+      return c.rows;
+    }
+    return undefined;
+  }
+
+  // Lazily fetch one ticker's slim OHLC from data/candles/<TICKER>.json, caching
+  // it in memory and in the browser so revisits only fetch tickers they lack.
+  async function loadCandles(ticker){
+    const peek = peekCandles(ticker);
+    if (peek !== undefined) return peek;
     let rows = null;
     try {
       const r = await fetch('data/candles/'+encodeURIComponent(ticker)+'.json', {cache:'no-store'});
       if (r.ok){ const j = await r.json(); rows = j.candles || j; }
     } catch(e){ rows = null; }
+    if (rows && rows.length){
+      lsSetCandles(ticker, rows);
+    } else {
+      const stale = lsGetCandles(ticker);          // offline/failed: use stale copy if any
+      if (stale && stale.rows && stale.rows.length) rows = stale.rows;
+    }
     _candleCache[ticker] = rows;
     return rows;
   }
+
+  // Candlestick-shaped shimmer placeholder shown while a chart loads.
+  function chartSkeleton(){
+    const h = [42,64,54,72,48,82,66,52,76,60,88,70,58,84,62,46,74,90,68,55,80,63,86,57];
+    return '<div class="chart-skeleton" aria-label="Loading price history">'
+      + h.map(v=>`<i style="height:${v}%"></i>`).join('') + '</div>';
+  }
+  const unavailable = t => '<div class="chart-empty">Price history isn\'t available for '+t+'.</div>';
 
   function kpiCard(label, value, sub, tone){
     return `<div class="kpi ${tone||''}">
@@ -161,13 +206,19 @@
     $('#trade-modal-metrics').innerHTML = cfg.metrics.map(([l,v,tone])=>mm(l,v,tone)).join('');
     const modal = $('#trade-modal'); modal.hidden = false;
     const chartEl = $('#trade-modal-chart');
-    chartEl.innerHTML = '<div class="chart-empty">Loading price history…</div>';
+    const cached = peekCandles(cfg.ticker);
+    if (cached !== undefined){                       // in-memory / fresh cache: render now
+      chartEl.innerHTML = '';
+      if (cached && cached.length) window.Charts.tradeChart('trade-modal-chart', cached, cfg.mark);
+      else chartEl.innerHTML = unavailable(cfg.ticker);
+      return;
+    }
+    chartEl.innerHTML = chartSkeleton();             // fetching: show skeleton
     const rows = await loadCandles(cfg.ticker);
     if (token !== _openToken || modal.hidden) return;   // superseded or closed
     chartEl.innerHTML = '';
     if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, cfg.mark);
-    else chartEl.innerHTML =
-      '<div class="chart-empty">Price history isn\'t available for '+cfg.ticker+'.</div>';
+    else chartEl.innerHTML = unavailable(cfg.ticker);
   }
 
   function openTradeModal(t){
