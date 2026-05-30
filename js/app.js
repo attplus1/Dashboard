@@ -125,7 +125,7 @@
       bnote.textContent='Benchmark + prices are placeholder data. Run the data workflow for live values.';
     } else {
       bnote.className='source-note live';
-      bnote.innerHTML='<span class="live-dot"></span>Live · ASX 200 &amp; prices · '+(state.benchmark.asof||'');
+      bnote.textContent='Live ASX 200 + prices · '+(state.benchmark.asof||'');
     }
   }
 

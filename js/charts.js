@@ -4,6 +4,7 @@
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
     accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#8a96a3',
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
+    posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
   const FONT = "Inter, system-ui, sans-serif";
@@ -98,7 +99,7 @@
         axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
       series:[{
         type:'bar', data:rows.map(r=>({value:+r.value.toFixed(2),
-          itemStyle:{color:r.value>=0?COLORS.pos:COLORS.neg, borderRadius:[0,3,3,0]}})),
+          itemStyle:{color:r.value>=0?COLORS.posDim:COLORS.negDim, borderRadius:[0,3,3,0]}})),
         barMaxWidth:18
       }]
     });
@@ -116,9 +117,9 @@
         itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.pos}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.neg}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#67788c'}}
+          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.posDim}},
+          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.negDim}},
+          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#dfe4ea'}}
         ]
       }]
     });
@@ -135,8 +136,8 @@
       xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
       yAxis:{type:'value', ...axisBase, axisLabel:{color:COLORS.text, formatter:'{value}d'}},
       series:[{type:'bar', barMaxWidth:48, data:[
-        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:COLORS.pos}},
-        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:COLORS.neg}},
+        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:COLORS.posDim}},
+        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:COLORS.negDim}},
         {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:COLORS.accent}}
       ], itemStyle:{borderRadius:[4,4,0,0]}}]
     });
