@@ -18,24 +18,24 @@
     return c;
   }
   const axisBase = { axisLine:{lineStyle:{color:COLORS.grid}},
-    axisLabel:{color:COLORS.text, fontFamily:FONT},
+    axisLabel:{color:COLORS.text, fontFamily:FONT, margin:14},   // a little breathing room under axis labels
     splitLine:{lineStyle:{color:COLORS.grid, opacity:.35}} };
+  const XLABEL = {color:COLORS.text, fontFamily:FONT, margin:14};  // shared x-axis label spacing
 
   // Bottom range slider for modal charts, styled to match the overview date
-  // slider: light track, orange fill, white circular handles with accent border.
+  // slider: a slim plain track with an orange fill and white circular handles —
+  // no in-slider price line.
   function zoomSlider(start, end){
     return {
-      type:'slider', start, end, height:18, bottom:16,
-      backgroundColor:'transparent', borderColor:'transparent',
-      fillerColor:'rgba(245,130,30,.16)',
-      dataBackground:{ lineStyle:{color:COLORS.grid}, areaStyle:{color:'rgba(120,135,150,.05)'} },
-      selectedDataBackground:{ lineStyle:{color:COLORS.accent, opacity:.7},
-        areaStyle:{color:'rgba(245,130,30,.10)'} },
+      type:'slider', start, end, height:10, bottom:16,
+      showDataShadow:false,                            // drop the mini price line
+      backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
+      fillerColor:'rgba(245,130,30,.22)',
       handleIcon:'path://M0,0 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0',
-      handleSize:'130%',
+      handleSize:'150%',
       handleStyle:{ color:'#fff', borderColor:COLORS.accent, borderWidth:2,
         shadowBlur:4, shadowColor:'rgba(0,0,0,.18)' },
-      moveHandleStyle:{ color:COLORS.accent2 },
+      moveHandleSize:0,
       emphasis:{ handleStyle:{ borderColor:COLORS.accentD } },
       textStyle:{ color:COLORS.text, fontSize:10 }, brushSelect:false
     };
@@ -93,7 +93,7 @@
           return `<b>${nm}</b> <span style="color:${COLORS.text}">${p.name}</span><br/>`
                + (unit==='percent'?fmtPct(v):fmtMoney(v)); }},
       xAxis:{type:'value', ...axisBase,
-        axisLabel:{color:COLORS.text, formatter:v=> unit==='percent'? v+'%' : fmtMoney(v)}},
+        axisLabel:{...XLABEL, formatter:v=> unit==='percent'? v+'%' : fmtMoney(v)}},
       yAxis:{type:'category', data:rows.map(r=>r.ticker), ...axisBase,
         axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
       series:[{
@@ -167,7 +167,7 @@
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
       xAxis:{type:'category', data:dates, show:big, boundaryGap:true,
-        axisLabel:{color:COLORS.text}, axisLine:{lineStyle:{color:COLORS.grid}}},
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
       yAxis:{type:'log', show:big, ...(big?axisBase:{})},
       dataZoom:[
         big
@@ -214,7 +214,7 @@
           return (b? `${isDollar?'P&L':'Return'} ≈ ${fmtMid(+b.value[3])}<br/>${b.value[2]} trade(s)` : ''); }},
       xAxis:{type:'value', name:axisName, nameLocation:'middle', nameGap:24,
         nameTextStyle:{color:COLORS.text}, ...axisBase,
-        axisLabel:{color:COLORS.text, formatter:v=>fmtAxis(v)}},
+        axisLabel:{...XLABEL, formatter:v=>fmtAxis(v)}},
       yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
       series:[
         {name:'Trades', type:'custom', encode:{x:[0,1], y:2},
@@ -279,7 +279,7 @@
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
       xAxis:{type:'category', data:dates, boundaryGap:true,
-        axisLabel:{color:COLORS.text}, axisLine:{lineStyle:{color:COLORS.grid}}},
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
       yAxis:{type:'value', scale:true, ...axisBase},
       dataZoom:[
         {type:'inside', start:lo/n*100, end:hi/n*100, zoomOnMouseWheel:true, moveOnMouseMove:true},
