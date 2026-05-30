@@ -48,32 +48,43 @@
     };
   }
 
-  // Two date labels that follow each slider handle (the "dots"), showing the
-  // full visible-range start/end dates. Positioned ABOVE the slider and clamped
-  // to the chart's left/right edges so they never run off or under the cards.
+  // Two date labels that follow each slider handle: the LEFT one is left-anchored
+  // (so it reaches the very left edge), the RIGHT one right-anchored (hugs the
+  // right edge). Sits in a separated band below the chart. A faint divider marks
+  // the boundary between the chart and the slider zone.
   function attachZoomRange(c, dates, gridLeft, gridRight){
     const n = dates.length; if (!n) return;
     const clampI = i => Math.max(0, Math.min(n-1, Math.round(i)));
-    const LBL_HALF = 34;                       // ~ half a "YYYY-MM-DD" label box
     const update = ()=>{
       const dz = (c.getOption().dataZoom||[])[0]||{};
       const sp = dz.start!=null ? dz.start : (dz.startValue!=null? dz.startValue/(n-1)*100 : 0);
       const ep = dz.end!=null   ? dz.end   : (dz.endValue!=null?   dz.endValue/(n-1)*100   : 100);
       const W = c.getWidth();
       const x0 = gridLeft, x1 = W - gridRight, span = Math.max(1, x1-x0);
-      // Clamp each label's centre so its box stays within [x0, x1].
-      const cx = p => Math.max(x0+LBL_HALF, Math.min(x1-LBL_HALF, x0 + p/100*span));
+      const hx = p => x0 + p/100*span;                 // handle x for a percent
       const a = dates[clampI(sp/100*(n-1))], b = dates[clampI(ep/100*(n-1))];
       c.setOption({ graphic:[
-        { id:'zoomL', style:{ text:a||'', x:cx(sp) } },
-        { id:'zoomR', style:{ text:b||'', x:cx(ep) } }
+        // left label: left edge tracks the left handle, never past the right one
+        { id:'zoomL', style:{ text:a||'', x:Math.max(x0, Math.min(hx(sp), x1-58)) } },
+        // right label: right edge tracks the right handle, never past the left one
+        { id:'zoomR', style:{ text:b||'', x:Math.min(x1, Math.max(hx(ep), x0+58)) } }
       ] }, false);
     };
-    const lbl = id => ({ id, type:'text', bottom:26, z:60,
-      style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'center',
-        fontWeight:600 } });
-    c.setOption({ graphic:[ lbl('zoomL'), lbl('zoomR') ] }, false);
-    c.on('dataZoom', update); update();
+    // Divider line marking the boundary between the chart and the slider band.
+    const divider = ()=>{ const W=c.getWidth(), H=c.getHeight();
+      return { id:'zoomDiv', type:'line', z:55, silent:true,
+        shape:{ x1:gridLeft, y1:H-52, x2:W-gridRight, y2:H-52 },
+        style:{ stroke:COLORS.grid, lineWidth:1 } }; };
+    c.setOption({ graphic:[
+      divider(),
+      { id:'zoomL', type:'text', bottom:30, z:60,
+        style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'left', fontWeight:600 } },
+      { id:'zoomR', type:'text', bottom:30, z:60,
+        style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'right', fontWeight:600 } }
+    ] }, false);
+    c.on('dataZoom', update);
+    c.on('finished', ()=>c.setOption({graphic:[divider()]}, false));  // keep divider sized on resize
+    update();
   }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
   const fmtPct = v => (v>=0?'+':'') + v.toFixed(2) + '%';
@@ -198,7 +209,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:66} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:82} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -309,10 +320,15 @@
       label:{show:true, formatter:'Stop '+(+mark.stop).toFixed(3), position:'insideEndTop',
         color:COLORS.neg, fontSize:10} });
 
+    // Default window: ~20 bars either side of the trade. If the trade reaches
+    // the last bar (e.g. an open position), pin the right edge to 100% so the
+    // most recent candle is always shown without zooming out.
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
+    const startPct = lo/n*100;
+    const endPct = hi>=n-1 ? 100 : (hi+1)/n*100;
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:66},
+      grid:{left:56,right:18,top:16,bottom:82},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -321,9 +337,9 @@
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
       yAxis:{type:'value', scale:true, ...axisBase},
       dataZoom:[
-        {type:'inside', start:lo/n*100, end:hi/n*100, filterMode:'filter',
+        {type:'inside', start:startPct, end:endPct, filterMode:'filter',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
-        zoomSlider(lo/n*100, hi/n*100)
+        zoomSlider(startPct, endPct)
       ],
       series:[{
         type:'candlestick', data:ohlc,
