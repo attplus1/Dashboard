@@ -168,7 +168,11 @@
           const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
       xAxis:{type:'category', data:dates, show:big, boundaryGap:true,
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
-      yAxis:{type:'log', show:big, ...(big?axisBase:{})},
+      // Preview: tight linear axis fitted to the visible 7-month window so the
+      // candles fill the card vertically. Expanded: log axis for the full
+      // multi-year history (which spans too many decades for linear).
+      yAxis: big ? {type:'log', show:true, ...axisBase}
+                 : {type:'value', scale:true, show:false},
       dataZoom:[
         big
           // Expanded: full zoom + pan via wheel/drag.
