@@ -75,10 +75,26 @@
         lineStyle:{width:1.8, color:COLORS.bench, type:'dashed'}
       });
     }
+    // Headline: latest account equity + total change over the visible window
+    // (Robinhood/Stake style), drawn top-left above the plot.
+    const lastEq = m.equity.length ? m.equity[m.equity.length-1].equity : 0;
+    const chg = lastEq - base, chgPct = base ? chg/base*100 : 0;
+    const up = chg>=0;
+    const headline = [
+      { type:'text', left:0, top:0, z:5,
+        style:{ text:'ACCOUNT EQUITY', fill:COLORS.text, opacity:.55, fontSize:10.5,
+          fontFamily:FONT, fontWeight:600 } },
+      { type:'text', left:0, top:15, z:5,
+        style:{ text:fmtMoney(lastEq), fill:COLORS.textStrong, fontSize:26, fontFamily:FONT, fontWeight:700 } },
+      { type:'text', left:0, top:48, z:5,
+        style:{ text:`${up?'▲':'▼'} ${fmtMoney(Math.abs(chg))} (${fmtPct(chgPct)}) in range`,
+          fill:up?COLORS.pos:COLORS.neg, fontSize:12, fontFamily:FONT, fontWeight:600 } }
+    ];
     c.setOption({
       backgroundColor:'transparent',
       color:[COLORS.accent, COLORS.bench],
-      grid:{left:64,right:18,top:34,bottom:34},
+      grid:{left:64,right:18,top:78,bottom:34},   // extra top room for the headline
+      graphic:headline,
       legend:{data:series.map(s=>s.name), top:0, right:0,
         icon:'roundRect', itemWidth:11, itemHeight:11, itemGap:16,
         textStyle:{color:COLORS.text, fontSize:12.5}},
@@ -233,14 +249,16 @@
       yAxis:{type:'value', name:'Trades', ...axisBase, axisLabel:{color:COLORS.text}},
       series:[
         {name:'Trades', type:'custom', encode:{x:[0,1], y:2},
-         itemStyle:{color:'rgba(245,130,30,.7)'},   // legend swatch matches bars
+         itemStyle:{color:COLORS.pos},   // legend swatch
          data:h.bins.map(b=>[b.x0,b.x1,b.count,b.mid]),
          renderItem:(params,api)=>{
            const x0=api.coord([api.value(0),0]), x1=api.coord([api.value(1),0]);
            const top=api.coord([0,api.value(2)]), base=api.coord([0,0]);
            const w=Math.max(1,(x1[0]-x0[0])-1.5);
+           // Colour by sign of the bin: losses red, wins green.
+           const fill = api.value(3) < 0 ? COLORS.neg : COLORS.pos;
            return {type:'rect', shape:{x:x0[0]+0.75, y:top[1], width:w, height:base[1]-top[1]},
-             style:{fill:COLORS.accent}};
+             style:{fill}};
          }},
         {name:'Density', type:'line', smooth:true, showSymbol:false, data:h.density,
          itemStyle:{color:COLORS.bench}, lineStyle:{color:COLORS.bench,width:2}}

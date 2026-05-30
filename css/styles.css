@@ -277,7 +277,7 @@ input[type=date]{
 .dist-legend{display:inline-flex; gap:16px; margin-left:auto}   /* legend pushed to the right of the stats row */
 .dl-item{display:inline-flex; align-items:center; gap:6px}
 .dl-swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
-.dl-swatch.dl-trades{background:var(--accent)}
+.dl-swatch.dl-trades{background:linear-gradient(90deg,var(--neg) 0 50%,var(--pos) 50% 100%)}
 .dl-swatch.dl-density{background:#8a96a3}
 .top-trades{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:760px){.top-trades{grid-template-columns:1fr}}
