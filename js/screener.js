@@ -95,7 +95,7 @@
         <div class="mom-chart" id="mom-${i}"></div>
         <div class="mom-card-foot">
           <div class="ma-key"><span class="ma50">MA50</span><span class="ma200">MA200</span></div>
-          <div>${r.last!=null?('$'+r.last.toFixed(3)):''}</div>
+          <div class="mom-price">${r.last!=null?('$'+r.last.toFixed(3)):''}</div>
         </div>
       </div>`).join('');
 

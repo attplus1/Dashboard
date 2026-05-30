@@ -242,9 +242,10 @@ input[type=date]{
 .mom-score{text-align:right}
 .mom-score .s-val{font-family:var(--mono); font-size:17px; font-weight:700; color:var(--pos)}
 .mom-score .s-lbl{font-size:10px; color:var(--text-faint); text-transform:uppercase}
-.mom-chart{height:150px; width:100%}
-.mom-card-foot{display:flex; justify-content:space-between; padding:8px 16px 14px; font-size:11px; color:var(--text-dim)}
+.mom-chart{height:190px; width:100%}
+.mom-card-foot{display:flex; justify-content:space-between; align-items:center; padding:8px 16px 14px; font-size:11px; color:var(--text-dim)}
 .mom-card-foot .ma-key{display:flex; gap:12px}
+.mom-price{font-family:var(--mono); font-size:14px; font-weight:700; color:var(--accent)}
 .ma-key span::before{content:'—'; margin-right:4px; font-weight:700}
 .ma50::before{color:var(--accent)} .ma200::before{color:var(--warn)}
 .entry-key::before{color:#10b981} .exit-key::before{color:#f43f5e}
