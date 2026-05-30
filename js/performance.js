@@ -279,8 +279,8 @@
     openChartModal({
       ticker:t.ticker, name:t.product, dir:t.dir, sideNote:t.exitType,
       metrics:[
-        ['Entry', t.entryPx.toFixed(3)+' · '+fmtD(t.entryDt)],
-        ['Exit',  t.exitPx.toFixed(3)+' · '+fmtD(t.exitDt)],
+        ['Entry', t.entryPx.toFixed(3)+` <span class="mm-date">${fmtD(t.entryDt)}</span>`],
+        ['Exit',  t.exitPx.toFixed(3)+` <span class="mm-date">${fmtD(t.exitDt)}</span>`],
         ['Shares', t.units.toLocaleString()],
         ['P&L', money(t.pnl,2), cls(t.pnl)],
         ['Return', pct(t.ret), cls(t.ret)],
@@ -302,7 +302,7 @@
     openChartModal({
       ticker:p.ticker, name:p.product, dir:p.dir, sideNote:'Open position',
       metrics:[
-        ['Entry', p.price.toFixed(3)+' · '+fmtD(p.dt)],
+        ['Entry', p.price.toFixed(3)+` <span class="mm-date">${fmtD(p.dt)}</span>`],
         ['Last', px!=null ? px.toFixed(3) : '—'],
         ['Shares', p.units.toLocaleString()],
         ['Unreal. P&L', uPnl==null?'—':money(uPnl,2), uPnl==null?'':cls(uPnl)],
