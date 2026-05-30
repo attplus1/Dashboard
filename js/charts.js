@@ -146,7 +146,7 @@
     el.innerHTML = `
       <div class="oc-head">
         <span class="oc-rate">${wr.toFixed(1)}<i>%</i></span>
-        <span class="oc-sub">win rate · <b>${m.nWin}</b>W / <b>${m.nLoss}</b>L / <b>${m.nFlat}</b>BE</span>
+        <span class="oc-sub">win rate · <b>${m.nTotal}</b> trades</span>
       </div>
       <div class="oc-bar">
         ${segs.map(s=>`<span class="oc-seg oc-${s[0]}" style="width:${s[2]}%"
