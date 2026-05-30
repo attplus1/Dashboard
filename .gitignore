@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 .venv/
 node_modules/
+# Per-ticker candle files are derived from data/history and built at deploy
+# time (scripts/build_candles.py) — never committed.
+data/candles/

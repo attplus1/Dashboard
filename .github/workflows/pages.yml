@@ -34,8 +34,14 @@ jobs:
           rsync -a \
             --exclude '.git' --exclude '_site' \
             --exclude 'scripts' --exclude '.github' \
-            --exclude 'data/history' \
+            --exclude 'data/history' --exclude 'data/candles' \
             ./ _site/
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build per-ticker candle files into the site
+        # Derived from data/history at deploy time so they aren't committed to git.
+        run: SITE_DIR=_site python scripts/build_candles.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: '_site'

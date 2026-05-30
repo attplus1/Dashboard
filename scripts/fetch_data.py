@@ -391,13 +391,17 @@ def build_outputs(tickers, names, caps, caps_ready):
     return prices, ranked, stocks, n_caps
 
 
-def write_candle_files(tickers):
-    """Slim per-ticker OHLC files under data/candles/ so the Overview trades
-    table can lazily pop up a price chart (fetched on click) with entry/exit
-    markers — one small file per ticker. Compact [date,o,h,l,c] arrays over the
-    last TRADE_CANDLES_OUT bars. One file per stock also makes per-symbol data
-    issues easy to inspect/track. Returns the number of files written."""
-    os.makedirs(CANDLES_DIR, exist_ok=True)
+def write_candle_files(tickers, out_dir=None):
+    """Slim per-ticker OHLC files so the Overview tables can lazily pop up a
+    price chart (fetched on click) with entry/exit markers — one small file per
+    ticker. Compact [date,o,h,l,c] arrays over the last TRADE_CANDLES_OUT bars.
+
+    These are NOT committed to git: they're derived from the data/history store
+    and built fresh into the deployed site at Pages-deploy time (see
+    scripts/build_candles.py), so they don't bloat the repo history. `out_dir`
+    defaults to data/candles for local use. Returns the number of files."""
+    out_dir = out_dir or CANDLES_DIR
+    os.makedirs(out_dir, exist_ok=True)
     written = 0
     for t in tickers:
         candles = candles_of(load_hist(t))[-TRADE_CANDLES_OUT:]
@@ -407,9 +411,7 @@ def write_candle_files(tickers):
         arr = ",".join(json.dumps([c["date"], round(c["open"], 4), round(c["high"], 4),
                                    round(c["low"], 4), round(c["close"], 4)])
                        for c in candles)
-        # No timestamp in the file: content changes only when the OHLC does, so
-        # git only re-commits tickers whose data actually moved (less churn).
-        with open(os.path.join(CANDLES_DIR, f"{safe}.json"), "w") as f:
+        with open(os.path.join(out_dir, f"{safe}.json"), "w") as f:
             f.write('{"ticker":%s,"candles":[%s]}' % (json.dumps(t), arr))
         written += 1
     return written
@@ -441,10 +443,8 @@ def main():
                    "cap_count": n_caps, "caps_ready": caps_ready,
                    "ranked": ranked, "stocks": stocks},
                   f, separators=(",", ":"))
-    n_candle_files = write_candle_files(tickers)
-
     log(f"Done. priced={len(prices)} caps={n_caps} stocks={len(stocks)} "
-        f"candle_files={n_candle_files} benchmark={len(bench)} stale_remaining={remaining}")
+        f"benchmark={len(bench)} stale_remaining={remaining}")
 
 
 if __name__ == "__main__":
