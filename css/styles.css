@@ -186,9 +186,24 @@ input[type=date]{
 }
 .kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent)}
 .kpi-hero:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(30,40,55,.12)}
-/* Net P&L card: whole background tints green (profit) / red (loss). */
-.kpi-hero.tinted.pos{background:linear-gradient(155deg, #fff, var(--pos-dim)); border-color:#bfe6d4}
-.kpi-hero.tinted.neg{background:linear-gradient(155deg, #fff, var(--neg-dim)); border-color:#f6cdd2}
+/* Net P&L card: whole background tints green (profit) / red (loss). A 3-stop
+   gradient (using each card's own --tint colours) is oversized and animates its
+   position on hover, so the wash gently drifts. Colours are set per result via
+   the .pos/.neg classes, so this adapts to whatever the data produces. */
+.kpi-hero.tinted{background-size:220% 220%; background-position:0% 0%}
+.kpi-hero.tinted.pos{
+  background:linear-gradient(135deg, #fff 0%, var(--pos-dim) 55%, #b6e3cd 100%);
+  background-size:220% 220%; border-color:#bfe6d4}
+.kpi-hero.tinted.neg{
+  background:linear-gradient(135deg, #fff 0%, var(--neg-dim) 55%, #f6c2c8 100%);
+  background-size:220% 220%; border-color:#f6cdd2}
+.kpi-hero.tinted:hover{animation:tint-drift 3.2s ease-in-out infinite}
+@keyframes tint-drift{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+@media(prefers-reduced-motion:reduce){.kpi-hero.tinted:hover{animation:none}}
 .kpi-hero.tinted.pos::before{background:var(--pos)} .kpi-hero.tinted.neg::before{background:var(--neg)}
 .kpi-hero.tinted.pos .kh-foot span,.kpi-hero.tinted.neg .kh-foot span{border-top-color:rgba(30,40,55,.10)}
 .kh-label{font-size:11px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--text-faint)}
