@@ -278,7 +278,7 @@ input[type=date]{
 .dl-item{display:inline-flex; align-items:center; gap:6px}
 .dl-swatch{width:11px; height:11px; border-radius:3px; display:inline-block}
 .dl-swatch.dl-trades{background:linear-gradient(90deg,var(--neg) 0 50%,var(--pos) 50% 100%)}
-.dl-swatch.dl-density{background:#8a96a3}
+.dl-swatch.dl-density{background:#c2c9d2}
 .top-trades{display:grid; grid-template-columns:1fr 1fr; gap:22px}
 @media(max-width:760px){.top-trades{grid-template-columns:1fr}}
 .tt-h{margin:0 0 8px; font-size:12.5px; font-weight:600}
