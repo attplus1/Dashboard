@@ -30,9 +30,9 @@
   // Bottom range slider for modal charts, styled to match the overview date
   // slider: a slim plain track with an orange fill and white circular handles —
   // no in-slider price line.
-  function zoomSlider(start, end, dates){
+  function zoomSlider(start, end){
     return {
-      type:'slider', start, end, height:12, bottom:8,  // clear of the card's bottom edge (handles not clipped)
+      type:'slider', start, end, height:12, bottom:6,
       filterMode:'filter',                             // recompute series in view -> y-axis rescales on zoom
       showDataShadow:false,                            // drop the mini price line
       backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
@@ -43,17 +43,28 @@
         shadowBlur:4, shadowColor:'rgba(0,0,0,.18)' },
       moveHandleSize:0,
       emphasis:{ handleStyle:{ borderColor:COLORS.accentD } },
-      // On a category axis the handle value is the bar INDEX, so map it back to
-      // the date and shorten to MM-DD so it reads clearly and stays on-chart.
-      labelFormatter: v => {
-        const d = dates && dates[Math.round(v)]; const s = String(d || '');
-        return s.length>=10 ? s.slice(5) : s;
-      },
-      textStyle:{ color:COLORS.text, fontSize:10,
-        backgroundColor:'rgba(255,255,255,.95)', padding:[3,5], borderRadius:3,
-        borderColor:COLORS.grid, borderWidth:1 },
+      showDetail:false,        // no handle labels — the visible range is shown above the slider instead
       brushSelect:false
     };
+  }
+
+  // Show the visible date range as a small readout ABOVE the bottom slider
+  // (separated from the chart), updated live as the slider/zoom changes. Stays
+  // inside the chart bounds so it never spills under the side cards, and always
+  // shows the full date incl. year.
+  function attachZoomRange(c, dates){
+    const n = dates.length; if (!n) return;
+    const clamp = i => Math.max(0, Math.min(n-1, Math.round(i)));
+    const update = ()=>{
+      const dz = (c.getOption().dataZoom||[])[0]||{};
+      const si = dz.startValue!=null ? dz.startValue : (dz.start||0)/100*(n-1);
+      const ei = dz.endValue!=null   ? dz.endValue   : (dz.end==null?100:dz.end)/100*(n-1);
+      const a = dates[clamp(si)], b = dates[clamp(ei)];
+      c.setOption({ graphic:[{ id:'zoomRange', style:{ text:(a&&b)?(a+'   →   '+b):'' } }] }, false);
+    };
+    c.setOption({ graphic:[{ id:'zoomRange', type:'text', right:6, bottom:26, z:60,
+      style:{ text:'', fill:COLORS.text, fontSize:11, fontFamily:FONT, textAlign:'right' } }] }, false);
+    c.on('dataZoom', update); update();
   }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
   const fmtPct = v => (v>=0?'+':'') + v.toFixed(2) + '%';
@@ -178,7 +189,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:30,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:66} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -199,7 +210,7 @@
           // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
-        ...(big ? [zoomSlider(startPct, 100, dates)] : [])
+        ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
       series:[
         {type:'candlestick', data:ohlc,
@@ -211,6 +222,7 @@
           lineStyle:{width:1.3,color:COLORS.warn}}
       ]
     });
+    if (big) attachZoomRange(c, dates);
     return c;
   }
 
@@ -291,7 +303,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:30,top:16,bottom:58},
+      grid:{left:56,right:18,top:16,bottom:66},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -302,7 +314,7 @@
       dataZoom:[
         {type:'inside', start:lo/n*100, end:hi/n*100, filterMode:'filter',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
-        zoomSlider(lo/n*100, hi/n*100, dates)
+        zoomSlider(lo/n*100, hi/n*100)
       ],
       series:[{
         type:'candlestick', data:ohlc,
@@ -312,6 +324,7 @@
           lineStyle:{color: mark.win ? COLORS.pos : COLORS.neg, width:2}, data:lineData }
       }]
     });
+    attachZoomRange(c, dates);
   }
 
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
