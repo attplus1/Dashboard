@@ -142,12 +142,12 @@
     return rows;
   }
 
-  // Histogram of trade outcomes with a fitted normal curve overlaid. `mode`
+  // Histogram of trade outcomes with a smoothed density curve overlaid. `mode`
   // selects the metric: 'dollar' bins per-trade $ P&L, otherwise % return.
   function returnsHistogram(trades, mode){
     const pick = mode==='dollar' ? (t=>t.pnl) : (t=>t.ret);
     const vals = trades.map(pick).filter(v=>isFinite(v));
-    if (vals.length < 2) return { bins:[], normal:[], mean:0, std:0, n:vals.length, mode };
+    if (vals.length < 2) return { bins:[], density:[], mean:0, std:0, n:vals.length, mode };
     const lo=Math.min(...vals), hi=Math.max(...vals);
     const nbins = Math.max(6, Math.min(24, Math.ceil(Math.sqrt(vals.length))+2));
     const span = (hi-lo)||1, w = span/nbins;
@@ -155,17 +155,24 @@
     for (const v of vals){ let i=Math.floor((v-lo)/w); if(i>=nbins)i=nbins-1; if(i<0)i=0; counts[i]++; }
     const bins = counts.map((c,i)=>({ x0:lo+i*w, x1:lo+(i+1)*w, mid:lo+(i+0.5)*w, count:c }));
     const m=mean(vals), s=std(vals);
-    // Normal PDF scaled to counts (×n×binWidth) sampled across the range.
-    const normal=[];
+    // Kernel density estimate (Gaussian kernel, Silverman bandwidth) scaled to
+    // the count histogram. Unlike a normal fit, a KDE follows the actual shape —
+    // skew and heavy tails included — and tapers to zero just past the data
+    // rather than stopping mid-air at the min/max.
+    const density=[];
     if (s>0){
-      const steps=80;
-      for (let k=0;k<=steps;k++){
-        const x=lo+span*k/steps;
-        const pdf=Math.exp(-((x-m)**2)/(2*s*s))/(s*Math.sqrt(2*Math.PI));
-        normal.push([+x.toFixed(3), +(pdf*vals.length*w).toFixed(3)]);
+      const n=vals.length;
+      const h = 1.06 * s * Math.pow(n, -1/5) || w;     // bandwidth
+      const lo2 = lo - 2.5*h, hi2 = hi + 2.5*h, steps=120;
+      const scale = w / h / Math.sqrt(2*Math.PI);      // -> counts (density × n × w)
+      for (let j=0;j<=steps;j++){
+        const x = lo2 + (hi2-lo2)*j/steps;
+        let d=0;
+        for (const v of vals){ const z=(x-v)/h; d += Math.exp(-0.5*z*z); }
+        density.push([+x.toFixed(3), +(d*scale).toFixed(3)]);
       }
     }
-    return { bins, normal, mean:m, std:s, n:vals.length, mode };
+    return { bins, density, mean:m, std:s, n:vals.length, mode };
   }
 
   // Top winners/losers ranked by the active display metric so the table lines
