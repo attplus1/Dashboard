@@ -189,8 +189,8 @@ input[type=date]{
 /* Net P&L card: whole background tints green (profit) / red (loss) — white at
    both the top-left and the bottom-right (where the figures sit). On hover a
    soft, very light band sweeps across. */
-.kpi-hero.tinted.pos{background:linear-gradient(150deg, #fff 0%, var(--pos-dim) 48%, #f3fbf7 100%); border-color:#bfe6d4}
-.kpi-hero.tinted.neg{background:linear-gradient(150deg, #fff 0%, var(--neg-dim) 48%, #fef5f6 100%); border-color:#f6cdd2}
+.kpi-hero.tinted.pos{background:radial-gradient(120% 130% at 28% 18%, var(--pos-dim) 0%, rgba(212,239,227,.45) 38%, #fff 72%); border-color:#bfe6d4}
+.kpi-hero.tinted.neg{background:radial-gradient(120% 130% at 28% 18%, var(--neg-dim) 0%, rgba(251,224,227,.45) 38%, #fff 72%); border-color:#f6cdd2}
 .kpi-hero.tinted .kh-tint{
   position:absolute; top:0; right:0; bottom:0; left:5px; z-index:0; opacity:0; pointer-events:none;
   transition:opacity .25s ease; background-size:300% 300%;
