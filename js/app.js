@@ -88,6 +88,33 @@
     $('#top-losers tbody').innerHTML = er(6,'—');
   }
 
+  // ---------- collapsible panels ----------
+  const COLLAPSE_KEY = 'plus1_collapsed_v1';
+  function loadCollapsed(){ try { return JSON.parse(localStorage.getItem(COLLAPSE_KEY))||{}; } catch(e){ return {}; } }
+  function saveCollapsed(o){ try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify(o)); } catch(e){} }
+  function wireCollapsibles(){
+    const stored = loadCollapsed();
+    document.querySelectorAll('.panel.collapsible').forEach(panel=>{
+      const head = panel.querySelector('.panel-head');
+      if (!head || head.querySelector('.collapse-toggle')) return;
+      const h3 = head.querySelector('h3');
+      const key = h3 ? h3.textContent.trim() : '';
+      if (key && stored[key]) panel.classList.add('collapsed');
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'collapse-toggle';
+      btn.setAttribute('aria-label', 'Collapse or expand section');
+      btn.innerHTML = '<span class="chev">▾</span>';
+      head.appendChild(btn);
+      head.addEventListener('click', ()=>{
+        const collapsed = panel.classList.toggle('collapsed');
+        const s = loadCollapsed();
+        if (collapsed) s[key] = 1; else delete s[key];
+        saveCollapsed(s);
+        if (!collapsed) setTimeout(()=>window.Charts && window.Charts.resizeAll && window.Charts.resizeAll(), 60);
+      });
+    });
+  }
+
   function applySourceNotes(){
     const bnote = $('#data-source-note');
     if (!state.benchmark){
@@ -95,10 +122,10 @@
       bnote.innerHTML='ASX 200 benchmark not loaded — run the <code>update-data</code> workflow.';
     } else if (state.benchmark.placeholder){
       bnote.className='source-note placeholder';
-      bnote.textContent='Benchmark + prices are placeholder data. Run the data workflow for live Stooq values.';
+      bnote.textContent='Benchmark + prices are placeholder data. Run the data workflow for live values.';
     } else {
       bnote.className='source-note live';
-      bnote.textContent='Live ASX 200 + prices · '+(state.benchmark.asof||'');
+      bnote.innerHTML='<span class="live-dot"></span>Live · ASX 200 &amp; prices · '+(state.benchmark.asof||'');
     }
   }
 
@@ -238,6 +265,7 @@
     window.ScreenerTab.wireModal();
     window.PerformanceTab.wireTradeModal();
     window.PerformanceTab.renderGlossary();
+    wireCollapsibles();
 
     // Market data loads for the benchmark/prices and the screener, but trade
     // data is NOT auto-loaded — the performance page stays empty until upload.
