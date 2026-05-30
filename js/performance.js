@@ -7,6 +7,9 @@
   const ratio = v => v==null?'—':(v===Infinity?'∞':v.toFixed(2));
   const fmtD = d => (d instanceof Date && !isNaN(d.getTime())) ? d.toLocaleDateString('en-AU') : '—';
 
+  let TRADE_PRICES = null;     // { ticker: [[date,o,h,l,c],...] } for trade popups
+  let _tradesShown = [];       // trades currently in the table (newest-first)
+
   function kpiCard(label, value, sub, tone){
     return `<div class="kpi ${tone||''}">
       <div class="k-label">${label}</div>
@@ -106,7 +109,8 @@
   function renderTradesTable(trades){
     const tb = $('#trades-table tbody');
     if (!trades.length){ tb.innerHTML = `<tr class="empty-row"><td colspan="11">No closed trades in this period.</td></tr>`; return; }
-    tb.innerHTML = trades.slice().reverse().map(t=>`<tr>
+    _tradesShown = trades.slice().reverse();           // table is newest-first
+    tb.innerHTML = _tradesShown.map((t,i)=>`<tr class="trade-row" data-idx="${i}" title="Click for entry/exit chart">
       <td><b>${t.ticker}</b></td>
       <td><span class="pill ${t.dir}">${t.dir}</span></td>
       <td class="num">${t.units.toLocaleString()}</td>
@@ -119,6 +123,38 @@
       <td>${fmtD(t.exitDt)}</td>
       <td><span class="pill exit">${t.exitType}</span></td>
     </tr>`).join('');
+    tb.querySelectorAll('.trade-row').forEach(tr=>
+      tr.addEventListener('click', ()=> openTradeModal(_tradesShown[+tr.dataset.idx])));
+  }
+
+  // ---------- trade entry/exit chart popup ----------
+  function openTradeModal(t){
+    if (!t) return;
+    const rows = TRADE_PRICES && TRADE_PRICES[t.ticker];
+    $('#trade-modal-ticker').textContent = t.ticker;
+    $('#trade-modal-name').textContent   = t.product || '';
+    $('#trade-modal-side').textContent   = t.dir.toUpperCase()+' · '+t.exitType;
+    const mm = (l,v,tone)=>`<div class="mm"><span class="mm-l">${l}</span>
+      <span class="mm-v ${tone||''}">${v}</span></div>`;
+    $('#trade-modal-metrics').innerHTML =
+      mm('Entry', t.entryPx.toFixed(3)+' · '+fmtD(t.entryDt)) +
+      mm('Exit',  t.exitPx.toFixed(3)+' · '+fmtD(t.exitDt)) +
+      mm('Shares', t.units.toLocaleString()) +
+      mm('P&L', money(t.pnl,2), cls(t.pnl)) +
+      mm('Return', pct(t.ret), cls(t.ret)) +
+      mm('Hold', t.holdDays.toFixed(1)+' d');
+    const modal = $('#trade-modal'); modal.hidden = false;
+    requestAnimationFrame(()=>{
+      if (rows && rows.length) window.Charts.tradeChart('trade-modal-chart', rows, t);
+      else $('#trade-modal-chart').innerHTML =
+        '<div class="chart-empty">Price history isn\'t available for '+t.ticker+'.</div>';
+    });
+  }
+  function closeTradeModal(){ const m=$('#trade-modal'); if (m) m.hidden = true; }
+  function wireTradeModal(){
+    $('#trade-modal-close').addEventListener('click', closeTradeModal);
+    $('#trade-modal-backdrop').addEventListener('click', closeTradeModal);
+    document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeTradeModal(); });
   }
 
   function renderGlossary(){
@@ -129,6 +165,7 @@
   // Full render given the current app state.
   function render(state){
     const { recon, from, to, unit, benchmark, prices } = state;
+    TRADE_PRICES = state.tradePrices || TRADE_PRICES;
     const m = window.Metrics.compute(recon.trades, from, to, recon.balanceSeries, benchmark);
     const commission = window.Metrics.sumInRange(recon.commissions, from, to);
     const funding    = window.Metrics.sumInRange(recon.fundings, from, to);
@@ -143,5 +180,5 @@
     renderTradesTable(m.trades);
   }
 
-  window.PerformanceTab = { render, renderGlossary };
+  window.PerformanceTab = { render, renderGlossary, wireTradeModal };
 })();

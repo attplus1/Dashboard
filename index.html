@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=19" />
+  <link rel="stylesheet" href="css/styles.css?v=20" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -264,6 +264,25 @@
     </div>
   </div>
 
+  <!-- Trade entry/exit chart modal (opened from the Overview trades table) -->
+  <div id="trade-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="trade-modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="trade-modal-close" aria-label="Close">✕</button>
+      <div class="modal-head">
+        <div><span class="modal-ticker" id="trade-modal-ticker"></span>
+             <span class="modal-name" id="trade-modal-name"></span></div>
+        <div class="modal-rank" id="trade-modal-side"></div>
+      </div>
+      <div class="modal-metrics" id="trade-modal-metrics"></div>
+      <div class="modal-chart" id="trade-modal-chart"></div>
+      <div class="modal-foot">
+        <span class="ma-key"><span class="entry-key">Entry</span><span class="exit-key">Exit</span></span>
+        <span>Scroll / drag the chart to zoom &amp; pan</span>
+      </div>
+    </div>
+  </div>
+
   <footer class="app-footer">
     <span>Static dashboard &middot; GitHub Pages</span>
     <span>Market data via yfinance (daily, refreshed by GitHub Actions)</span>
@@ -273,12 +292,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=19"></script>
-  <script src="js/parser.js?v=19"></script>
-  <script src="js/metrics.js?v=19"></script>
-  <script src="js/charts.js?v=19"></script>
-  <script src="js/performance.js?v=19"></script>
-  <script src="js/screener.js?v=19"></script>
-  <script src="js/app.js?v=19"></script>
+  <script src="js/config.js?v=20"></script>
+  <script src="js/parser.js?v=20"></script>
+  <script src="js/metrics.js?v=20"></script>
+  <script src="js/charts.js?v=20"></script>
+  <script src="js/performance.js?v=20"></script>
+  <script src="js/screener.js?v=20"></script>
+  <script src="js/app.js?v=20"></script>
 </body>
 </html>
