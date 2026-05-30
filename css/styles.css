@@ -141,7 +141,7 @@ input[type=date]{
   display:flex; flex-direction:column; justify-content:space-between}
 .range-slider{position:relative; height:18px; display:flex; align-items:center}
 .slider-track{position:absolute; left:0; right:0; height:5px; background:var(--bg); border-radius:4px; border:1px solid var(--border)}
-.slider-fill{position:absolute; height:5px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:4px}
+.slider-fill{position:absolute; height:7px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:4px}
 .slider-handle{
   position:absolute; width:16px; height:16px; border-radius:50%;
   background:#fff; border:3px solid var(--accent); cursor:grab; transform:translateX(-50%);
