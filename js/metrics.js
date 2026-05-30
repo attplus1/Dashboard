@@ -185,11 +185,21 @@
     return rows;
   }
 
-  // P&L/return by hour of entry (only hours that actually occur in the data).
+  // P&L/return by hour of entry, across the full ASX cash-equities trading day
+  // (10:00–16:00 AEST). Hours 10–15 are shown even with no trades yet, so empty
+  // buckets are visible; any entry outside that range still gets its own bucket.
   function byHour(trades, mode){
-    const labels = Array.from({length:24}, (_,h)=>String(h).padStart(2,'0'));
-    const rows = byEntryBucket(trades, mode, labels, d=>d.getHours());
-    return rows.filter(r=>r.n>0);
+    const ASX_OPEN = 10, ASX_CLOSE = 16;   // hour buckets 10..15 (entry hour)
+    const hours = new Set();
+    for (let h=ASX_OPEN; h<ASX_CLOSE; h++) hours.add(h);
+    for (const t of trades){
+      const d = t.entryDt;
+      if (d instanceof Date && !isNaN(d.getTime())) hours.add(d.getHours());
+    }
+    const sorted = [...hours].sort((a,b)=>a-b);
+    const labels = sorted.map(h=>String(h).padStart(2,'0'));
+    const idxOf = {}; sorted.forEach((h,i)=>idxOf[h]=i);
+    return byEntryBucket(trades, mode, labels, d=>idxOf[d.getHours()]);
   }
 
   // The bucket with the highest value (P&L or mean return) — for the KPI tiles.
