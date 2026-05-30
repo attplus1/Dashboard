@@ -184,7 +184,7 @@ input[type=date]{
   display:flex; flex-direction:column;
   transition:transform .18s ease, box-shadow .18s ease;
 }
-.kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent)}
+.kpi-hero::before{content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--border-2)}
 .kpi-hero:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(30,40,55,.12)}
 /* Net P&L card: whole background tints green (profit) / red (loss). On hover an
    oversized diagonal repeating-gradient overlay (the card's own tint colour via
