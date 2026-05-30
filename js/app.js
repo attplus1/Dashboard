@@ -99,6 +99,7 @@
       if (!head || head.querySelector('.collapse-toggle')) return;
       const h3 = head.querySelector('h3');
       const key = h3 ? h3.textContent.trim() : '';
+      panel.dataset.ckey = key;
       if (key && stored[key]) panel.classList.add('collapsed');
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'collapse-toggle';
@@ -106,11 +107,18 @@
       btn.innerHTML = '<span class="chev">▾</span>';
       head.appendChild(btn);
       head.addEventListener('click', ()=>{
-        const collapsed = panel.classList.toggle('collapsed');
+        const collapse = !panel.classList.contains('collapsed');     // target state
+        // Side-by-side charts (a .grid-2) collapse/expand together.
+        const grid = panel.closest('.grid-2');
+        const group = grid ? Array.from(grid.querySelectorAll('.panel.collapsible')) : [panel];
         const s = loadCollapsed();
-        if (collapsed) s[key] = 1; else delete s[key];
+        group.forEach(p=>{
+          p.classList.toggle('collapsed', collapse);
+          const k = p.dataset.ckey;
+          if (k){ if (collapse) s[k] = 1; else delete s[k]; }
+        });
         saveCollapsed(s);
-        if (!collapsed) setTimeout(()=>window.Charts && window.Charts.resizeAll && window.Charts.resizeAll(), 60);
+        if (!collapse) setTimeout(()=>window.Charts && window.Charts.resizeAll && window.Charts.resizeAll(), 60);
       });
     });
   }
@@ -125,7 +133,9 @@
       bnote.textContent='Benchmark + prices are placeholder data. Run the data workflow for live values.';
     } else {
       bnote.className='source-note live';
-      bnote.textContent='Live ASX 200 + prices · '+(state.benchmark.asof||'');
+      bnote.innerHTML='<span class="sn-title">Live market data</span>'
+        + '<span>ASX 200 + prices</span>'
+        + '<span>as of '+(state.benchmark.asof||'—')+'</span>';
     }
   }
 

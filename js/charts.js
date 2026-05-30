@@ -5,6 +5,7 @@
     accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', bench:'#8a96a3',
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
+    posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red (pie slices)
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
   const FONT = "Inter, system-ui, sans-serif";
@@ -21,6 +22,9 @@
   const axisBase = { axisLine:{lineStyle:{color:COLORS.grid}},
     axisLabel:{color:COLORS.text, fontFamily:FONT, margin:14},   // a little breathing room under axis labels
     splitLine:{lineStyle:{color:COLORS.grid, opacity:.35}} };
+  // Gradient fills (pastel <-> saturated) for the summary charts.
+  const gradH = (a,b) => new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:a},{offset:1,color:b}]);
+  const gradV = (a,b) => new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:a},{offset:1,color:b}]);
   const XLABEL = {color:COLORS.text, fontFamily:FONT, margin:14};  // shared x-axis label spacing
 
   // Bottom range slider for modal charts, styled to match the overview date
@@ -99,7 +103,8 @@
         axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
       series:[{
         type:'bar', data:rows.map(r=>({value:+r.value.toFixed(2),
-          itemStyle:{color:r.value>=0?COLORS.posDim:COLORS.negDim, borderRadius:[0,3,3,0]}})),
+          itemStyle:{color:r.value>=0?gradH(COLORS.posDim,COLORS.pos):gradH(COLORS.neg,COLORS.negDim),
+                     borderRadius:[0,3,3,0]}})),
         barMaxWidth:18
       }]
     });
@@ -117,9 +122,9 @@
         itemStyle:{borderColor:'#ffffff', borderWidth:2},
         label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
         data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.posDim}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.negDim}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#dfe4ea'}}
+          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.posMid}},
+          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.negMid}},
+          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#cdd5de'}}
         ]
       }]
     });
@@ -136,9 +141,9 @@
       xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
       yAxis:{type:'value', ...axisBase, axisLabel:{color:COLORS.text, formatter:'{value}d'}},
       series:[{type:'bar', barMaxWidth:48, data:[
-        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:COLORS.posDim}},
-        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:COLORS.negDim}},
-        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:COLORS.accent}}
+        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:gradV(COLORS.pos,COLORS.posDim)}},
+        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:gradV(COLORS.neg,COLORS.negDim)}},
+        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:gradV(COLORS.accent,COLORS.accent2)}}
       ], itemStyle:{borderRadius:[4,4,0,0]}}]
     });
   }

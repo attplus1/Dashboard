@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=32" />
+  <link rel="stylesheet" href="css/styles.css?v=33" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -59,15 +59,13 @@
 
     <!-- Date range control -->
     <section class="panel control-panel">
+      <label class="control-label">Date range</label>
       <div class="control-row">
-        <div class="date-control">
-          <label>Date range</label>
-          <div class="range-inputs">
-            <input type="date" id="date-from" />
-            <span class="range-sep">→</span>
-            <input type="date" id="date-to" />
-            <button id="range-reset" class="ghost-btn">Reset</button>
-          </div>
+        <div class="range-inputs">
+          <input type="date" id="date-from" />
+          <span class="range-sep">→</span>
+          <input type="date" id="date-to" />
+          <button id="range-reset" class="ghost-btn">Reset</button>
         </div>
         <div class="range-slider-wrap">
           <div id="range-slider" class="range-slider">
@@ -295,12 +293,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=32"></script>
-  <script src="js/parser.js?v=32"></script>
-  <script src="js/metrics.js?v=32"></script>
-  <script src="js/charts.js?v=32"></script>
-  <script src="js/performance.js?v=32"></script>
-  <script src="js/screener.js?v=32"></script>
-  <script src="js/app.js?v=32"></script>
+  <script src="js/config.js?v=33"></script>
+  <script src="js/parser.js?v=33"></script>
+  <script src="js/metrics.js?v=33"></script>
+  <script src="js/charts.js?v=33"></script>
+  <script src="js/performance.js?v=33"></script>
+  <script src="js/screener.js?v=33"></script>
+  <script src="js/app.js?v=33"></script>
 </body>
 </html>
