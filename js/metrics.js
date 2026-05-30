@@ -90,6 +90,22 @@
     const sd = std(rets);
     const sharpe = sd ? ((mean(rets)-rfDaily)/sd)*Math.sqrt(C.TRADING_DAYS) : null;
 
+    // Sortino: excess return per unit of DOWNSIDE deviation (penalises only
+    // losing days). Calmar: annualised return ÷ max drawdown depth.
+    const downside = rets.filter(r=>r<rfDaily).map(r=>r-rfDaily);
+    const dd = downside.length
+      ? Math.sqrt(downside.reduce((s,x)=>s+x*x,0)/downside.length) : 0;
+    const sortino = dd ? ((mean(rets)-rfDaily)/dd)*Math.sqrt(C.TRADING_DAYS) : null;
+
+    const mdd = maxDrawdown(equity);
+    let calmar = null;
+    if (equity.length>1 && mdd.pct<0){
+      const totRet = baseEquity ? equity[equity.length-1].equity/baseEquity - 1 : 0;
+      const years = Math.max(rets.length,1)/C.TRADING_DAYS;
+      const annRet = years>0 ? Math.pow(1+totRet, 1/years)-1 : totRet;
+      calmar = annRet / (Math.abs(mdd.pct)/100);
+    }
+
     let infoRatio=null;
     const benchEq = benchmarkSeries(benchmark, equity.map(e=>e.date), baseEquity);
     if (benchEq){
@@ -116,7 +132,7 @@
       avgHoldWin:    mean(wins.map(t=>t.holdDays)),
       avgHoldLoss:   mean(losses.map(t=>t.holdDays)),
       avgRet:        mean(trades.map(t=>t.ret)),
-      sharpe, infoRatio, maxDrawdown: maxDrawdown(equity),
+      sharpe, sortino, calmar, infoRatio, maxDrawdown: mdd,
       equity, benchEquity: benchEq,
       nWin: wins.length, nLoss: losses.length, nFlat: flat.length, nTotal: trades.length
     };

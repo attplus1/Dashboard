@@ -48,22 +48,31 @@
     };
   }
 
-  // Show the visible date range as a small readout ABOVE the bottom slider
-  // (separated from the chart), updated live as the slider/zoom changes. Stays
-  // inside the chart bounds so it never spills under the side cards, and always
-  // shows the full date incl. year.
-  function attachZoomRange(c, dates){
+  // Two date labels that follow each slider handle (the "dots"), showing the
+  // full visible-range start/end dates. Positioned ABOVE the slider and clamped
+  // to the chart's left/right edges so they never run off or under the cards.
+  function attachZoomRange(c, dates, gridLeft, gridRight){
     const n = dates.length; if (!n) return;
-    const clamp = i => Math.max(0, Math.min(n-1, Math.round(i)));
+    const clampI = i => Math.max(0, Math.min(n-1, Math.round(i)));
+    const LBL_HALF = 34;                       // ~ half a "YYYY-MM-DD" label box
     const update = ()=>{
       const dz = (c.getOption().dataZoom||[])[0]||{};
-      const si = dz.startValue!=null ? dz.startValue : (dz.start||0)/100*(n-1);
-      const ei = dz.endValue!=null   ? dz.endValue   : (dz.end==null?100:dz.end)/100*(n-1);
-      const a = dates[clamp(si)], b = dates[clamp(ei)];
-      c.setOption({ graphic:[{ id:'zoomRange', style:{ text:(a&&b)?(a+'   →   '+b):'' } }] }, false);
+      const sp = dz.start!=null ? dz.start : (dz.startValue!=null? dz.startValue/(n-1)*100 : 0);
+      const ep = dz.end!=null   ? dz.end   : (dz.endValue!=null?   dz.endValue/(n-1)*100   : 100);
+      const W = c.getWidth();
+      const x0 = gridLeft, x1 = W - gridRight, span = Math.max(1, x1-x0);
+      // Clamp each label's centre so its box stays within [x0, x1].
+      const cx = p => Math.max(x0+LBL_HALF, Math.min(x1-LBL_HALF, x0 + p/100*span));
+      const a = dates[clampI(sp/100*(n-1))], b = dates[clampI(ep/100*(n-1))];
+      c.setOption({ graphic:[
+        { id:'zoomL', style:{ text:a||'', x:cx(sp) } },
+        { id:'zoomR', style:{ text:b||'', x:cx(ep) } }
+      ] }, false);
     };
-    c.setOption({ graphic:[{ id:'zoomRange', type:'text', right:6, bottom:26, z:60,
-      style:{ text:'', fill:COLORS.text, fontSize:11, fontFamily:FONT, textAlign:'right' } }] }, false);
+    const lbl = id => ({ id, type:'text', bottom:26, z:60,
+      style:{ text:'', x:0, fill:COLORS.text, fontSize:10.5, fontFamily:FONT, textAlign:'center',
+        fontWeight:600 } });
+    c.setOption({ graphic:[ lbl('zoomL'), lbl('zoomR') ] }, false);
     c.on('dataZoom', update); update();
   }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
@@ -222,7 +231,7 @@
           lineStyle:{width:1.3,color:COLORS.warn}}
       ]
     });
-    if (big) attachZoomRange(c, dates);
+    if (big) attachZoomRange(c, dates, 54, 18);
     return c;
   }
 
@@ -324,7 +333,7 @@
           lineStyle:{color: mark.win ? COLORS.pos : COLORS.neg, width:2}, data:lineData }
       }]
     });
-    attachZoomRange(c, dates);
+    attachZoomRange(c, dates, 56, 18);
   }
 
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
