@@ -364,9 +364,11 @@ input[type=date]{
 .mm{background:var(--bg-2); border:1px solid var(--border); border-radius:9px; padding:10px 12px}
 .mm-l{display:block; font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--text-faint)}
 .mm-v{display:block; font-family:var(--mono); font-size:16px; font-weight:700; margin-top:4px}
+.mm-v .mm-date{font-weight:400; color:var(--text-dim)}   /* un-bold the date next to the price */
 .modal-chart{height:400px; width:100%}
 .modal-foot{display:flex; justify-content:space-between; align-items:center; gap:16px;
-  flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:10px}
+  flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:10px;
+  padding-left:54px}   /* indent so the legend lines up with the chart slider's left edge */
 .modal-foot .ma-key{display:inline-flex; gap:16px; align-items:center}   /* keep Entry/Exit legend from overlapping */
 
 /* Modal split: chart on the left, metric cards stacked in a right column
