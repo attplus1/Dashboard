@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=60" />
+  <link rel="stylesheet" href="css/styles.css?v=61" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -82,9 +82,7 @@
     <!-- Equity curve -->
     <section class="panel" id="equity-panel">
       <div class="panel-head">
-        <h3>Equity Curve vs ASX 200</h3>
-        <p class="panel-desc">Cumulative account performance over the selected period. The ASX 200 benchmark
-           is rebased to your starting equity so relative performance is directly comparable.</p>
+        <h3>Account Equity</h3>
       </div>
       <div id="equity-chart" class="chart chart-lg"></div>
     </section>
@@ -96,8 +94,7 @@
     <section class="panel collapsible">
       <div class="panel-head">
         <h3>Open Positions</h3>
-        <p class="panel-desc">Currently held positions reconstructed from unmatched entries. Unrealised P&amp;L
-           uses the latest market price from the data feed when available.</p>
+        <p class="panel-desc">Open positions with live unrealised P&amp;L.</p>
       </div>
       <div class="table-wrap">
         <table class="data-table" id="open-positions-table">
@@ -119,8 +116,7 @@
     <section class="panel collapsible">
       <div class="panel-head">
         <h3>Realised P&amp;L by Ticker</h3>
-        <p class="panel-desc">Net realised result per instrument across all closed trades in the period.
-           Toggle the display control above to switch between dollars and average % return.</p>
+        <p class="panel-desc">Net realised result per instrument.</p>
       </div>
       <div id="ticker-chart" class="chart chart-md"></div>
     </section>
@@ -143,9 +139,7 @@
     <section class="panel collapsible">
       <div class="panel-head">
         <h3>Distribution of Trade Outcomes</h3>
-        <p class="panel-desc">Histogram of per-trade outcomes with a smoothed density curve (kernel density
-           estimate, so it follows the real skew/tails rather than forcing a normal fit). Mean (μ) and
-           standard deviation (σ) are shown; figures are gross of fees.</p>
+        <p class="panel-desc">Per-trade outcomes with a fitted density curve.</p>
       </div>
       <div id="dist-stats" class="dist-stats"></div>
       <div id="dist-chart" class="chart chart-md"></div>
@@ -154,9 +148,7 @@
     <section class="panel collapsible">
       <div class="panel-head">
         <h3>Top Trades</h3>
-        <p class="panel-desc">The five largest winners and losers in the selected period, ranked by the
-           active display metric (toggle above): dollar P&amp;L or % return — matching the distribution
-           histogram, which follows the same toggle.</p>
+        <p class="panel-desc">The five largest winners and losers by the active display metric.</p>
       </div>
       <div class="top-trades">
         <div>
@@ -292,12 +284,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=60"></script>
-  <script src="js/parser.js?v=60"></script>
-  <script src="js/metrics.js?v=60"></script>
-  <script src="js/charts.js?v=60"></script>
-  <script src="js/performance.js?v=60"></script>
-  <script src="js/screener.js?v=60"></script>
-  <script src="js/app.js?v=60"></script>
+  <script src="js/config.js?v=61"></script>
+  <script src="js/parser.js?v=61"></script>
+  <script src="js/metrics.js?v=61"></script>
+  <script src="js/charts.js?v=61"></script>
+  <script src="js/performance.js?v=61"></script>
+  <script src="js/screener.js?v=61"></script>
+  <script src="js/app.js?v=61"></script>
 </body>
 </html>
