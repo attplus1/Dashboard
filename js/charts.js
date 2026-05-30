@@ -3,7 +3,7 @@
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
     accent:'#F5821E', accentD:'#d96f12', accent2:'#ffa24d', accentMid:'#ffb877', bench:'#8a96a3',
-    densityLine:'#dfe4ea',   // very light site grey for the distribution density overlay
+    densityLine:'#1d2733',   // dark (site text colour) density overlay
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
     posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
