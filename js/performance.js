@@ -97,8 +97,8 @@
       if (base) heroSub = `${pct(net/base*100,1)} on starting equity`;
     }
 
-    // Hero Net P&L card.
-    const hero = `<div class="kpi-hero ${netPos?'pos':'neg'}">
+    // Hero Net P&L card — background tints green (profit) or red (loss).
+    const hero = `<div class="kpi-hero tinted ${netPos?'pos':'neg'}">
       <div class="kh-label">Net P&amp;L</div>
       <div class="kh-value ${netPos?'val-pos':'val-neg'}">${money(net,0)}</div>
       <div class="kh-sub">${heroSub}</div>
@@ -109,8 +109,19 @@
       </div>
     </div>`;
 
-    // Hero Risk-adjusted ratios card (same shape as the P&L hero).
-    const ratios = `<div class="kpi-hero ratios">
+    // Hero Trade Activity card (rows like the ratios card).
+    const activity = `<div class="kpi-hero">
+      <div class="kh-label">Trade Activity</div>
+      <div class="kh-ratios">
+        <div><i>Total trades</i><b>${m.nTotal}</b></div>
+        <div><i>Avg trade</i><b class="${cls(m.avgPnl)}">${money(m.avgPnl,0)}</b></div>
+        <div><i>Avg win</i><b class="${m.avgWin>=0?'val-pos':''}">${money(m.avgWin,0)}</b></div>
+        <div><i>Avg loss</i><b class="val-neg">${money(m.avgLoss,0)}</b></div>
+      </div>
+    </div>`;
+
+    // Hero Risk-adjusted ratios card.
+    const ratios = `<div class="kpi-hero">
       <div class="kh-label">Risk-Adjusted Ratios</div>
       <div class="kh-ratios">
         <div><i>Sharpe</i><b>${ratio(m.sharpe)}</b></div>
@@ -120,17 +131,16 @@
       </div>
     </div>`;
 
+    // Smaller stat tiles for the remaining metrics (original-style grid).
     const tiles = [
       kTile('Win rate', m.winRate.toFixed(1)+'%', `${m.nWin}W · ${m.nLoss}L`, ''),
       kTile('Profit factor', ratio(m.profitFactor), '', ''),
-      kTile('Total trades', String(m.nTotal), `${m.nFlat} flat`, ''),
       kTile('Max drawdown', m.maxDrawdown.pct.toFixed(1)+'%', money(m.maxDrawdown.dollars,0), 'neg'),
-      kTile('Avg win', money(m.avgWin,0), '', m.avgWin>=0?'pos':''),
-      kTile('Avg loss', money(m.avgLoss,0), '', 'neg'),
-      kTile('Avg trade', money(m.avgPnl,0), '', m.avgPnl>=0?'pos':'neg'),
       kTile('Avg hold', m.avgHoldAll.toFixed(1)+'d', '', '')
     ];
-    $('#kpi-grid').innerHTML = hero + `<div class="kpi-tiles">${tiles.join('')}</div>` + ratios;
+    $('#kpi-grid').innerHTML =
+      `<div class="kpi-heroes">${hero}${activity}${ratios}</div>` +
+      `<div class="kpi-tiles">${tiles.join('')}</div>`;
   }
 
   function renderTopTrades(m, unit){
