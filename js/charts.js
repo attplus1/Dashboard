@@ -82,18 +82,15 @@
     const up = chg>=0;
     const headline = [
       { type:'text', left:0, top:0, z:5,
-        style:{ text:'ACCOUNT EQUITY', fill:COLORS.text, opacity:.55, fontSize:10.5,
-          fontFamily:FONT, fontWeight:600 } },
-      { type:'text', left:0, top:15, z:5,
         style:{ text:fmtMoney(lastEq), fill:COLORS.textStrong, fontSize:26, fontFamily:FONT, fontWeight:700 } },
-      { type:'text', left:0, top:48, z:5,
+      { type:'text', left:0, top:33, z:5,
         style:{ text:`${up?'▲':'▼'} ${fmtMoney(Math.abs(chg))} (${fmtPct(chgPct)}) in range`,
           fill:up?COLORS.pos:COLORS.neg, fontSize:12, fontFamily:FONT, fontWeight:600 } }
     ];
     c.setOption({
       backgroundColor:'transparent',
       color:[COLORS.accent, COLORS.bench],
-      grid:{left:64,right:18,top:78,bottom:34},   // extra top room for the headline
+      grid:{left:64,right:18,top:62,bottom:34},   // room for the equity headline + a 16px gap
       graphic:headline,
       legend:{data:series.map(s=>s.name), top:0, right:0,
         icon:'roundRect', itemWidth:11, itemHeight:11, itemGap:16,
