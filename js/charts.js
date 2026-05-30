@@ -131,42 +131,45 @@
     });
   }
 
+  // Trade outcomes: a big win-rate headline + a 100% win/loss/breakeven split
+  // bar. Rendered as HTML (not ECharts) so it inherits the site font.
   function outcomeChart(id, m){
-    const c = init(id); if (!c) return;
-    c.setOption({
-      backgroundColor:'transparent',
-      tooltip:{trigger:'item', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
-        textStyle:{color:COLORS.textStrong}},
-      legend:{bottom:0, textStyle:{color:COLORS.text}},
-      series:[{
-        type:'pie', radius:['52%','74%'], center:['50%','45%'], avoidLabelOverlap:true,
-        itemStyle:{borderColor:'#ffffff', borderWidth:2},
-        label:{color:COLORS.textStrong, formatter:'{b}\n{c}'},
-        data:[
-          {value:m.nWin, name:'Wins', itemStyle:{color:COLORS.pos}},
-          {value:m.nLoss, name:'Losses', itemStyle:{color:COLORS.neg}},
-          {value:m.nFlat, name:'Breakeven', itemStyle:{color:'#9aa6b2'}}
-        ]
-      }]
-    });
+    const el = document.getElementById(id); if (!el) return;
+    const n = m.nTotal||0;
+    const wr = n ? (m.nWin/n*100) : 0;
+    const pct1 = v => (n? (v/n*100):0);
+    const segs = [
+      ['win', m.nWin, pct1(m.nWin)],
+      ['loss', m.nLoss, pct1(m.nLoss)],
+      ['flat', m.nFlat, pct1(m.nFlat)]
+    ].filter(s=>s[1]>0);
+    el.innerHTML = `
+      <div class="oc-head">
+        <span class="oc-rate">${wr.toFixed(1)}<i>%</i></span>
+        <span class="oc-sub">win rate · <b>${m.nWin}</b>W / <b>${m.nLoss}</b>L / <b>${m.nFlat}</b>BE</span>
+      </div>
+      <div class="oc-bar">
+        ${segs.map(s=>`<span class="oc-seg oc-${s[0]}" style="width:${s[2]}%"
+            title="${s[1]} (${s[2].toFixed(1)}%)">${s[2]>=14?`<i>${Math.round(s[2])}%</i>`:''}</span>`).join('')}
+      </div>
+      <div class="oc-legend">
+        <span><i class="oc-dot oc-win"></i>Wins ${m.nWin}</span>
+        <span><i class="oc-dot oc-loss"></i>Losses ${m.nLoss}</span>
+        <span><i class="oc-dot oc-flat"></i>Breakeven ${m.nFlat}</span>
+      </div>`;
   }
 
+  // Average holding period: three stat tiles (Winners / Losers / Overall).
   function holdingChart(id, m){
-    const c = init(id); if (!c) return;
-    c.setOption({
-      backgroundColor:'transparent',
-      grid:{left:46,right:20,top:20,bottom:30},
-      tooltip:{trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:COLORS.tip,
-        borderColor:COLORS.grid, textStyle:{color:COLORS.textStrong},
-        valueFormatter:v=>v.toFixed(1)+' days'},
-      xAxis:{type:'category', data:['Winners','Losers','All'], ...axisBase},
-      yAxis:{type:'value', ...axisBase, axisLabel:{color:COLORS.text, formatter:'{value}d'}},
-      series:[{type:'bar', barMaxWidth:48, data:[
-        {value:+m.avgHoldWin.toFixed(1), itemStyle:{color:COLORS.pos}},
-        {value:+m.avgHoldLoss.toFixed(1), itemStyle:{color:COLORS.neg}},
-        {value:+m.avgHoldAll.toFixed(1), itemStyle:{color:COLORS.accent}}
-      ], itemStyle:{borderRadius:[4,4,0,0]}}]
-    });
+    const el = document.getElementById(id); if (!el) return;
+    const tile = (lbl,val,cls) => `<div class="hold-tile">
+        <div class="hold-lbl">${lbl}</div>
+        <div class="hold-val ${cls}">${(val||0).toFixed(1)}<i>d</i></div></div>`;
+    el.innerHTML = `<div class="hold-tiles">
+        ${tile('Winners', m.avgHoldWin, 'val-pos')}
+        ${tile('Losers', m.avgHoldLoss, 'val-neg')}
+        ${tile('Overall', m.avgHoldAll, 'val-accent')}
+      </div>`;
   }
 
   // Candlestick + MA50/MA200. Scrollable/zoomable (dataZoom). `big` shows axes
