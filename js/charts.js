@@ -8,7 +8,7 @@
     posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
-  const FONT = "Inter, system-ui, sans-serif";
+  const FONT = "Manrope, system-ui, sans-serif";
   const instances = {};
 
   function init(id){
@@ -131,7 +131,7 @@
       xAxis:{type:'value', ...axisBase,
         axisLabel:{...XLABEL, formatter:v=> unit==='percent'? v+'%' : fmtMoney(v)}},
       yAxis:{type:'category', data:rows.map(r=>r.ticker), ...axisBase,
-        axisLabel:{color:COLORS.text, fontFamily:'JetBrains Mono, monospace'}},
+        axisLabel:{color:COLORS.text, fontFamily:FONT}},
       series:[{
         type:'bar', data:rows.map(r=>({value:+r.value.toFixed(2),
           itemStyle:{color:r.value>=0?COLORS.pos:COLORS.neg,
