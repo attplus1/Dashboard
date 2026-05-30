@@ -191,6 +191,7 @@ input[type=date]{
 .kh-foot span{display:flex; justify-content:space-between; font-family:var(--mono); font-size:13px; color:var(--text);
   border-top:1px solid var(--border); padding-top:7px}
 .kh-foot i{font-style:normal; font-family:'Inter',sans-serif; font-size:11.5px; color:var(--text-dim)}
+.kh-foot b{font-weight:700}
 
 /* Row-list hero cards (Trade Activity, Risk-Adjusted Ratios) */
 .kh-ratios{display:flex; flex-direction:column; justify-content:center; gap:0; margin-top:6px; flex:1}
