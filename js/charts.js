@@ -32,7 +32,8 @@
   // no in-slider price line.
   function zoomSlider(start, end){
     return {
-      type:'slider', start, end, height:12, bottom:4,
+      type:'slider', start, end, height:12, bottom:8,  // clear of the card's bottom edge (handles not clipped)
+      filterMode:'filter',                             // recompute series in view -> y-axis rescales on zoom
       showDataShadow:false,                            // drop the mini price line
       backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
       fillerColor:'rgba(245,130,30,.22)',
@@ -167,7 +168,7 @@
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:52} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid: big ? {left:54,right:18,top:16,bottom:58} : {left:6,right:6,top:8,bottom:6,containLabel:false},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -181,12 +182,13 @@
                  : {type:'value', scale:true, show:false},
       dataZoom:[
         big
-          // Expanded: full zoom + pan via wheel/drag.
-          ? {type:'inside', start:startPct, end:100,
+          // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
+          // out-of-view bars so the (scale:true) y-axis re-fits the visible range.
+          ? {type:'inside', start:startPct, end:100, filterMode:'filter',
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
           // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
           // click cleanly expands the card. No zoom; y auto-scales.
-          : {type:'inside', start:startPct, end:100, zoomLock:true,
+          : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
         ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
@@ -280,7 +282,7 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:52},
+      grid:{left:56,right:18,top:16,bottom:58},
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
@@ -289,7 +291,8 @@
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
       yAxis:{type:'value', scale:true, ...axisBase},
       dataZoom:[
-        {type:'inside', start:lo/n*100, end:hi/n*100, zoomOnMouseWheel:true, moveOnMouseMove:true},
+        {type:'inside', start:lo/n*100, end:hi/n*100, filterMode:'filter',
+         zoomOnMouseWheel:true, moveOnMouseMove:true},
         zoomSlider(lo/n*100, hi/n*100)
       ],
       series:[{

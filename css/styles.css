@@ -156,7 +156,11 @@ input[type=date]{
 }
 .seg-btn + .seg-btn{border-left:1px solid var(--border-2)}
 .seg-btn:hover{color:var(--text)}
-.seg-btn.active{background:#fff4ea; color:var(--accent-d); font-weight:600; box-shadow:inset 0 0 0 1px var(--accent)}
+/* Active segment: filled with the accent (= its outline) and white text; the
+   container's overflow:hidden + radius keeps the outer corners rounded. */
+.seg-btn.active{background:var(--accent); color:#fff; font-weight:600}
+.seg-btn.active + .seg-btn{border-left-color:var(--accent)}
+.seg-btn.active:hover{color:#fff}
 
 /* ---------- KPI ---------- */
 .kpi-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-bottom:22px}
