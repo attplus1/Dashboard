@@ -148,8 +148,6 @@
           <button class="wb-add" data-ticker="${r.ticker}">
             <span class="wb-label">${on?'On watchlist':'Add to watchlist'}</span>
           </button>
-          <button class="wb-star${on?' on':''}" data-ticker="${r.ticker}"
-            title="Toggle watchlist" aria-label="Toggle watchlist">${on?'★':'☆'}</button>
         </div>
       </div>`;
   }
@@ -198,7 +196,7 @@
         onOpen(+card.dataset.idx);
       });
     });
-    grid.querySelectorAll('.mom-watchbar .wb-add, .mom-watchbar .wb-star').forEach(btn=>{
+    grid.querySelectorAll('.mom-watchbar .wb-add').forEach(btn=>{
       btn.addEventListener('click', e=>{
         e.stopPropagation();
         toggleWatch(btn.dataset.ticker);
@@ -216,8 +214,6 @@
     document.querySelectorAll('.mom-card .mom-watchbar').forEach(bar=>{
       const on = isWatched(bar.dataset.ticker);
       const card = bar.closest('.mom-card'); if (card) card.classList.toggle('watched', on);
-      const star = bar.querySelector('.wb-star');
-      if (star){ star.classList.toggle('on', on); star.textContent = on ? '★' : '☆'; }
       const lbl = bar.querySelector('.wb-label');
       if (lbl) lbl.textContent = on ? 'On watchlist' : 'Add to watchlist';
     });

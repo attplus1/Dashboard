@@ -403,13 +403,6 @@ input[type=date]{
 .wb-add::before{content:'＋'; font-size:15px; font-weight:700; line-height:1}
 .mom-card.watched .wb-add::before{content:'✓'}
 .wb-add:hover{filter:brightness(1.07)}
-.wb-star{
-  flex:0 0 46px; border:none; cursor:pointer; font-size:18px; line-height:1;
-  color:#fff; background:var(--accent-d);
-  display:flex; align-items:center; justify-content:center; transition:filter .15s;
-}
-.wb-star:hover{filter:brightness(1.1)}
-.wb-star.on{color:#ffe7a3}   /* gold star when on the list */
 
 /* Watchlist tab empty state */
 .empty-watch{grid-column:1/-1; text-align:center; padding:56px 24px; color:var(--text-dim)}
