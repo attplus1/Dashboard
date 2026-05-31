@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Dashboard</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=91" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=92" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=91" />
+  <link rel="stylesheet" href="css/styles.css?v=92" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -119,6 +119,15 @@
         <p class="panel-desc">Net realised result per instrument.</p>
       </div>
       <div id="ticker-chart" class="chart chart-md"></div>
+    </section>
+
+    <!-- Drawdown (underwater) -->
+    <section class="panel collapsible">
+      <div class="panel-head">
+        <h3>Drawdown</h3>
+        <p class="panel-desc">How far the account sits below its prior peak. The dashed line marks the deepest drawdown reached in the period.</p>
+      </div>
+      <div id="drawdown-chart" class="chart chart-md"></div>
     </section>
 
     <!-- Two-up: by entry weekday + by entry hour -->
@@ -298,12 +307,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=91"></script>
-  <script src="js/parser.js?v=91"></script>
-  <script src="js/metrics.js?v=91"></script>
-  <script src="js/charts.js?v=91"></script>
-  <script src="js/performance.js?v=91"></script>
-  <script src="js/screener.js?v=91"></script>
-  <script src="js/app.js?v=91"></script>
+  <script src="js/config.js?v=92"></script>
+  <script src="js/parser.js?v=92"></script>
+  <script src="js/metrics.js?v=92"></script>
+  <script src="js/charts.js?v=92"></script>
+  <script src="js/performance.js?v=92"></script>
+  <script src="js/screener.js?v=92"></script>
+  <script src="js/app.js?v=92"></script>
 </body>
 </html>

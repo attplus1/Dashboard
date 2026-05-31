@@ -80,7 +80,7 @@
         <span class="ec-btn" id="cta-import">＋ Import trades</span>
       </div>`;
     $('#cta-import').addEventListener('click', () => $('#file-input').click());
-    ['ticker-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
+    ['ticker-chart','drawdown-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
       { const el=$('#'+id); if (el) el.innerHTML='<div class="chart-empty">No data yet</div>'; });
     $('#dist-stats').innerHTML = '';
     $('#open-positions-table tbody').innerHTML = er(13,'Upload a file to see open positions.');
