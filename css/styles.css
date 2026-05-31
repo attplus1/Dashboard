@@ -411,15 +411,12 @@ input[type=date]{
 .mom-card.watched .wb-add::before{content:'✓'}
 .wb-add:hover{filter:brightness(1.07)}
 
-/* Watchlist removal: fade + shrink the card out before the grid rebuilds.
-   max-height is driven inline by JS (start height -> 0); this rule fades it and
-   sets the transition for the collapse. */
-.mom-card.removing{
-  overflow:hidden; pointer-events:none;
-  opacity:0; transform:scale(.94);
-  margin:0; padding:0; border-width:0;
-  transition:opacity .25s ease, transform .25s ease, max-height .32s ease,
-             margin .32s ease, padding .32s ease, border-width .32s ease;
+/* Watchlist removal: the leaving card fades + shrinks in place (its box is kept
+   so siblings don't shift yet); JS then FLIP-animates the remaining cards into
+   their new positions. */
+.mom-card.leaving{
+  opacity:0; transform:scale(.92); pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease;
 }
 
 /* Watchlist tab empty state */

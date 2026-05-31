@@ -259,21 +259,35 @@
           if (card){
             const others = grid.querySelectorAll('.mom-card').length - 1;
             if (others > 0){
-              // Drop just THIS card: collapse it out, dispose only its own chart,
-              // and leave the siblings in place — no full re-render, so the other
-              // cards' charts don't flicker/rebuild. Lock the height + force a
-              // reflow so the collapse has a start value to animate from.
-              card.style.maxHeight = card.offsetHeight + 'px';
-              void card.offsetHeight;
+              // Drop just THIS card and slide the rest into place (FLIP), disposing
+              // only its own chart so the others don't rebuild. Fade the leaving
+              // card first (its box stays, so nothing shifts yet); then remove it
+              // and animate each sibling from its old position to the new one.
+              const sibs = Array.prototype.slice.call(grid.querySelectorAll('.mom-card')).filter(c=>c!==card);
               let done = false;
               const finish = ()=>{
                 if (done) return; done = true;
+                const before = sibs.map(c=>c.getBoundingClientRect());   // First
                 disposeCardChart(card, charts);
                 card.remove();
+                const after = sibs.map(c=>c.getBoundingClientRect());    // Last
+                sibs.forEach((c,i)=>{
+                  const dx = before[i].left - after[i].left, dy = before[i].top - after[i].top;
+                  if (!dx && !dy) return;                                // didn't move
+                  c.style.transition = 'none';                          // Invert
+                  c.style.transform  = `translate(${dx}px, ${dy}px)`;
+                  requestAnimationFrame(()=>{                           // Play
+                    c.style.transition = 'transform .3s ease';
+                    c.style.transform  = '';
+                    const te = ev=>{ if (ev.propertyName!=='transform') return;
+                      c.style.transition=''; c.removeEventListener('transitionend', te); };
+                    c.addEventListener('transitionend', te);
+                  });
+                });
               };
-              card.addEventListener('transitionend', e=>{ if (e.propertyName==='max-height') finish(); });
-              setTimeout(finish, 480);
-              requestAnimationFrame(()=>{ card.classList.add('removing'); card.style.maxHeight = '0px'; });
+              card.addEventListener('transitionend', e=>{ if (e.propertyName==='opacity') finish(); });
+              setTimeout(finish, 320);                                  // fallback
+              requestAnimationFrame(()=>card.classList.add('leaving'));
             } else {
               // Last card: settle the grid straight to the empty-state height
               // instead of collapsing to zero and re-expanding into it.
