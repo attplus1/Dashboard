@@ -86,12 +86,11 @@
       ${sub?`<div class="kt-sub">${sub}</div>`:''}</div>`;
   }
 
-  function renderKPIs(m, commission, funding, unit){
+  function renderKPIs(m, commission, funding, unit, wkRows, hrRows){
     const net = m.totalPnl + commission + funding;
-    const C = window.CONFIG;
     const fmtVal = v => unit==='percent' ? pct(v,1) : money(v,0);
-    const bestDay = window.Metrics.bestBucket(window.Metrics.byWeekday(m.trades, unit));
-    const bestHour = window.Metrics.bestBucket(window.Metrics.byHour(m.trades, unit));
+    const bestDay = window.Metrics.bestBucket(wkRows);
+    const bestHour = window.Metrics.bestBucket(hrRows);
     const netPos = net>=0;
     // Headline return on starting equity, if we have an equity curve.
     let heroSub = `Gross ${money(m.totalPnl,0)} · fees ${money(commission+funding,0)}`;
@@ -168,10 +167,6 @@
       ? tt.winners.map((t,i)=>row(t,'win',i)).join('') : `<tr class="empty-row"><td colspan="6">No winning trades.</td></tr>`;
     $('#top-losers tbody').innerHTML = tt.losers.length
       ? tt.losers.map((t,i)=>row(t,'lose',i)).join('') : `<tr class="empty-row"><td colspan="6">No losing trades.</td></tr>`;
-    $('#top-winners tbody').querySelectorAll('tr.row-link').forEach(tr=>
-      tr.addEventListener('click', ()=> openTradeModal(_topWins[+tr.dataset.idx])));
-    $('#top-losers tbody').querySelectorAll('tr.row-link').forEach(tr=>
-      tr.addEventListener('click', ()=> openTradeModal(_topLosses[+tr.dataset.idx])));
   }
 
   function renderDistribution(m, unit){
@@ -228,8 +223,6 @@
         <td class="num val-neg">${money(p.commission,2)}</td>
       </tr>`;
     }).join('');
-    tb.querySelectorAll('tr.row-link').forEach(tr=>
-      tr.addEventListener('click', ()=> openPositionModal(_openPos[+tr.dataset.idx])));
   }
 
   function renderTradesTable(trades){
@@ -249,8 +242,6 @@
       <td>${fmtD(t.exitDt)}</td>
       <td><span class="pill exit">${t.exitType}</span></td>
     </tr>`).join('');
-    tb.querySelectorAll('tr.row-link').forEach(tr=>
-      tr.addEventListener('click', ()=> openTradeModal(_tradesShown[+tr.dataset.idx])));
   }
 
   // ---------- entry/exit chart popup (trades, top trades, open positions) ----------
@@ -322,10 +313,24 @@
     });
   }
   function closeTradeModal(){ const m=$('#trade-modal'); if (m) m.hidden = true; }
+  // Delegated row clicks: one listener per <tbody> (these elements are static),
+  // so rebuilding rows on each render doesn't re-bind a handler per row. Each row
+  // carries a data-idx into the matching module-level array.
+  function delegateRows(sel, pick){
+    const tb = $(sel); if (!tb) return;
+    tb.addEventListener('click', e=>{
+      const tr = e.target.closest('tr.row-link');
+      if (tr && tb.contains(tr)) pick(+tr.dataset.idx);
+    });
+  }
   function wireTradeModal(){
     $('#trade-modal-close').addEventListener('click', closeTradeModal);
     $('#trade-modal-backdrop').addEventListener('click', closeTradeModal);
     document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeTradeModal(); });
+    delegateRows('#top-winners tbody',          i=> openTradeModal(_topWins[i]));
+    delegateRows('#top-losers tbody',           i=> openTradeModal(_topLosses[i]));
+    delegateRows('#open-positions-table tbody', i=> openPositionModal(_openPos[i]));
+    delegateRows('#trades-table tbody',         i=> openTradeModal(_tradesShown[i]));
   }
 
   function renderGlossary(){
@@ -338,17 +343,35 @@
       </div>`).join('');
   }
 
-  // Full render given the current app state.
-  function render(state){
-    const { recon, from, to, unit, benchmark, prices } = state;
+  // The core metric set (equity curve, ratios, drawdown) depends only on the
+  // trade set + date window + benchmark — not the $/% display unit. Cache it so a
+  // unit toggle (or any re-render at the same scope) skips the heavy recompute.
+  let _mCache = null;
+  function metricsFor(recon, from, to, benchmark){
+    if (_mCache && _mCache.recon===recon && _mCache.benchmark===benchmark
+        && _mCache.from===+from && _mCache.to===+to) return _mCache;
     const m = window.Metrics.compute(recon.trades, from, to, recon.balanceSeries, benchmark);
     const commission = window.Metrics.sumInRange(recon.commissions, from, to);
     const funding    = window.Metrics.sumInRange(recon.fundings, from, to);
-    renderKPIs(m, commission, funding, unit);
+    _mCache = { recon, benchmark, from:+from, to:+to, m, commission, funding };
+    return _mCache;
+  }
+
+  // Full render given the current app state.
+  function render(state){
+    const { recon, from, to, unit, prices } = state;
+    // App hands us the raw benchmark blob; Metrics.compute wants the bare array.
+    const benchmark = state.benchmark && state.benchmark.data ? state.benchmark.data : state.benchmark;
+    const { m, commission, funding } = metricsFor(recon, from, to, benchmark);
+    // Weekday / hour buckets feed both the KPI tiles and their charts — compute
+    // each once and share.
+    const wkRows = window.Metrics.byWeekday(m.trades, unit);
+    const hrRows = window.Metrics.byHour(m.trades, unit);
+    renderKPIs(m, commission, funding, unit, wkRows, hrRows);
     window.Charts.equityChart('equity-chart', m, unit);
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
-    window.Charts.categoryBarChart('weekday-chart', window.Metrics.byWeekday(m.trades, unit), unit);
-    window.Charts.categoryBarChart('hour-chart', window.Metrics.byHour(m.trades, unit), unit);
+    window.Charts.categoryBarChart('weekday-chart', wkRows, unit);
+    window.Charts.categoryBarChart('hour-chart', hrRows, unit);
     window.Charts.outcomeChart('outcome-chart', m);
     window.Charts.holdingChart('holding-chart', m);
     renderDistribution(m, unit);

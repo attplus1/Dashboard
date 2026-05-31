@@ -210,10 +210,18 @@
 
   // Histogram of trade outcomes with a smoothed density curve overlaid. `mode`
   // selects the metric: 'dollar' bins per-trade $ P&L, otherwise % return.
+  let _histMemo = { trades:null, mode:null, res:null };
   function returnsHistogram(trades, mode){
+    // The KDE loop is the heaviest per-render cost; skip it when neither the
+    // trade set (array identity) nor the metric has changed since last time.
+    if (_histMemo.trades===trades && _histMemo.mode===mode) return _histMemo.res;
     const pick = mode==='dollar' ? (t=>t.pnl) : (t=>t.ret);
     const vals = trades.map(pick).filter(v=>isFinite(v));
-    if (vals.length < 2) return { bins:[], density:[], mean:0, std:0, n:vals.length, mode };
+    if (vals.length < 2){
+      const empty = { bins:[], density:[], mean:0, std:0, n:vals.length, mode };
+      _histMemo = { trades, mode, res:empty };
+      return empty;
+    }
     const lo=Math.min(...vals), hi=Math.max(...vals);
     const nbins = Math.max(6, Math.min(24, Math.ceil(Math.sqrt(vals.length))+2));
     const span = (hi-lo)||1, w = span/nbins;
@@ -238,7 +246,9 @@
         density.push([+x.toFixed(3), +(d*scale).toFixed(3)]);
       }
     }
-    return { bins, density, mean:m, std:s, n:vals.length, mode };
+    const res = { bins, density, mean:m, std:s, n:vals.length, mode };
+    _histMemo = { trades, mode, res };
+    return res;
   }
 
   // Top winners/losers ranked by the active display metric so the table lines
@@ -253,5 +263,5 @@
   }
 
   window.Metrics = { compute, sumInRange, byTicker, byWeekday, byHour, bestBucket,
-                     returnsHistogram, topTrades, filterTrades, mean, std };
+                     returnsHistogram, topTrades };
 })();
