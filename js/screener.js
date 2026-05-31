@@ -269,20 +269,24 @@
                 if (done) return; done = true;
                 const before = sibs.map(c=>c.getBoundingClientRect());   // First
                 disposeCardChart(card, charts);
-                card.remove();
-                const after = sibs.map(c=>c.getBoundingClientRect());    // Last
-                sibs.forEach((c,i)=>{
-                  const dx = before[i].left - after[i].left, dy = before[i].top - after[i].top;
-                  if (!dx && !dy) return;                                // didn't move
-                  c.style.transition = 'none';                          // Invert
+                card.remove();                                          // Last (layout shifts)
+                const moved = [];
+                sibs.forEach((c,i)=>{                                   // Invert
+                  const r = c.getBoundingClientRect();
+                  const dx = before[i].left - r.left, dy = before[i].top - r.top;
+                  if (!dx && !dy) return;                               // didn't move
+                  c.style.transition = 'none';
                   c.style.transform  = `translate(${dx}px, ${dy}px)`;
-                  requestAnimationFrame(()=>{                           // Play
-                    c.style.transition = 'transform .5s cubic-bezier(.65,0,.35,1)';
-                    c.style.transform  = '';
-                    const te = ev=>{ if (ev.propertyName!=='transform') return;
-                      c.style.transition=''; c.removeEventListener('transitionend', te); };
-                    c.addEventListener('transitionend', te);
-                  });
+                  moved.push(c);
+                });
+                if (!moved.length) return;
+                void grid.offsetHeight;                                // force reflow so the inverted positions paint
+                moved.forEach(c=>{                                      // Play
+                  c.style.transition = 'transform .5s cubic-bezier(.65,0,.35,1)';
+                  c.style.transform  = '';
+                  const te = ev=>{ if (ev.propertyName!=='transform') return;
+                    c.style.transition=''; c.removeEventListener('transitionend', te); };
+                  c.addEventListener('transitionend', te);
                 });
               };
               card.addEventListener('transitionend', e=>{ if (e.propertyName==='opacity') finish(); });
