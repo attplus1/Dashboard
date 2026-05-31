@@ -200,14 +200,16 @@
         document.body.dataset.tab = btn.dataset.tab;   // header toggle hides on screener
         $('#tab-'+btn.dataset.tab).classList.add('active');
         if (btn.dataset.tab==='screener') window.ScreenerTab.render();
+        if (btn.dataset.tab==='watchlist') window.ScreenerTab.renderWatchlist();
         setTimeout(()=>window.Charts.resizeAll(),50);
       });
     });
-    // unit toggle
-    document.querySelectorAll('.seg-btn').forEach(btn=>{
+    // unit toggle (scope to the header toggle only — the screener pills reuse
+    // .seg-btn but are wired separately in screener.js)
+    document.querySelectorAll('.unit-toggle .seg-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const seg=btn.closest('.seg');
-        document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+        seg.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
         // drive the sliding indicator (fallback for browsers without :has)
         if (seg) seg.classList.toggle('seg-right', btn.dataset.unit==='percent');
