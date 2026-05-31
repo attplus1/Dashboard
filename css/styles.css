@@ -21,6 +21,9 @@
 .mom-score .s-val,.mom-price,.modal-rank,.dist-stats b,.screener-stat .val,
 .range-labels,.side-note,input[type=date]{font-variant-numeric:tabular-nums lining-nums}
 *{box-sizing:border-box}
+/* Always reserve the vertical scrollbar gutter so short tabs (e.g. Watchlist)
+   don't render wider / shift sideways versus the taller, scrolling tabs. */
+html{scrollbar-gutter:stable}
 html,body{margin:0;padding:0}
 body{
   background:
