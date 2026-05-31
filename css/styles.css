@@ -3,8 +3,8 @@
   --bg:#eef1f5; --bg-2:#f7f9fc; --panel:#ffffff; --panel-2:#f7f9fc;
   --border:#e3e8ef; --border-2:#d2dae4;
   --text:#1d2733; --text-dim:#5a6776; --text-faint:#8c99a8;
-  --accent:#CAA6FF; --accent-d:#a87fe8; --accent-2:#ddc4ff;
-  --accent-rgb:202,166,255;   /* #CAA6FF */
+  --accent:#8B5CF6; --accent-d:#7340e0; --accent-2:#b79bf9;
+  --accent-rgb:139,92,246;   /* #8B5CF6 (violet-500) */
   --pos:#15a36b; --pos-dim:#d4efe3; --neg:#e23b4e; --neg-dim:#fbe0e3;
   --warn:#e0a020;
   --shadow:0 6px 22px rgba(31,42,55,.07);
