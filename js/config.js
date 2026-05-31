@@ -82,8 +82,10 @@ window.CONFIG = {
        'Gross profit divided by gross loss. Above 1.0 means winners outweigh losers; 2.0+ is strong.'],
       ['Equity curve',
        'Your actual account balance over time, taken directly from the statement. The ASX 200 is rebased to your starting balance so the two lines are directly comparable.'],
-      ['Most profitable day / hour',
-       'The entry weekday and hour with the highest total P&L (or average return, per the display toggle), drawn from the two charts above.']
+      ['Most profitable day',
+       'The entry weekday with the highest total P&L (or average return, per the display toggle), drawn from the weekday chart above.'],
+      ['Net expectancy',
+       'The average net result you can expect per closed trade — Net P&L (gross plus commission and funding) divided by the number of trades. Positive means a typical trade adds to the account after costs.']
     ]]
   ]
 };
