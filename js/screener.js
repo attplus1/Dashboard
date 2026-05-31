@@ -39,7 +39,12 @@
     return { periodReturn, formation, volDaily:volD, volAnn:volD*Math.sqrt(252) };
   }
 
-  function setData(d){ DATA = d; }
+  let UNIVERSE = [];   // full ASX directory [{ticker,name}] — search spans this
+  function setData(d, universe){
+    DATA = d;
+    const c = universe && (universe.constituents || universe);
+    UNIVERSE = Array.isArray(c) ? c : [];
+  }
 
   // Read a pill segmented control's current value.
   function pillValue(id){ const el=$('#'+id); return el ? el.dataset.value : null; }
@@ -73,9 +78,25 @@
     return list.map((entry,i)=> Object.assign({ rank:i+1 }, stockOf(entry)));
   }
 
-  // The complete available universe (ignores the Top 200/500 pill) — used by
-  // search so it can find ANY ranked name. Ranks come from the full ordering.
-  function fullPool(){
+  // The full momentum ranking (ignores the Top 200/500 pill) as a ticker->rank map.
+  function rankIndex(){
+    const list = Array.isArray(DATA.ranked) ? DATA.ranked
+               : ((DATA.ranked && DATA.ranked.full) || []);
+    const idx = {};
+    list.forEach((entry,i)=>{ const t = typeof entry==='string'?entry:entry.ticker; idx[t]=i+1; });
+    return idx;
+  }
+
+  // The search pool: the ENTIRE ASX directory (universe.json), each row enriched
+  // with momentum data (rank/score/candles) when the name is in the ranked set.
+  // Falls back to the ranked list alone if the universe didn't load.
+  function searchPool(){
+    const ranks = rankIndex();
+    if (UNIVERSE.length){
+      return UNIVERSE.map(u => Object.assign(
+        { ticker:u.ticker, name:u.name, rank:ranks[u.ticker]||null },
+        (DATA.stocks||{})[u.ticker] || {}));
+    }
     const list = Array.isArray(DATA.ranked) ? DATA.ranked
                : ((DATA.ranked && DATA.ranked.full) || []);
     return list.map((entry,i)=> Object.assign({ rank:i+1 }, stockOf(entry)));
@@ -91,20 +112,27 @@
       from yfinance. Run that workflow to see ranked momentum candidates here.</div>`;
   }
 
+  // Candlestick-shaped shimmer placeholder shown while a card chart loads.
+  function chartSkeleton(){
+    const h = [42,64,54,72,48,82,66,52,76,60,88,70,58,84,62,46,74,90,68,55];
+    return '<div class="chart-skeleton" aria-label="Loading price history">'
+      + h.map(v=>`<i style="height:${v}%"></i>`).join('') + '</div>';
+  }
+  const unavailable = t => '<div class="chart-empty">Price history isn\'t available for '+t+'.</div>';
+
   // ---------- card rendering (shared by screener / watchlist / search) ----------
   // `domId` namespaces the chart container ids so the two grids never collide.
   function cardHTML(r, rank, idx, domId){
-    const on = isWatched(r.ticker) ? ' on' : '';
+    const on = isWatched(r.ticker);
     const score = (r.score!=null) ? (r.score*100).toFixed(1)+'%' : '–';
     const scoreCls = (r.score!=null && r.score<0) ? ' neg' : '';
+    const rankLbl = (rank!=null) ? ('#'+rank) : 'NR';   // NR = not momentum-ranked
     return `
-      <div class="mom-card" data-idx="${idx}" title="Click to expand">
-        <button class="mom-star${on}" data-ticker="${r.ticker}" title="Toggle watchlist"
-          aria-label="Toggle watchlist">${isWatched(r.ticker)?'★':'☆'}</button>
+      <div class="mom-card${on?' watched':''}" data-idx="${idx}" title="Click to expand">
         <div class="mom-card-head">
           <div>
             <div style="display:flex;gap:8px;align-items:center">
-              <span class="mom-rank">#${rank}</span><span class="mom-ticker">${r.ticker}</span>
+              <span class="mom-rank${rank==null?' nr':''}">${rankLbl}</span><span class="mom-ticker">${r.ticker}</span>
             </div>
             <div class="mom-name">${r.name||''}</div>
           </div>
@@ -116,26 +144,61 @@
           <div class="ma-key"><span class="ma50">MA50</span><span class="ma200">MA200</span></div>
           <div class="mom-price">${r.last!=null?('$'+r.last.toFixed(3)):''}</div>
         </div>
+        <div class="mom-watchbar" data-ticker="${r.ticker}">
+          <button class="wb-add" data-ticker="${r.ticker}">
+            <span class="wb-label">${on?'On watchlist':'Add to watchlist'}</span>
+          </button>
+          <button class="wb-star${on?' on':''}" data-ticker="${r.ticker}"
+            title="Toggle watchlist" aria-label="Toggle watchlist">${on?'★':'☆'}</button>
+        </div>
       </div>`;
+  }
+
+  // Lazily fetch a slim per-ticker candle file (the same files the Overview
+  // popups use) for names whose candles aren't bundled in momentum.json — e.g.
+  // search hits outside the ranked set. Compact [date,o,h,l,c] -> chart objects.
+  const _candleMem = {};   // ticker -> rows | null (known-missing) | undefined
+  async function loadCandles(ticker){
+    if (ticker in _candleMem) return _candleMem[ticker];
+    let rows = null;
+    try {
+      const r = await fetch('data/candles/'+encodeURIComponent(ticker)+'.json', {cache:'no-store'});
+      if (r.ok){ const j = await r.json(); const raw = j.candles || j;
+        rows = raw.map(c => Array.isArray(c)
+          ? { date:c[0], open:c[1], high:c[2], low:c[3], close:c[4] } : c); }
+    } catch(e){ rows = null; }
+    _candleMem[ticker] = rows;
+    return rows;
   }
 
   // Render a set of rows into a grid, mount their charts, and wire clicks.
   // `onOpen(idx)` opens the modal for that grid; `charts` collects instances.
   function paintGrid(grid, rows, domId, charts, onOpen){
     charts.forEach(c=>c.dispose()); charts.length = 0;
-    grid.innerHTML = rows.map((r,i)=>cardHTML(r, r.rank||(i+1), i, domId)).join('');
+    grid.innerHTML = rows.map((r,i)=>cardHTML(r, r.rank!=null?r.rank:null, i, domId)).join('');
     rows.forEach((r,i)=>{
       const el = document.getElementById(`${domId}-${i}`);
-      if (el && r.candles && r.candles.length)
+      if (!el) return;
+      if (r.candles && r.candles.length){
         charts.push(window.Charts.candleCard(el, r.candles, false));
+      } else {
+        // No bundled candles (e.g. a non-ranked search hit): fetch on demand.
+        el.innerHTML = chartSkeleton();
+        loadCandles(r.ticker).then(c=>{
+          if (!document.body.contains(el)) return;       // grid re-rendered meanwhile
+          el.innerHTML = '';
+          if (c && c.length){ r.candles = c; charts.push(window.Charts.candleCard(el, c, false)); }
+          else el.innerHTML = unavailable(r.ticker);
+        });
+      }
     });
     grid.querySelectorAll('.mom-card').forEach(card=>{
       card.addEventListener('click', e=>{
-        if (e.target.closest('.mom-star')) return;       // star handled separately
+        if (e.target.closest('.mom-watchbar')) return;   // watch bar handled separately
         onOpen(+card.dataset.idx);
       });
     });
-    grid.querySelectorAll('.mom-star').forEach(btn=>{
+    grid.querySelectorAll('.mom-watchbar .wb-add, .mom-watchbar .wb-star').forEach(btn=>{
       btn.addEventListener('click', e=>{
         e.stopPropagation();
         toggleWatch(btn.dataset.ticker);
@@ -147,13 +210,16 @@
     });
   }
 
-  // Reflect the current watchlist state on every visible star without a full
-  // re-render (cheap; avoids tearing down charts).
+  // Reflect the current watchlist state on every visible watch bar without a
+  // full re-render (cheap; avoids tearing down charts).
   function refreshStars(){
-    document.querySelectorAll('.mom-star').forEach(btn=>{
-      const on = isWatched(btn.dataset.ticker);
-      btn.classList.toggle('on', on);
-      btn.textContent = on ? '★' : '☆';
+    document.querySelectorAll('.mom-card .mom-watchbar').forEach(bar=>{
+      const on = isWatched(bar.dataset.ticker);
+      const card = bar.closest('.mom-card'); if (card) card.classList.toggle('watched', on);
+      const star = bar.querySelector('.wb-star');
+      if (star){ star.classList.toggle('on', on); star.textContent = on ? '★' : '☆'; }
+      const lbl = bar.querySelector('.wb-label');
+      if (lbl) lbl.textContent = on ? 'On watchlist' : 'Add to watchlist';
     });
   }
 
@@ -187,7 +253,7 @@
     if (searchRows){
       currentRows = searchRows;
       if (meta){ meta.hidden=false;
-        const total = DATA.universe_count || fullPool().length;
+        const total = UNIVERSE.length || DATA.universe_count || 0;
         const capped = searchTotal>searchRows.length ? ` (showing first ${searchRows.length})` : '';
         meta.textContent = `${searchTotal} match${searchTotal===1?'':'es'} of ${total.toLocaleString()}${capped}`; }
       if (!searchRows.length){
@@ -210,10 +276,17 @@
   function runSearch(q){
     q = (q||'').trim().toLowerCase();
     if (!q){ searchRows = null; searchTotal = 0; render(); return; }
-    const pool = fullPool();        // search the whole universe, not the active tier
+    const pool = searchPool();      // the whole ASX directory, not the active tier
     const hits = pool.filter(r =>
       (r.ticker||'').toLowerCase().includes(q) ||
       (r.name||'').toLowerCase().includes(q));
+    // Rank the matches: momentum-ranked names first (by rank), then the rest
+    // alphabetically — so a known leader surfaces above the long tail.
+    hits.sort((a,b)=>{
+      if (a.rank && b.rank) return a.rank-b.rank;
+      if (a.rank) return -1; if (b.rank) return 1;
+      return (a.ticker||'').localeCompare(b.ticker||'');
+    });
     searchTotal = hits.length;
     searchRows = hits.slice(0, SEARCH_CAP);
     render();
@@ -243,28 +316,38 @@
   }
 
   // ---------- expand modal ----------
+  let _modalToken = 0;
   function fillModal(r, rank, total){
-    const s = periodStats(r.candles||[]);
+    const candles = r.candles || [];
+    const s = periodStats(candles);
     $('#modal-ticker').textContent = r.ticker;
     $('#modal-name').textContent   = r.name || '';
-    $('#modal-rank').textContent   = rank!=null ? `Rank #${rank}${total?(' of '+total):''}` : '';
+    $('#modal-rank').textContent   = rank!=null ? `Rank #${rank}${total?(' of '+total):''}` : 'Not momentum-ranked';
     const metric = (label,val,tone)=>`<div class="mm"><span class="mm-l">${label}</span>
       <span class="mm-v ${tone||''}">${val}</span></div>`;
     const pc = v => v==null?'–':((v>=0?'+':'')+(v*100).toFixed(1)+'%');
     $('#modal-metrics').innerHTML =
-      metric('6−1 momentum (ranking)', pc(r.score), r.score>=0?'pos':'neg') +
-      metric('Return over period (incl. last month)', pc(s.periodReturn), s.periodReturn>=0?'pos':'neg') +
+      metric('6−1 momentum (ranking)', pc(r.score), r.score==null?'':(r.score>=0?'pos':'neg')) +
+      metric('Return over period (incl. last month)', pc(s.periodReturn), s.periodReturn==null?'':(s.periodReturn>=0?'pos':'neg')) +
       metric('Volatility — period, annualised', s.volAnn==null?'–':(s.volAnn*100).toFixed(1)+'%') +
       metric('Daily volatility (period)', s.volDaily==null?'–':(s.volDaily*100).toFixed(2)+'%') +
       (r.capRank!=null ? metric('Market-cap rank (ASX)', '#'+r.capRank) : '') +
       metric('Last close', r.last!=null?('$'+r.last.toFixed(3)):'–');
     const modal = $('#mom-modal'); modal.hidden = false;
     if (bigChart){ bigChart.dispose(); bigChart=null; }
-    requestAnimationFrame(()=>{ bigChart = window.Charts.candleCard($('#modal-chart'), r.candles||[], true); });
+    const chartEl = $('#modal-chart');
+    const token = ++_modalToken;
+    const draw = c => { if (token!==_modalToken || modal.hidden) return;
+      chartEl.innerHTML='';
+      if (c && c.length) bigChart = window.Charts.candleCard(chartEl, c, true);
+      else chartEl.innerHTML = unavailable(r.ticker); };
+    if (candles.length){ requestAnimationFrame(()=>draw(candles)); }
+    else { chartEl.innerHTML = chartSkeleton();          // non-ranked: fetch on open
+      loadCandles(r.ticker).then(c=>{ if(c&&c.length) r.candles=c; draw(c); }); }
   }
   function openModal(idx){
     const r = currentRows[idx]; if (!r) return;
-    fillModal(r, r.rank||(idx+1), null);
+    fillModal(r, r.rank!=null?r.rank:null, null);
   }
   function openWatchModal(idx){
     const r = watchRows[idx]; if (!r) return;
