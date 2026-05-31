@@ -1,5 +1,5 @@
 :root{
-  /* Plus1 Group palette: orange + white, professional light theme */
+  /* Plus1 Group palette: lilac accent + white, professional light theme */
   --bg:#eef1f5; --bg-2:#f7f9fc; --panel:#ffffff; --panel-2:#f7f9fc;
   --border:#e3e8ef; --border-2:#d2dae4;
   --text:#1d2733; --text-dim:#5a6776; --text-faint:#8c99a8;
@@ -256,7 +256,7 @@ input[type=date]{
   text-transform:uppercase; letter-spacing:.4px; position:sticky; top:0;
 }
 .data-table td{border-top:1px solid var(--border)}
-.data-table tbody tr:hover{background:#fff7ef}
+.data-table tbody tr:hover{background:var(--bg-2)}
 .data-table .num{text-align:right; font-family:var(--mono)}
 .pill{padding:2px 9px; border-radius:20px; font-size:10.5px; font-weight:600; letter-spacing:.3px}
 .pill.long{background:var(--pos-dim); color:var(--pos)}
