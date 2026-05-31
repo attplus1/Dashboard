@@ -248,9 +248,9 @@
           itemStyle:{color:COLORS.pos,color0:COLORS.neg,
             borderColor:COLORS.pos,borderColor0:COLORS.neg}},
         {name:'MA50', type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
-          lineStyle:{width:1.3,color:COLORS.accent}},
+          lineStyle:{width:1.3,color:COLORS.ma200}},
         {name:'MA200', type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
-          lineStyle:{width:1.3,color:COLORS.ma200}}
+          lineStyle:{width:1.3,color:COLORS.accent}}
       ]
     });
     if (big) attachZoomRange(c, dates, 54, 18);
