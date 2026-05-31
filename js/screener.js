@@ -244,13 +244,20 @@
         if (removing){
           const card = btn.closest('.mom-card');
           if (card){
-            card.style.maxHeight = card.offsetHeight + 'px';   // fix height so it can collapse
-            card.classList.add('removing');
+            // Lock the current height, force a reflow so the browser paints that
+            // start value, THEN flip to collapsed on the next frame — otherwise
+            // it jumps straight to 0 with no transition. Max-height is driven
+            // inline (inline beats the class rule), the class handles fade.
+            card.style.maxHeight = card.offsetHeight + 'px';
+            void card.offsetHeight;                       // force reflow
             let done = false;
             const finish = ()=>{ if (done) return; done = true; renderWatchlist(); };
-            // Rebuild once the collapse (max-height) transition completes.
             card.addEventListener('transitionend', e=>{ if (e.propertyName==='max-height') finish(); });
-            setTimeout(finish, 420);   // fallback if transitionend doesn't fire
+            setTimeout(finish, 480);                       // fallback
+            requestAnimationFrame(()=>{
+              card.classList.add('removing');
+              card.style.maxHeight = '0px';
+            });
             return;
           }
         }
