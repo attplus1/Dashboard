@@ -158,18 +158,22 @@ input[type=date]{
 }
 .slider-handle:active{cursor:grabbing}
 .range-labels{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); line-height:1; margin:0}
-.seg{display:inline-flex; background:#fff; border:1px solid var(--border-2); border-radius:999px; padding:0; overflow:hidden}
+/* Pill toggle with a single sliding indicator (no inter-segment border). The
+   accent pill is a ::before that slides between the two equal-width segments. */
+.seg{position:relative; display:inline-flex; background:#fff; border:1px solid var(--border-2);
+  border-radius:999px; padding:3px}
+.seg::before{content:''; position:absolute; top:3px; bottom:3px; left:3px; width:calc(50% - 3px);
+  background:var(--accent); border-radius:999px; transition:transform .25s cubic-bezier(.4,0,.2,1); z-index:0}
+.seg.seg-right::before,
+.seg:has(.seg-btn:last-child.active)::before{transform:translateX(100%)}
 .seg-btn{
-  background:transparent; border:none; color:var(--text-dim); padding:8px 16px;
-  border-radius:999px; cursor:pointer; font-size:13px; font-weight:500; line-height:1.2; transition:.15s;
+  position:relative; z-index:1; flex:1 1 0; text-align:center; white-space:nowrap;
+  background:transparent; border:none; color:var(--text-dim); padding:6px 16px;
+  border-radius:999px; cursor:pointer; font-size:13px; font-weight:500; line-height:1.2;
+  transition:color .2s;
 }
-.seg-btn + .seg-btn{border-left:1px solid var(--border-2)}
 .seg-btn:hover{color:var(--text)}
-/* Active segment: filled with the accent (= its outline) and white text; the
-   container's overflow:hidden + radius keeps the outer corners rounded. */
-.seg-btn.active{background:var(--accent); color:#fff; font-weight:600}
-.seg-btn.active + .seg-btn{border-left-color:var(--accent)}
-.seg-btn.active:hover{color:#fff}
+.seg-btn.active{color:#fff; font-weight:600}
 
 /* ---------- KPI ---------- */
 /* KPI: a row of three hero cards (P&L / Trade Activity / Ratios) above a grid
