@@ -270,23 +270,29 @@
                 const before = sibs.map(c=>c.getBoundingClientRect());   // First
                 disposeCardChart(card, charts);
                 card.remove();                                          // Last (layout shifts)
-                const moved = [];
-                sibs.forEach((c,i)=>{                                   // Invert
+                const EASE = 'cubic-bezier(.65,0,.35,1)', DUR = 460;
+                sibs.forEach((c,i)=>{
                   const r = c.getBoundingClientRect();
-                  const dx = before[i].left - r.left, dy = before[i].top - r.top;
+                  const dx = before[i].left - r.left, dy = before[i].top - r.top;   // old - new
                   if (!dx && !dy) return;                               // didn't move
-                  c.style.transition = 'none';
-                  c.style.transform  = `translate(${dx}px, ${dy}px)`;
-                  moved.push(c);
-                });
-                if (!moved.length) return;
-                void grid.offsetHeight;                                // force reflow so the inverted positions paint
-                moved.forEach(c=>{                                      // Play
-                  c.style.transition = 'transform .5s cubic-bezier(.65,0,.35,1)';
-                  c.style.transform  = '';
-                  const te = ev=>{ if (ev.propertyName!=='transform') return;
-                    c.style.transition=''; c.removeEventListener('transitionend', te); };
-                  c.addEventListener('transitionend', te);
+                  let frames;
+                  if (dx && dy){
+                    // A card that wraps onto the previous row moves diagonally,
+                    // which looks broken. Travel one axis then the other (an
+                    // L-shaped path) so motion is only ever horizontal/vertical;
+                    // do the longer leg first, with the corner placed by distance
+                    // so the speed stays even.
+                    const horizFirst = Math.abs(dx) >= Math.abs(dy);
+                    const off = (horizFirst ? Math.abs(dx) : Math.abs(dy)) / (Math.abs(dx) + Math.abs(dy));
+                    const mid = horizFirst ? `translate(0px, ${dy}px)` : `translate(${dx}px, 0px)`;
+                    frames = [ { transform:`translate(${dx}px, ${dy}px)`, offset:0 },
+                               { transform:mid, offset:off },
+                               { transform:'translate(0px, 0px)', offset:1 } ];
+                  } else {
+                    frames = [ { transform:`translate(${dx}px, ${dy}px)` },
+                               { transform:'translate(0px, 0px)' } ];
+                  }
+                  if (c.animate) c.animate(frames, { duration:DUR, easing:EASE });
                 });
               };
               card.addEventListener('transitionend', e=>{ if (e.propertyName==='opacity') finish(); });
