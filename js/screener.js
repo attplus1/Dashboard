@@ -271,17 +271,24 @@
                 disposeCardChart(card, charts);
                 card.remove();                                          // Last (layout shifts)
                 const EASE = 'cubic-bezier(.65,0,.35,1)', DUR = 460;
-                sibs.forEach((c,i)=>{
+                const moves = sibs.map((c,i)=>{
                   const r = c.getBoundingClientRect();
-                  const dx = before[i].left - r.left, dy = before[i].top - r.top;   // old - new
+                  return { c, dx: before[i].left - r.left, dy: before[i].top - r.top };  // old - new
+                });
+                // Stacking during the slide so a moving card never paints over
+                // another card's title: cards that stay put sit on top, plain
+                // horizontal slides go under them, and the far-travelling wrapping
+                // cards slide beneath everything.
+                moves.forEach(m=>{ m.c.style.zIndex = (!m.dx && !m.dy) ? '3' : (m.dy ? '1' : '2'); });
+                moves.forEach(m=>{
+                  const { c, dx, dy } = m;
                   if (!dx && !dy) return;                               // didn't move
                   let frames;
                   if (dx && dy){
-                    // A card that wraps onto the previous row moves diagonally,
-                    // which looks broken. Travel one axis then the other (an
-                    // L-shaped path) so motion is only ever horizontal/vertical;
-                    // do the longer leg first, with the corner placed by distance
-                    // so the speed stays even.
+                    // A card that wraps onto the previous row would move
+                    // diagonally; travel one axis then the other (an L-shaped
+                    // path) so motion is only ever horizontal/vertical. Longer leg
+                    // first, corner placed by distance so the speed stays even.
                     const horizFirst = Math.abs(dx) >= Math.abs(dy);
                     const off = (horizFirst ? Math.abs(dx) : Math.abs(dy)) / (Math.abs(dx) + Math.abs(dy));
                     const mid = horizFirst ? `translate(0px, ${dy}px)` : `translate(${dx}px, 0px)`;
@@ -294,6 +301,7 @@
                   }
                   if (c.animate) c.animate(frames, { duration:DUR, easing:EASE });
                 });
+                setTimeout(()=>moves.forEach(m=>{ m.c.style.zIndex=''; }), DUR + 80);
               };
               card.addEventListener('transitionend', e=>{ if (e.propertyName==='opacity') finish(); });
               setTimeout(finish, 240);                                  // fallback
