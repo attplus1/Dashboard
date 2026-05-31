@@ -286,9 +286,10 @@
 
     // Market data loads for the benchmark/prices and the screener, but trade
     // data is NOT auto-loaded — the performance page stays empty until upload.
-    const [bench, prices, momentum] = await Promise.all([
+    const [bench, prices, momentum, universe] = await Promise.all([
       loadJSON('data/benchmark.json'),
-      loadJSON('data/prices.json'), loadJSON('data/momentum.json')
+      loadJSON('data/prices.json'), loadJSON('data/momentum.json'),
+      loadJSON('data/universe.json')
     ]);
 
     state.benchmark = bench;            // { placeholder, asof, data:[{date,close}] }
@@ -309,7 +310,7 @@
     applySourceNotes();
     renderAll();                        // import prompt if nothing restored
 
-    window.ScreenerTab.setData(momentum);
+    window.ScreenerTab.setData(momentum, universe);
   }
 
   document.addEventListener('DOMContentLoaded', init);
