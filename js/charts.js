@@ -374,5 +374,5 @@
   window.addEventListener('resize', resizeAll);
 
   window.Charts = { equityChart, tickerChart, categoryBarChart, outcomeChart, holdingChart,
-                    candleCard, returnsDistChart, tradeChart, resizeAll, disposeAll };
+                    candleCard, returnsDistChart, tradeChart, resizeAll, disposeOne, disposeAll };
 })();

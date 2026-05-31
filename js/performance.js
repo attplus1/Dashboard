@@ -86,11 +86,13 @@
       ${sub?`<div class="kt-sub">${sub}</div>`:''}</div>`;
   }
 
-  function renderKPIs(m, commission, funding, unit, wkRows, hrRows){
+  function renderKPIs(m, commission, funding, unit, wkRows){
     const net = m.totalPnl + commission + funding;
     const fmtVal = v => unit==='percent' ? pct(v,1) : money(v,0);
     const bestDay = window.Metrics.bestBucket(wkRows);
-    const bestHour = window.Metrics.bestBucket(hrRows);
+    // Net trade expectancy: average net $ outcome per closed trade (gross P&L plus
+    // commission + funding, spread across the trade count).
+    const expectancy = m.nTotal ? net / m.nTotal : null;
     const netPos = net>=0;
     // Headline return on starting equity, if we have an equity curve.
     let heroSub = `Gross ${money(m.totalPnl,0)} · fees ${money(commission+funding,0)}`;
@@ -144,9 +146,9 @@
       kTile('Most profitable day',
             bestDay ? bestDay.label : '—',
             bestDay ? fmtVal(bestDay.value) : '', bestDay && bestDay.value>=0?'pos':(bestDay?'neg':'')),
-      kTile('Most profitable hour',
-            bestHour ? bestHour.label+':00' : '—',
-            bestHour ? fmtVal(bestHour.value) : '', bestHour && bestHour.value>=0?'pos':(bestHour?'neg':''))
+      kTile('Net expectancy',
+            expectancy==null ? '—' : money(expectancy,2),
+            'per trade', expectancy==null ? '' : (expectancy>=0?'pos':'neg'))
     ];
     $('#kpi-grid').innerHTML =
       `<div class="kpi-heroes">${hero}${activity}${ratios}</div>` +
@@ -258,6 +260,10 @@
     $('#trade-modal-metrics').innerHTML = cfg.metrics.map(([l,v,tone])=>mm(l,v,tone)).join('');
     const modal = $('#trade-modal'); modal.hidden = false;
     const chartEl = $('#trade-modal-chart');
+    // This container's innerHTML gets swapped between skeleton / message / chart,
+    // which detaches any live ECharts canvas. Drop the prior instance so init()
+    // builds a fresh one instead of reusing one whose canvas we've wiped.
+    window.Charts.disposeOne('trade-modal-chart');
     const cached = peekCandles(cfg.ticker);
     if (cached !== undefined){                       // in-memory / fresh cache: render now
       chartEl.innerHTML = '';
@@ -367,7 +373,7 @@
     // each once and share.
     const wkRows = window.Metrics.byWeekday(m.trades, unit);
     const hrRows = window.Metrics.byHour(m.trades, unit);
-    renderKPIs(m, commission, funding, unit, wkRows, hrRows);
+    renderKPIs(m, commission, funding, unit, wkRows);
     window.Charts.equityChart('equity-chart', m, unit);
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
     window.Charts.categoryBarChart('weekday-chart', wkRows, unit);
