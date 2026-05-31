@@ -416,7 +416,7 @@ input[type=date]{
    their new positions. */
 .mom-card.leaving{
   opacity:0; transform:scale(.92); pointer-events:none;
-  transition:opacity .2s ease, transform .2s ease;
+  transition:opacity .18s cubic-bezier(.65,0,.35,1), transform .18s cubic-bezier(.65,0,.35,1);
 }
 
 /* Watchlist tab empty state */

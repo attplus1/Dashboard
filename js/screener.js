@@ -277,7 +277,7 @@
                   c.style.transition = 'none';                          // Invert
                   c.style.transform  = `translate(${dx}px, ${dy}px)`;
                   requestAnimationFrame(()=>{                           // Play
-                    c.style.transition = 'transform .3s ease';
+                    c.style.transition = 'transform .5s cubic-bezier(.65,0,.35,1)';
                     c.style.transform  = '';
                     const te = ev=>{ if (ev.propertyName!=='transform') return;
                       c.style.transition=''; c.removeEventListener('transitionend', te); };
@@ -286,7 +286,7 @@
                 });
               };
               card.addEventListener('transitionend', e=>{ if (e.propertyName==='opacity') finish(); });
-              setTimeout(finish, 320);                                  // fallback
+              setTimeout(finish, 240);                                  // fallback
               requestAnimationFrame(()=>card.classList.add('leaving'));
             } else {
               // Last card: settle the grid straight to the empty-state height
@@ -297,7 +297,7 @@
               const endH = grid.offsetHeight;
               grid.style.height = startH + 'px';
               void grid.offsetHeight;
-              grid.style.transition = 'height .3s ease';
+              grid.style.transition = 'height .45s cubic-bezier(.65,0,.35,1)';
               grid.style.height = endH + 'px';
               const clear = ev=>{
                 if (ev.target!==grid || ev.propertyName!=='height') return;
