@@ -205,8 +205,12 @@
     // unit toggle
     document.querySelectorAll('.seg-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
+        const seg=btn.closest('.seg');
         document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active'); state.unit=btn.dataset.unit; renderAll();
+        btn.classList.add('active');
+        // drive the sliding indicator (fallback for browsers without :has)
+        if (seg) seg.classList.toggle('seg-right', btn.dataset.unit==='percent');
+        state.unit=btn.dataset.unit; renderAll();
       });
     });
     // date inputs
