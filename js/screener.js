@@ -235,11 +235,26 @@
     grid.querySelectorAll('.mom-watchbar .wb-add').forEach(btn=>{
       btn.addEventListener('click', e=>{
         e.stopPropagation();
+        const removing = isWatched(btn.dataset.ticker);
         toggleWatch(btn.dataset.ticker);
         refreshStars();
-        // Only rebuild the watchlist grid if it's the visible tab; otherwise it
-        // renders fresh on the next tab switch (no point mounting hidden charts).
-        if (document.body.dataset.tab==='watchlist') renderWatchlist();
+        if (document.body.dataset.tab!=='watchlist') return;
+        // On the Watchlist tab a removal drops the card — play a brief fade +
+        // collapse on it before rebuilding, instead of an instant disappearance.
+        if (removing){
+          const card = btn.closest('.mom-card');
+          if (card){
+            card.style.maxHeight = card.offsetHeight + 'px';   // fix height so it can collapse
+            card.classList.add('removing');
+            let done = false;
+            const finish = ()=>{ if (done) return; done = true; renderWatchlist(); };
+            // Rebuild once the collapse (max-height) transition completes.
+            card.addEventListener('transitionend', e=>{ if (e.propertyName==='max-height') finish(); });
+            setTimeout(finish, 420);   // fallback if transitionend doesn't fire
+            return;
+          }
+        }
+        renderWatchlist();   // adding (rare here) or no card found -> rebuild now
       });
     });
   }
