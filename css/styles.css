@@ -411,6 +411,15 @@ input[type=date]{
 .mom-card.watched .wb-add::before{content:'✓'}
 .wb-add:hover{filter:brightness(1.07)}
 
+/* Watchlist removal: fade + shrink the card out before the grid rebuilds. */
+.mom-card.removing{
+  overflow:hidden; pointer-events:none;
+  opacity:0; transform:scale(.94); max-height:0 !important;
+  margin:0; padding:0; border-width:0;
+  transition:opacity .25s ease, transform .25s ease, max-height .3s ease .03s,
+             margin .3s ease .03s, padding .3s ease .03s, border-width .3s ease .03s;
+}
+
 /* Watchlist tab empty state */
 .empty-watch{grid-column:1/-1; text-align:center; padding:56px 24px; color:var(--text-dim)}
 .empty-watch .ew-star{font-size:42px; color:var(--accent-2); display:block; margin-bottom:10px; line-height:1}
