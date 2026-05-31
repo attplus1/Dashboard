@@ -20,8 +20,13 @@
   let WATCH = loadWatch();
   const isWatched = t => WATCH.includes(t);
   function toggleWatch(t){
-    if (isWatched(t)) WATCH = WATCH.filter(x=>x!==t);
-    else WATCH = WATCH.concat(t);
+    if (isWatched(t)){
+      WATCH = WATCH.filter(x=>x!==t);
+      evictCandles(t);              // no longer watchlisted -> drop persisted candles
+    } else {
+      WATCH = WATCH.concat(t);
+      persistCandles(t);            // promote its candles to the persistent store
+    }
     saveWatch(WATCH);
   }
 
@@ -153,11 +158,40 @@
   }
 
   // Lazily fetch a slim per-ticker candle file (the same files the Overview
-  // popups use) for names whose candles aren't bundled in momentum.json — e.g.
-  // search hits outside the ranked set. Compact [date,o,h,l,c] -> chart objects.
-  const _candleMem = {};   // ticker -> rows | null (known-missing) | undefined
+  // popups use). Compact [date,o,h,l,c] -> chart objects.
+  //
+  // Caching strategy (the optimisation): candles for WATCHLISTED names are
+  // persisted in localStorage so the Watchlist tab loads instantly and offline.
+  // Candles fetched while *browsing search results* are held only in a small
+  // bounded in-memory LRU — they're evicted as you look at more names, so the
+  // cache never balloons. Adding a name to the watchlist promotes its candles to
+  // the persistent store; removing it drops them.
+  const LS_CANDLES = 'plus1_wl_candles_v1';      // { ticker: rows } for watchlisted names
+  const MEM_LIMIT = 24;                          // max non-watchlisted tickers kept in RAM
+  const _memCache = new Map();                   // insertion-ordered -> used as LRU
+  let _persist = (function(){ try { return JSON.parse(localStorage.getItem(LS_CANDLES))||{}; } catch(e){ return {}; } })();
+  function _savePersist(){ try { localStorage.setItem(LS_CANDLES, JSON.stringify(_persist)); } catch(e){} }
+
+  function _memPut(ticker, rows){
+    _memCache.delete(ticker); _memCache.set(ticker, rows);   // move to newest
+    while (_memCache.size > MEM_LIMIT){                       // evict oldest
+      const oldest = _memCache.keys().next().value;
+      _memCache.delete(oldest);
+    }
+  }
+  // Promote / drop a ticker's candles in the persistent store as it joins/leaves
+  // the watchlist. Returns nothing; safe if we don't have the candles yet.
+  function persistCandles(ticker){
+    const rows = _persist[ticker] || _memCache.get(ticker);
+    if (rows && rows.length){ _persist[ticker] = rows; _savePersist(); }
+  }
+  function evictCandles(ticker){
+    if (ticker in _persist){ delete _persist[ticker]; _savePersist(); }
+  }
+
   async function loadCandles(ticker){
-    if (ticker in _candleMem) return _candleMem[ticker];
+    if (ticker in _persist) return _persist[ticker];         // watchlisted: persistent
+    if (_memCache.has(ticker)){ const r=_memCache.get(ticker); _memPut(ticker,r); return r; }
     let rows = null;
     try {
       const r = await fetch('data/candles/'+encodeURIComponent(ticker)+'.json', {cache:'no-store'});
@@ -165,7 +199,9 @@
         rows = raw.map(c => Array.isArray(c)
           ? { date:c[0], open:c[1], high:c[2], low:c[3], close:c[4] } : c); }
     } catch(e){ rows = null; }
-    _candleMem[ticker] = rows;
+    // Watchlisted names persist; everything else goes to the bounded LRU.
+    if (rows && rows.length && isWatched(ticker)){ _persist[ticker]=rows; _savePersist(); }
+    else _memPut(ticker, rows);
     return rows;
   }
 
@@ -290,11 +326,19 @@
 
   // ---------- watchlist tab ----------
   function watchPool(){
-    // Resolve every watched ticker against the stocks map / ranked pool so the
-    // cards carry candles + score. Tag with the ticker's tier rank if known.
-    const pool = hasData() ? tierPool() : [];
-    const byTicker = {}; pool.forEach(r=> byTicker[r.ticker]=r);
-    return WATCH.map(t => byTicker[t] || stockOf(t)).filter(r => r && r.ticker);
+    // Resolve every watched ticker so its card carries name / rank / score and,
+    // where we have them, candles. Momentum data (ranked names) wins; otherwise
+    // fall back to the universe directory for the company name. Persisted
+    // candles are attached so the grid renders without re-fetching.
+    const ranks = rankIndex();
+    const uniName = {}; UNIVERSE.forEach(u=> uniName[u.ticker]=u.name);
+    return WATCH.map(t => {
+      const base = Object.assign(
+        { ticker:t, name:uniName[t]||t, rank:ranks[t]||null },
+        (DATA && DATA.stocks && DATA.stocks[t]) || {});
+      if (!base.candles && _persist[t]) base.candles = _persist[t];   // use persisted
+      return base;
+    }).filter(r => r && r.ticker);
   }
   function renderWatchlist(){
     const grid = $('#watchlist-cards'); if (!grid) return;
@@ -304,8 +348,8 @@
       grid.innerHTML = `<div class="empty-watch">
         <span class="ew-star">☆</span>
         <h3>Your watchlist is empty</h3>
-        <p>Open the <b>Screener</b> and tap the star on any card to pin it here.
-           Your list is saved in this browser.</p></div>`;
+        <p>Open the <b>Screener</b> and hit <b>Add to watchlist</b> on any card to
+           pin it here. Your list is saved in this browser.</p></div>`;
       return;
     }
     paintGrid(grid, watchRows, 'wl', watchCharts, openWatchModal);
