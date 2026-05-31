@@ -66,10 +66,18 @@
     return entry;
   }
 
-  // The full pool of resolved stocks for the active tier, each tagged with its
-  // 1-based rank — used by search (and as the source for the screener grid).
+  // The pool of resolved stocks for the active tier, each tagged with its 1-based
+  // rank — the source for the screener grid (top-N).
   function tierPool(){
     const { list } = currentTier();
+    return list.map((entry,i)=> Object.assign({ rank:i+1 }, stockOf(entry)));
+  }
+
+  // The complete available universe (ignores the Top 200/500 pill) — used by
+  // search so it can find ANY ranked name. Ranks come from the full ordering.
+  function fullPool(){
+    const list = Array.isArray(DATA.ranked) ? DATA.ranked
+               : ((DATA.ranked && DATA.ranked.full) || []);
     return list.map((entry,i)=> Object.assign({ rank:i+1 }, stockOf(entry)));
   }
 
@@ -179,11 +187,12 @@
     if (searchRows){
       currentRows = searchRows;
       if (meta){ meta.hidden=false;
+        const total = DATA.universe_count || fullPool().length;
         const capped = searchTotal>searchRows.length ? ` (showing first ${searchRows.length})` : '';
-        meta.textContent = `${searchTotal} match${searchTotal===1?'':'es'} of ${pool.length.toLocaleString()}${capped}`; }
+        meta.textContent = `${searchTotal} match${searchTotal===1?'':'es'} of ${total.toLocaleString()}${capped}`; }
       if (!searchRows.length){
         cardCharts.forEach(c=>c.dispose()); cardCharts=[];
-        grid.innerHTML = `<div class="notice">No tickers match your search in this universe.</div>`;
+        grid.innerHTML = `<div class="notice">No tickers match your search across the universe.</div>`;
         return;
       }
     } else {
@@ -201,7 +210,7 @@
   function runSearch(q){
     q = (q||'').trim().toLowerCase();
     if (!q){ searchRows = null; searchTotal = 0; render(); return; }
-    const pool = tierPool();
+    const pool = fullPool();        // search the whole universe, not the active tier
     const hits = pool.filter(r =>
       (r.ticker||'').toLowerCase().includes(q) ||
       (r.name||'').toLowerCase().includes(q));
@@ -284,8 +293,9 @@
     $('#modal-backdrop').addEventListener('click', closeModal);
     document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeModal(); });
 
-    // Changing the universe invalidates any active search (different pool).
-    wirePill('scr-universe-sel', ()=>{ if (searchRows) runSearch($('#scr-search').value); else render(); });
+    // Search spans the whole universe, so the tier pill only affects the top-N
+    // grid — no need to re-run an active search when it changes.
+    wirePill('scr-universe-sel', ()=> render());
     wirePill('scr-topn', ()=> render());
 
     const search = $('#scr-search'), clear = $('#scr-search-clear');
