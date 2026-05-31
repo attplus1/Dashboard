@@ -2,30 +2,40 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#8B5CF6', accentD:'#7340e0', accent2:'#b79bf9', accentMid:'#a98bf3', bench:'#8a96a3',
+    accent:'#8B5CF6', accentD:'#7340e0', bench:'#8a96a3',
     densityLine:'#1d2733',   // dark (site text colour) density overlay
-    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020', ma200:'#c4b0f5',
-    posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
-    posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
+    pos:'#15a36b', neg:'#e23b4e', ma200:'#c4b0f5',
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
   };
   const FONT = "Manrope, system-ui, sans-serif";
   const instances = {};
 
+  // Reuse a live ECharts instance across re-renders (clearing its option) rather
+  // than disposing + recreating the canvas every time — far less churn on a unit
+  // toggle or date-range drag. A container that gets its innerHTML wiped (empty
+  // state, "not enough data") drops its instance via disposeOne/disposeAll, so a
+  // fresh one is created here when one is next needed.
   function init(id){
     const el = document.getElementById(id);
     if (!el) return null;
-    if (instances[id]) instances[id].dispose();
-    const c = echarts.init(el, null, { renderer:'canvas' });
-    instances[id] = c;
+    let c = instances[id];
+    if (!c || c.isDisposed()){
+      c = echarts.init(el, null, { renderer:'canvas' });
+      instances[id] = c;
+    } else {
+      c.clear();
+    }
     return c;
   }
+  function disposeOne(id){
+    const c = instances[id];
+    if (c && !c.isDisposed()) c.dispose();
+    delete instances[id];
+  }
+  function disposeAll(){ Object.keys(instances).forEach(disposeOne); }
   const axisBase = { axisLine:{lineStyle:{color:COLORS.grid}},
     axisLabel:{color:COLORS.text, fontFamily:FONT, margin:14},   // a little breathing room under axis labels
     splitLine:{lineStyle:{color:COLORS.grid, opacity:.35}} };
-  // Gradient fills (pastel <-> saturated) for the summary charts.
-  const gradH = (a,b) => new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:a},{offset:1,color:b}]);
-  const gradV = (a,b) => new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:a},{offset:1,color:b}]);
   const XLABEL = {color:COLORS.text, fontFamily:FONT, margin:14};  // shared x-axis label spacing
 
   // Bottom range slider for modal charts, styled to match the overview date
@@ -49,9 +59,6 @@
     };
   }
 
-  // (Date labels above the slider were removed by request.) Kept as a no-op so
-  // call sites and grid sizing stay unchanged — the chart position doesn't shift.
-  function attachZoomRange(){ /* intentionally empty */ }
   const fmtMoney = v => (v<0?'-$':'$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
   const fmtPct = v => (v>=0?'+':'') + v.toFixed(2) + '%';
 
@@ -253,7 +260,6 @@
           lineStyle:{width:1.3,color:COLORS.accent}}
       ]
     });
-    if (big) attachZoomRange(c, dates, 54, 18);
     return c;
   }
 
@@ -261,9 +267,9 @@
   // normal-distribution overlay. h.mode picks the metric/axis: 'dollar' shows
   // per-trade $ P&L, otherwise % return.
   function returnsDistChart(id, h){
+    if (!h.bins.length){ disposeOne(id); const el=document.getElementById(id);
+      if (el) el.innerHTML = '<div class="chart-empty">Not enough trades to plot a distribution</div>'; return; }
     const c = init(id); if (!c) return;
-    if (!h.bins.length){ document.getElementById(id).innerHTML =
-      '<div class="chart-empty">Not enough trades to plot a distribution</div>'; return; }
     const isDollar = h.mode==='dollar';
     const fmtAxis  = isDollar ? (v=>fmtMoney(v)) : (v=>v+'%');
     const fmtMid   = isDollar ? (v=>fmtMoney(v)) : (v=>v.toFixed(1)+'%');
@@ -362,12 +368,11 @@
           lineStyle:{color: mark.win ? COLORS.pos : COLORS.neg, width:2}, data:lineData }
       }]
     });
-    attachZoomRange(c, dates, 56, 18);
   }
 
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
   window.addEventListener('resize', resizeAll);
 
   window.Charts = { equityChart, tickerChart, categoryBarChart, outcomeChart, holdingChart,
-                    candleCard, returnsDistChart, tradeChart, resizeAll };
+                    candleCard, returnsDistChart, tradeChart, resizeAll, disposeAll };
 })();

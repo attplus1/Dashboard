@@ -1,7 +1,7 @@
 /* Trade reconstruction — ports the validated Python logic to the browser.
  *
  * Input  : rows = array of arrays (raw statement rows incl. header), newest-first.
- * Output : { trades, openPositions, totalCommission, firstDate, lastDate }
+ * Output : { trades, openPositions, commissions, fundings, balanceSeries, firstDate, lastDate }
  */
 (function () {
   const COL = { DATE:0, TYPE:1, ORDER:2, TRADE:3, REL:4, PRODUCT:5, UNITS:6,
@@ -54,13 +54,11 @@
 
     // 1) Commissions, attributed to the order they relate to (REL column),
     //    plus a dated list for period-scoped totals.
-    let totalCommission = 0;
     const commissionByOrder = {};
     const commissions = [];
     for (const r of chron){
       if (r[COL.TYPE] === 'Commission Charge'){
         const a = num(r[COL.AMOUNT]);          // negative
-        totalCommission += a;
         commissionByOrder[r[COL.REL]] = (commissionByOrder[r[COL.REL]] || 0) + a;
         const d = parseDate(r[COL.DATE]);
         if (d) commissions.push({ dt:d, amount:a });
@@ -71,7 +69,6 @@
     //     in the HOLDING COST column and reference the position's order; the
     //     account-level rows carry the same totals in AMOUNT (dated, no double
     //     count) — used for period-scoped totals.
-    let totalFunding = 0;
     const fundingByOrder = {};
     const fundings = [];
     for (const r of chron){
@@ -82,7 +79,6 @@
       }
       const acct = num(r[COL.AMOUNT]);             // account-level dated cash hit
       if (acct){
-        totalFunding += acct;
         const d = parseDate(r[COL.DATE]);
         if (d) fundings.push({ dt:d, amount:acct });
       }
@@ -97,8 +93,6 @@
         if (d) balanceSeries.push({ dt:d, balance:num(raw) });
       }
     }
-    const initialCapital = balanceSeries.length ? balanceSeries[0].balance : 100000;
-
     // 2) Build opening legs.
     const opens = {};            // order# -> open object
     const queueByProduct = {};   // product -> [order#] FIFO
@@ -175,9 +169,8 @@
     const firstDate = valid.length ? new Date(Math.min(...valid)) : null;
     const lastDate  = valid.length ? new Date(Math.max(...valid)) : null;
 
-    return { trades, openPositions, totalCommission, commissions,
-             totalFunding, fundings, balanceSeries, initialCapital,
-             firstDate, lastDate };
+    return { trades, openPositions, commissions, fundings,
+             balanceSeries, firstDate, lastDate };
   }
 
   // Parse an ArrayBuffer / Uint8Array (csv/xlsx) via SheetJS, then reconstruct.
@@ -187,10 +180,6 @@
     const ws = wb.Sheets[wb.SheetNames[0]];
     const rows = XLSX.utils.sheet_to_json(ws, { header:1, raw:true, defval:'' });
     return reconstruct(rows);
-  }
-
-  function parseFile(file){
-    return file.arrayBuffer().then(buf => parseArrayBuffer(new Uint8Array(buf)));
   }
 
   // Parse raw CSV text (the committed repo trade history).
@@ -206,5 +195,5 @@
     return reconstruct(rows);
   }
 
-  window.TradeParser = { reconstruct, parseFile, parseArrayBuffer, parseCSVText };
+  window.TradeParser = { reconstruct, parseArrayBuffer, parseCSVText };
 })();

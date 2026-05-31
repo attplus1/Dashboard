@@ -57,8 +57,6 @@
   function renderAll(){
     if (!state.recon){ renderEmpty(); return; }
     $('#tab-performance').classList.remove('no-data');
-    ['equity-chart','ticker-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart']
-      .forEach(id => { const el=$('#'+id); if (el) el.innerHTML=''; });
     window.PerformanceTab.render({
       recon: state.recon, from: state.from, to: state.to,
       unit: state.unit, benchmark: state.benchmark, prices: state.prices
@@ -68,6 +66,9 @@
   // No file uploaded yet: clear everything and show a branded prompt.
   function renderEmpty(){
     $('#tab-performance').classList.add('no-data');
+    // Wiping the chart containers below detaches their canvases, so drop the live
+    // ECharts instances too (otherwise init() would later reuse a dead one).
+    if (window.Charts && window.Charts.disposeAll) window.Charts.disposeAll();
     const er = (n,msg) => `<tr class="empty-row"><td colspan="${n}">${msg}</td></tr>`;
     $('#kpi-grid').innerHTML = '';
     $('#equity-chart').innerHTML = `<div class="empty-cta">
@@ -308,13 +309,6 @@
 
     window.ScreenerTab.setData(momentum);
   }
-
-  // Metrics.compute expects benchmark as array of {date,close}; adapt here.
-  const _origRender = window.PerformanceTab.render;
-  window.PerformanceTab.render = function(s){
-    const b = s.benchmark && s.benchmark.data ? s.benchmark.data : null;
-    _origRender(Object.assign({}, s, { benchmark:b }));
-  };
 
   document.addEventListener('DOMContentLoaded', init);
 })();
