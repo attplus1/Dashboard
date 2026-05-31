@@ -404,7 +404,8 @@ input[type=date]{
   box-shadow:var(--shadow); transition:.15s;
 }
 .mom-card:hover{border-color:var(--accent-2); transform:translateY(-2px); box-shadow:0 10px 26px rgba(var(--accent-rgb),.14)}
-.mom-card-head{display:flex; justify-content:space-between; align-items:flex-start; padding:14px 16px 8px}
+/* extra right padding clears the watchlist star pinned at the top-right corner */
+.mom-card-head{display:flex; justify-content:space-between; align-items:flex-start; padding:14px 46px 8px 16px}
 .mom-rank{
   font-family:var(--mono); font-size:11px; color:#fff;
   background:var(--accent); border-radius:6px; padding:2px 7px;
