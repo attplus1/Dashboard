@@ -130,7 +130,9 @@
     const vals  = dd.map(d=> +(unit==='percent' ? d.pct : d.dollars).toFixed(2));
     const thresh = +(unit==='percent' ? m.maxDrawdown.pct : m.maxDrawdown.dollars).toFixed(2);
     const valFmt = v => unit==='percent' ? v.toFixed(1)+'%' : fmtMoney(v);
-    const axFmt  = v => unit==='percent' ? Math.round(v)+'%' : fmtMoney(v);
+    // Percent ticks can land on fractional intervals (e.g. 0.5%); show up to 2
+    // decimals (trailing zeros trimmed) so labels aren't rounded to duplicates.
+    const axFmt  = v => unit==='percent' ? (+v.toFixed(2))+'%' : fmtMoney(v);
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:58, right:18, top:16, bottom:30},
