@@ -128,13 +128,9 @@
     const dd = m.drawdown || [];
     const dates = dd.map(d=>d.date);
     const vals  = dd.map(d=> +(unit==='percent' ? d.pct : d.dollars).toFixed(2));
-    const minV  = vals.length ? Math.min(0, ...vals) : 0;
     const thresh = +(unit==='percent' ? m.maxDrawdown.pct : m.maxDrawdown.dollars).toFixed(2);
     const valFmt = v => unit==='percent' ? v.toFixed(1)+'%' : fmtMoney(v);
     const axFmt  = v => unit==='percent' ? Math.round(v)+'%' : fmtMoney(v);
-    // A touch of headroom above 0 and below the trough so the curve and label breathe.
-    const lo = minV<0 ? minV*1.14 : -1;
-    const hi = minV<0 ? Math.abs(minV)*0.05 : 1;
     c.setOption({
       backgroundColor:'transparent',
       grid:{left:58, right:18, top:16, bottom:30},
@@ -142,7 +138,10 @@
         textStyle:{color:COLORS.textStrong},
         valueFormatter:v=> v==null?'–':valFmt(v)},
       xAxis:{type:'category', data:dates, boundaryGap:false, ...axisBase},
-      yAxis:{type:'value', min:+lo.toFixed(2), max:+hi.toFixed(2), ...axisBase,
+      // Drawdown is always <=0, so pin the top at 0 and let ECharts choose a
+      // rounded min + interval (clean thousands) rather than padding the trough
+      // to an odd value like -4330.
+      yAxis:{type:'value', max:0, ...axisBase,
         axisLabel:{color:COLORS.text, formatter:v=>axFmt(v)}},
       series:[{
         name:'Drawdown', type:'line', data:vals, showSymbol:false,
