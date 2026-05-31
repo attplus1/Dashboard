@@ -167,9 +167,10 @@ input[type=date]{
 .seg.seg-right::before,
 .seg:has(.seg-btn:last-child.active)::before{transform:translateX(100%)}
 .seg-btn{
-  position:relative; z-index:1; flex:1 1 0; text-align:center; white-space:nowrap;
-  background:transparent; border:none; color:var(--text-dim); padding:6px 16px;
-  border-radius:999px; cursor:pointer; font-size:13px; font-weight:500; line-height:1.2;
+  position:relative; z-index:1; flex:1 1 0; min-width:0; white-space:nowrap;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:transparent; border:none; color:var(--text-dim); height:30px; padding:0 18px;
+  border-radius:999px; cursor:pointer; font-size:13px; font-weight:500; line-height:1;
   transition:color .2s;
 }
 .seg-btn:hover{color:var(--text)}
