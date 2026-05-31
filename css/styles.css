@@ -6,6 +6,7 @@
   --accent:#8B5CF6; --accent-d:#7340e0; --accent-2:#b79bf9;
   --accent-rgb:139,92,246;   /* #8B5CF6 (violet-500) */
   --pos:#15a36b; --pos-dim:#d4efe3; --neg:#e23b4e; --neg-dim:#fbe0e3;
+  --accent-bg:#f1ecfe;   /* faint lilac tint for hover/active surfaces */
   --warn:#e0a020;
   --shadow:0 6px 22px rgba(31,42,55,.07);
   --shadow-sm:0 2px 8px rgba(31,42,55,.06);
@@ -355,20 +356,49 @@ input[type=date]{
 .screener-stat.push-right{margin-left:auto}   /* pushes Universe + Showing top to the right */
 .screener-stat .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--text-faint)}
 .screener-stat .val{font-size:16px; font-weight:600; font-family:var(--mono)}
-.screener-stat select{
-  -webkit-appearance:none; -moz-appearance:none; appearance:none;
-  background:#fff; border:1px solid var(--border-2); color:var(--text);
-  border-radius:8px; padding:7px 32px 7px 12px; font-size:13px; font-weight:500;
-  cursor:pointer; transition:border-color .15s, box-shadow .15s;
-  /* custom caret */
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2.5 4.2l3.5 3.6 3.5-3.6' fill='none' stroke='%235a6776' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat:no-repeat; background-position:right 11px center;
-}
-.screener-stat select:hover{border-color:var(--accent-2)}
-.screener-stat select:focus{outline:none; border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+
+/* Multi-option pill segmented control (universe / top-N on the screener).
+   Reuses the .seg shell but, unlike the 2-way toggle, drops the sliding
+   ::before and lets the active option itself carry the accent fill — so it
+   scales to any number of options. */
+.pill-seg{display:inline-flex}
+.pill-seg::before{display:none}
+.pill-seg .seg-btn{flex:0 0 auto; padding:0 14px; transition:color .2s, background .2s}
+.pill-seg .seg-btn.active{background:var(--accent); color:#fff}
+.pill-seg .seg-btn.active:hover{background:var(--accent-d); color:#fff}
+
+/* Screener ticker search */
+.screener-search{position:relative; display:flex; align-items:center; margin-top:14px}
+.screener-search .ss-icon{position:absolute; left:14px; display:flex; color:var(--text-faint); pointer-events:none}
+.screener-search input[type=text]{
+  flex:1; padding:10px 36px 10px 38px; border-radius:999px; border:1px solid var(--border-2);
+  font-family:var(--sans); font-size:13.5px; color:var(--text); background:#fff;
+  transition:border-color .15s, box-shadow .15s}
+.screener-search input[type=text]::placeholder{color:var(--text-faint)}
+.screener-search input[type=text]:focus{outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(var(--accent-rgb),.13)}
+.ss-clear{position:absolute; right:12px; border:none; background:transparent; cursor:pointer;
+  color:var(--text-faint); font-size:13px; line-height:1; padding:4px; border-radius:50%}
+.ss-clear:hover{color:var(--accent-d)}
+.search-meta{font-size:12px; color:var(--text-dim); margin:8px 4px 0; font-family:var(--mono)}
+
+/* Watchlist star button on cards */
+.mom-star{position:absolute; top:10px; right:10px; z-index:3; width:30px; height:30px;
+  display:flex; align-items:center; justify-content:center; border:none; background:transparent;
+  cursor:pointer; color:var(--text-faint); font-size:18px; line-height:1; border-radius:50%;
+  transition:color .15s, background .15s, transform .12s}
+.mom-star:hover{background:var(--accent-bg); transform:scale(1.12)}
+.mom-star.on{color:var(--accent)}
+
+/* Watchlist tab empty state */
+.empty-watch{grid-column:1/-1; text-align:center; padding:56px 24px; color:var(--text-dim)}
+.empty-watch .ew-star{font-size:42px; color:var(--accent-2); display:block; margin-bottom:10px; line-height:1}
+.empty-watch h3{margin:0 0 6px; font-size:16px; color:var(--text)}
+.empty-watch p{margin:0 auto; max-width:440px; font-size:13px; line-height:1.55}
+
 .cards-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:18px}
 .mom-card{
+  position:relative;
   background:var(--panel);
   border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;
   box-shadow:var(--shadow); transition:.15s;
@@ -383,6 +413,7 @@ input[type=date]{
 .mom-name{font-size:11px; color:var(--text-faint); margin-top:1px; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .mom-score{text-align:right}
 .mom-score .s-val{font-family:var(--mono); font-size:17px; font-weight:700; color:var(--pos)}
+.mom-score .s-val.neg{color:var(--neg)}
 .mom-score .s-lbl{font-size:10px; color:var(--text-faint); text-transform:uppercase}
 .mom-chart{height:190px; width:100%}
 .mom-card-foot{display:flex; justify-content:space-between; align-items:center; padding:8px 16px 14px; font-size:11px; color:var(--text-dim)}
