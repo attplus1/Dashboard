@@ -389,7 +389,7 @@ input[type=date]{
 .mom-card-foot .ma-key{display:flex; gap:12px}
 .mom-price{font-family:var(--mono); font-size:14px; font-weight:700; color:var(--accent)}
 .ma-key span::before{content:'—'; margin-right:4px; font-weight:700}
-.ma50::before{color:var(--accent)} .ma200::before{color:#c4b0f5}
+.ma50::before{color:#c4b0f5} .ma200::before{color:var(--accent)}
 .entry-key::before{color:#10b981} .exit-key::before{color:#f43f5e}
 .data-table tbody tr.row-link{cursor:pointer}
 .data-table tbody tr.row-link:hover{background:var(--bg)}
