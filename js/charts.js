@@ -2,7 +2,7 @@
 (function () {
   const COLORS = {
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
-    accent:'#CAA6FF', accentD:'#a87fe8', accent2:'#ddc4ff', accentMid:'#d6bcff', bench:'#8a96a3',
+    accent:'#8B5CF6', accentD:'#7340e0', accent2:'#b79bf9', accentMid:'#a98bf3', bench:'#8a96a3',
     densityLine:'#1d2733',   // dark (site text colour) density overlay
     pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
@@ -37,7 +37,7 @@
       filterMode:'filter',                             // recompute series in view -> y-axis rescales on zoom
       showDataShadow:false,                            // drop the mini price line
       backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
-      fillerColor:'rgba(202,166,255,.30)',
+      fillerColor:'rgba(139,92,246,.26)',
       handleIcon:'path://M0,0 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0',
       handleSize:'150%',
       handleStyle:{ color:'#fff', borderColor:COLORS.accent, borderWidth:2,
