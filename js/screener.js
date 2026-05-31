@@ -205,6 +205,17 @@
     return rows;
   }
 
+  // Dispose one card's chart and drop it from the grid's chart list, so removing
+  // a single card doesn't have to tear down and rebuild every other chart.
+  function disposeCardChart(card, charts){
+    const inst = card && card._chart;
+    if (!inst) return;
+    const i = charts.indexOf(inst);
+    if (i>=0) charts.splice(i,1);
+    try { inst.dispose(); } catch(e){}
+    card._chart = null;
+  }
+
   // Render a set of rows into a grid, mount their charts, and wire clicks.
   // `onOpen(idx)` opens the modal for that grid; `charts` collects instances.
   function paintGrid(grid, rows, domId, charts, onOpen){
@@ -213,15 +224,17 @@
     rows.forEach((r,i)=>{
       const el = document.getElementById(`${domId}-${i}`);
       if (!el) return;
+      const card = el.closest('.mom-card');   // so a single removal can dispose just this chart
       if (r.candles && r.candles.length){
-        charts.push(window.Charts.candleCard(el, r.candles, false));
+        const inst = window.Charts.candleCard(el, r.candles, false);
+        charts.push(inst); if (card) card._chart = inst;
       } else {
         // No bundled candles (e.g. a non-ranked search hit): fetch on demand.
         el.innerHTML = chartSkeleton();
         loadCandles(r.ticker).then(c=>{
           if (!document.body.contains(el)) return;       // grid re-rendered meanwhile
           el.innerHTML = '';
-          if (c && c.length){ r.candles = c; charts.push(window.Charts.candleCard(el, c, false)); }
+          if (c && c.length){ r.candles = c; const inst = window.Charts.candleCard(el, c, false); charts.push(inst); if (card) card._chart = inst; }
           else el.innerHTML = unavailable(r.ticker);
         });
       }
@@ -244,24 +257,45 @@
         if (removing){
           const card = btn.closest('.mom-card');
           if (card){
-            // Lock the current height, force a reflow so the browser paints that
-            // start value, THEN flip to collapsed on the next frame — otherwise
-            // it jumps straight to 0 with no transition. Max-height is driven
-            // inline (inline beats the class rule), the class handles fade.
-            card.style.maxHeight = card.offsetHeight + 'px';
-            void card.offsetHeight;                       // force reflow
-            let done = false;
-            const finish = ()=>{ if (done) return; done = true; renderWatchlist(); };
-            card.addEventListener('transitionend', e=>{ if (e.propertyName==='max-height') finish(); });
-            setTimeout(finish, 480);                       // fallback
-            requestAnimationFrame(()=>{
-              card.classList.add('removing');
-              card.style.maxHeight = '0px';
-            });
+            const others = grid.querySelectorAll('.mom-card').length - 1;
+            if (others > 0){
+              // Drop just THIS card: collapse it out, dispose only its own chart,
+              // and leave the siblings in place — no full re-render, so the other
+              // cards' charts don't flicker/rebuild. Lock the height + force a
+              // reflow so the collapse has a start value to animate from.
+              card.style.maxHeight = card.offsetHeight + 'px';
+              void card.offsetHeight;
+              let done = false;
+              const finish = ()=>{
+                if (done) return; done = true;
+                disposeCardChart(card, charts);
+                card.remove();
+              };
+              card.addEventListener('transitionend', e=>{ if (e.propertyName==='max-height') finish(); });
+              setTimeout(finish, 480);
+              requestAnimationFrame(()=>{ card.classList.add('removing'); card.style.maxHeight = '0px'; });
+            } else {
+              // Last card: settle the grid straight to the empty-state height
+              // instead of collapsing to zero and re-expanding into it.
+              disposeCardChart(card, charts);
+              const startH = grid.offsetHeight;
+              renderWatchlist();                            // swap in the empty state
+              const endH = grid.offsetHeight;
+              grid.style.height = startH + 'px';
+              void grid.offsetHeight;
+              grid.style.transition = 'height .3s ease';
+              grid.style.height = endH + 'px';
+              const clear = ev=>{
+                if (ev.target!==grid || ev.propertyName!=='height') return;
+                grid.style.height = ''; grid.style.transition = '';
+                grid.removeEventListener('transitionend', clear);
+              };
+              grid.addEventListener('transitionend', clear);
+            }
             return;
           }
         }
-        renderWatchlist();   // adding (rare here) or no card found -> rebuild now
+        renderWatchlist();   // adding (rare on this tab) or no card found -> rebuild now
       });
     });
   }
