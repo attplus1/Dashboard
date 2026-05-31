@@ -57,6 +57,20 @@
     return { pct: mdd*100, dollars: troughV-peakV };
   }
 
+  // Underwater curve: each equity sample's distance below its running peak, as a
+  // % and in dollars (both <=0). The series minimum equals maxDrawdown(), so the
+  // chart and the Max-drawdown KPI stay in lock-step.
+  function drawdownSeries(series){
+    let peak=-Infinity; const out=[];
+    for (const s of series){
+      if (s.equity>peak) peak=s.equity;
+      out.push({ date:s.date,
+                 pct: peak ? (s.equity-peak)/peak*100 : 0,
+                 dollars: s.equity-peak });
+    }
+    return out;
+  }
+
   // Align benchmark closes to the equity sample dates and rebase to the equity's
   // starting value so the two curves share a common origin.
   function benchmarkSeries(benchmark, dates, baseEquity){
@@ -133,7 +147,7 @@
       avgHoldLoss:   mean(losses.map(t=>t.holdDays)),
       avgRet:        mean(trades.map(t=>t.ret)),
       sharpe, sortino, calmar, infoRatio, maxDrawdown: mdd,
-      equity, benchEquity: benchEq,
+      equity, benchEquity: benchEq, drawdown: drawdownSeries(equity),
       nWin: wins.length, nLoss: losses.length, nFlat: flat.length, nTotal: trades.length
     };
   }

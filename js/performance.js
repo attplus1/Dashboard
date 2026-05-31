@@ -376,6 +376,7 @@
     renderKPIs(m, commission, funding, unit, wkRows);
     window.Charts.equityChart('equity-chart', m, unit);
     window.Charts.tickerChart('ticker-chart', window.Metrics.byTicker(m.trades, unit), unit);
+    window.Charts.drawdownChart('drawdown-chart', m, unit);
     window.Charts.categoryBarChart('weekday-chart', wkRows, unit);
     window.Charts.categoryBarChart('hour-chart', hrRows, unit);
     window.Charts.outcomeChart('outcome-chart', m);

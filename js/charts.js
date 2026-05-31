@@ -119,6 +119,44 @@
     });
   }
 
+  // Underwater / drawdown curve: distance below the running peak over time (<=0),
+  // shaded red down to a dashed line at the deepest drawdown. `unit` switches the
+  // axis between % and $; the dashed threshold reuses m.maxDrawdown so it matches
+  // the KPI tile exactly.
+  function drawdownChart(id, m, unit){
+    const c = init(id); if (!c) return;
+    const dd = m.drawdown || [];
+    const dates = dd.map(d=>d.date);
+    const vals  = dd.map(d=> +(unit==='percent' ? d.pct : d.dollars).toFixed(2));
+    const minV  = vals.length ? Math.min(0, ...vals) : 0;
+    const thresh = +(unit==='percent' ? m.maxDrawdown.pct : m.maxDrawdown.dollars).toFixed(2);
+    const valFmt = v => unit==='percent' ? v.toFixed(1)+'%' : fmtMoney(v);
+    const axFmt  = v => unit==='percent' ? Math.round(v)+'%' : fmtMoney(v);
+    // A touch of headroom above 0 and below the trough so the curve and label breathe.
+    const lo = minV<0 ? minV*1.14 : -1;
+    const hi = minV<0 ? Math.abs(minV)*0.05 : 1;
+    c.setOption({
+      backgroundColor:'transparent',
+      grid:{left:58, right:18, top:16, bottom:30},
+      tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
+        textStyle:{color:COLORS.textStrong},
+        valueFormatter:v=> v==null?'–':valFmt(v)},
+      xAxis:{type:'category', data:dates, boundaryGap:false, ...axisBase},
+      yAxis:{type:'value', min:+lo.toFixed(2), max:+hi.toFixed(2), ...axisBase,
+        axisLabel:{color:COLORS.text, formatter:v=>axFmt(v)}},
+      series:[{
+        name:'Drawdown', type:'line', data:vals, showSymbol:false,
+        lineStyle:{width:1.9, color:COLORS.neg}, itemStyle:{color:COLORS.neg},
+        areaStyle:{color:'rgba(226,59,78,.13)'},   // shade between the curve and 0
+        markLine:{ silent:true, symbol:'none',
+          lineStyle:{color:COLORS.neg, type:'dashed', width:1.2},
+          label:{ formatter:'Max drawdown '+valFmt(thresh), position:'insideStartTop',
+            color:COLORS.neg, fontSize:10, fontWeight:'bold' },
+          data:[{ yAxis: thresh }] }
+      }]
+    });
+  }
+
   function tickerChart(id, rows, unit){
     const c = init(id); if (!c) return;
     const nameByTicker = {}; rows.forEach(r => nameByTicker[r.ticker] = r.name || r.ticker);
@@ -373,6 +411,7 @@
   function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
   window.addEventListener('resize', resizeAll);
 
-  window.Charts = { equityChart, tickerChart, categoryBarChart, outcomeChart, holdingChart,
-                    candleCard, returnsDistChart, tradeChart, resizeAll, disposeOne, disposeAll };
+  window.Charts = { equityChart, drawdownChart, tickerChart, categoryBarChart, outcomeChart,
+                    holdingChart, candleCard, returnsDistChart, tradeChart,
+                    resizeAll, disposeOne, disposeAll };
 })();

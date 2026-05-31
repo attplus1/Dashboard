@@ -82,6 +82,8 @@ window.CONFIG = {
        'Gross profit divided by gross loss. Above 1.0 means winners outweigh losers; 2.0+ is strong.'],
       ['Equity curve',
        'Your actual account balance over time, taken directly from the statement. The ASX 200 is rebased to your starting balance so the two lines are directly comparable.'],
+      ['Drawdown (underwater)',
+       'The distance the account sits below its highest prior balance, plotted over time. It is 0% whenever you are at a new peak and dips while you are recovering a loss; the dashed line marks the deepest point (the max drawdown).'],
       ['Most profitable day',
        'The entry weekday with the highest total P&L (or average return, per the display toggle), drawn from the weekday chart above.'],
       ['Net expectancy',
