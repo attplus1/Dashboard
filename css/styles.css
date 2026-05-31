@@ -391,8 +391,15 @@ input[type=date]{
   display:flex; align-items:stretch;
   transform:translateY(100%); transition:transform .22s ease;
 }
-.mom-card:hover .mom-watchbar,
-.mom-card.watched .mom-watchbar{transform:translateY(0)}
+/* The full bar only appears on hover (so it never sits over the footer's legend
+   + price). A watched card instead shows a thin accent strip pinned to the
+   bottom edge — the overview cards' side-bar treatment, rotated to the bottom. */
+.mom-card:hover .mom-watchbar{transform:translateY(0)}
+.mom-card.watched::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:4px; z-index:2;
+  background:linear-gradient(90deg, var(--accent), var(--accent-d));
+}
+.mom-card.watched:hover::after{display:none}   /* hidden while the full bar is up */
 .wb-add{
   flex:1; border:none; cursor:pointer; color:#fff; font-family:var(--sans);
   font-size:13px; font-weight:600; letter-spacing:.2px;
