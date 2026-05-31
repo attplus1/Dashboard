@@ -4,7 +4,7 @@
     text:'#5a6776', textStrong:'#1d2733', grid:'#e3e8ef', tip:'#ffffff',
     accent:'#8B5CF6', accentD:'#7340e0', accent2:'#b79bf9', accentMid:'#a98bf3', bench:'#8a96a3',
     densityLine:'#1d2733',   // dark (site text colour) density overlay
-    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020',
+    pos:'#15a36b', neg:'#e23b4e', warn:'#e0a020', ma200:'#3b6fb0',
     posDim:'#d4efe3', negDim:'#fbe0e3',        // pastel green/red (match the side-pill backgrounds)
     posMid:'#74c9a7', negMid:'#ee8d98',        // medium green/red — pastel-but-not-white gradient end
     markEntry:'#10b981', markExit:'#f43f5e'   // distinct green/red dots vs candles
@@ -250,7 +250,7 @@
         {name:'MA50', type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
           lineStyle:{width:1.3,color:COLORS.accent}},
         {name:'MA200', type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
-          lineStyle:{width:1.3,color:COLORS.warn}}
+          lineStyle:{width:1.3,color:COLORS.ma200}}
       ]
     });
     if (big) attachZoomRange(c, dates, 54, 18);
