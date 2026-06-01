@@ -345,6 +345,9 @@
 
   // ---------- screener tab ----------
   function render(){
+    // Reposition the sliding pills now the tab is visible (they measure 0 while
+    // the panel is display:none, so the initial wirePill pass is a no-op).
+    ['scr-universe-sel','scr-topn'].forEach(id=>{ const s=$('#'+id); if (s) movePill(s); });
     const grid = $('#screener-cards');
     if (!hasData()){ grid.innerHTML = noDataNotice(); return; }
 
@@ -486,6 +489,17 @@
     if (bigChart){ bigChart.dispose(); bigChart=null; }
   }
 
+  // Slide the accent pill (::before) to the active option by measuring its
+  // geometry. The ::before sits at left:3px inside the .seg padding, so offset by
+  // that. Skipped silently if the seg isn't laid out yet (e.g. hidden tab).
+  function movePill(seg){
+    const btn = seg.querySelector('.seg-btn.active'); if (!btn) return;
+    if (!btn.offsetWidth) return;                       // not laid out yet
+    seg.style.setProperty('--pill-x', (btn.offsetLeft - 3) + 'px');
+    seg.style.setProperty('--pill-w', btn.offsetWidth + 'px');
+    seg.classList.add('pill-ready');
+  }
+
   // Turn a pill segmented control into a working selector. `onChange(value)`.
   function wirePill(id, onChange){
     const seg = $('#'+id); if (!seg) return;
@@ -494,9 +508,12 @@
         seg.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
         seg.dataset.value = btn.dataset.value;
+        movePill(seg);
         onChange(btn.dataset.value);
       });
     });
+    movePill(seg);                                      // initial position
+    window.addEventListener('resize', ()=>movePill(seg));
   }
 
   function wireModal(){
