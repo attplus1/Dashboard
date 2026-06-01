@@ -361,14 +361,17 @@ input[type=date]{
 .screener-stat .val{font-size:16px; font-weight:600; font-family:var(--mono)}
 
 /* Multi-option pill segmented control (universe / top-N on the screener).
-   Reuses the .seg shell but, unlike the 2-way toggle, drops the sliding
-   ::before and lets the active option itself carry the accent fill — so it
-   scales to any number of options. */
+   Reuses the .seg shell. Options are variable-width, so the sliding accent pill
+   (::before) is positioned/sized by --pill-x / --pill-w, which JS sets from the
+   active button's geometry — same gliding feel as the header $ / % toggle. */
 .pill-seg{display:inline-flex}
-.pill-seg::before{display:none}
-.pill-seg .seg-btn{flex:0 0 auto; padding:0 14px; transition:color .2s, background .2s}
-.pill-seg .seg-btn.active{background:var(--accent); color:#fff}
-.pill-seg .seg-btn.active:hover{background:var(--accent-d); color:#fff}
+.pill-seg::before{display:block; width:var(--pill-w,0); height:auto;
+  transform:translateX(var(--pill-x,0));
+  transition:transform .25s cubic-bezier(.4,0,.2,1), width .25s cubic-bezier(.4,0,.2,1)}
+.pill-seg .seg-btn{flex:0 0 auto; padding:0 14px; transition:color .2s}
+.pill-seg .seg-btn.active{color:#fff}
+/* Before JS measures (or if disabled), keep the active option readable. */
+.pill-seg:not(.pill-ready) .seg-btn.active{background:var(--accent); border-radius:999px}
 
 /* Screener ticker search */
 .screener-search{position:relative; display:flex; align-items:center; margin-top:14px}
