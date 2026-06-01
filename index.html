@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Dashboard</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=112" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=113" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=112" />
+  <link rel="stylesheet" href="css/styles.css?v=113" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -49,11 +49,9 @@
     <section class="panel intro-panel">
       <div class="intro-text">
         <h2>Overview</h2>
-        <p>Round-trip trades are reconstructed from your broker history: entries (<em>Buy/Sell Trade</em>)
-           are matched to exits (<em>Close Trade / Stop Loss</em>) by order reference, with stop-loss
-           exits matched FIFO per ticker. Realised P&amp;L is read from the statement and is shown
-           <strong>gross</strong> of commission and overnight funding — those are tracked separately and
-           combined into the <em>Net P&amp;L</em> figures. Use the date range to scope every metric and chart below.</p>
+        <p>Your trading, at a glance. We turn your CMC history into clean round-trip
+           trades and track the numbers that matter — P&amp;L, win rate, drawdown and more.
+           Drag the date range to zoom in on any stretch.</p>
       </div>
       <div id="data-source-note" class="source-note"></div>
     </section>
@@ -221,11 +219,9 @@
     <section class="panel intro-panel">
       <div class="intro-text">
         <h2>Momentum Screener</h2>
-        <p>Ranks the ASX universe using <strong>Jegadeesh &amp; Titman (1993)</strong> cross-sectional
-           momentum: the formation return over the prior <strong>6 months, skipping the most recent month</strong>
-           (a "6&ndash;1" lookback) to avoid short-term reversal. The strongest names form the suggested
-           buy list for the coming period. Each card shows a daily candlestick chart with 50- and
-           200-day moving averages.</p>
+        <p>The ASX's hottest names, ranked. We score every stock on its 6-month price
+           momentum to surface what's trending now. Tap any card for the full chart, or
+           search to look up any ticker.</p>
       </div>
       <div id="screener-source-note" class="source-note"></div>
     </section>
@@ -269,9 +265,9 @@
     <section class="panel intro-panel">
       <div class="intro-text">
         <h2>Watchlist</h2>
-        <p>Names you've starred from the screener, kept in this browser. Each card shows the same
-           daily candlestick with 50- and 200-day moving averages; click to expand. Star a stock
-           from any screener card to add it here, or remove it with the ✕.</p>
+        <p>Your stocks, all in one place. Keep tabs on the names you're following with a
+           live chart for each. Add one from the Screener anytime — your list is saved
+           right here in your browser.</p>
       </div>
     </section>
 
@@ -333,12 +329,12 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=112"></script>
-  <script src="js/parser.js?v=112"></script>
-  <script src="js/metrics.js?v=112"></script>
-  <script src="js/charts.js?v=112"></script>
-  <script src="js/performance.js?v=112"></script>
-  <script src="js/screener.js?v=112"></script>
-  <script src="js/app.js?v=112"></script>
+  <script src="js/config.js?v=113"></script>
+  <script src="js/parser.js?v=113"></script>
+  <script src="js/metrics.js?v=113"></script>
+  <script src="js/charts.js?v=113"></script>
+  <script src="js/performance.js?v=113"></script>
+  <script src="js/screener.js?v=113"></script>
+  <script src="js/app.js?v=113"></script>
 </body>
 </html>
