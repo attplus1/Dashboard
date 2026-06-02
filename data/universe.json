@@ -1214,6 +1214,10 @@
    "name": "BALLYMORE RESOURCES LIMITED"
   },
   {
+   "ticker": "BMRN",
+   "name": "BALLYMORE RESOURCES LIMITED"
+  },
+  {
    "ticker": "BMT",
    "name": "BEAMTREE HOLDINGS LIMITED"
   },
@@ -7390,7 +7394,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1847,
+ "count": 1848,
  "source": "asx directory",
- "updated": "2026-06-01"
+ "updated": "2026-06-02"
 }
