@@ -2790,6 +2790,10 @@
    "name": "FAT PROPHETS GLOBAL CONTRARIAN FUND LTD"
   },
   {
+   "ticker": "FPCN",
+   "name": "FAT PROPHETS GLOBAL CONTRARIAN FUND LTD"
+  },
+  {
    "ticker": "FPH",
    "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED"
   },
@@ -3963,7 +3967,7 @@
   },
   {
    "ticker": "LEL",
-   "name": "LITHIUM ENERGY LIMITED"
+   "name": "LE MINERALS LIMITED"
   },
   {
    "ticker": "LEX",
@@ -7394,7 +7398,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1848,
+ "count": 1849,
  "source": "asx directory",
- "updated": "2026-06-02"
+ "updated": "2026-06-03"
 }
