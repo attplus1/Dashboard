@@ -7166,6 +7166,10 @@
    "name": "WHITEFIELD INCOME LIMITED"
   },
   {
+   "ticker": "WHIN",
+   "name": "WHITEFIELD INCOME LIMITED"
+  },
+  {
    "ticker": "WHK",
    "name": "WHITEHAWK LIMITED"
   },
@@ -7398,7 +7402,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1849,
+ "count": 1850,
  "source": "asx directory",
- "updated": "2026-06-04"
+ "updated": "2026-06-05"
 }
