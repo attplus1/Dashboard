@@ -5574,6 +5574,10 @@
    "name": "RAGNAR METALS LIMITED"
   },
   {
+   "ticker": "RAN",
+   "name": "RANGE INTERNATIONAL LIMITED"
+  },
+  {
    "ticker": "RAP",
    "name": "RAPTOR METALS LTD"
   },
@@ -7339,7 +7343,7 @@
   },
   {
    "ticker": "YAR",
-   "name": "YARI MINERALS LIMITED"
+   "name": "YARI RESOURCES LTD"
   },
   {
    "ticker": "YOJ",
@@ -7402,7 +7406,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1850,
+ "count": 1851,
  "source": "asx directory",
- "updated": "2026-06-07"
+ "updated": "2026-06-08"
 }
