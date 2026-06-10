@@ -238,6 +238,10 @@
    "name": "ACDC METALS LTD"
   },
   {
+   "ticker": "ADCN",
+   "name": "ACDC METALS LTD"
+  },
+  {
    "ticker": "ADD",
    "name": "ADAVALE RESOURCES LIMITED"
   },
@@ -967,7 +971,7 @@
   },
   {
    "ticker": "AZ9",
-   "name": "ASIAN BATTERY METALS PLC"
+   "name": "AZZURO RESOURCES PLC"
   },
   {
    "ticker": "AZI",
@@ -1332,6 +1336,10 @@
   {
    "ticker": "BSR",
    "name": "BISON RESOURCES LIMITED"
+  },
+  {
+   "ticker": "BST",
+   "name": "BORESIGHT LTD"
   },
   {
    "ticker": "BSX",
@@ -7406,7 +7414,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1851,
+ "count": 1853,
  "source": "asx directory",
- "updated": "2026-06-09"
+ "updated": "2026-06-10"
 }
