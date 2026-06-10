@@ -89,7 +89,6 @@ body[data-tab="screener"] .header-toggle{display:none}
   padding:38px 54px; text-align:center; box-shadow:var(--shadow);
   pointer-events:none;
 }
-.drop-mark{width:52px; height:52px; border-radius:50%; margin-bottom:10px}
 .drop-card h3{margin:0 0 6px; color:var(--text)}
 .drop-card p{margin:0; color:var(--text-dim); font-size:13px}
 

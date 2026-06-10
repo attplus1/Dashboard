@@ -18,8 +18,17 @@
       const bytes = new Uint8Array(arrbuf); let bin='';
       const CH=0x8000; for (let i=0;i<bytes.length;i+=CH)
         bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CH));
-      localStorage.setItem(LS_KEY, JSON.stringify({ name, ts:Date.now(), b64:btoa(bin) }));
-    } catch(e){ /* quota/full — non-fatal */ }
+      const payload = JSON.stringify({ name, ts:Date.now(), b64:btoa(bin) });
+      try { localStorage.setItem(LS_KEY, payload); }
+      catch(e){
+        // Quota full: the watchlist candle cache is rebuildable — reclaim it and
+        // retry once. If it STILL fails, drop any stale snapshot so an old
+        // import can't silently shadow this newer statement on the next visit.
+        try { localStorage.removeItem('plus1_wl_candles_v1');
+              localStorage.setItem(LS_KEY, payload); }
+        catch(e2){ clearStored(); }
+      }
+    } catch(e){ /* encoding failure — non-fatal */ }
   }
   function loadStored(){
     try {
@@ -295,17 +304,23 @@
     state.benchmark = bench;            // { placeholder, asof, data:[{date,close}] }
     state.prices = prices ? prices.prices : null;
 
-    // Trade history precedence: a statement you uploaded on this device
-    // (saved locally) wins; otherwise fall back to the committed repo history.
+    // Trade history precedence: FRESHEST data wins. A locally saved import used
+    // to always shadow the committed repo history, so once the repo file moved
+    // past an old local snapshot the dashboard looked permanently stale. Parse
+    // both and keep whichever statement ends later.
     const stored = loadStored();
+    let local = null;
     if (stored){
-      try { setReconciliation(window.TradeParser.parseArrayBuffer(stored.bytes)); }
+      try { local = window.TradeParser.parseArrayBuffer(stored.bytes); }
       catch(e){ clearStored(); }
     }
-    if (!state.recon){
-      const repo = await loadRepoTrades();
-      if (repo) setReconciliation(repo);
-    }
+    const repo = await loadRepoTrades();
+    if (local && repo){
+      const repoNewer = repo.lastDate && local.lastDate && repo.lastDate > local.lastDate;
+      if (repoNewer) clearStored();        // outdated snapshot: drop it for good
+      setReconciliation(repoNewer ? repo : local);
+    } else if (local){ setReconciliation(local); }
+    else if (repo){ setReconciliation(repo); }
 
     applySourceNotes();
     renderAll();                        // import prompt if nothing restored

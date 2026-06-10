@@ -6,6 +6,14 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # The data workflow commits with the default GITHUB_TOKEN, whose pushes
+  # deliberately do NOT trigger `push` workflows (GitHub's anti-recursion rule)
+  # — so the site sat on stale market data until the next human push. Redeploy
+  # whenever a data refresh finishes instead.
+  workflow_run:
+    workflows: ["Update market data"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +27,8 @@ concurrency:
 
 jobs:
   deploy:
+    # For workflow_run triggers, only deploy after a SUCCESSFUL data refresh.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
