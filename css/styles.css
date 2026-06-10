@@ -69,13 +69,20 @@ body[data-tab="screener"] .header-toggle{display:none}
   background:var(--accent); border-radius:2px 2px 0 0;
 }
 .header-actions{display:flex; align-items:center; margin-left:18px}
-.upload-btn{cursor:pointer}
+.upload-btn{cursor:pointer; background:none; border:none; padding:0; font-family:inherit}
 .upload-btn span{
   display:inline-block; padding:9px 18px; border-radius:999px; font-weight:600; font-size:13px;
   background:linear-gradient(135deg,var(--accent),var(--accent-d)); color:#fff;
   box-shadow:0 4px 14px rgba(var(--accent-rgb),.32);
+  transition:filter .15s, background .2s, color .2s, box-shadow .2s;
 }
 .upload-btn:hover span{filter:brightness(1.05)}
+/* When data is loaded the button becomes a neutral "Clear data" action. */
+.upload-btn.is-clear span{
+  background:#fff; color:var(--neg); box-shadow:none;
+  border:1px solid var(--border-2);
+}
+.upload-btn.is-clear:hover span{filter:none; background:var(--neg-dim); border-color:var(--neg)}
 
 /* ---------- Drag-and-drop import overlay ---------- */
 .drop-overlay{

@@ -62,8 +62,26 @@
     syncDateInputs(); positionHandles();
   }
 
+  // The header button doubles as Import (no data) / Clear (data loaded).
+  function syncDataActionButton(){
+    const btn = $('#data-action-btn'); if (!btn) return;
+    const hasData = !!state.recon;
+    btn.classList.toggle('is-clear', hasData);
+    btn.querySelector('span').textContent = hasData ? '✕ Clear data' : '＋ Import trades';
+    btn.title = hasData ? 'Remove the loaded trades' : 'Import a broker statement';
+  }
+
+  // Wipe the loaded trades (and any saved import) back to the empty prompt.
+  function clearData(){
+    clearStored();
+    state.recon = null;
+    state.from = state.to = state.fullFrom = state.fullTo = null;
+    renderAll();
+  }
+
   // ---------- rendering ----------
   function renderAll(){
+    syncDataActionButton();
     if (!state.recon){ renderEmpty(); return; }
     $('#tab-performance').classList.remove('no-data');
     window.PerformanceTab.render({
@@ -245,6 +263,10 @@
     $('#scr-topn').addEventListener('change',()=>window.ScreenerTab.render());
     // import (file picker + drag-and-drop both route here)
     $('#file-input').addEventListener('change',e=>importFile(e.target.files[0]));
+    // Header action: Import when empty, Clear when trades are loaded.
+    $('#data-action-btn').addEventListener('click',()=>{
+      if (state.recon) clearData(); else $('#file-input').click();
+    });
     wireDragDrop();
   }
 
@@ -256,6 +278,7 @@
       const recon = window.TradeParser.parseArrayBuffer(new Uint8Array(buf));
       storeTrades(f.name, buf);              // persist so it continues next visit
       setReconciliation(recon); renderAll();
+      $('#file-input').value = '';           // allow re-selecting the same file later
     } catch(err){ alert('Could not parse "'+(f.name||'file')+'": '+err.message); }
   }
 
