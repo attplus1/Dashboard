@@ -67,7 +67,7 @@
     const btn = $('#data-action-btn'); if (!btn) return;
     const hasData = !!state.recon;
     btn.classList.toggle('is-clear', hasData);
-    btn.querySelector('span').textContent = hasData ? '✕ Clear data' : '＋ Import trades';
+    btn.querySelector('span').textContent = hasData ? 'Clear data' : '＋ Import trades';
     btn.title = hasData ? 'Remove the loaded trades' : 'Import a broker statement';
   }
 
