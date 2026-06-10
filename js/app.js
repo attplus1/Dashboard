@@ -67,7 +67,7 @@
     const btn = $('#data-action-btn'); if (!btn) return;
     const hasData = !!state.recon;
     btn.classList.toggle('is-clear', hasData);
-    btn.querySelector('span').textContent = hasData ? 'Clear data' : '＋ Import trades';
+    btn.querySelector('span').textContent = hasData ? 'Clear data' : 'Import trades';
     btn.title = hasData ? 'Remove the loaded trades' : 'Import a broker statement';
   }
 
@@ -103,7 +103,7 @@
         <p>The performance review is empty until you upload a broker statement
            (<code>.csv</code> or <code>.xlsx</code>). Everything is processed in your
            browser — nothing is uploaded anywhere.</p>
-        <span class="ec-btn" id="cta-import">＋ Import trades</span>
+        <span class="ec-btn" id="cta-import">Import trades</span>
       </div>`;
     $('#cta-import').addEventListener('click', () => $('#file-input').click());
     ['ticker-chart','drawdown-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
