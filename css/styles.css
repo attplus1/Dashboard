@@ -306,9 +306,6 @@ input[type=date]{
   text-align:center; padding:46px 24px; color:var(--text-dim);
   border:2px dashed var(--border-2); border-radius:var(--radius); background:var(--bg-2);
 }
-.empty-cta .ec-mark{
-  width:56px;height:56px;border-radius:50%;margin:0 auto 14px;display:block;
-}
 .empty-cta h3{margin:0 0 6px; font-size:17px; color:var(--text)}
 .empty-cta p{margin:0 auto; max-width:520px; font-size:13px}
 .empty-cta .ec-btn{
