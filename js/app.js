@@ -99,7 +99,6 @@
     const er = (n,msg) => `<tr class="empty-row"><td colspan="${n}">${msg}</td></tr>`;
     $('#kpi-grid').innerHTML = '';
     $('#equity-chart').innerHTML = `<div class="empty-cta">
-        <img class="ec-mark" src="assets/logo.svg" alt="" />
         <h3>Import your trade history to begin</h3>
         <p>The performance review is empty until you upload a broker statement
            (<code>.csv</code> or <code>.xlsx</code>). Everything is processed in your
