@@ -46,11 +46,6 @@ body{
 .header-inner{
   max-width:1320px; margin:0 auto; padding:12px 28px;
   display:flex; align-items:center; gap:24px;
-  /* FIXED content-row height so the row is identical on every tab regardless of
-     which items are present (the $/% toggle only shows on the Overview). With a
-     min-height the toggle could still drive the row a hair taller than the other
-     tabs, shifting the centred action button — a fixed height removes that. */
-  height:38px;
 }
 .brand{display:flex; align-items:center; gap:12px}
 .brand-mark{width:40px; height:40px; border-radius:50%; display:block; box-shadow:var(--shadow-sm)}
@@ -79,7 +74,10 @@ body[data-tab="watchlist"] .header-toggle{display:none}
 .upload-btn{cursor:pointer; background:none; border:none; padding:0; font-family:inherit}
 .upload-btn span{
   display:inline-flex; align-items:center; justify-content:center; text-align:center;
-  height:34px; padding:0 18px; border-radius:999px; font-weight:600; font-size:13px;
+  /* Match the $/% toggle's height (38px) so the header row is the same height on
+     every tab — present on the Overview, absent on Screener/Watchlist — and the
+     button centres identically. */
+  height:38px; padding:0 18px; border-radius:999px; font-weight:600; font-size:13px;
   background:linear-gradient(135deg,var(--accent),var(--accent-d)); color:#fff;
   border:1px solid transparent;   /* keep box size identical to the .is-clear state */
   box-shadow:0 4px 14px rgba(var(--accent-rgb),.32);
