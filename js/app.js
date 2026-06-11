@@ -226,7 +226,8 @@
         document.body.dataset.tab = btn.dataset.tab;   // header toggle hides on screener
         $('#tab-'+btn.dataset.tab).classList.add('active');
         if (btn.dataset.tab==='screener') window.ScreenerTab.render();
-        if (btn.dataset.tab==='watchlist') window.ScreenerTab.renderWatchlist();
+        else if (btn.dataset.tab==='watchlist') window.ScreenerTab.renderWatchlist();
+        else if (btn.dataset.tab==='performance') renderAll();   // re-fit after being hidden
         setTimeout(()=>window.Charts.resizeAll(),50);
       });
     });

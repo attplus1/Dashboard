@@ -10,6 +10,21 @@
   const FONT = "Manrope, system-ui, sans-serif";
   const instances = {};
 
+  // Snappier defaults: ECharts' out-of-the-box entry animation is ~1s with
+  // easing, which is what makes the dashboard feel sluggish on load and on every
+  // re-render. Trim to a quick, still-smooth ~280ms. Applied centrally by
+  // wrapping each instance's setOption once, so individual charts don't need to
+  // repeat it (and an explicit option can still override).
+  const ANIM = { animation:true, animationDuration:280, animationDurationUpdate:280,
+                 animationEasing:'cubicOut', animationEasingUpdate:'cubicOut' };
+  function tuneAnim(c){
+    if (!c || c.__animTuned) return c;
+    const orig = c.setOption.bind(c);
+    c.setOption = (opt, ...rest) => orig(Object.assign({}, ANIM, opt), ...rest);
+    c.__animTuned = true;
+    return c;
+  }
+
   // Reuse a live ECharts instance across re-renders (clearing its option) rather
   // than disposing + recreating the canvas every time — far less churn on a unit
   // toggle or date-range drag. A container that gets its innerHTML wiped (empty
@@ -20,7 +35,7 @@
     if (!el) return null;
     let c = instances[id];
     if (!c || c.isDisposed()){
-      c = echarts.init(el, null, { renderer:'canvas' });
+      c = tuneAnim(echarts.init(el, null, { renderer:'canvas' }));
       instances[id] = c;
     } else {
       c.clear();
@@ -250,7 +265,7 @@
   // Candlestick + MA50/MA200. Scrollable/zoomable (dataZoom). `big` shows axes
   // and a zoom slider for the expanded full-screen view.
   function candleCard(el, candles, big){
-    const c = echarts.init(el, null, {renderer:'canvas'});
+    const c = tuneAnim(echarts.init(el, null, {renderer:'canvas'}));
     const dates = candles.map(d=>d.date);
     const ohlc = candles.map(d=>[d.open,d.close,d.low,d.high]);
     const hasMA = candles.some(d=>d.ma50!=null||d.ma200!=null);
@@ -409,8 +424,22 @@
     });
   }
 
-  function resizeAll(){ Object.values(instances).forEach(c=>c && c.resize()); }
-  window.addEventListener('resize', resizeAll);
+  // Resize only the charts that are actually on screen — a hidden tab's canvases
+  // have zero size and resizing them just thrashes for nothing.
+  function resizeAll(){
+    Object.values(instances).forEach(c=>{
+      if (!c || c.isDisposed()) return;
+      const el = c.getDom();
+      if (el && el.offsetParent !== null) c.resize();   // offsetParent null => not displayed
+    });
+  }
+  // Debounce window resizes so dragging the window edge doesn't re-lay-out every
+  // canvas on every pixel.
+  let resizeTimer = null;
+  window.addEventListener('resize', ()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeAll, 150);
+  });
 
   window.Charts = { equityChart, drawdownChart, tickerChart, categoryBarChart, outcomeChart,
                     holdingChart, candleCard, returnsDistChart, tradeChart,

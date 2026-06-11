@@ -46,6 +46,9 @@ body{
 .header-inner{
   max-width:1320px; margin:0 auto; padding:12px 28px;
   display:flex; align-items:center; gap:24px;
+  /* Pin the row height so it doesn't shrink on the Screener tab (where the
+     $/% toggle is hidden) — otherwise the centred action button shifts up. */
+  min-height:38px;
 }
 .brand{display:flex; align-items:center; gap:12px}
 .brand-mark{width:40px; height:40px; border-radius:50%; display:block; box-shadow:var(--shadow-sm)}
