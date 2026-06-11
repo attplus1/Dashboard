@@ -109,6 +109,7 @@
     ['ticker-chart','drawdown-chart','weekday-chart','hour-chart','outcome-chart','holding-chart','dist-chart'].forEach(id =>
       { const el=$('#'+id); if (el) el.innerHTML='<div class="chart-empty">No data yet</div>'; });
     $('#dist-stats').innerHTML = '';
+    $('#open-pos-summary').innerHTML = '';
     $('#open-positions-table tbody').innerHTML = er(13,'Upload a file to see open positions.');
     $('#trades-table tbody').innerHTML = er(11,'Upload a file to see closed trades.');
     $('#top-winners tbody').innerHTML = er(6,'—');

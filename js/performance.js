@@ -188,6 +188,39 @@
     window.Charts.returnsDistChart('dist-chart', h);
   }
 
+  // Summary strip above the open-positions table: current equity, cash balance,
+  // total open P/L, and a stop-based worst case (VaR). Stops aren't guaranteed
+  // to exist on every position, so VaR counts only the protected ones and the
+  // tile flags coverage.
+  function renderOpenSummary(recon, prices){
+    const el = $('#open-pos-summary'); if (!el) return;
+    const open = recon.openPositions || [];
+    const bs = recon.balanceSeries || [];
+    const bal = bs.length ? bs[bs.length-1].balance : null;   // after all closed trades/cash events
+    let uPnl = 0, varPnl = 0, stops = 0;
+    open.forEach(p=>{
+      const px = prices && prices[p.ticker] ? prices[p.ticker].last : null;
+      const dir = p.dir==='long' ? 1 : -1;
+      if (px!=null) uPnl += (px-p.price)*p.units*dir;
+      if (p.stop){                       // P/L change if this stop is hit, vs current (or entry) price
+        const ref = px!=null ? px : p.price;
+        varPnl += (p.stop-ref)*p.units*dir; stops++;
+      }
+    });
+    const equity = bal!=null ? bal + uPnl : null;
+    const tile = (lbl, val, cls, sub) => `<div class="op-tile">
+        <div class="op-lbl">${lbl}</div>
+        <div class="op-val ${cls||''}">${val}</div>
+        <div class="op-sub">${sub}</div></div>`;
+    el.innerHTML =
+      tile('Account equity', equity==null?'—':money(equity,0), 'val-accent', 'balance + open P/L') +
+      tile('Balance', bal==null?'—':money(bal,0), '', 'after closed trades') +
+      tile('Open P/L', open.length?money(uPnl,0):'—', cls(uPnl), `${open.length} open position${open.length===1?'':'s'}`) +
+      tile('VaR (stop-out)', stops?money(varPnl,0):'—', stops?cls(varPnl):'',
+           stops===open.length && stops>0 ? 'all stops set'
+             : `${stops}/${open.length} stops set`);
+  }
+
   function renderOpenPositions(openPositions, prices){
     const tb = $('#open-positions-table tbody');
     _openPos = openPositions; _prices = prices;
@@ -383,6 +416,7 @@
     window.Charts.holdingChart('holding-chart', m);
     renderDistribution(m, unit);
     renderTopTrades(m, unit);
+    renderOpenSummary(recon, prices);
     renderOpenPositions(recon.openPositions, prices);
     renderTradesTable(m.trades);
   }

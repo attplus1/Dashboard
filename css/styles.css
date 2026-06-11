@@ -349,6 +349,18 @@ input[type=date]{
 /* Override .hold-val's base colour (higher specificity than .val-*) */
 .hold-val.val-pos{color:var(--pos)} .hold-val.val-neg{color:var(--neg)} .hold-val.val-accent{color:var(--accent)}
 
+/* Open-positions summary strip (equity / balance / open P/L / VaR) */
+.op-summary{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:14px}
+.op-summary:empty{display:none}
+@media(max-width:760px){.op-summary{grid-template-columns:repeat(2,1fr)}}
+.op-tile{background:var(--bg-2); border:1px solid var(--border); border-radius:11px;
+  padding:14px 14px 12px; text-align:center}
+.op-lbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--text-faint)}
+.op-val{font-size:22px; font-weight:700; letter-spacing:-.4px; margin-top:6px; color:var(--text);
+  font-variant-numeric:tabular-nums lining-nums}
+.op-val.val-pos{color:var(--pos)} .op-val.val-neg{color:var(--neg)} .op-val.val-accent{color:var(--accent)}
+.op-sub{font-size:11px; color:var(--text-dim); margin-top:3px}
+
 /* ---------- Distribution + top trades ---------- */
 .dist-stats{display:flex; align-items:center; gap:22px; margin-bottom:16px; font-size:12.5px; color:var(--text-dim)}
 .dist-stats b{font-family:var(--mono); color:var(--accent); font-weight:400}
