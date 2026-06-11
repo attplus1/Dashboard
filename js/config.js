@@ -76,7 +76,9 @@ window.CONFIG = {
       ['Information ratio',
        'How much you beat (or trailed) the ASX 200 benchmark, divided by how consistently you did so. It measures skill at outperforming the index rather than just riding the market — higher means more reliable outperformance.'],
       ['Max drawdown',
-       'The largest peak-to-trough fall in the account over the period, shown as a % and in dollars. A gauge of the worst losing stretch you would have had to sit through.']
+       'The largest peak-to-trough fall in the account over the period, shown as a % and in dollars. A gauge of the worst losing stretch you would have had to sit through.'],
+      ['VaR (stop-out)',
+       'The worst-case hit to the account if every stop-loss on your open positions were triggered, valued against current prices. Only positions that actually have a stop are counted — a position without one has no defined exit, so its downside is open-ended and isn\'t included. Treat it as the protected worst case, not an absolute floor (the tile shows how many positions are covered). This is a simplified, stop-based take on Value at Risk, not the statistical kind.']
     ]],
     ['How figures are calculated', [
       ['Gross vs Net P&L',
