@@ -22,8 +22,21 @@
     let dates;
     if (benchmark && benchmark.length){
       dates = benchmark.map(b=>b.date).filter(d=>{ const dt=new Date(d); return dt>=from && dt<=to; });
+      // The statement can run past the price feed (e.g. holding costs charged
+      // after the benchmark's last close). Extend with calendar days so the
+      // curve always reaches `to` and its final point reflects every balance
+      // event — keeping it in lock-step with the balance/equity figures shown
+      // in the open-positions summary.
+      let tail = dates.length ? new Date(dates[dates.length-1]+'T00:00:00')
+                              : new Date(from.getTime() - 86400000);
+      for (let d=new Date(tail.getTime()+86400000); d<=to; d.setDate(d.getDate()+1))
+        dates.push(dayKey(d));
     } else {
-      dates=[]; for (let d=new Date(from); d<=to; d.setDate(d.getDate()+1)) dates.push(dayKey(d));
+      // Step from midnight (not `from`'s time-of-day) so the final — possibly
+      // partial — day is still sampled and late events aren't dropped.
+      dates=[];
+      for (let d=new Date(from.getFullYear(), from.getMonth(), from.getDate());
+           d<=to; d.setDate(d.getDate()+1)) dates.push(dayKey(d));
     }
     // Seed with the last balance on/before the window start so the curve begins
     // at the real account value at that date.

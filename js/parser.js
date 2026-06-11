@@ -166,8 +166,18 @@
     for (const t of trades){ allDates.push(t.entryDt, t.exitDt); }
     for (const o of openPositions){ allDates.push(o.dt); }
     const valid = allDates.filter(d => d instanceof Date && !isNaN(d.getTime())).map(d => d.getTime());
-    const firstDate = valid.length ? new Date(Math.min(...valid)) : null;
-    const lastDate  = valid.length ? new Date(Math.max(...valid)) : null;
+    // lastDate must cover EVERY balance event, not just the last trade —
+    // statements keep accruing cash rows (holding costs, fees) after the final
+    // trade, and the equity curve / balance figures should agree through to the
+    // statement's true end.
+    const balTimes = balanceSeries.filter(b => b.dt instanceof Date && !isNaN(b.dt.getTime()))
+                                  .map(b => b.dt.getTime());
+    const lastTs = Math.max(valid.length ? Math.max(...valid) : -Infinity,
+                            balTimes.length ? Math.max(...balTimes) : -Infinity);
+    const lastDate = isFinite(lastTs) ? new Date(lastTs) : null;
+    // A statement with cash rows but no (parsable) trades still gets a range.
+    const firstDate = valid.length ? new Date(Math.min(...valid))
+                    : (balTimes.length ? new Date(Math.min(...balTimes)) : null);
 
     return { trades, openPositions, commissions, fundings,
              balanceSeries, firstDate, lastDate };
