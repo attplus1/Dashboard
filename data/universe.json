@@ -1074,6 +1074,10 @@
    "name": "BEONIC LTD"
   },
   {
+   "ticker": "BEON",
+   "name": "BEONIC LTD"
+  },
+  {
    "ticker": "BET",
    "name": "BETMAKERS TECHNOLOGY GROUP LTD"
   },
@@ -7414,7 +7418,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1853,
+ "count": 1854,
  "source": "asx directory",
- "updated": "2026-06-10"
+ "updated": "2026-06-11"
 }
