@@ -1822,6 +1822,10 @@
    "name": "CANADIAN PHOSPHATE LIMITED"
   },
   {
+   "ticker": "CP8N",
+   "name": "CANADIAN PHOSPHATE LIMITED"
+  },
+  {
    "ticker": "CPM",
    "name": "COOPER METALS LIMITED"
   },
@@ -3727,6 +3731,10 @@
   },
   {
    "ticker": "JLL",
+   "name": "JINDALEE LITHIUM LIMITED"
+  },
+  {
+   "ticker": "JLLN",
    "name": "JINDALEE LITHIUM LIMITED"
   },
   {
@@ -7034,6 +7042,10 @@
    "name": "VRX SILICA LIMITED"
   },
   {
+   "ticker": "VRXN",
+   "name": "VRX SILICA LIMITED"
+  },
+  {
    "ticker": "VSL",
    "name": "VULCAN STEEL LIMITED"
   },
@@ -7418,7 +7430,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1854,
+ "count": 1857,
  "source": "asx directory",
  "updated": "2026-06-14"
 }
