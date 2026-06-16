@@ -2874,6 +2874,10 @@
    "name": "FELIX GOLD LIMITED"
   },
   {
+   "ticker": "FXGN",
+   "name": "FELIX GOLD LIMITED"
+  },
+  {
    "ticker": "FZR",
    "name": "FITZROY RIVER CORPORATION LTD"
   },
@@ -2916,6 +2920,10 @@
   {
    "ticker": "GBE",
    "name": "GLOBE METALS & MINING LIMITED"
+  },
+  {
+   "ticker": "GBL",
+   "name": "GREAT BEAR EXPLORATION LTD"
   },
   {
    "ticker": "GBM",
@@ -7430,7 +7438,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1857,
+ "count": 1859,
  "source": "asx directory",
- "updated": "2026-06-15"
+ "updated": "2026-06-16"
 }
