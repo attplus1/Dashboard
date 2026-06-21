@@ -450,6 +450,10 @@
    "name": "AKORA RESOURCES LIMITED"
   },
   {
+   "ticker": "AKON",
+   "name": "AKORA RESOURCES LIMITED"
+  },
+  {
    "ticker": "AL3",
    "name": "AML3D LIMITED"
   },
@@ -659,6 +663,10 @@
   },
   {
    "ticker": "AQX",
+   "name": "ALICE QUEEN LIMITED"
+  },
+  {
+   "ticker": "AQXN",
    "name": "ALICE QUEEN LIMITED"
   },
   {
@@ -7438,7 +7446,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1859,
+ "count": 1861,
  "source": "asx directory",
  "updated": "2026-06-21"
 }
