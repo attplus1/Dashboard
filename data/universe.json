@@ -414,6 +414,10 @@
    "name": "AERIS RESOURCES LIMITED"
   },
   {
+   "ticker": "AISN",
+   "name": "AERIS RESOURCES LIMITED"
+  },
+  {
    "ticker": "AIV",
    "name": "ACTIVEX LIMITED"
   },
@@ -2160,6 +2164,10 @@
   {
    "ticker": "DLI",
    "name": "DELTA LITHIUM LIMITED"
+  },
+  {
+   "ticker": "DLY",
+   "name": "DALY RESOURCES LIMITED"
   },
   {
    "ticker": "DM1",
@@ -5146,6 +5154,10 @@
    "name": "PACIFIC CURRENT GROUP LIMITED"
   },
   {
+   "ticker": "PAF",
+   "name": "PAN AFRICAN RESOURCES PLC"
+  },
+  {
    "ticker": "PAR",
    "name": "PARADIGM BIOPHARMACEUTICALS LIMITED.."
   },
@@ -7446,7 +7458,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1861,
+ "count": 1864,
  "source": "asx directory",
  "updated": "2026-06-22"
 }
