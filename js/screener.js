@@ -362,15 +362,20 @@
     $('#scr-asof').textContent = DATA.asof || '–';
 
     const note = $('#screener-source-note');
+    // The full ASX universe is rolled through ~800 tickers/run, so `complete` is
+    // almost never True even though coverage is effectively full (the residual
+    // stragglers are delisted/no-data names that never price). So we DON'T gate
+    // the "Live scan" label on `complete` — we just show the live ticker count.
     if (DATA.placeholder){ note.className='source-note placeholder';
       note.textContent='Placeholder data — run the data workflow for a live scan.'; }
     else if (!legacy && tier!=='full' && !active){ note.className='source-note placeholder';
       note.textContent=`Top ${tierSize} by market cap — still gathering market caps `
         +`(${(DATA.cap_count||0).toLocaleString()} so far); showing the full universe meanwhile.`; }
-    else if (DATA.complete===false){ note.className='source-note placeholder';
-      note.textContent=`Scan updating… ${(DATA.universe_count||0).toLocaleString()} tickers so far · ${DATA.asof||''}`; }
     else { note.className='source-note live';
-      note.innerHTML='<span class="sn-title">Live scan</span><span>as of '+(DATA.asof||'—')+'</span>'; }
+      const n = (DATA.universe_count||0).toLocaleString();
+      note.innerHTML='<span class="sn-title">Live scan</span>'
+        +'<span>'+n+' ASX tickers</span>'
+        +'<span>as of '+(DATA.asof||'—')+'</span>'; }
 
     // A search filter, when active, takes over the grid; otherwise show top-N.
     const meta = $('#scr-search-meta');
