@@ -10,13 +10,13 @@
   const FONT = "Manrope, system-ui, sans-serif";
   const instances = {};
 
-  // Snappier defaults: ECharts' out-of-the-box entry animation is ~1s with
-  // easing, which is what makes the dashboard feel sluggish on load and on every
-  // re-render. Trim to a quick, still-smooth ~280ms. Applied centrally by
-  // wrapping each instance's setOption once, so individual charts don't need to
-  // repeat it (and an explicit option can still override).
-  const ANIM = { animation:true, animationDuration:280, animationDurationUpdate:280,
-                 animationEasing:'cubicOut', animationEasingUpdate:'cubicOut' };
+  // Snappier defaults: trim ECharts' ~1s entry animation to a quick ~280ms.
+  // CRUCIAL for interaction: animationDurationUpdate is 0. Pan/zoom (dataZoom)
+  // re-renders the chart on EVERY frame; animating each of those updates stacks
+  // up and makes dragging feel laggy. A 0ms update keeps drag instant while the
+  // initial appear still animates. Applied centrally by wrapping setOption once.
+  const ANIM = { animation:true, animationDuration:280, animationEasing:'cubicOut',
+                 animationDurationUpdate:0 };
   function tuneAnim(c){
     if (!c || c.__animTuned) return c;
     const orig = c.setOption.bind(c);
@@ -324,11 +324,13 @@
         big
           // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
           // out-of-view bars so the (scale:true) y-axis re-fits the visible range.
-          ? {type:'inside', start:startPct, end:100, filterMode:'filter',
+          // throttle:50 coalesces the heavy filter+rescale to ~20fps so dragging
+          // stays smooth instead of recomputing on every mouse-move event.
+          ? {type:'inside', start:startPct, end:100, filterMode:'filter', throttle:50,
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
           // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
           // click cleanly expands the card. No zoom; y auto-scales.
-          : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
+          : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter', throttle:50,
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
         ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
@@ -446,7 +448,7 @@
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}} ],
       yAxis:[ {type:'value', scale:true, ...axisBase}, ...vol.yAxes ],
       dataZoom:[
-        {type:'inside', start:startPct, end:endPct, filterMode:'filter',
+        {type:'inside', start:startPct, end:endPct, filterMode:'filter', throttle:50,
          zoomOnMouseWheel:true, moveOnMouseMove:true},
         zoomSlider(startPct, endPct)
       ],
