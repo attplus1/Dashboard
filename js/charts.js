@@ -274,7 +274,8 @@
         gridIndex:0, axisLabel:{show:false}, axisLine:{show:false},
         splitLine:{show:false}, axisTick:{show:false} }],
       series:[{ name:'Volume', type:'bar', xAxisIndex:0, yAxisIndex:1, data:vols,
-        barWidth:'60%', silent:true, z:1,
+        barWidth:'60%', silent:true, z:1,   // NB: no large-mode here — it drops the
+        // per-bar green/red itemStyle callback. Volume bars are cheap rects anyway.
         itemStyle:{color:(p)=> upFlags[p.dataIndex] ? 'rgba(21,163,107,.40)' : 'rgba(226,59,78,.40)'} }]
     };
   }
@@ -333,6 +334,7 @@
       ],
       series:[
         {type:'candlestick', data:ohlc,
+          large:true, largeThreshold:200, progressive:4000, progressiveThreshold:3000,
           itemStyle:{color:COLORS.pos,color0:COLORS.neg,
             borderColor:COLORS.pos,borderColor0:COLORS.neg}},
         {name:'MA50', type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
@@ -450,6 +452,7 @@
       ],
       series:[{
         type:'candlestick', data:ohlc,
+        large:true, largeThreshold:200, progressive:4000, progressiveThreshold:3000,
         itemStyle:{color:COLORS.pos, color0:COLORS.neg, borderColor:COLORS.pos, borderColor0:COLORS.neg},
         markPoint:{ data:points },
         markLine:{ symbol:'none', label:{show:false},
