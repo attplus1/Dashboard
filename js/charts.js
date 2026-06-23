@@ -262,24 +262,20 @@
       </div>`;
   }
 
-  // Volume bars live in their own grid below the price chart, sharing the x-axis
-  // via a second xAxis/yAxis on gridIndex 1. Returns the option fragments to mix
-  // in, or empty objects when there's no volume data (legacy candles). `vols` is
-  // the per-bar volume array; `upFlags[i]` = close>=open (green) else red.
+  // Volume bars overlaid on the BOTTOM of the price chart (same grid + x-axis),
+  // on their own hidden y-axis whose max is inflated so the bars only fill the
+  // lower ~22% of the height — a relative-volume strip, no axis or numbers. `up`
+  // flags colour each bar green/red. Returns option fragments to mix in.
   function volumeLayer(vols, upFlags, hasVol){
-    if (!hasVol) return { grids:[], xAxes:[], yAxes:[], series:[], priceBottom:74 };
+    if (!hasVol) return { yAxes:[], series:[] };
+    const maxV = Math.max(1, ...vols);
     return {
-      // Price grid shrinks to make room; volume grid sits beneath it.
-      priceBottom:150,
-      grids:[{left:54,right:18,height:64,bottom:74}],   // volume grid
-      xAxes:[{type:'category', gridIndex:1, data:null, boundaryGap:true,
-        axisLabel:{show:false}, axisTick:{show:false}, axisLine:{lineStyle:{color:COLORS.grid}}}],
-      yAxes:[{type:'value', gridIndex:1, scale:true, splitNumber:2,
-        axisLabel:{color:COLORS.text, fontFamily:FONT, fontSize:10,
-          formatter:v=> v>=1e6 ? (v/1e6).toFixed(1)+'M' : v>=1e3 ? (v/1e3).toFixed(0)+'k' : v},
-        splitLine:{show:false}, axisLine:{lineStyle:{color:COLORS.grid}}}],
-      series:[{name:'Volume', type:'bar', xAxisIndex:1, yAxisIndex:1, data:vols,
-        itemStyle:{color:(p)=> upFlags[p.dataIndex] ? 'rgba(21,163,107,.45)' : 'rgba(226,59,78,.45)'}}]
+      yAxes:[{ type:'value', show:false, min:0, max:maxV*4.5,   // bars ~bottom 22%
+        gridIndex:0, axisLabel:{show:false}, axisLine:{show:false},
+        splitLine:{show:false}, axisTick:{show:false} }],
+      series:[{ name:'Volume', type:'bar', xAxisIndex:0, yAxisIndex:1, data:vols,
+        barWidth:'60%', silent:true, z:1,
+        itemStyle:{color:(p)=> upFlags[p.dataIndex] ? 'rgba(21,163,107,.40)' : 'rgba(226,59,78,.40)'} }]
     };
   }
 
@@ -305,37 +301,35 @@
     // spike from a low base, which a linear axis would squash to a flat line.
     const MOM_BARS = 147;
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
-    // The volume bars' x-axis mirrors the price dates.
-    if (vol.xAxes.length) vol.xAxes[0].data = dates;
-    const priceGrid = big ? {left:54,right:18,top:16,bottom:vol.priceBottom}
+    const priceGrid = big ? {left:54,right:18,top:16,bottom:74}
                           : {left:6,right:6,top:8,bottom:6,containLabel:false};
     c.setOption({
       backgroundColor:'transparent',
-      grid:[ priceGrid, ...vol.grids ],
+      grid:[ priceGrid ],
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; const vb=p.find(x=>x.seriesName==='Volume');
           return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`
                + (vb? `<br/>Vol ${(+vb.data).toLocaleString()}` : '');}},
-      axisPointer:{link:[{xAxisIndex:'all'}]},   // crosshair spans price + volume
       xAxis:[ {type:'category', data:dates, show:big, boundaryGap:true,
-        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}}, ...vol.xAxes ],
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}} ],
       // Linear axis with scale:true so it always re-fits to the VISIBLE window
       // (paired with dataZoom filterMode:'filter') — candles fill the height at
-      // any zoom. Preview hides the axis; expanded shows it.
+      // any zoom. Preview hides the axis; expanded shows it. The volume bars ride
+      // a second, hidden y-axis on the SAME grid (see volumeLayer).
       yAxis:[ {type:'value', scale:true, show:big, ...(big?axisBase:{})}, ...vol.yAxes ],
       dataZoom:[
         big
           // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
           // out-of-view bars so the (scale:true) y-axis re-fits the visible range.
-          ? {type:'inside', xAxisIndex:[0,1], start:startPct, end:100, filterMode:'filter',
+          ? {type:'inside', start:startPct, end:100, filterMode:'filter',
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
           // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
           // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
-        ...(big ? [Object.assign(zoomSlider(startPct, 100), {xAxisIndex:[0,1]})] : [])
+        ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
       series:[
         {type:'candlestick', data:ohlc,
@@ -437,24 +431,22 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     const startPct = lo/n*100;
     const endPct = hi>=n-1 ? 100 : (hi+1)/n*100;
-    if (vol.xAxes.length) vol.xAxes[0].data = dates;
     c.setOption({
       backgroundColor:'transparent',
-      grid:[ {left:56,right:18,top:16,bottom:vol.priceBottom}, ...vol.grids ],
+      grid:[ {left:56,right:18,top:16,bottom:74} ],
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
           const v=k.data; const vb=p.find(x=>x.seriesName==='Volume');
           return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`
                + (vb? `<br/>Vol ${(+vb.data).toLocaleString()}` : '');}},
-      axisPointer:{link:[{xAxisIndex:'all'}]},
       xAxis:[ {type:'category', data:dates, boundaryGap:true,
-        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}}, ...vol.xAxes ],
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}} ],
       yAxis:[ {type:'value', scale:true, ...axisBase}, ...vol.yAxes ],
       dataZoom:[
-        {type:'inside', xAxisIndex:[0,1], start:startPct, end:endPct, filterMode:'filter',
+        {type:'inside', start:startPct, end:endPct, filterMode:'filter',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
-        Object.assign(zoomSlider(startPct, endPct), {xAxisIndex:[0,1]})
+        zoomSlider(startPct, endPct)
       ],
       series:[{
         type:'candlestick', data:ohlc,
