@@ -262,12 +262,38 @@
       </div>`;
   }
 
-  // Candlestick + MA50/MA200. Scrollable/zoomable (dataZoom). `big` shows axes
-  // and a zoom slider for the expanded full-screen view.
+  // Volume bars live in their own grid below the price chart, sharing the x-axis
+  // via a second xAxis/yAxis on gridIndex 1. Returns the option fragments to mix
+  // in, or empty objects when there's no volume data (legacy candles). `vols` is
+  // the per-bar volume array; `upFlags[i]` = close>=open (green) else red.
+  function volumeLayer(vols, upFlags, hasVol){
+    if (!hasVol) return { grids:[], xAxes:[], yAxes:[], series:[], priceBottom:74 };
+    return {
+      // Price grid shrinks to make room; volume grid sits beneath it.
+      priceBottom:150,
+      grids:[{left:54,right:18,height:64,bottom:74}],   // volume grid
+      xAxes:[{type:'category', gridIndex:1, data:null, boundaryGap:true,
+        axisLabel:{show:false}, axisTick:{show:false}, axisLine:{lineStyle:{color:COLORS.grid}}}],
+      yAxes:[{type:'value', gridIndex:1, scale:true, splitNumber:2,
+        axisLabel:{color:COLORS.text, fontFamily:FONT, fontSize:10,
+          formatter:v=> v>=1e6 ? (v/1e6).toFixed(1)+'M' : v>=1e3 ? (v/1e3).toFixed(0)+'k' : v},
+        splitLine:{show:false}, axisLine:{lineStyle:{color:COLORS.grid}}}],
+      series:[{name:'Volume', type:'bar', xAxisIndex:1, yAxisIndex:1, data:vols,
+        itemStyle:{color:(p)=> upFlags[p.dataIndex] ? 'rgba(21,163,107,.45)' : 'rgba(226,59,78,.45)'}}]
+    };
+  }
+
+  // Candlestick + MA50/MA200. Scrollable/zoomable (dataZoom). `big` shows axes,
+  // a zoom slider, and (when volume is present) a volume-bar panel — expanded
+  // (modal) view only; the small preview cards stay clean.
   function candleCard(el, candles, big){
     const c = tuneAnim(echarts.init(el, null, {renderer:'canvas'}));
     const dates = candles.map(d=>d.date);
     const ohlc = candles.map(d=>[d.open,d.close,d.low,d.high]);
+    const hasVol = big && candles.some(d=>d.volume>0);
+    const vols = candles.map(d=>d.volume||0);
+    const upFlags = candles.map(d=>d.close>=d.open);
+    const vol = volumeLayer(vols, upFlags, hasVol);
     const hasMA = candles.some(d=>d.ma50!=null||d.ma200!=null);
     const ma = (n,key)=> hasMA
       ? candles.map(d=> d[key]==null?null:+d[key])
@@ -279,30 +305,37 @@
     // spike from a low base, which a linear axis would squash to a flat line.
     const MOM_BARS = 147;
     const startPct = big ? 0 : Math.max(0, 100 - (MOM_BARS / candles.length * 100));
+    // The volume bars' x-axis mirrors the price dates.
+    if (vol.xAxes.length) vol.xAxes[0].data = dates;
+    const priceGrid = big ? {left:54,right:18,top:16,bottom:vol.priceBottom}
+                          : {left:6,right:6,top:8,bottom:6,containLabel:false};
     c.setOption({
       backgroundColor:'transparent',
-      grid: big ? {left:54,right:18,top:16,bottom:74} : {left:6,right:6,top:8,bottom:6,containLabel:false},
+      grid:[ priceGrid, ...vol.grids ],
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
-          const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
-      xAxis:{type:'category', data:dates, show:big, boundaryGap:true,
-        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
+          const v=k.data; const vb=p.find(x=>x.seriesName==='Volume');
+          return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`
+               + (vb? `<br/>Vol ${(+vb.data).toLocaleString()}` : '');}},
+      axisPointer:{link:[{xAxisIndex:'all'}]},   // crosshair spans price + volume
+      xAxis:[ {type:'category', data:dates, show:big, boundaryGap:true,
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}}, ...vol.xAxes ],
       // Linear axis with scale:true so it always re-fits to the VISIBLE window
       // (paired with dataZoom filterMode:'filter') — candles fill the height at
       // any zoom. Preview hides the axis; expanded shows it.
-      yAxis:{type:'value', scale:true, show:big, ...(big?axisBase:{})},
+      yAxis:[ {type:'value', scale:true, show:big, ...(big?axisBase:{})}, ...vol.yAxes ],
       dataZoom:[
         big
           // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
           // out-of-view bars so the (scale:true) y-axis re-fits the visible range.
-          ? {type:'inside', start:startPct, end:100, filterMode:'filter',
+          ? {type:'inside', xAxisIndex:[0,1], start:startPct, end:100, filterMode:'filter',
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
           // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
           // click cleanly expands the card. No zoom; y auto-scales.
           : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
-        ...(big ? [zoomSlider(startPct, 100)] : [])
+        ...(big ? [Object.assign(zoomSlider(startPct, 100), {xAxisIndex:[0,1]})] : [])
       ],
       series:[
         {type:'candlestick', data:ohlc,
@@ -311,7 +344,8 @@
         {name:'MA50', type:'line', data:ma(50,'ma50'), showSymbol:false, connectNulls:true,
           lineStyle:{width:1.3,color:COLORS.ma200}},
         {name:'MA200', type:'line', data:ma(200,'ma200'), showSymbol:false, connectNulls:true,
-          lineStyle:{width:1.3,color:COLORS.accent}}
+          lineStyle:{width:1.3,color:COLORS.accent}},
+        ...vol.series
       ]
     });
     return c;
@@ -365,6 +399,10 @@
     const c = init(id); if (!c) return;
     const dates = rows.map(r=>r[0]);
     const ohlc  = rows.map(r=>[r[1], r[4], r[3], r[2]]);   // ECharts: [open,close,low,high]
+    const hasVol  = rows.some(r=>r[5]>0);
+    const vols    = rows.map(r=>r[5]||0);
+    const upFlags = rows.map(r=>r[4]>=r[1]);               // close>=open
+    const vol     = volumeLayer(vols, upFlags, hasVol);
     const key = d => (d instanceof Date ? d.toISOString().slice(0,10) : String(d).slice(0,10));
     const nearest = k => {
       const i = dates.indexOf(k); if (i>=0) return i;
@@ -399,20 +437,24 @@
     const lo = Math.max(0, Math.min(ei,xi)-20), hi = Math.min(n-1, Math.max(ei,xi)+20);
     const startPct = lo/n*100;
     const endPct = hi>=n-1 ? 100 : (hi+1)/n*100;
+    if (vol.xAxes.length) vol.xAxes[0].data = dates;
     c.setOption({
       backgroundColor:'transparent',
-      grid:{left:56,right:18,top:16,bottom:74},
+      grid:[ {left:56,right:18,top:16,bottom:vol.priceBottom}, ...vol.grids ],
       tooltip:{trigger:'axis', backgroundColor:COLORS.tip, borderColor:COLORS.grid,
         textStyle:{color:COLORS.textStrong, fontSize:11},
         formatter:p=>{const k=p.find(x=>x.seriesType==='candlestick'); if(!k) return '';
-          const v=k.data; return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`;}},
-      xAxis:{type:'category', data:dates, boundaryGap:true,
-        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}},
-      yAxis:{type:'value', scale:true, ...axisBase},
+          const v=k.data; const vb=p.find(x=>x.seriesName==='Volume');
+          return `${k.axisValue}<br/>O ${v[1]} H ${v[4]}<br/>L ${v[3]} C ${v[2]}`
+               + (vb? `<br/>Vol ${(+vb.data).toLocaleString()}` : '');}},
+      axisPointer:{link:[{xAxisIndex:'all'}]},
+      xAxis:[ {type:'category', data:dates, boundaryGap:true,
+        axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}}, ...vol.xAxes ],
+      yAxis:[ {type:'value', scale:true, ...axisBase}, ...vol.yAxes ],
       dataZoom:[
-        {type:'inside', start:startPct, end:endPct, filterMode:'filter',
+        {type:'inside', xAxisIndex:[0,1], start:startPct, end:endPct, filterMode:'filter',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
-        zoomSlider(startPct, endPct)
+        Object.assign(zoomSlider(startPct, endPct), {xAxisIndex:[0,1]})
       ],
       series:[{
         type:'candlestick', data:ohlc,
@@ -420,8 +462,44 @@
         markPoint:{ data:points },
         markLine:{ symbol:'none', label:{show:false},
           lineStyle:{color: mark.win ? COLORS.pos : COLORS.neg, width:2}, data:lineData }
-      }]
+      }, ...vol.series]
     });
+  }
+
+  // Export a modal (header + chart + sidebar) to a PNG. html2canvas rasterises
+  // the DOM subtree, but it can't read a live <canvas> reliably across browsers,
+  // so we first paint the ECharts chart into a static <img> overlay (via the
+  // chart's own getDataURL — which keeps candles, markers, MA lines and volume),
+  // snapshot the card, then restore the live chart. `chartInst` is the ECharts
+  // instance inside `cardEl`; `name` seeds the download filename.
+  async function exportModalPNG(cardEl, chartInst, name){
+    if (!cardEl || typeof html2canvas === 'undefined') return false;
+    const chartEl = chartInst && !chartInst.isDisposed() ? chartInst.getDom() : null;
+    let overlay = null;
+    if (chartEl){
+      const url = chartInst.getDataURL({ type:'png', pixelRatio:2, backgroundColor:'#fff' });
+      overlay = document.createElement('img');
+      overlay.src = url;
+      overlay.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:fill';
+      chartEl.style.position = 'relative';
+      chartEl.appendChild(overlay);                 // cover the live canvas for the snapshot
+      const canv = chartEl.querySelector('canvas'); if (canv) canv.style.visibility='hidden';
+    }
+    try {
+      const shot = await html2canvas(cardEl, { backgroundColor:'#fff', scale:2,
+        useCORS:true, logging:false,
+        ignoreElements:el=>el.classList && (el.classList.contains('modal-close')
+                          || el.classList.contains('export-btn')) });
+      const a = document.createElement('a');
+      a.download = (name||'chart').replace(/[^\w.-]+/g,'_') + '.png';
+      a.href = shot.toDataURL('image/png');
+      a.click();
+      return true;
+    } catch(e){ return false; }
+    finally {
+      if (overlay){ overlay.remove();
+        const canv = chartEl.querySelector('canvas'); if (canv) canv.style.visibility=''; }
+    }
   }
 
   // Resize only the charts that are actually on screen — a hidden tab's canvases
@@ -443,5 +521,6 @@
 
   window.Charts = { equityChart, drawdownChart, tickerChart, categoryBarChart, outcomeChart,
                     holdingChart, candleCard, returnsDistChart, tradeChart,
-                    resizeAll, disposeOne, disposeAll };
+                    resizeAll, disposeOne, disposeAll,
+                    exportModalPNG, instance:(id)=>instances[id] };
 })();

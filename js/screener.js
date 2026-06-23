@@ -6,6 +6,7 @@
   let cardCharts = [];           // live ECharts instances in the screener grid
   let watchCharts = [];          // live ECharts instances in the watchlist grid
   let bigChart = null;
+  let modalRow = null;           // row currently shown in the expand modal (for PNG export)
   let currentRows = [];          // resolved stock objects currently displayed (screener)
   let watchRows = [];            // resolved stock objects in the watchlist grid
   let searchRows = null;         // non-null while a search filter is active
@@ -197,7 +198,7 @@
       const r = await fetch('data/candles/'+encodeURIComponent(ticker)+'.json', {cache:'no-store'});
       if (r.ok){ const j = await r.json(); const raw = j.candles || j;
         rows = raw.map(c => Array.isArray(c)
-          ? { date:c[0], open:c[1], high:c[2], low:c[3], close:c[4] } : c); }
+          ? { date:c[0], open:c[1], high:c[2], low:c[3], close:c[4], volume:c[5]||0 } : c); }
     } catch(e){ rows = null; }
     // Watchlisted names persist; everything else goes to the bounded LRU.
     if (rows && rows.length && isWatched(ticker)){ _persist[ticker]=rows; _savePersist(); }
@@ -449,6 +450,7 @@
   // ---------- expand modal ----------
   let _modalToken = 0;
   function fillModal(r, rank, total){
+    modalRow = r;
     const candles = r.candles || [];
     const s = periodStats(candles);
     $('#modal-ticker').textContent = r.ticker;
@@ -520,6 +522,13 @@
     $('#modal-close').addEventListener('click', closeModal);
     $('#modal-backdrop').addEventListener('click', closeModal);
     document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeModal(); });
+    $('#modal-export').addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; const card = $('#mom-modal .modal-card');
+      btn.disabled = true; const t0 = btn.textContent; btn.textContent = '…';
+      const nm = modalRow ? (modalRow.ticker + (modalRow.name?'_'+modalRow.name:'')) : 'chart';
+      await window.Charts.exportModalPNG(card, bigChart, nm);
+      btn.disabled = false; btn.textContent = t0;
+    });
 
     // Search spans the whole universe, so the tier pill only affects the top-N
     // grid — no need to re-run an active search when it changes.

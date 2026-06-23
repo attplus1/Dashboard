@@ -12,6 +12,7 @@
   let _openPos = [], _prices = null;    // open positions + latest prices
   const _candleCache = {};     // ticker -> [[date,o,h,l,c],...] | null (in-memory)
   let _openToken = 0;          // guards against out-of-order async opens
+  let _modalCfg = null;        // cfg of the trade modal currently shown (PNG export filename)
   const LS_CANDLES = 'plus1_candles_v1:';   // per-ticker browser cache
   const CANDLE_TTL = 12 * 3600 * 1000;      // re-fetch a ticker at most ~twice a day
 
@@ -282,6 +283,7 @@
   // ---------- entry/exit chart popup (trades, top trades, open positions) ----------
   async function openChartModal(cfg){
     const token = ++_openToken;
+    _modalCfg = cfg;
     $('#trade-modal-ticker').textContent = cfg.ticker;
     $('#trade-modal-name').textContent   = cfg.name || '';
     const dirLabel = cfg.dir==='short' ? '▼ SHORT' : '▲ LONG';
@@ -366,6 +368,13 @@
     $('#trade-modal-close').addEventListener('click', closeTradeModal);
     $('#trade-modal-backdrop').addEventListener('click', closeTradeModal);
     document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeTradeModal(); });
+    $('#trade-modal-export').addEventListener('click', async (e)=>{
+      const btn = e.currentTarget; const card = $('#trade-modal .modal-card');
+      btn.disabled = true; const t0 = btn.textContent; btn.textContent = '…';
+      const nm = _modalCfg ? (_modalCfg.ticker + (_modalCfg.name?'_'+_modalCfg.name:'')) : 'trade';
+      await window.Charts.exportModalPNG(card, window.Charts.instance('trade-modal-chart'), nm);
+      btn.disabled = false; btn.textContent = t0;
+    });
     delegateRows('#top-winners tbody',          i=> openTradeModal(_topWins[i]));
     delegateRows('#top-losers tbody',           i=> openTradeModal(_topLosses[i]));
     delegateRows('#open-positions-table tbody', i=> openPositionModal(_openPos[i]));

@@ -524,6 +524,14 @@ input[type=date]{
   flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:10px;
   padding-left:54px}   /* indent so the legend lines up with the chart slider's left edge */
 .modal-foot .ma-key{display:inline-flex; gap:16px; align-items:center}   /* keep Entry/Exit legend from overlapping */
+.modal-foot .foot-right{display:inline-flex; gap:14px; align-items:center}
+.export-btn{
+  border:1px solid var(--border-2); background:#fff; color:var(--accent);
+  font-family:inherit; font-size:12px; font-weight:600; cursor:pointer;
+  padding:5px 12px; border-radius:999px; transition:background .15s, border-color .15s, color .15s;
+}
+.export-btn:hover{background:var(--accent-bg); border-color:var(--accent)}
+.export-btn:disabled{opacity:.6; cursor:default}
 
 /* Modal split: chart on the left, metric cards stacked in a right column
    (used by both the trade/position popup and the screener expand modal). */
