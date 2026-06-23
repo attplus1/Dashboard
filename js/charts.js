@@ -59,7 +59,7 @@
   function zoomSlider(start, end){
     return {
       type:'slider', start, end, height:12, bottom:6,
-      filterMode:'filter',                             // recompute series in view -> y-axis rescales on zoom
+      filterMode:'none',                               // just slide the window (no per-frame series recompute) -> smooth pan/zoom
       showDataShadow:false,                            // drop the mini price line
       backgroundColor:'rgba(120,135,150,.12)', borderColor:'transparent',
       fillerColor:'rgba(139,92,246,.26)',
@@ -315,20 +315,22 @@
                + (vb? `<br/>Vol ${(+vb.data).toLocaleString()}` : '');}},
       xAxis:[ {type:'category', data:dates, show:big, boundaryGap:true,
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}} ],
-      // Linear axis with scale:true so it always re-fits to the VISIBLE window
-      // (paired with dataZoom filterMode:'filter') — candles fill the height at
-      // any zoom. Preview hides the axis; expanded shows it. The volume bars ride
-      // a second, hidden y-axis on the SAME grid (see volumeLayer).
+      // Linear axis, scale:true. With dataZoom filterMode:'none' (smooth pan) it
+      // fits the whole series rather than re-fitting the visible window each zoom.
+      // Preview hides the axis; expanded shows it. The volume bars ride a second,
+      // hidden y-axis on the SAME grid (see volumeLayer).
       yAxis:[ {type:'value', scale:true, show:big, ...(big?axisBase:{})}, ...vol.yAxes ],
       dataZoom:[
         big
-          // Expanded: full zoom + pan via wheel/drag. filterMode:'filter' drops
-          // out-of-view bars so the (scale:true) y-axis re-fits the visible range.
-          ? {type:'inside', start:startPct, end:100, filterMode:'filter',
+          // Expanded: full zoom + pan via wheel/drag. filterMode:'none' just
+          // slides the data window WITHOUT recomputing the series each frame, so
+          // pan/zoom stays smooth. Trade-off: the y-axis fits the whole series
+          // rather than re-fitting to the visible range on every zoom.
+          ? {type:'inside', start:startPct, end:100, filterMode:'none',
              zoomOnMouseWheel:true, moveOnMouseMove:true, moveOnMouseWheel:false}
           // Preview: pan with the SCROLL WHEEL only — drag-pan is disabled so a
           // click cleanly expands the card. No zoom; y auto-scales.
-          : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'filter',
+          : {type:'inside', start:startPct, end:100, zoomLock:true, filterMode:'none',
              zoomOnMouseWheel:false, moveOnMouseWheel:true, moveOnMouseMove:false},
         ...(big ? [zoomSlider(startPct, 100)] : [])
       ],
@@ -446,7 +448,7 @@
         axisLabel:{...XLABEL}, axisLine:{lineStyle:{color:COLORS.grid}}} ],
       yAxis:[ {type:'value', scale:true, ...axisBase}, ...vol.yAxes ],
       dataZoom:[
-        {type:'inside', start:startPct, end:endPct, filterMode:'filter',
+        {type:'inside', start:startPct, end:endPct, filterMode:'none',
          zoomOnMouseWheel:true, moveOnMouseMove:true},
         zoomSlider(startPct, endPct)
       ],
