@@ -78,7 +78,10 @@ def load_hist(ticker):
 
 def save_hist(ticker, last_fetch, candles):
     os.makedirs(HISTORY_DIR, exist_ok=True)
-    lines = ",\n".join(json.dumps([c["date"], c["open"], c["high"], c["low"], c["close"]])
+    # Stored row: [date, open, high, low, close, volume]. Volume is appended last
+    # so older 5-element rows stay valid (candles_of defaults missing vol to 0).
+    lines = ",\n".join(json.dumps([c["date"], c["open"], c["high"], c["low"], c["close"],
+                                   c.get("volume", 0)])
                        for c in candles)
     with open(hist_path(ticker), "w") as f:
         f.write('{"ticker":%s,"last_fetch":%s,"candles":[\n%s\n]}\n'
@@ -86,14 +89,18 @@ def save_hist(ticker, last_fetch, candles):
 
 
 def candles_of(obj):
-    """Stored arrays -> list of {date,open,high,low,close} ascending."""
+    """Stored arrays -> list of {date,open,high,low,close,volume} ascending.
+
+    Rows may be 5-element (legacy, pre-volume) or 6-element; missing volume -> 0.
+    """
     if not obj:
         return []
     out = []
     for a in obj.get("candles", []):
         try:
             out.append({"date": a[0], "open": float(a[1]), "high": float(a[2]),
-                        "low": float(a[3]), "close": float(a[4])})
+                        "low": float(a[3]), "close": float(a[4]),
+                        "volume": int(a[5]) if len(a) > 5 and a[5] is not None else 0})
         except (IndexError, ValueError, TypeError):
             continue
     return out
@@ -116,8 +123,10 @@ def _candles_from_df(sub):
         o, h, l, c = row.get("Open"), row.get("High"), row.get("Low"), row.get("Close")
         if any(pd.isna(x) for x in (o, h, l, c)):
             continue
+        v = row.get("Volume")
         out.append({"date": idx.strftime("%Y-%m-%d"), "open": float(o),
-                    "high": float(h), "low": float(l), "close": float(c)})
+                    "high": float(h), "low": float(l), "close": float(c),
+                    "volume": 0 if pd.isna(v) or v is None else int(v)})
     return out
 
 
@@ -201,7 +210,7 @@ def build_candles(candles):
     return [{
         "date": candles[i]["date"], "open": round(candles[i]["open"], 4),
         "high": round(candles[i]["high"], 4), "low": round(candles[i]["low"], 4),
-        "close": round(candles[i]["close"], 4),
+        "close": round(candles[i]["close"], 4), "volume": candles[i].get("volume", 0),
         "ma50": sma(i, 50), "ma200": sma(i, 200),
     } for i in range(start, len(candles))]
 
@@ -409,7 +418,7 @@ def write_candle_files(tickers, out_dir=None):
             continue
         safe = t.replace("^", "_").replace("/", "_")
         arr = ",".join(json.dumps([c["date"], round(c["open"], 4), round(c["high"], 4),
-                                   round(c["low"], 4), round(c["close"], 4)])
+                                   round(c["low"], 4), round(c["close"], 4), c.get("volume", 0)])
                        for c in candles)
         with open(os.path.join(out_dir, f"{safe}.json"), "w") as f:
             f.write('{"ticker":%s,"candles":[%s]}' % (json.dumps(t), arr))

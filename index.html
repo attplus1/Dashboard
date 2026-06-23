@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Dashboard</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=126" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=127" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=126" />
+  <link rel="stylesheet" href="css/styles.css?v=127" />
 </head>
 <body>
   <!-- ============ HEADER ============ -->
@@ -290,7 +290,10 @@
       </div>
       <div class="modal-foot">
         <span class="ma-key"><span class="ma50">MA50</span><span class="ma200">MA200</span></span>
-        <span>Scroll / drag the chart to zoom &amp; pan</span>
+        <span class="foot-right">
+          <span class="foot-hint">Scroll / drag the chart to zoom &amp; pan</span>
+          <button class="export-btn" id="modal-export" type="button">↓ PNG</button>
+        </span>
       </div>
     </div>
   </div>
@@ -315,7 +318,10 @@
       </div>
       <div class="modal-foot">
         <span class="ma-key"><span class="entry-key">Entry</span><span class="exit-key">Exit</span></span>
-        <span>Scroll / drag the chart to zoom &amp; pan</span>
+        <span class="foot-right">
+          <span class="foot-hint">Scroll / drag the chart to zoom &amp; pan</span>
+          <button class="export-btn" id="trade-modal-export" type="button">↓ PNG</button>
+        </span>
       </div>
     </div>
   </div>
@@ -328,13 +334,14 @@
   <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <!-- App (cache-busted: bump ?v= on each release) -->
-  <script src="js/config.js?v=126"></script>
-  <script src="js/parser.js?v=126"></script>
-  <script src="js/metrics.js?v=126"></script>
-  <script src="js/charts.js?v=126"></script>
-  <script src="js/performance.js?v=126"></script>
-  <script src="js/screener.js?v=126"></script>
-  <script src="js/app.js?v=126"></script>
+  <script src="js/config.js?v=127"></script>
+  <script src="js/parser.js?v=127"></script>
+  <script src="js/metrics.js?v=127"></script>
+  <script src="js/charts.js?v=127"></script>
+  <script src="js/performance.js?v=127"></script>
+  <script src="js/screener.js?v=127"></script>
+  <script src="js/app.js?v=127"></script>
 </body>
 </html>
