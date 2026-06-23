@@ -43,7 +43,7 @@
   },
   {
    "ticker": "3DA",
-   "name": "AMAERO LTD"
+   "name": "AMAERO INC."
   },
   {
    "ticker": "3DP",
@@ -4230,6 +4230,10 @@
    "name": "MACH7 TECHNOLOGIES LIMITED"
   },
   {
+   "ticker": "M96",
+   "name": "MAVERICK MINERALS AUSTRALIA LTD"
+  },
+  {
    "ticker": "MA1",
    "name": "MA CREDIT INCOME TRUST"
   },
@@ -7458,7 +7462,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1864,
+ "count": 1865,
  "source": "asx directory",
  "updated": "2026-06-23"
 }
