@@ -422,6 +422,10 @@
    "name": "ACTIVEX LIMITED"
   },
   {
+   "ticker": "AIX",
+   "name": "AI PRIVATE OPPORTUNITIES TRUST"
+  },
+  {
    "ticker": "AIZ",
    "name": "AIR NEW ZEALAND LIMITED"
   },
@@ -7466,7 +7470,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1866,
+ "count": 1867,
  "source": "asx directory",
  "updated": "2026-07-01"
 }
