@@ -6182,6 +6182,10 @@
    "name": "SKYCITY ENTERTAINMENT GROUP LIMITED"
   },
   {
+   "ticker": "SKG",
+   "name": "STORAGE KING GROUP"
+  },
+  {
    "ticker": "SKK",
    "name": "STAKK LIMITED"
   },
@@ -7470,7 +7474,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1867,
+ "count": 1868,
  "source": "asx directory",
- "updated": "2026-07-04"
+ "updated": "2026-07-05"
 }
