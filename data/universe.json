@@ -1198,6 +1198,10 @@
    "name": "BLUGLASS LIMITED"
   },
   {
+   "ticker": "BLS",
+   "name": "BLS PHARMACEUTICALS LIMITED"
+  },
+  {
    "ticker": "BLU",
    "name": "BLUE ENERGY LIMITED."
   },
@@ -4786,6 +4790,10 @@
    "name": "NIB HOLDINGS LIMITED"
   },
   {
+   "ticker": "NHU",
+   "name": "NEU HORIZON URANIUM LIMITED"
+  },
+  {
    "ticker": "NIC",
    "name": "NICKEL INDUSTRIES LIMITED"
   },
@@ -7474,7 +7482,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1868,
+ "count": 1870,
  "source": "asx directory",
  "updated": "2026-07-06"
 }
