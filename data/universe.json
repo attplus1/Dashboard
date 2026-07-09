@@ -978,6 +978,10 @@
    "name": "AXP ENERGY LIMITED"
   },
   {
+   "ticker": "AXQ",
+   "name": "AURA CONSOLIDATED GROUP, INC."
+  },
+  {
    "ticker": "AYA",
    "name": "ARTRYA LIMITED"
   },
@@ -2082,6 +2086,10 @@
    "name": "CYCLIQ GROUP LTD"
   },
   {
+   "ticker": "CYV",
+   "name": "CERYVYN THERAPEUTICS LIMITED"
+  },
+  {
    "ticker": "CZN",
    "name": "CORAZON MINING LIMITED"
   },
@@ -2700,6 +2708,10 @@
   {
    "ticker": "FCT",
    "name": "FIRSTWAVE CLOUD TECHNOLOGY LIMITED"
+  },
+  {
+   "ticker": "FDC",
+   "name": "FDC CONSOLIDATED HOLDINGS LIMITED"
   },
   {
    "ticker": "FDR",
@@ -4351,7 +4363,7 @@
   },
   {
    "ticker": "MEI",
-   "name": "METEORIC RESOURCES NL"
+   "name": "METEORIC RESOURCES LIMITED"
   },
   {
    "ticker": "MEK",
@@ -6650,6 +6662,10 @@
    "name": "TERRACOM LIMITED"
   },
   {
+   "ticker": "TET",
+   "name": "TETRAGON ENERGY LIMITED"
+  },
+  {
    "ticker": "TFL",
    "name": "TASFOODS LIMITED"
   },
@@ -6903,6 +6919,10 @@
   },
   {
    "ticker": "TZL",
+   "name": "TZ LIMITED"
+  },
+  {
+   "ticker": "TZLN",
    "name": "TZ LIMITED"
   },
   {
@@ -7482,7 +7502,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1870,
+ "count": 1875,
  "source": "asx directory",
- "updated": "2026-07-08"
+ "updated": "2026-07-09"
 }
