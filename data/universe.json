@@ -3962,6 +3962,10 @@
    "name": "KINGSTON RESOURCES LIMITED"
   },
   {
+   "ticker": "KSNN",
+   "name": "KINGSTON RESOURCES LIMITED"
+  },
+  {
    "ticker": "KTA",
    "name": "KRAKATOA RESOURCES LIMITED"
   },
@@ -7502,7 +7506,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1875,
+ "count": 1876,
  "source": "asx directory",
  "updated": "2026-07-14"
 }
