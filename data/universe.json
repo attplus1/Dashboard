@@ -730,6 +730,10 @@
    "name": "ALDORO RESOURCES LIMITED"
   },
   {
+   "ticker": "ARO",
+   "name": "ALTORO METALS LIMITED"
+  },
+  {
    "ticker": "ARR",
    "name": "AMERICAN RARE EARTHS LIMITED"
   },
@@ -1972,6 +1976,10 @@
   {
    "ticker": "CTQ",
    "name": "CARETEQ LIMITED"
+  },
+  {
+   "ticker": "CTS",
+   "name": "CERETAS LIMITED"
   },
   {
    "ticker": "CTT",
@@ -3851,6 +3859,10 @@
   },
   {
    "ticker": "KGL",
+   "name": "KGL RESOURCES LIMITED"
+  },
+  {
+   "ticker": "KGLN",
    "name": "KGL RESOURCES LIMITED"
   },
   {
@@ -7518,7 +7530,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1879,
+ "count": 1882,
  "source": "asx directory",
- "updated": "2026-07-22"
+ "updated": "2026-07-23"
 }
