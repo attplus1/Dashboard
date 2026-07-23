@@ -4550,6 +4550,10 @@
    "name": "MACALLUM NEW ENERGY LIMITED"
   },
   {
+   "ticker": "MNV",
+   "name": "MONVIA LIMITED"
+  },
+  {
    "ticker": "MOH",
    "name": "MOHO RESOURCES LIMITED"
   },
@@ -7530,7 +7534,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1882,
+ "count": 1883,
  "source": "asx directory",
  "updated": "2026-07-23"
 }
