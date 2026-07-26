@@ -4890,6 +4890,10 @@
    "name": "NEURIZER LTD"
   },
   {
+   "ticker": "NS1",
+   "name": "NODESTREAM LTD"
+  },
+  {
    "ticker": "NSB",
    "name": "NEUROSCIENTIFIC BIOPHARMACEUTICALS LTD"
   },
@@ -7534,7 +7538,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1883,
+ "count": 1884,
  "source": "asx directory",
- "updated": "2026-07-25"
+ "updated": "2026-07-26"
 }
