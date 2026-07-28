@@ -4606,6 +4606,10 @@
    "name": "MARQUEE RESOURCES LIMITED"
   },
   {
+   "ticker": "MQRN",
+   "name": "MARQUEE RESOURCES LIMITED"
+  },
+  {
    "ticker": "MRC",
    "name": "MINERAL COMMODITIES LTD"
   },
@@ -6418,6 +6422,10 @@
    "name": "STARPHARMA HOLDINGS LIMITED"
   },
   {
+   "ticker": "SPLN",
+   "name": "STARPHARMA HOLDINGS LIMITED"
+  },
+  {
    "ticker": "SPN",
    "name": "SPARC TECHNOLOGIES LIMITED"
   },
@@ -7523,7 +7531,7 @@
   },
   {
    "ticker": "ZMI",
-   "name": "ZINC OF IRELAND NL"
+   "name": "ZINC OF IRELAND LIMITED"
   },
   {
    "ticker": "ZMM",
@@ -7538,7 +7546,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1884,
+ "count": 1886,
  "source": "asx directory",
  "updated": "2026-07-28"
 }
