@@ -2394,6 +2394,10 @@
    "name": "EASTERN RESOURCES LIMITED"
   },
   {
+   "ticker": "EFR",
+   "name": "EVERFLOW RESOURCES LTD"
+  },
+  {
    "ticker": "EG1",
    "name": "EVERGOLD MINERALS LIMITED"
   },
@@ -3984,6 +3988,10 @@
   {
    "ticker": "KTK",
    "name": "KTEK AEROSYSTEMS LTD"
+  },
+  {
+   "ticker": "KYN",
+   "name": "KYRON CAPITAL GROUP"
   },
   {
    "ticker": "KYP",
@@ -7546,7 +7554,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1886,
+ "count": 1888,
  "source": "asx directory",
- "updated": "2026-07-29"
+ "updated": "2026-07-30"
 }
