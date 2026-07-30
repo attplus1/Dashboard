@@ -507,7 +507,7 @@
   },
   {
    "ticker": "ALU",
-   "name": "Altium Ltd"
+   "name": "ALURION RESOURCES LIMITED"
   },
   {
    "ticker": "ALV",
@@ -3182,6 +3182,10 @@
    "name": "GRANGE RESOURCES LIMITED."
   },
   {
+   "ticker": "GRS",
+   "name": "GWARDAR RESOURCES LIMITED"
+  },
+  {
    "ticker": "GRV",
    "name": "GREENVALE ENERGY LTD"
   },
@@ -4979,6 +4983,10 @@
   },
   {
    "ticker": "NWM",
+   "name": "NORWEST MINERALS LIMITED"
+  },
+  {
+   "ticker": "NWMN",
    "name": "NORWEST MINERALS LIMITED"
   },
   {
@@ -7554,7 +7562,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1888,
+ "count": 1890,
  "source": "asx directory",
  "updated": "2026-07-30"
 }
