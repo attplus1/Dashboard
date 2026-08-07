@@ -1894,6 +1894,10 @@
    "name": "CONSTELLATION RESOURCES LIMITED"
   },
   {
+   "ticker": "CR1N",
+   "name": "CONSTELLATION RESOURCES LIMITED"
+  },
+  {
    "ticker": "CR3",
    "name": "CORE ENERGY MINERALS LTD"
   },
@@ -7566,7 +7570,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1891,
+ "count": 1892,
  "source": "asx directory",
- "updated": "2026-08-06"
+ "updated": "2026-08-07"
 }
