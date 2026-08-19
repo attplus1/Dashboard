@@ -1150,6 +1150,10 @@
    "name": "BIO-GENE TECHNOLOGY LTD"
   },
   {
+   "ticker": "BH6",
+   "name": "BROKEN HILL GOLD LTD"
+  },
+  {
    "ticker": "BHD",
    "name": "BENJAMIN HORNIGOLD LIMITED"
   },
@@ -2448,6 +2452,10 @@
   {
    "ticker": "ELD",
    "name": "ELDERS LIMITED"
+  },
+  {
+   "ticker": "ELK",
+   "name": "ELK RANGE MINING LIMITED"
   },
   {
    "ticker": "ELS",
@@ -4142,6 +4150,10 @@
    "name": "LAKES BLUE ENERGY NL"
   },
   {
+   "ticker": "LKON",
+   "name": "LAKES BLUE ENERGY NL"
+  },
+  {
    "ticker": "LKY",
    "name": "LOCKSLEY RESOURCES LIMITED"
   },
@@ -5062,6 +5074,10 @@
    "name": "ORA BANDA MINING LTD"
   },
   {
+   "ticker": "OBT",
+   "name": "ORBIT RESOURCES LIMITED"
+  },
+  {
    "ticker": "OCA",
    "name": "OCEANIA HEALTHCARE LIMITED"
   },
@@ -5448,6 +5464,10 @@
   {
    "ticker": "PLY",
    "name": "PLAYSIDE STUDIOS LIMITED"
+  },
+  {
+   "ticker": "PM1",
+   "name": "PALISADE METALS LTD"
   },
   {
    "ticker": "PME",
@@ -7574,7 +7594,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1893,
+ "count": 1898,
  "source": "asx directory",
- "updated": "2026-08-18"
+ "updated": "2026-08-19"
 }
