@@ -1578,6 +1578,10 @@
    "name": "THE CALMER CO INTERNATIONAL LIMITED"
   },
   {
+   "ticker": "CCON",
+   "name": "THE CALMER CO INTERNATIONAL LIMITED"
+  },
+  {
    "ticker": "CCP",
    "name": "CREDIT CORP GROUP LIMITED"
   },
@@ -2400,6 +2404,10 @@
   {
    "ticker": "EE1",
    "name": "EARTHS ENERGY LIMITED"
+  },
+  {
+   "ticker": "EF2",
+   "name": "ENERGY FUELS INC."
   },
   {
    "ticker": "EFE",
@@ -7594,7 +7602,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1898,
+ "count": 1900,
  "source": "asx directory",
- "updated": "2026-08-19"
+ "updated": "2026-08-20"
 }
