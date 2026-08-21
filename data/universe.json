@@ -6122,6 +6122,10 @@
    "name": "SCALARE PARTNERS HOLDINGS LIMITED"
   },
   {
+   "ticker": "SCX",
+   "name": "SCX.AI HOLDINGS LIMITED"
+  },
+  {
    "ticker": "SDF",
    "name": "STEADFAST GROUP LIMITED"
   },
@@ -7602,7 +7606,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1900,
+ "count": 1901,
  "source": "asx directory",
- "updated": "2026-08-20"
+ "updated": "2026-08-21"
 }
