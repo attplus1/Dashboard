@@ -4454,6 +4454,10 @@
    "name": "MAYFIELD CHILDCARE LIMITED"
   },
   {
+   "ticker": "MFDN",
+   "name": "MAYFIELD CHILDCARE LIMITED"
+  },
+  {
    "ticker": "MFF",
    "name": "MFF CAPITAL INVESTMENTS LIMITED"
   },
@@ -5571,6 +5575,10 @@
   },
   {
    "ticker": "PR2",
+   "name": "PICHE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PR2N",
    "name": "PICHE RESOURCES LIMITED"
   },
   {
@@ -7390,6 +7398,10 @@
    "name": "WEBJET GROUP LIMITED"
   },
   {
+   "ticker": "WLC",
+   "name": "WHITEROCK LITHIUM CORP."
+  },
+  {
    "ticker": "WLE",
    "name": "WAM LEADERS LIMITED"
   },
@@ -7407,6 +7419,10 @@
   },
   {
    "ticker": "WMX",
+   "name": "WAM INCOME MAXIMISER LIMITED"
+  },
+  {
+   "ticker": "WMXN",
    "name": "WAM INCOME MAXIMISER LIMITED"
   },
   {
@@ -7606,7 +7622,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1901,
+ "count": 1905,
  "source": "asx directory",
- "updated": "2026-08-23"
+ "updated": "2026-08-24"
 }
