@@ -3082,6 +3082,10 @@
    "name": "GRAND GULF ENERGY LIMITED"
   },
   {
+   "ticker": "GGM",
+   "name": "GLOBAL GOLD MINING LIMITED"
+  },
+  {
    "ticker": "GGP",
    "name": "GREATLAND RESOURCES LIMITED"
   },
@@ -7630,7 +7634,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1907,
+ "count": 1908,
  "source": "asx directory",
  "updated": "2026-08-25"
 }
