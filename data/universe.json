@@ -1326,6 +1326,10 @@
    "name": "BABYLON PUMP & POWER LIMITED"
   },
   {
+   "ticker": "BPPN",
+   "name": "BABYLON PUMP & POWER LIMITED"
+  },
+  {
    "ticker": "BPT",
    "name": "BEACH ENERGY LIMITED"
   },
@@ -5534,6 +5538,10 @@
    "name": "POLYMETALS RESOURCES LTD"
   },
   {
+   "ticker": "POW",
+   "name": "POWERHAUS URANIUM LIMITED"
+  },
+  {
    "ticker": "PPC",
    "name": "PEET LIMITED"
   },
@@ -7622,7 +7630,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1905,
+ "count": 1907,
  "source": "asx directory",
- "updated": "2026-08-24"
+ "updated": "2026-08-25"
 }
