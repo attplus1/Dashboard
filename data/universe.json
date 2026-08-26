@@ -834,6 +834,10 @@
    "name": "ALTERITY THERAPEUTICS LIMITED"
   },
   {
+   "ticker": "ATHN",
+   "name": "ALTERITY THERAPEUTICS LIMITED"
+  },
+  {
    "ticker": "ATM",
    "name": "PT ANTAM (PERSERO) TBK"
   },
@@ -7634,7 +7638,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1908,
+ "count": 1909,
  "source": "asx directory",
- "updated": "2026-08-25"
+ "updated": "2026-08-26"
 }
