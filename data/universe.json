@@ -2682,6 +2682,10 @@
    "name": "EV RESOURCES LTD"
   },
   {
+   "ticker": "EVRN",
+   "name": "EV RESOURCES LTD"
+  },
+  {
    "ticker": "EVT",
    "name": "EVT LIMITED"
   },
@@ -7638,7 +7642,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1909,
+ "count": 1910,
  "source": "asx directory",
- "updated": "2026-08-26"
+ "updated": "2026-08-27"
 }
