@@ -554,6 +554,10 @@
    "name": "AURELIA METALS LIMITED"
   },
   {
+   "ticker": "AMK",
+   "name": "ALMASAR MINERALS LIMITED"
+  },
+  {
    "ticker": "AMN",
    "name": "AGRIMIN LIMITED"
   },
@@ -7642,7 +7646,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1910,
+ "count": 1911,
  "source": "asx directory",
  "updated": "2026-08-30"
 }
