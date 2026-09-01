@@ -998,6 +998,10 @@
    "name": "AURA CONSOLIDATED GROUP, INC."
   },
   {
+   "ticker": "AXR",
+   "name": "AXIANT RESOURCES LIMITED"
+  },
+  {
    "ticker": "AYA",
    "name": "ARTRYA LIMITED"
   },
@@ -7646,7 +7650,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1911,
+ "count": 1912,
  "source": "asx directory",
  "updated": "2026-09-01"
 }
