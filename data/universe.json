@@ -5274,6 +5274,10 @@
    "name": "OVANTI LIMITED"
   },
   {
+   "ticker": "OVTN",
+   "name": "OVANTI LIMITED"
+  },
+  {
    "ticker": "OZM",
    "name": "OZAURUM RESOURCES LIMITED"
   },
@@ -7650,7 +7654,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1912,
+ "count": 1913,
  "source": "asx directory",
  "updated": "2026-09-01"
 }
