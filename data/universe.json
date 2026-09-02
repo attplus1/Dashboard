@@ -2374,6 +2374,10 @@
    "name": "E79 GOLD MINES LIMITED"
   },
   {
+   "ticker": "EAU",
+   "name": "EAU LITHIUM LTD"
+  },
+  {
    "ticker": "EAX",
    "name": "ENERGY ACTION LIMITED"
   },
@@ -3876,6 +3880,10 @@
   {
    "ticker": "KAM",
    "name": "K2 ASSET MANAGEMENT HOLDINGS LTD"
+  },
+  {
+   "ticker": "KAN",
+   "name": "KANTRA COPPER LTD"
   },
   {
    "ticker": "KAO",
@@ -7367,7 +7375,7 @@
   },
   {
    "ticker": "WEB",
-   "name": "WEB TRAVEL GROUP LIMITED"
+   "name": "WEBBEDS GROUP LIMITED"
   },
   {
    "ticker": "WEC",
@@ -7654,7 +7662,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1913,
+ "count": 1915,
  "source": "asx directory",
  "updated": "2026-09-02"
 }
