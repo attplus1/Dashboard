@@ -310,6 +310,10 @@
    "name": "AVENIRA LIMITED"
   },
   {
+   "ticker": "AEVN",
+   "name": "AVENIRA LIMITED"
+  },
+  {
    "ticker": "AFA",
    "name": "ASF GROUP LIMITED"
   },
@@ -3742,6 +3746,10 @@
    "name": "IMPACT MINERALS LIMITED"
   },
   {
+   "ticker": "IPTN",
+   "name": "IMPACT MINERALS LIMITED"
+  },
+  {
    "ticker": "IPX",
    "name": "IPERIONX LIMITED"
   },
@@ -6142,6 +6150,10 @@
    "name": "SAGALIO ENERGY LIMITED"
   },
   {
+   "ticker": "SAU",
+   "name": "SIGMA LITHIUM CORPORATION"
+  },
+  {
    "ticker": "SB2",
    "name": "SALTER BROTHERS EMERGING COMPANIES LIMITED"
   },
@@ -7662,7 +7674,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1915,
+ "count": 1918,
  "source": "asx directory",
  "updated": "2026-09-03"
 }
