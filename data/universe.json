@@ -6566,6 +6566,10 @@
    "name": "SQX RESOURCES LIMITED"
   },
   {
+   "ticker": "SQXN",
+   "name": "SQX RESOURCES LIMITED"
+  },
+  {
    "ticker": "SRG",
    "name": "SRG GLOBAL LIMITED"
   },
@@ -7674,7 +7678,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1918,
+ "count": 1919,
  "source": "asx directory",
  "updated": "2026-09-14"
 }
