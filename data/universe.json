@@ -606,6 +606,10 @@
    "name": "ANATARA LIFESCIENCES LTD"
   },
   {
+   "ticker": "ANT",
+   "name": "ANTIMONY RESOURCES LIMITED"
+  },
+  {
    "ticker": "ANX",
    "name": "ANAX METALS LIMITED"
   },
@@ -7678,7 +7682,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1919,
+ "count": 1920,
  "source": "asx directory",
  "updated": "2026-09-20"
 }
