@@ -3706,6 +3706,10 @@
    "name": "INGHAMS GROUP LIMITED"
   },
   {
+   "ticker": "INN",
+   "name": "INNOVAERO TECHNOLOGIES LIMITED"
+  },
+  {
    "ticker": "INR",
    "name": "IONEER LTD"
   },
@@ -5632,6 +5636,10 @@
   {
    "ticker": "PR2N",
    "name": "PICHE RESOURCES LIMITED"
+  },
+  {
+   "ticker": "PRB",
+   "name": "PARBO RESOURCES LIMITED"
   },
   {
    "ticker": "PRG",
@@ -7682,7 +7690,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1920,
+ "count": 1922,
  "source": "asx directory",
- "updated": "2026-09-21"
+ "updated": "2026-09-22"
 }
