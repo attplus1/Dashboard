@@ -3903,7 +3903,7 @@
   },
   {
    "ticker": "KAN",
-   "name": "KANTRA COPPER LTD"
+   "name": "KANTRA COPPER LIMITED"
   },
   {
    "ticker": "KAO",
@@ -7696,5 +7696,5 @@
  ],
  "count": 1923,
  "source": "asx directory",
- "updated": "2026-09-24"
+ "updated": "2026-09-25"
 }
