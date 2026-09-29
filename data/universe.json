@@ -62,6 +62,10 @@
    "name": "4DS MEMORY LIMITED"
   },
   {
+   "ticker": "4DSN",
+   "name": "4DS MEMORY LIMITED"
+  },
+  {
    "ticker": "4DX",
    "name": "4DMEDICAL LIMITED"
   },
@@ -360,6 +364,10 @@
   {
    "ticker": "AGR",
    "name": "AGUIA RESOURCES LIMITED"
+  },
+  {
+   "ticker": "AGT",
+   "name": "ARBITR GROUP LIMITED"
   },
   {
    "ticker": "AGY",
@@ -5294,6 +5302,10 @@
    "name": "OSMOND RESOURCES LIMITED"
   },
   {
+   "ticker": "OSS",
+   "name": "OCEAN SCIENCES LTD"
+  },
+  {
    "ticker": "OSX",
    "name": "OSTEOPORE LIMITED"
   },
@@ -7694,7 +7706,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1923,
+ "count": 1926,
  "source": "asx directory",
- "updated": "2026-09-28"
+ "updated": "2026-09-29"
 }
