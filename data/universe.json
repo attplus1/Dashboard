@@ -158,6 +158,10 @@
    "name": "ANTILLES GOLD LIMITED"
   },
   {
+   "ticker": "AAUN",
+   "name": "ANTILLES GOLD LIMITED"
+  },
+  {
    "ticker": "ABB",
    "name": "AUSSIE BROADBAND LIMITED"
   },
@@ -7710,7 +7714,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1927,
+ "count": 1928,
  "source": "asx directory",
  "updated": "2026-10-01"
 }
