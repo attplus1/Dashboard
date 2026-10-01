@@ -1398,6 +1398,10 @@
    "name": "BARYS RESOURCES LIMITED"
   },
   {
+   "ticker": "BRYN",
+   "name": "BARYS RESOURCES LIMITED"
+  },
+  {
    "ticker": "BSA",
    "name": "BSA LIMITED"
   },
@@ -7706,7 +7710,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1926,
+ "count": 1927,
  "source": "asx directory",
- "updated": "2026-09-30"
+ "updated": "2026-10-01"
 }
