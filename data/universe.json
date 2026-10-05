@@ -4954,6 +4954,10 @@
    "name": "NIMY RESOURCES LIMITED"
   },
   {
+   "ticker": "NMD",
+   "name": "NORMANDY MINERALS LTD"
+  },
+  {
    "ticker": "NME",
    "name": "NEX METALS EXPLORATION LIMITED"
   },
@@ -7714,7 +7718,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1928,
+ "count": 1929,
  "source": "asx directory",
- "updated": "2026-10-04"
+ "updated": "2026-10-05"
 }
