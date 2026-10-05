@@ -5002,6 +5002,10 @@
    "name": "NEWPEAK METALS LIMITED"
   },
   {
+   "ticker": "NRL",
+   "name": "NORTHSTONE RESOURCES LIMITED"
+  },
+  {
    "ticker": "NRX",
    "name": "NORONEX LIMITED"
   },
@@ -7718,7 +7722,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1929,
+ "count": 1930,
  "source": "asx directory",
  "updated": "2026-10-05"
 }
