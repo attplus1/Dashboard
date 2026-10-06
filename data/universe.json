@@ -3914,6 +3914,10 @@
    "name": "KALGOORLIE GOLD MINING LIMITED"
   },
   {
+   "ticker": "KALN",
+   "name": "KALGOORLIE GOLD MINING LIMITED"
+  },
+  {
    "ticker": "KAM",
    "name": "K2 ASSET MANAGEMENT HOLDINGS LTD"
   },
@@ -7138,6 +7142,10 @@
    "name": "TERRAMIN AUSTRALIA LIMITED."
   },
   {
+   "ticker": "TZNN",
+   "name": "TERRAMIN AUSTRALIA LIMITED."
+  },
+  {
    "ticker": "UBI",
    "name": "UNIVERSAL BIOSENSORS INC."
   },
@@ -7722,7 +7730,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1930,
+ "count": 1932,
  "source": "asx directory",
  "updated": "2026-10-06"
 }
