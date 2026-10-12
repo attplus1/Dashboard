@@ -2834,6 +2834,10 @@
    "name": "FLYNN GOLD LIMITED"
   },
   {
+   "ticker": "FG1N",
+   "name": "FLYNN GOLD LIMITED"
+  },
+  {
    "ticker": "FGG",
    "name": "FUTURE GENERATION GLOBAL LIMITED"
   },
@@ -7730,7 +7734,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1932,
+ "count": 1933,
  "source": "asx directory",
- "updated": "2026-10-11"
+ "updated": "2026-10-12"
 }
