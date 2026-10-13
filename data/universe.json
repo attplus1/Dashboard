@@ -2362,6 +2362,10 @@
    "name": "DATAWORKS GROUP LIMITED"
   },
   {
+   "ticker": "DWGN",
+   "name": "DATAWORKS GROUP LIMITED"
+  },
+  {
    "ticker": "DXB",
    "name": "DIMERIX LIMITED"
   },
@@ -3604,6 +3608,10 @@
   {
    "ticker": "ICU",
    "name": "INVESTOR CENTRE LIMITED"
+  },
+  {
+   "ticker": "ID1",
+   "name": "IDENTIFAI GENETICS LIMITED"
   },
   {
    "ticker": "ID8",
@@ -7734,7 +7742,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1933,
+ "count": 1935,
  "source": "asx directory",
- "updated": "2026-10-12"
+ "updated": "2026-10-13"
 }
