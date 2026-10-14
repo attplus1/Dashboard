@@ -3170,6 +3170,10 @@
    "name": "GLOBE INTERNATIONAL LIMITED"
   },
   {
+   "ticker": "GLC",
+   "name": "GLENCORE PLC"
+  },
+  {
    "ticker": "GLE",
    "name": "GLG CORP LTD"
   },
@@ -7742,7 +7746,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1935,
+ "count": 1936,
  "source": "asx directory",
- "updated": "2026-10-13"
+ "updated": "2026-10-14"
 }
