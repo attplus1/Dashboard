@@ -3286,6 +3286,10 @@
    "name": "GREENX METALS LIMITED"
   },
   {
+   "ticker": "GSE",
+   "name": "GULF STREAM ENERGY LTD"
+  },
+  {
    "ticker": "GSM",
    "name": "GOLDEN STATE MINING LIMITED"
   },
@@ -7746,7 +7750,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1936,
+ "count": 1937,
  "source": "asx directory",
  "updated": "2026-10-14"
 }
