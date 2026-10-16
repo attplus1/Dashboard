@@ -910,6 +910,10 @@
    "name": "AURUM RESOURCES LIMITED"
   },
   {
+   "ticker": "AUEN",
+   "name": "AURUM RESOURCES LIMITED"
+  },
+  {
    "ticker": "AUG",
    "name": "AUGUSTUS MINERALS LIMITED"
   },
@@ -2692,6 +2696,10 @@
   {
    "ticker": "EUR",
    "name": "EUROPEAN LITHIUM LIMITED"
+  },
+  {
+   "ticker": "EUZ",
+   "name": "EUROPA METALS LTD"
   },
   {
    "ticker": "EV1",
@@ -5358,6 +5366,10 @@
    "name": "OVANTI LIMITED"
   },
   {
+   "ticker": "OWL",
+   "name": "OVERWATCH TECHNOLOGIES LIMITED"
+  },
+  {
    "ticker": "OZM",
    "name": "OZAURUM RESOURCES LIMITED"
   },
@@ -7750,7 +7762,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1937,
+ "count": 1940,
  "source": "asx directory",
- "updated": "2026-10-15"
+ "updated": "2026-10-16"
 }
