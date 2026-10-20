@@ -2150,6 +2150,10 @@
    "name": "CYNATA THERAPEUTICS LIMITED"
   },
   {
+   "ticker": "CYPN",
+   "name": "CYNATA THERAPEUTICS LIMITED"
+  },
+  {
    "ticker": "CYQ",
    "name": "CYCLIQ GROUP LTD"
   },
@@ -7762,7 +7766,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1940,
+ "count": 1941,
  "source": "asx directory",
  "updated": "2026-10-20"
 }
