@@ -7010,6 +7010,10 @@
    "name": "TERRAIN MINERALS LIMITED"
   },
   {
+   "ticker": "TMXN",
+   "name": "TERRAIN MINERALS LIMITED"
+  },
+  {
    "ticker": "TNC",
    "name": "TRUE NORTH COPPER LIMITED"
   },
@@ -7766,7 +7770,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1941,
+ "count": 1942,
  "source": "asx directory",
  "updated": "2026-10-22"
 }
