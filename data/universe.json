@@ -1358,6 +1358,10 @@
    "name": "BPM MINERALS LIMITED"
   },
   {
+   "ticker": "BPMN",
+   "name": "BPM MINERALS LIMITED"
+  },
+  {
    "ticker": "BPP",
    "name": "BABYLON PUMP & POWER LIMITED"
   },
@@ -2448,6 +2452,10 @@
   {
    "ticker": "EDE",
    "name": "EDEN INNOVATIONS LTD"
+  },
+  {
+   "ticker": "EDO",
+   "name": "EL DORADO GOLDFIELDS LIMITED"
   },
   {
    "ticker": "EDU",
@@ -4287,6 +4295,10 @@
   },
   {
    "ticker": "LMG",
+   "name": "LATROBE MAGNESIUM LIMITED"
+  },
+  {
+   "ticker": "LMGN",
    "name": "LATROBE MAGNESIUM LIMITED"
   },
   {
@@ -7022,6 +7034,10 @@
    "name": "TECHNOLOGY ONE LIMITED"
   },
   {
+   "ticker": "TNM",
+   "name": "TERRANOVA METALS LTD"
+  },
+  {
    "ticker": "TNY",
    "name": "TINYBEANS GROUP LTD"
   },
@@ -7558,6 +7574,10 @@
    "name": "WAM ALTERNATIVE ASSETS LIMITED"
   },
   {
+   "ticker": "WMC",
+   "name": "WILUNA MINING CORPORATION LIMITED"
+  },
+  {
    "ticker": "WMG",
    "name": "WESTERN MINES GROUP LTD"
   },
@@ -7770,7 +7790,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1942,
+ "count": 1947,
  "source": "asx directory",
- "updated": "2026-10-26"
+ "updated": "2026-10-27"
 }
