@@ -3946,6 +3946,10 @@
    "name": "JUPITER ENERGY LIMITED"
   },
   {
+   "ticker": "JRL",
+   "name": "JACARANDA NATURAL RESOURCES LIMITED"
+  },
+  {
    "ticker": "JYC",
    "name": "JOYCE CORPORATION LTD"
   },
@@ -4812,6 +4816,10 @@
   {
    "ticker": "MSV",
    "name": "MITCHELL SERVICES LIMITED"
+  },
+  {
+   "ticker": "MSX",
+   "name": "MIRO SCIENCES LTD"
   },
   {
    "ticker": "MTC",
@@ -7790,7 +7798,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1947,
+ "count": 1949,
  "source": "asx directory",
  "updated": "2026-10-28"
 }
