@@ -2630,6 +2630,10 @@
    "name": "ENOVA MINING LIMITED"
   },
   {
+   "ticker": "ENVN",
+   "name": "ENOVA MINING LIMITED"
+  },
+  {
    "ticker": "EOL",
    "name": "ENERGY ONE LIMITED"
   },
@@ -2735,6 +2739,10 @@
   },
   {
    "ticker": "EVN",
+   "name": "EVOLUTION MINING LIMITED"
+  },
+  {
+   "ticker": "EVNN",
    "name": "EVOLUTION MINING LIMITED"
   },
   {
@@ -7802,7 +7810,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1950,
+ "count": 1952,
  "source": "asx directory",
  "updated": "2026-11-01"
 }
