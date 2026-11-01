@@ -1222,6 +1222,10 @@
    "name": "BIOTRON LIMITED"
   },
   {
+   "ticker": "BJY",
+   "name": "BARRENJOEY GROUP LIMITED"
+  },
+  {
    "ticker": "BKB",
    "name": "BLACK BEAR MINERALS LIMITED"
   },
@@ -7798,7 +7802,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1949,
+ "count": 1950,
  "source": "asx directory",
- "updated": "2026-10-31"
+ "updated": "2026-11-01"
 }
