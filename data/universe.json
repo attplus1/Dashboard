@@ -3490,6 +3490,10 @@
    "name": "HELIA GROUP LIMITED"
   },
   {
+   "ticker": "HLM",
+   "name": "HIGHLAND METALS LIMITED"
+  },
+  {
    "ticker": "HLO",
    "name": "HELLOWORLD TRAVEL LIMITED"
   },
@@ -7810,7 +7814,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1952,
+ "count": 1953,
  "source": "asx directory",
- "updated": "2026-11-02"
+ "updated": "2026-11-03"
 }
