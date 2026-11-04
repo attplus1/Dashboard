@@ -678,6 +678,10 @@
    "name": "ASPEN GROUP"
   },
   {
+   "ticker": "AQ1",
+   "name": "AQYR LTD"
+  },
+  {
    "ticker": "AQC",
    "name": "AUSTRALIAN PACIFIC COAL LIMITED"
   },
@@ -1015,6 +1019,10 @@
   },
   {
    "ticker": "AXP",
+   "name": "AXP ENERGY LIMITED"
+  },
+  {
+   "ticker": "AXPN",
    "name": "AXP ENERGY LIMITED"
   },
   {
@@ -7814,7 +7822,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1953,
+ "count": 1955,
  "source": "asx directory",
- "updated": "2026-11-03"
+ "updated": "2026-11-04"
 }
