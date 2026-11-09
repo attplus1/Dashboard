@@ -6558,6 +6558,10 @@
    "name": "SYNLAIT MILK LIMITED"
   },
   {
+   "ticker": "SMG",
+   "name": "SEVEN MEDIA GROUP LIMITED"
+  },
+  {
    "ticker": "SMI",
    "name": "SANTANA MINERALS LIMITED"
   },
@@ -7826,7 +7830,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1956,
+ "count": 1957,
  "source": "asx directory",
  "updated": "2026-11-09"
 }
