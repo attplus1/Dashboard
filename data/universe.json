@@ -5926,6 +5926,10 @@
    "name": "RANGE INTERNATIONAL LIMITED"
   },
   {
+   "ticker": "RANN",
+   "name": "RANGE INTERNATIONAL LIMITED"
+  },
+  {
    "ticker": "RAP",
    "name": "RAPTOR METALS LTD"
   },
@@ -7822,7 +7826,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1955,
+ "count": 1956,
  "source": "asx directory",
- "updated": "2026-11-08"
+ "updated": "2026-11-09"
 }
