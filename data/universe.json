@@ -886,6 +886,10 @@
    "name": "ALTITUDE MINERALS LTD"
   },
   {
+   "ticker": "ATTN",
+   "name": "ALTITUDE MINERALS LTD"
+  },
+  {
    "ticker": "ATV",
    "name": "ACTIVEPORT GROUP LTD"
   },
@@ -6290,6 +6294,10 @@
    "name": "SALTER BROTHERS EMERGING COMPANIES LIMITED"
   },
   {
+   "ticker": "SBK",
+   "name": "SILVERBACK MINERALS LIMITED"
+  },
+  {
    "ticker": "SBM",
    "name": "ST BARBARA LIMITED"
   },
@@ -7830,7 +7838,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1957,
+ "count": 1959,
  "source": "asx directory",
  "updated": "2026-11-10"
 }
