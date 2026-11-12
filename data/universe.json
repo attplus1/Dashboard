@@ -2126,6 +2126,10 @@
    "name": "CLEANAWAY WASTE MANAGEMENT LIMITED"
   },
   {
+   "ticker": "CX8",
+   "name": "CAPABILITY X LIMITED"
+  },
+  {
    "ticker": "CXL",
    "name": "CALIX LIMITED"
   },
@@ -7838,7 +7842,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1959,
+ "count": 1960,
  "source": "asx directory",
- "updated": "2026-11-11"
+ "updated": "2026-11-12"
 }
