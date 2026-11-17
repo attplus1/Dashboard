@@ -7058,6 +7058,10 @@
    "name": "TAMBOURAH METALS LTD"
   },
   {
+   "ticker": "TMBN",
+   "name": "TAMBOURAH METALS LTD"
+  },
+  {
    "ticker": "TMK",
    "name": "TMK ENERGY LIMITED"
   },
@@ -7842,7 +7846,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1960,
+ "count": 1961,
  "source": "asx directory",
- "updated": "2026-11-16"
+ "updated": "2026-11-17"
 }
