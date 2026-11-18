@@ -3250,6 +3250,10 @@
    "name": "GENESIS MINERALS LIMITED"
   },
   {
+   "ticker": "GMDN",
+   "name": "GENESIS MINERALS LIMITED"
+  },
+  {
    "ticker": "GMG",
    "name": "GOODMAN GROUP"
   },
@@ -7846,7 +7850,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1961,
+ "count": 1962,
  "source": "asx directory",
- "updated": "2026-11-17"
+ "updated": "2026-11-18"
 }
