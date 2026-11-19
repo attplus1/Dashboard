@@ -278,6 +278,10 @@
    "name": "ADX ENERGY LTD"
   },
   {
+   "ticker": "ADXN",
+   "name": "ADX ENERGY LTD"
+  },
+  {
    "ticker": "ADY",
    "name": "ADMIRALTY RESOURCES NL."
   },
@@ -7850,7 +7854,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1962,
+ "count": 1963,
  "source": "asx directory",
- "updated": "2026-11-18"
+ "updated": "2026-11-19"
 }
