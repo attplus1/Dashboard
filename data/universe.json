@@ -5050,6 +5050,10 @@
    "name": "NIMY RESOURCES LIMITED"
   },
   {
+   "ticker": "NL8",
+   "name": "NOL8 LTD"
+  },
+  {
    "ticker": "NMD",
    "name": "NORMANDY MINERALS LTD"
   },
@@ -7854,7 +7858,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1963,
+ "count": 1964,
  "source": "asx directory",
- "updated": "2026-11-23"
+ "updated": "2026-11-24"
 }
