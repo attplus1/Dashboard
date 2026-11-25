@@ -4594,6 +4594,10 @@
    "name": "METGASCO LTD"
   },
   {
+   "ticker": "MELN",
+   "name": "METGASCO LTD"
+  },
+  {
    "ticker": "MEM",
    "name": "MEMPHASYS LIMITED."
   },
@@ -6894,6 +6898,10 @@
    "name": "SYRAH RESOURCES LIMITED"
   },
   {
+   "ticker": "SZH",
+   "name": "SOZOHEALTH HOLDINGS LIMITED"
+  },
+  {
    "ticker": "T3D",
    "name": "333D LIMITED"
   },
@@ -7035,7 +7043,7 @@
   },
   {
    "ticker": "TIP",
-   "name": "TEAMINVEST PRIVATE GROUP LIMITED"
+   "name": "TEAMINVEST GROUP LIMITED"
   },
   {
    "ticker": "TKM",
@@ -7858,7 +7866,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1964,
+ "count": 1966,
  "source": "asx directory",
  "updated": "2026-11-24"
 }
