@@ -242,6 +242,10 @@
    "name": "AUDINATE GROUP LIMITED"
   },
   {
+   "ticker": "ADA",
+   "name": "ADAVEN LIMITED"
+  },
+  {
    "ticker": "ADC",
    "name": "ACDC METALS LTD"
   },
@@ -5806,6 +5810,10 @@
    "name": "PRODIGY GOLD NL"
   },
   {
+   "ticker": "PRXN",
+   "name": "PRODIGY GOLD NL"
+  },
+  {
    "ticker": "PSC",
    "name": "PROSPECT RESOURCES LIMITED"
   },
@@ -7866,7 +7874,7 @@
    "name": "ZOONO GROUP LIMITED"
   }
  ],
- "count": 1966,
+ "count": 1968,
  "source": "asx directory",
- "updated": "2026-11-25"
+ "updated": "2026-11-26"
 }
